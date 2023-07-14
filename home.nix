@@ -11,7 +11,10 @@ in
 
     home.packages = with pkgs; [
       htop
+      firefox
       neofetch
+      ripgrep
+      fzf
       # Sway #
       wl-clipboard
       wofi
@@ -58,11 +61,6 @@ in
 	menu = "wofi --show run";
 	modifier = "Mod4";
 
-	bars = [{
-	  fonts.size = 15.0;
-	  position = "top";
-	}];
-
 	input = {
 	  "*" = {
 	    xkb_layout = "us,no";
@@ -76,6 +74,13 @@ in
 	    mode = "1920x1080";
 	  };
 	};
+
+	bars = [];
+
+	startup = [
+	  { command = "waybar"; }
+	];
+
       };
     };
   };
