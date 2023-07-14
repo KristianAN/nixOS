@@ -99,7 +99,7 @@ in
           smartGaps = "on";
           inner = 5;
           outer = 2;
-        }
+        };
 
         bars = [];
 
