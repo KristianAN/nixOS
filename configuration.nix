@@ -87,4 +87,24 @@
   # Enable polkit
   security.polkit.enable = true;
 
+  # Enable hardware support for wayland
+  hardware = {
+    opengl = {
+      enable = true;
+      driSupport = true;
+    };
+  };
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
+      ];
+    };
+  };
+
+  # For swaylock
+  # security.pam.services.swaylock = { text = "auth include login"; };
+
 }
