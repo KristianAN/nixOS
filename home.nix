@@ -51,6 +51,7 @@ in
     programs.neovim = {
       enable = true;
       vimAlias = true;
+      extraConfig = lib.fileConents ./config/neovim/init.lua;
     };
 
     
