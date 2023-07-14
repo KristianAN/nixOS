@@ -5,7 +5,9 @@ in
   imports = [
     (import "${home-manager}/nixos")
   ];
+
   home-manager.users.kristian = {
+
     programs.home-manager = { enable = true; };
     home.stateVersion = "23.05";
 
@@ -34,7 +36,7 @@ in
       enable = true;
       font = {
         name = "Iosevka";
-	size = 12;
+	      size = 12;
       };
     };
 
@@ -74,31 +76,36 @@ in
       # Sway config
       config = {
         terminal = "kitty";
-	menu = "wofi --show run";
-	modifier = "Mod4";
+	      menu = "wofi --show run";
+        modifier = "Mod4";
 
-	input = {
-	  "*" = {
-	    xkb_layout = "us,no";
-	    xkb_options = "caps:escape,grp:rctrl_toggle";
-	  };
-	};
+        input = {
+          "*" = {
+            xkb_layout = "us,no";
+            xkb_options = "caps:escape,grp:rctrl_toggle";
+          };
+	      };
 
-	output = {
-	  eDP-1 = {
-	    scale = "1";
-	    mode = "1920x1080";
-	  };
-	};
+        output = {
+          eDP-1 = {
+            scale = "1";
+            mode = "1920x1080";
+          };
+        };
 
-	bars = [];
+        gaps = {
+          smartBorders = "on";
+          smartGaps = "on";
+          inner = 5;
+          outer = 2;
+        }
 
-	startup = [
-	  { command = "waybar"; }
-	];
+        bars = [];
 
+        startup = [
+          { command = "waybar"; }
+        ];
       };
     };
   };
-
 }
