@@ -12,7 +12,7 @@ in
     home.stateVersion = "23.05";
 
     home.packages = with pkgs; [
-      idea-ultimate
+      jetbrains.idea-ultimate
       gcc
       dconf
       htop
