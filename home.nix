@@ -46,8 +46,10 @@ in
       enable = true;
       package = pkgs.gitAndTools.gitFull;
       userEmail = "kristian@krined.no";
+      userName = "Kristian Nedrevold-Hansen";
       extraConfig = {
-        core.editor = "nvim";};
+        core.editor = "nvim";
+      };
     };
 
     programs.neovim = {
