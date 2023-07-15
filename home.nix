@@ -13,7 +13,6 @@ in
 
     home.packages = with pkgs; [
       jetbrains.idea-ultimate
-      gcc
       dconf
       htop
       firefox
@@ -55,6 +54,11 @@ in
       enable = true;
       vimAlias = true;
       extraLuaConfig = lib.fileContents ./config/neovim/init.lua;
+      extraPackages = with pkgs; [
+       gcc 
+       fzf
+       cmake
+      ];
     };
 
     
@@ -91,11 +95,19 @@ in
 	      };
 
         output = {
+	  Virtual-1 = {
+            scale = "1";
+            mode = "1920x1080";
+          };
           eDP-1 = {
             scale = "1";
             mode = "1920x1080";
           };
         };
+
+	window = {
+	  titlebar = false;
+	};
 
         gaps = {
           smartBorders = "on";
