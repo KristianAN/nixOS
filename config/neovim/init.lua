@@ -380,13 +380,7 @@ end
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  pyright = {},
-  rust_analyzer = {},
-  svelte = {},
-  tsserver = {},
-  csharp_ls = {},
-  hls = {},
-  -- kotlin_language_server = {},
+  -- rust_analyzer = {},
 
   lua_ls = {
     Lua = {

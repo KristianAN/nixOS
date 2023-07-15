@@ -12,6 +12,8 @@ in
     home.stateVersion = "23.05";
 
     home.packages = with pkgs; [
+      gcc
+      dconf
       htop
       firefox
       neofetch
@@ -51,7 +53,7 @@ in
     programs.neovim = {
       enable = true;
       vimAlias = true;
-      extraConfig = lib.fileContents ./config/neovim/init.lua;
+      extraLuaConfig = lib.fileContents ./config/neovim/init.lua;
     };
 
     
@@ -96,7 +98,7 @@ in
 
         gaps = {
           smartBorders = "on";
-          smartGaps = "on";
+          smartGaps = true;
           inner = 5;
           outer = 2;
         };
