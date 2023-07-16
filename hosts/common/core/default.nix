@@ -14,10 +14,11 @@ with lib; {
     xdotool
     pstree
     unzip
-    xclip
+    wl-clipboard
     acpi
     btop
     fd
+    fzf
 
     # Archive tools
     xarchiver
