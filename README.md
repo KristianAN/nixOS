@@ -3,7 +3,4 @@ My config for nixOS workstation for development
 
 First attempt at anything nix. Gradually moving my entire workflow to use nixOS and nix flakes.
 
-TODOs
- - [ ] Figure out how to do host spesific settings in a simple pragmatic way. Modularity can come later
-
-
+If you came here looking for fancy themes you came to the wrong place. There is no rice here.
