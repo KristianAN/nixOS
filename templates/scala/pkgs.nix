@@ -1,0 +1,33 @@
+nixpkgs: system: let
+  makeOverlays = java: let
+
+    javaOverlay = final: _: {
+      jdk = final.${java};
+      jre = final.${java};
+    };
+
+    scalaCliOverlay = final: prev: {
+      scala-cli = prev.scala-cli.override {
+        # hardcoded because scala-cli requires 17 or above
+        jre = final.graalvm17-ce;
+      };
+    };
+  in [
+    javaOverlay
+    scalaCliOverlay
+  ];
+
+  makePackages = java: let
+    overlays = makeOverlays java;
+  in
+    import nixpkgs {
+      inherit system overlays;
+    };
+
+  default = pkgs17;
+  pkgs17 = makePackages "graalvm17-ce";
+  pkgs11 = makePackages "graalvm11-ce";
+in {
+  inherit default pkgs17 pkgs11;
+}
+
