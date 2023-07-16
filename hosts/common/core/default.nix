@@ -20,6 +20,10 @@ with lib; {
     fd
     fzf
 
+    # Sound stuff. TODO move to other file
+    pulseaudio # Make sure this isn't enabled
+    pavucontrol
+    
     # Archive tools
     xarchiver
     wget
