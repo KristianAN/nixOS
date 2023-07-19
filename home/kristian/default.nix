@@ -21,9 +21,29 @@
     dconf
     wofi
     waybar
-    wdisplays
+    #wdisplays
   ];
 
+  programs.neofetch = {
+    enable = true;
+  };
+
+  programs.cowsay = {
+    enable = true;
+  };
+
+#  programs.tmux = {
+#    enable = true;
+#    extraConfig = ''
+#      seg -g escape time 0
+#      seg -g prefix C-s
+#      unbind C-b
+#      bind C-s send-prefix
+#      seg -g base-index 1
+#      seg-option -ga terminal-overrides ",xterm-256color:Tc"
+#    '';
+#  };
+#
   # Enable home-manager and git
   programs.git = {
     enable = true;
@@ -85,8 +105,8 @@
       gaps = {
         smartBorders = "on";
         smartGaps = true;
-        inner = 5;
-        outer = 2;
+        #inner = 50;
+        #outer = 2;
       };
 
       bars = [];

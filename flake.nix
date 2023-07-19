@@ -30,7 +30,7 @@
 
     # NixOS modules
 
-    templates = import ./templates;
+    #templates = import ./templates;
     nixosModules = import ./modules/nixos;
     homeManagerModules = import ./modules/home-manager;
 
@@ -56,7 +56,7 @@
             programs.teams.enable = false;
             programs.citrix.enable = false;
             programs.discord.enable = true;
-            programs.intellij.enable = true;
+            programs.intellij.enable = false;
           }
         ];
       };

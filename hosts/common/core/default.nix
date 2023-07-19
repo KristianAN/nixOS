@@ -9,7 +9,6 @@ with lib; {
     # Nix Core
     nix-index
     wgetpaste
-    neofetch
     ripgrep
     xdotool
     pstree

@@ -8,6 +8,7 @@
   # Feel free to remove if you don't need it.
 
   security.rtkit.enable = true;
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
