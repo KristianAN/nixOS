@@ -68,10 +68,6 @@
     };
   };
 
-  programs.cowsay = {
-    enable = true;
-  }
-
   # Setup Sway
   wayland.windowManager.sway = {
     enable = true;
@@ -97,7 +93,7 @@
       };
 
       window = {
-        titlebar = true;
+        titlebar = false;
       };
 
       gaps = {
