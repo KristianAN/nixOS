@@ -3,11 +3,11 @@
   lib,
   ...
 }: {
-  imports = [
-    ../common
-    ./desktop
-    ./services
-  ];
+#  imports = [
+#    ../common
+#     ./desktop
+#     ./services
+#  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -24,7 +24,8 @@
     wdisplays
   ];
 
-  # Enable home-manager and git
+  programs.home-manager.enable = true;
+
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.gitFull;
@@ -33,6 +34,14 @@
     extraConfig = {
       core.editor = "nvim";
     };
+  };
+
+  programs.tmux = {
+    enable = true;
+    clock24 = true;
+    extraConfig = '' # used for less common options, intelligently combines if defined in multiple places.
+      set -s escape-time 0
+    '';
   };
 
   programs.neovim = {
@@ -79,7 +88,7 @@
       };
 
       window = {
-        titlebar = false;
+        titlebar = true;
       };
 
       gaps = {
