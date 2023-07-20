@@ -3,11 +3,11 @@
   lib,
   ...
 }: {
-  imports = [
-    ../common
-    ./desktop
-    ./services
-  ];
+#  imports = [
+#    ../common
+#     ./desktop
+#     ./services
+#  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -24,6 +24,8 @@
     wdisplays
   ];
 
+ programs.home-manager.enable = true;
+
  programs.tmux = {
     enable = true;
     extraConfig = ''
@@ -36,7 +38,6 @@
     '';
   };
 
-  # Enable home-manager and git
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.gitFull;
@@ -46,6 +47,7 @@
       core.editor = "nvim";
     };
   };
+
 
   programs.neovim = {
     enable = true;
