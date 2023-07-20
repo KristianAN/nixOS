@@ -12,7 +12,6 @@
   };
 
   outputs = {
-    self,
     nixpkgs,
     flake-utils,
     home-manager,
@@ -21,7 +20,6 @@
     forAllSystems = nixpkgs.lib.genAttrs systems;
     systems = [
       "x86_64-linux"
-      "i86_64-darwin"
     ];
   in rec {
     overlays = {
@@ -66,17 +64,8 @@
 
     # Home Manager configuration, callable for each system
     homeConfigurations = {
-      "kristian@desktop" = home-manager.lib.homeManagerConfiguration {
-        pkgs = legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs;};
-        modules = [
-          ./home/kristian
-          homeManagerModules
-        ];
-      };
-
       # Laptop
-      "kristian@laptop" = home-manager.lib.homeManagerConfiguration {
+      "kristian@nixos" = home-manager.lib.homeManagerConfiguration {
         pkgs = legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs;};
         modules = [

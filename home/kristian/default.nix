@@ -21,16 +21,8 @@
     dconf
     wofi
     waybar
-    #wdisplays
+    wdisplays
   ];
-
-  programs.neofetch = {
-    enable = true;
-  };
-
-  programs.cowsay = {
-    enable = true;
-  };
 
 #  programs.tmux = {
 #    enable = true;
@@ -74,6 +66,10 @@
     };
   };
 
+  programs.cowsay = {
+    enable = true;
+  }
+
   # Setup Sway
   wayland.windowManager.sway = {
     enable = true;
@@ -94,19 +90,19 @@
       output = {
         eDP-1 = {
           scale = "1";
-          mode = "1920x1080";
+          mode = "1024x1080";
         };
       };
 
       window = {
-        titlebar = false;
+        titlebar = true;
       };
 
       gaps = {
         smartBorders = "on";
         smartGaps = true;
-        #inner = 50;
-        #outer = 2;
+        inner = 50;
+        outer = 2;
       };
 
       bars = [];
