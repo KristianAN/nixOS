@@ -29,6 +29,8 @@ with lib; {
     curl
     zip
     git
+
+
   ];
 
   imports = [
