@@ -12,7 +12,6 @@
   };
 
   outputs = {
-    self,
     nixpkgs,
     flake-utils,
     home-manager,
@@ -21,7 +20,6 @@
     forAllSystems = nixpkgs.lib.genAttrs systems;
     systems = [
       "x86_64-linux"
-      "i86_64-darwin"
     ];
   in rec {
     overlays = {
@@ -30,7 +28,7 @@
 
     # NixOS modules
 
-    templates = import ./templates;
+    #templates = import ./templates;
     nixosModules = import ./modules/nixos;
     homeManagerModules = import ./modules/home-manager;
 
@@ -56,7 +54,7 @@
             programs.teams.enable = false;
             programs.citrix.enable = false;
             programs.discord.enable = true;
-            programs.intellij.enable = true;
+            programs.intellij.enable = false;
           }
         ];
       };
@@ -66,15 +64,6 @@
 
     # Home Manager configuration, callable for each system
     homeConfigurations = {
-      "kristian@desktop" = home-manager.lib.homeManagerConfiguration {
-        pkgs = legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs;};
-        modules = [
-          ./home/kristian
-          homeManagerModules
-        ];
-      };
-
       # Laptop
       "kristian@nixos" = home-manager.lib.homeManagerConfiguration {
         pkgs = legacyPackages.x86_64-linux;

@@ -24,7 +24,19 @@
     wdisplays
   ];
 
-  programs.home-manager.enable = true;
+ programs.home-manager.enable = true;
+
+ programs.tmux = {
+    enable = true;
+    extraConfig = ''
+      seg -g escape time 0
+      seg -g prefix C-s
+      unbind C-b
+      bind C-s send-prefix
+      seg -g base-index 1
+      seg-option -ga terminal-overrides ",xterm-256color:Tc"
+    '';
+  };
 
   programs.git = {
     enable = true;
@@ -36,13 +48,6 @@
     };
   };
 
-  programs.tmux = {
-    enable = true;
-    clock24 = true;
-    extraConfig = '' # used for less common options, intelligently combines if defined in multiple places.
-      set -s escape-time 0
-    '';
-  };
 
   programs.neovim = {
     enable = true;
@@ -62,6 +67,10 @@
       size = 12;
     };
   };
+
+  programs.cowsay = {
+    enable = true;
+  }
 
   # Setup Sway
   wayland.windowManager.sway = {
@@ -83,7 +92,7 @@
       output = {
         eDP-1 = {
           scale = "1";
-          mode = "1920x1080";
+          mode = "1024x1080";
         };
       };
 
@@ -94,7 +103,7 @@
       gaps = {
         smartBorders = "on";
         smartGaps = true;
-        inner = 5;
+        inner = 50;
         outer = 2;
       };
 

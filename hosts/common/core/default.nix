@@ -9,7 +9,6 @@ with lib; {
     # Nix Core
     nix-index
     wgetpaste
-    neofetch
     ripgrep
     xdotool
     pstree
@@ -30,6 +29,8 @@ with lib; {
     curl
     zip
     git
+
+
   ];
 
   imports = [
