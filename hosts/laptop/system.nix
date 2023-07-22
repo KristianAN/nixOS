@@ -26,4 +26,6 @@
       PasswordAuthentication = false;
     };
   };
+
+  services.blueman.enable = true;
 }
