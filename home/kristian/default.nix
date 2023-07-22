@@ -88,7 +88,7 @@
       output = {
         eDP-1 = {
           scale = "1";
-          mode = "1024x1080";
+          mode = "1920x1080";
         };
       };
 
@@ -99,7 +99,7 @@
       gaps = {
         smartBorders = "on";
         smartGaps = true;
-        inner = 50;
+        inner = 5;
         outer = 2;
       };
 
