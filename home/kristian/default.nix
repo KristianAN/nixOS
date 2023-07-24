@@ -29,13 +29,9 @@
  programs.tmux = {
     enable = true;
     extraConfig = ''
-      seg -g escape time 0
-      seg -g prefix C-s
-      unbind C-b
-      bind C-s send-prefix
-      seg -g base-index 1
-      seg-option -ga terminal-overrides ",xterm-256color:Tc"
-    '';
+      set  -s escape-time 0
+      '';
+    # set-option -g terminal-overrides ",xterm-256color:Tc"
   };
 
   programs.git = {
@@ -67,6 +63,27 @@
       size = 12;
     };
   };
+
+  programs.zsh = {
+      enable = true;
+      enableCompletion = false; # enabled in oh-my-zsh
+      initExtra = ''
+        test -f ~/.dir_colors && eval $(dircolors ~/.dir_colors)
+      '';
+      shellAliases = {
+        please = "sudo";
+        nd = "nix-develop";
+        kew = ''tmux display-message -p "#S" | xargs -I {} kitty tmux new-session -A -s {}'';
+      };
+      oh-my-zsh = {
+        enable = true;
+        plugins = [ "git" "systemd" "rsync" "kubectl" ];
+        theme = "half-life";
+      };
+    };
+
+
+
 
   programs.firefox = {
     enable = true;
@@ -127,6 +144,7 @@
       startup = [
         {command = "waybar";}
       ];
+      keybindings = lib.mkOptionDefault (import ./keybindings.nix { inherit pkgs; });
     };
   };
 

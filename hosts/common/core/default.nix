@@ -18,6 +18,7 @@ with lib; {
     btop
     fd
     fzf
+    neofetch
 
     # Sound stuff. TODO move to other file
     pulseaudio # Make sure this isn't enabled
@@ -29,10 +30,12 @@ with lib; {
     curl
     zip
     git
-
-
+    zsh
   ];
 
+  users.users.kristian.shell = pkgs.zsh;
+  programs.zsh.enable = true;
+  
   imports = [
     ./fonts.nix
   ];
