@@ -71,8 +71,8 @@
       '';
       shellAliases = {
         please = "sudo";
-        nd = "nix-develop";
-        kew = ''tmux display-message -p "#S" | xargs -I {} kitty tmux new-session -A -s {}'';
+        nd = "nix develop";
+        tmr = "tmux attach-session -d";
       };
       oh-my-zsh = {
         enable = true;
