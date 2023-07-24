@@ -28,9 +28,8 @@
 
  programs.tmux = {
     enable = true;
-    extraConfig = ''
-      set  -s escape-time 0
-      '';
+    shell = "${pkgs.zsh}/bin/zsh";
+    escapeTime = 0;
     # set-option -g terminal-overrides ",xterm-256color:Tc"
   };
 
