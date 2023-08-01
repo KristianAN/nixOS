@@ -3,6 +3,7 @@
   lib,
   ...
 }: {
+
 #  imports = [
 #    ../common
 #     ./desktop
@@ -12,7 +13,7 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  home = {
+    home = {
     username = "kristian";
     homeDirectory = "/home/kristian";
   };
@@ -22,6 +23,7 @@
     wofi
     waybar
     wdisplays
+    wev
   ];
 
  programs.home-manager.enable = true;
@@ -81,9 +83,6 @@
       };
     };
 
-
-
-
   programs.firefox = {
     enable = true;
   };
@@ -116,7 +115,8 @@
       input = {
         "*" = {
           xkb_layout = "us,no";
-          xkb_options = "caps:escape,grp:rctrl_toggle";
+          xkb_options = "caps:escape,grp:rctrl_toggle,ctrl:swap_lalt_lctl"; 
+          tap = "enabled";
         };
       };
 

@@ -19,6 +19,8 @@ with lib; {
     fd
     fzf
     neofetch
+    htop
+    killall
 
     # Sound stuff. TODO move to other file
     pulseaudio # Make sure this isn't enabled
@@ -34,8 +36,9 @@ with lib; {
   ];
 
   users.users.kristian.shell = pkgs.zsh;
+
   programs.zsh.enable = true;
-  
+      
   imports = [
     ./fonts.nix
   ];

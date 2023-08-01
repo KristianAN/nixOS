@@ -16,6 +16,16 @@ require('packer').startup(function(use)
     config = function() require("nvim-autopairs").setup {} end
   }
 
+  use {
+  'j-hui/fidget.nvim',
+  tag = 'legacy',
+  config = function()
+    require("fidget").setup {
+      -- options
+    }
+    end,
+  }
+
   use { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     requires = {
@@ -258,7 +268,7 @@ vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'java', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim', 'scala' },
+  ensure_installed = { 'c', 'cpp', 'java', 'go', 'lua', 'python', 'rust', 'typescript',  'vim', 'scala', 'haskell' },
 
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
@@ -380,7 +390,6 @@ end
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  -- rust_analyzer = {},
 
   lua_ls = {
     Lua = {
@@ -389,6 +398,8 @@ local servers = {
     },
   },
 }
+
+require'lspconfig'.hls.setup{}
 
 -- Setup neovim lua configuration
 require('neodev').setup()

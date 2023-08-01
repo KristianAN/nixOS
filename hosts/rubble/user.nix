@@ -7,5 +7,9 @@
       ];
       extraGroups = ["wheel" "networkmanager" "docker" "libvirtd" "video" "audio"];
     };
+    
   };
+  
+ 
+
 }

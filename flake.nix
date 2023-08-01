@@ -26,9 +26,9 @@
       default = import ./overlay {inherit inputs;};
     };
 
-    # NixOS modules
+   # NixOS modules
 
-    #templates = import ./templates;
+    templates = import ./templates;
     nixosModules = import ./modules/nixos;
     homeManagerModules = import ./modules/home-manager;
 
@@ -43,33 +43,57 @@
 
     # NixOS configuration, callable for each system
     nixosConfigurations = {
-      # Laptop
-      laptop = nixpkgs.lib.nixosSystem {
+      # Rubble
+      rubble = nixpkgs.lib.nixosSystem {
+
         specialArgs = {inherit inputs;};
         modules = [
-          ./hosts/laptop
+          ./hosts/rubble
           nixosModules
           {
             programs.slack.enable = true;
             programs.teams.enable = false;
             programs.citrix.enable = false;
             programs.discord.enable = true;
-            programs.intellij.enable = false;
+            programs.intellij.enable = true;
           }
         ];
       };
 
-      # Work Laptop -> TODO: Add modules for laptop
+      # Chase 
+      chase = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./hosts/chase
+          nixosModules
+          {
+            programs.slack.enable = true;
+            programs.teams.enable = true;
+            programs.citrix.enable = true;
+            programs.discord.enable = true;
+            programs.intellij.enable = true;
+          }
+        ];
+      };
     };
 
     # Home Manager configuration, callable for each system
     homeConfigurations = {
-      # Laptop
-      "kristian@nixos" = home-manager.lib.homeManagerConfiguration {
+      # Rubble
+      "kristian@rubble" = home-manager.lib.homeManagerConfiguration {
         pkgs = legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs;};
         modules = [
-          ./home/kristian
+          ./home/rubble
+          homeManagerModules
+        ];
+      };
+
+      "kristian@chase" = home-manager.lib.homeManagerConfiguration {
+        pkgs = legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs;};
+        modules = [
+          ./home/chase
           homeManagerModules
         ];
       };
