@@ -9,7 +9,6 @@
     # Home Manager is a tool that helps you manage your dotfiles
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = {
