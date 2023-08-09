@@ -23,6 +23,7 @@
     wdisplays
     wev
     swaylock-effects
+    dunst
   ];
 
  programs.home-manager.enable = true;
@@ -100,7 +101,6 @@
       gtk-application-prefer-dark-theme = true;
     };
   };
-
 
   # Setup Sway
   wayland.windowManager.sway = {
