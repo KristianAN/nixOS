@@ -21,6 +21,8 @@ with lib; {
     neofetch
     htop
     killall
+    tree
+    dbeaver
 
     # Sound stuff. TODO move to other file
     pulseaudio # Make sure this isn't enabled
@@ -33,9 +35,17 @@ with lib; {
     zip
     git
     zsh
+
+    # Keyring
+    gnome.gnome-keyring
+
+    
+
   ];
 
   users.users.kristian.shell = pkgs.zsh;
+
+  security.pam.services.swaylock = {};
 
   programs.zsh.enable = true;
       

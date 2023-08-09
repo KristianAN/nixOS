@@ -4,11 +4,9 @@
   ...
 }: {
 
-#  imports = [
-#    ../common
-#     ./desktop
-#     ./services
-#  ];
+  imports = [
+     ./services
+  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -24,6 +22,7 @@
     waybar
     wdisplays
     wev
+    swaylock-effects
   ];
 
  programs.home-manager.enable = true;
@@ -101,6 +100,7 @@
       gtk-application-prefer-dark-theme = true;
     };
   };
+
 
   # Setup Sway
   wayland.windowManager.sway = {

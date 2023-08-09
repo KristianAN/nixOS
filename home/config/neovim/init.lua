@@ -11,6 +11,8 @@ require('packer').startup(function(use)
   -- Package manager
   use 'wbthomason/packer.nvim'
 
+  use "sindrets/diffview.nvim"
+
   use {
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
