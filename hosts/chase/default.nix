@@ -15,8 +15,6 @@
   ];
   environment.systemPackages = with pkgs; [
     # Nix Core
-    # Piece of shit
-    microsoft-edge
   ];
 
 
