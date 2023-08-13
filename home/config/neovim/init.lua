@@ -549,3 +549,16 @@ vim.diagnostic.config({
 
 -- My remaps
 vim.api.nvim_set_keymap('n', '<Space>`', '<Cmd>b#<CR>', { noremap = true, silent = true })
+
+-- Map ñ to Left
+vim.api.nvim_set_keymap('n', 'ñ', '<Left>', { noremap = true, silent = true })
+
+-- Map é to Up
+vim.api.nvim_set_keymap('n', 'é', '<Up>', { noremap = true, silent = true })
+
+-- Map í to Down
+vim.api.nvim_set_keymap('n', 'í', '<Down>', { noremap = true, silent = true })
+
+-- Map ó to Right
+vim.api.nvim_set_keymap('n', 'ó', '<Right>', { noremap = true, silent = true })
+
