@@ -6,6 +6,7 @@
 
   imports = [
      ./services
+     ./emacs.nix
   ];
 
   # Allow unfree packages
@@ -82,6 +83,10 @@
         theme = "half-life";
       };
     };
+
+  programs.chromium = {
+    enable = true;
+  };
 
   programs.firefox = {
     enable = true;
