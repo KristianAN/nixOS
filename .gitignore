@@ -1,0 +1,15 @@
+home/config/doom/bin/
+home/config/doom/.dir-locals.el
+home/config/doom/docs/
+home/config/doom/.doomrc
+home/config/doom/early-init.el
+home/config/doom/.github
+home/config/doom/.gitignore
+home/config/doom/LICENSE
+home/config/doom/lisp/
+home/config/doom/.local/
+home/config/doom/modules/
+home/config/doom/profiles/
+home/config/doom/README.md
+home/config/doom/shell.nix
+home/config/doom/templates/

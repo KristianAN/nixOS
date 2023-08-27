@@ -6,6 +6,7 @@
 
   imports = [
      ./services
+     ./emacs.nix
   ];
 
   # Allow unfree packages
