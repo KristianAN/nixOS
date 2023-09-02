@@ -15,7 +15,6 @@
   ];
 
   hardware = {
-    displaylink.enable = true;
     opengl = {
       enable = true;
       driSupport = true;
