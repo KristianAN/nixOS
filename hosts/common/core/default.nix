@@ -31,6 +31,8 @@ with lib; {
     # Archive tools
     xarchiver
     wget
+    inetutils
+    filezilla
     curl
     zip
     git
