@@ -394,6 +394,7 @@ local servers = {
   kotlin_language_server = {};
   jdtls = {};
   tsserver = {};
+  volar = {};
 
   lua_ls = {
     Lua = {
