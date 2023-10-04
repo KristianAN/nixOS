@@ -9,6 +9,8 @@ with lib; {
     # Nix Core
     nix-index
     wgetpaste
+    filezilla
+    ncdu
     ripgrep
     xdotool
     pstree
@@ -75,6 +77,16 @@ with lib; {
     };
   };
 
+  virtualisation = {
+    podman.enable = true;
+    libvirtd.enable = true;
+    docker = {
+      enable = true;
+      daemon.settings = {
+        data-root = "/opt/docker";
+      };
+    };
+  };
       
   imports = [
     ./fonts.nix

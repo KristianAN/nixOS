@@ -5,7 +5,9 @@
       fd
       gcc
       ripgrep
-      coursier
+      cmake
+      gnumake
+      libtool
     ];
   };
   programs.emacs = {
