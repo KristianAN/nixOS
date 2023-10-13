@@ -6,13 +6,14 @@
   hardware.opengl.driSupport = true;
   hardware.bluetooth.enable = true;
   hardware.keyboard.zsa.enable = true;
+  harware.enableAllFirmware = true;
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   # high-resolution display
   # hardware.video.hidpi.enable = lib.mkDefault true;
   # Set your system kind (needed for flakes)
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
- boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];

@@ -28,6 +28,7 @@ require('packer').startup(function(use)
     end,
   }
 
+
   use { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     requires = {
@@ -85,7 +86,7 @@ require('packer').startup(function(use)
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  -- use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -212,11 +213,7 @@ require('Comment').setup()
 vim.opt.list = true
 vim.opt.listchars:append "eol:↴"
 
-require("indent_blankline").setup {
-  space_char_blankline = " ",
-  show_current_context = true,
-  show_current_context_start = true,
-}
+require("ibl").setup()
 
 -- Gitsigns
 -- See `:help gitsigns.txt`
@@ -272,7 +269,7 @@ require('nvim-treesitter.configs').setup {
   ensure_installed = { 'c', 'cpp', 'java', 'go', 'lua', 'python', 'rust', 'typescript',  'vim', 'scala', 'haskell' },
 
   highlight = { enable = true },
-  indent = { enable = true, disable = { 'python' } },
+  indent = { enable = true, disable = { 'python', 'scala' } },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -392,7 +389,6 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   kotlin_language_server = {};
-  jdtls = {};
   tsserver = {};
 
   lua_ls = {
@@ -474,10 +470,12 @@ cmp.setup({
   }),
 })
 
+
 ----------------------------------
 -- LSP Setup ---------------------
 ----------------------------------
 
+-- Metals
 local metals_config = require("metals").bare_config()
 
 -- Example of settings
@@ -505,7 +503,7 @@ vim.api.nvim_create_autocmd("FileType", {
   -- NOTE: You may or may not want java included here. You will need it if you
   -- want basic Java support but it may also conflict if you are using
   -- something like nvim-jdtls which also works on a java filetype autocmd.
-  pattern = { "scala", "sbt",},
+  pattern = { "scala", "sbt", "java" },
   callback = function()
     require("metals").initialize_or_attach(metals_config)
   end,
@@ -551,3 +549,9 @@ vim.diagnostic.config({
 
 -- My remaps
 vim.api.nvim_set_keymap('n', '<Space>`', '<Cmd>b#<CR>', { noremap = true, silent = true })
+vim.cmd("filetype plugin on")
+if vim.fn.executable('rg') then
+  -- set grepprg=rg\ --vimgrep\ --no-heading
+  vim.opt.grepprg = "rg --column --colors path:fg:blue --line-number --no-heading --color=always --smart-case"
+  vim.opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
+end

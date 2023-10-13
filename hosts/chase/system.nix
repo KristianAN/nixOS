@@ -1,4 +1,10 @@
 {
+ pkgs, 
+ lib,
+ config,
+ ...
+}:
+{
   time.timeZone = "Europe/Oslo";
   i18n.supportedLocales = [
     "en_US.UTF-8/UTF-8"
@@ -28,5 +34,8 @@
   };
 
   services.blueman.enable = true;
+
+
+  
 
 }

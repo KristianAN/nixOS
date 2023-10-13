@@ -144,7 +144,7 @@
       };
     };
 
-  programs.chromium = {
+  programs.vscode = {
     enable = true;
   };
 
@@ -180,8 +180,7 @@
       input = {
         "*" = {
           xkb_layout = "us,no";
-          xkb_variant= "colemak_dh_iso,,";
-          xkb_options = "caps:escape,grp:rctrl_toggle,ctrl:swap_lalt_lctl"; 
+          xkb_variant= ",";
           tap = "enabled";
         };
       };

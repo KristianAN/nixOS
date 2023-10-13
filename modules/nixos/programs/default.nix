@@ -4,6 +4,5 @@
     ./discord.nix
     ./intellij.nix
     ./slack.nix
-    ./teams.nix
   ];
 }
