@@ -20,16 +20,19 @@
   home.packages = with pkgs; [
     dconf
     wofi
-    waybar
     wdisplays
     wev
     swaylock-effects
     dunst
   ];
 
- programs.home-manager.enable = true;
+  programs.home-manager.enable = true;
 
- programs.tmux = {
+  programs.waybar = {
+    enable = true;
+  };
+
+  programs.tmux = {
     enable = true;
     shell = "${pkgs.zsh}/bin/zsh";
     escapeTime = 0;
@@ -107,7 +110,17 @@
   };
 
 
-  programs.neovim = {
+  programs.neovim = 
+  let
+    servers = with pkgs; { 
+      jdtls = writeShellScriptBin "jdtls" "${jdt-language-server}/bin/jdt-language-server $*"; 
+      hls = haskell-language-server;
+      nixd = nixd;
+      tsserver = nodePackages.typescript-language-server;
+      volar = nodePackages.volar;
+      rust = rust-analyzer;
+    };
+  in {
     enable = true;
     vimAlias = true;
     extraLuaConfig = lib.fileContents ./../config/neovim/init.lua;
@@ -115,8 +128,10 @@
       gcc
       fzf
       cmake
-    ];
+    ] ++ builtins.attrValues servers;
   };
+
+    
 
   programs.kitty = {
     enable = true;
@@ -179,8 +194,9 @@
 
       input = {
         "*" = {
-          xkb_layout = "us,no";
-          xkb_variant= ",";
+          xkb_layout = "no,us";
+          xkb_variant= ",colemak_dh_iso";
+          xkb_options = "grp:rctrl_toggle"; 
           tap = "enabled";
         };
       };
