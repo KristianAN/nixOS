@@ -13,11 +13,6 @@
     ./system.nix
     ./user.nix
   ];
-  environment.systemPackages = with pkgs; [
-    # Nix Core
-  ];
-
-
 
   hardware = {
     opengl = {

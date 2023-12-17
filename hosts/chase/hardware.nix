@@ -1,13 +1,21 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: {
+  hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
+
+  hardware.opengl.extraPackages = with pkgs; [
+    vaapiIntel
+    libvdpau-va-gl
+    intel-media-driver
+  ];
+
   hardware.bluetooth.enable = true;
   hardware.keyboard.zsa.enable = true;
-  harware.enableAllFirmware = true;
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   # high-resolution display
   # hardware.video.hidpi.enable = lib.mkDefault true;
   # Set your system kind (needed for flakes)
@@ -15,7 +23,7 @@
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [ "i915" "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =

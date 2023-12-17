@@ -13,6 +13,8 @@ require('packer').startup(function(use)
 
   use "sindrets/diffview.nvim"
 
+  use "github/copilot.vim"
+
   use {
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
@@ -32,10 +34,6 @@ require('packer').startup(function(use)
   use { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     requires = {
-      -- Automatically install LSPs to stdpath for neovim
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
-
       -- Useful status updates for LSP
       'j-hui/fidget.nvim',
 
@@ -266,7 +264,7 @@ vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'java', 'go', 'lua', 'python', 'rust', 'typescript',  'vim', 'scala', 'haskell' },
+  ensure_installed = { 'java', 'lua', 'python', 'rust', 'typescript',  'vim', 'scala', 'haskell', 'javascript' },
 
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python', 'scala' } },
@@ -380,26 +378,13 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---
---  Add any additional override configuration in the following tables. They will be passed to
---  the `settings` field of the server config. You must look up that documentation yourself.
-local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  kotlin_language_server = {};
-  tsserver = {};
-
-  lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-    },
-  },
-}
-
 require'lspconfig'.hls.setup{}
+require'lspconfig'.jdtls.setup{}
+require'lspconfig'.hls.setup{}
+require'lspconfig'.tsserver.setup{}
+require'lspconfig'.volar.setup{}
+require'lspconfig'.rust_analyzer.setup{}
+
 
 -- Setup neovim lua configuration
 require('neodev').setup()
@@ -407,25 +392,6 @@ require('neodev').setup()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
--- Setup mason so it can manage external tooling
-require('mason').setup()
-
--- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
-
-mason_lspconfig.setup {
-  ensure_installed = vim.tbl_keys(servers),
-}
-
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-    }
-  end,
-}
 
 -- Turn on lsp status information
 require('fidget').setup()
@@ -503,13 +469,12 @@ vim.api.nvim_create_autocmd("FileType", {
   -- NOTE: You may or may not want java included here. You will need it if you
   -- want basic Java support but it may also conflict if you are using
   -- something like nvim-jdtls which also works on a java filetype autocmd.
-  pattern = { "scala", "sbt", "java" },
+  pattern = { "scala", "sbt" },
   callback = function()
     require("metals").initialize_or_attach(metals_config)
   end,
   group = nvim_metals_group,
 })
-
 
 
 vim.api.nvim_set_option("clipboard", "unnamed")
@@ -555,3 +520,6 @@ if vim.fn.executable('rg') then
   vim.opt.grepprg = "rg --column --colors path:fg:blue --line-number --no-heading --color=always --smart-case"
   vim.opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 end
+
+vim.g.copilot_no_tab_map = true
+vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
