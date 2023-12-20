@@ -10,7 +10,6 @@
         "UbuntuMono"
         "SourceCodePro"
         "FiraMono"
-        "Iosevka"
         "LiberationMono"
         "Noto"
         "RobotoMono"
