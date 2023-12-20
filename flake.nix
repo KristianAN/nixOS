@@ -28,7 +28,6 @@
 
    # NixOS modules
 
-    templates = import ./templates;
     nixosModules = import ./modules/nixos;
     homeManagerModules = import ./modules/home-manager;
 
@@ -42,7 +41,23 @@
       });
 
     # NixOS configuration, callable for each system
-    nixosConfigurations = {
+     nixosConfigurations = {
+      # Sky
+      sky = nixpkgs.lib.nixosSystem {
+
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./hosts/sky
+          nixosModules
+          {
+            programs.slack.enable = false;
+            programs.citrix.enable = false;
+            programs.discord.enable = false;
+            programs.intellij.enable = false;
+          }
+        ];
+      };
+
       # Rubble
       rubble = nixpkgs.lib.nixosSystem {
 
