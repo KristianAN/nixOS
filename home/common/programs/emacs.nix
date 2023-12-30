@@ -18,6 +18,7 @@ in
 {
   programs.emacs = {
     enable = true;
+
     extraPackages = epkgs:
       with epkgs; [
         # Core packages
@@ -35,8 +36,6 @@ in
         all-the-icons-ivy-rich # More friendly display transformer for ivy
         dired-single # Reuse the dired buffer
         direnv # Environment switcher for Emacs
-        docker # Docker integration
-        dockerfile-mode # Major mode for editing Dockerfiles
         editorconfig # EditorConfig Emacs Plugin
         eldoc # Show function arglist or variable docstring in echo area
         emojify # Display emojis in Emacs
@@ -58,11 +57,6 @@ in
         org-roam-ui # A graphical user interface for org-roam
         pretty-mode # Redisplay parts of the buffer as pretty symbols
         projectile # Project Interaction Library for Emacs
-        # protobuf-mode # Major mode for editing protocol buffers
-        # simple-httpd # A simple HTTP server
-        # websocket # WebSocket client and server
-        web-mode # Major mode for editing web templates
-        # writegood-mode # A minor mode to aid in finding common writing problems
 
         # Terminal
         vterm # Fully-featured terminal emulator
@@ -73,14 +67,6 @@ in
 
         # Language Server
         dap-mode # Debug Adapter Protocol mode
-        # ccls # C/C++/ObjC language server
-        helm-lsp # Helm UI for the Language Server Protocol
-        lsp-java # Java
-        lsp-metals # Scala language server
-        lsp-treemacs # Treemacs integration f
-        lsp-tailwindcss # Tailwind CSS support for lsp-mode
-        lsp-mode # An implementation of the Language Server Protocol
-        lsp-ui # UI integrations for lsp-mode
 
         # Programming language packages.
         company # Modular text completion framework
@@ -97,25 +83,18 @@ in
         yasnippet # Template system for Emacs
         clojure-mode # Major mode for editing clojure files
         cider # Extends clojure-mode with superpowers
+        web-mode # Major mode for editing web templates
 
         # User interface packages.
         counsel # Various completion functions using Ivy
       ];
     extraConfig = ''
-      ;; General Settings
-      (defun nix-path (exeFile &rest joins)
-        "It returns the path to the /nix/store of EXEFILE and joins JOINS together into a string."
-        (let* ((target (string-trim (executable-find exeFile)))
-        (path (string-trim (shell-command-to-string (format "nix-store -q %s" target)))))
-          (string-join (cons path joins))))
-
       (setq inhibit-startup-message t) ; Disable startup message
       (menu-bar-mode -1) ; Disable the menu bar
       (tool-bar-mode -1) ; Disable the toolbar
       (scroll-bar-mode -1) ; Disable the scroll bar
       (setq-default indent-tabs-mode nil) ; Use spaces instead of tabs
 
-      ;; Enable relative line numbers
       (setq display-line-numbers-type 'default)
       (global-display-line-numbers-mode t)
 
@@ -155,50 +134,7 @@ in
         ;; Org Keybindings
         "oa" 'org-agenda
         "oc" 'org-capture
-
-        ;; LSP Keybindings
-        "lws" 'lsp-ui-sideline-mode
-        "lwd" 'lsp-ui-doc-mode
-        "lwr" 'lsp-ui-peek-find-references
-        "lwf" 'lsp-ui-peek-find-definitions
-        "lwa" 'lsp-ui-peek-find-implementation
-        "lwh" 'lsp-ui-doc-glance
-        "lwe" 'lsp-treemacs-errors-list
-        "lxf" 'xml-pretty-print
-        "lf" 'lsp-format-buffer
-        "lr" 'lsp-rename
-        "lR" 'lsp-workspace-restart
-        "la" 'lsp-execute-code-action
-        "ld" 'lsp-describe-thing-at-point
-        "lgt" 'lsp-goto-type-definition
-        "lgi" 'lsp-goto-implementation
-        "lsh" 'lsp-symbol-highlight
-        "lwa" 'lsp-workspace-folders-add
-        "lwr" 'lsp-workspace-folders-remove
-        "lws" 'lsp-workspace-folders-switch
-
-        ;; Java Keybindings
-        "jo" 'lsp-java-organize-imports
-        "jbp" 'lsp-java-build-project
-        "jupc" 'lsp-java-update-project-configuration
-        "jan" 'lsp-java-actionable-notifications
-        "juus" 'lsp-java-update-user-settings
-        "jus" 'lsp-java-update-server
-        "jgt" 'lsp-java-generate-to-string
-        "jgeh" 'lsp-java-generate-equals-and-hash-code
-        "jgo" 'lsp-java-generate-overrides
-        "jggs" 'lsp-java-generate-getters-and-setters
-        "jth" 'lsp-java-type-hierarchy
-        "jec" 'lsp-java-extract-to-constant
-        "jaum" 'lsp-java-add-unimplemented-methods
-        "jcp" 'lsp-java-create-parameter
-        "jcf" 'lsp-java-create-field
-        "jcl" 'lsp-java-create-local
-        "jem" 'lsp-java-extract-method
-        "jai" 'lsp-java-add-import
-        "jtb" 'lsp-jt-browser
-        "jro" 'lsp-jt-report-open
-        "jlm" 'lsp-jt-lens-mode)
+      )
 
       ;; Flycheck
       (require 'flycheck)
@@ -229,18 +165,6 @@ in
       (defvar projectile-project-root nil)
       (projectile-mode +1)
 
-      ;; LSP Mode
-      (require 'lsp-mode)
-      (add-hook 'prog-mode-hook #'lsp-deferred)
-
-      (require 'lsp-java)
-      (add-hook 'java-mode-hook #'lsp-deferred)
-      (setq lsp-java-server-install-dir "${pkgs.jdt-language-server}/share/java")
-
-      ;; Enable LSP-UI
-      (require 'lsp-ui)
-      (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-
       ;; Enable Scala
       ;; scala-ts-mode configuration
       (let ((scala-ts-mode-dir "~/.scalaTsMode")
@@ -256,18 +180,6 @@ in
             ;; If there's an error, print a message (you can also log or take other actions)
             (error (message "Failed to load scala-ts-mode: %s" err)))))
 
-
-      (require 'lsp-metals)
-      (add-hook 'scala-ts-hook #'lsp-metals-bootstrapped)
-
-      ;; Enable LSP-TailwindCSS
-      (require 'lsp-tailwindcss)
-      (add-hook 'css-mode-hook #'lsp-deferred)
-
-      ;; (require 'python-mode)
-      ;; (require 'lsp-pyright)
-      ;; (require 'blacken)
-      ;; (add-hook 'python-mode-hook #'lsp-deferred)
 
       ;; Enable SQL
       (require 'sql)
@@ -345,6 +257,18 @@ in
        (scala "https://github.com/tree-sitter/tree-sitter-scala")
       ))
 
+      
+      (dolist (mode
+           '(
+             clojure-mode-hook
+             clojurescript-mode-hook
+             clojurec-mode-hook
+             scala-ts-mode-hook
+             haskell-mode-hook))
+      (add-hook mode 'eglot-ensure))
+
+      (with-eval-after-load 'eglot
+      (add-to-list 'eglot-server-programs '((scala-mode scala-ts-mode) . ("metals"))))
 
       (add-hook 'java-mode-hook #'tree-sitter-mode)
       (add-hook 'java-mode-hook #'tree-sitter-hl-mode)
