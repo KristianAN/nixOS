@@ -1,6 +1,6 @@
 {
   imports = [
-    ./citrix.nix
+    #./citrix.nix
     ./discord.nix
     ./intellij.nix
     ./slack.nix
