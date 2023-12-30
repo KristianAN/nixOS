@@ -71,13 +71,7 @@ in
         # Programming language packages.
         company # Modular text completion framework
         helm-xref # Helm UI for xref
-        go-mode # Major mode for the Go programming language
-        javap-mode # Major mode for editing Java bytecode
-        java-imports # Automatically import Java classes
-        java-snippets # Yasnippets for Java
-        javadoc-lookup # Lookup Javadoc documentation
         json-mode # Major mode for editing JSON files
-        organize-imports-java # Organize imports for Java
         vue-mode # Major mode for editing Vue.js files
         yaml-mode # Major mode for editing YAML files
         yasnippet # Template system for Emacs
@@ -204,7 +198,6 @@ in
       (require 'json-mode)
       (require 'dap-chrome)
       (add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-mode))
-      (add-hook 'vue-mode-hook #'lsp-deferred)
       (flycheck-add-mode 'javascript-eslint 'web-mode)
 
       ;; Web-mode configurations
@@ -264,17 +257,15 @@ in
              clojurescript-mode-hook
              clojurec-mode-hook
              scala-ts-mode-hook
-             haskell-mode-hook))
+             ))
       (add-hook mode 'eglot-ensure))
 
       (with-eval-after-load 'eglot
       (add-to-list 'eglot-server-programs '((scala-mode scala-ts-mode) . ("metals"))))
 
-      (add-hook 'java-mode-hook #'tree-sitter-mode)
-      (add-hook 'java-mode-hook #'tree-sitter-hl-mode)
-
       (require 'company)
       (setq company-backends '(company-capf))
+      (add-hook 'after-init-hook 'global-company-mode)
 
       ;; Direnv Configuration
       (direnv-mode)
