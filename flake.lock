@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "copilot-el": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1703439558,
+        "narHash": "sha256-Tb0UWFBlqELLtKpA6tK1g+B0AqHDBRMVJjGPQQMpw7M=",
+        "owner": "zerolfx",
+        "repo": "copilot.el",
+        "rev": "653fe7b12990b5b7a050971bed4579022ce4b4f8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zerolfx",
+        "repo": "copilot.el",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -56,9 +72,27 @@
     },
     "root": {
       "inputs": {
+        "copilot-el": "copilot-el",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "scala-ts-mode": "scala-ts-mode"
+      }
+    },
+    "scala-ts-mode": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1699361927,
+        "narHash": "sha256-uV0OYjA8qwJerPuWewkINoeHrjmyUTU68Mn5tYHWyb0=",
+        "owner": "KaranAhlawat",
+        "repo": "scala-ts-mode",
+        "rev": "cbfab189842ce564d9514f1b65a72b0af0d51438",
+        "type": "github"
+      },
+      "original": {
+        "owner": "KaranAhlawat",
+        "repo": "scala-ts-mode",
+        "type": "github"
       }
     },
     "systems": {

@@ -9,6 +9,14 @@
     # Home Manager is a tool that helps you manage your dotfiles
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    copilot-el = {
+      url = "github:zerolfx/copilot.el";
+      flake = false;
+    };
+    scala-ts-mode = {
+      url = "github:KaranAhlawat/scala-ts-mode";
+      flake = false;
+    };
   };
 
   outputs = {
