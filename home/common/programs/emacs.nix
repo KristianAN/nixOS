@@ -1,23 +1,68 @@
-{ pkgs, ... }:
-let
-  # Emacs Copilot Installation Definition
-  emacsCopilotSrc = builtins.fetchGit {
-    url = "https://github.com/zerolfx/copilot.el.git";
-    rev = "421703f5dd5218ec2a3aa23ddf09d5f13e5014c2";
-  };
-  scalaTsModeSrc = builtins.fetchGit {
-    url = "https://github.com/KaranAhlawat/scala-ts-mode.git";
-    rev = "cbfab189842ce564d9514f1b65a72b0af0d51438";
-  };
-
-  kanagawaThemeSrc = builtins.fetchGit {
-    url = "https://github.com/meritamen/emacs-kanagawa-theme.git";
-    rev = "cd4869986e0a3f688131007f1366f6041ef8d818";
-  };
-in
+{inputs, pkgs, ... }:
 {
   programs.emacs = {
     enable = true;
+    overrides = self: super: {
+      # I install the packages below by hand because they're not in MELPA, and I
+      # don't want to incur the startup cost of using straight.el.
+      copilot =
+        let
+          rev = inputs.copilot-el.shortRev;
+        in
+        with pkgs;
+        with pkgs.emacsPackages;
+        melpaBuild {
+          pname = "copilot";
+          ename = "copilot";
+          version = inputs.copilot-el.lastModifiedDate;
+          commit = rev;
+          packageRequires = [ dash editorconfig s ];
+
+          src = fetchFromGitHub {
+            inherit rev;
+            owner = "zerolfx";
+            repo = "copilot.el";
+            sha256 = inputs.copilot-el.narHash;
+          };
+
+          recipe = writeText "recipe" ''
+            (copilot
+              :repo "zerolfx/copilot.el"
+              :fetcher github
+              :files ("*.el" "dist"))
+          '';
+          meta.description = "Emacs plugin for GitHub Copilot";
+        };
+        scala-ts-mode =
+        let
+          rev = inputs.scala-ts-mode.shortRev;
+        in
+        with pkgs;
+        with pkgs.emacsPackages;
+        melpaBuild {
+          pname = "scala-ts-mode";
+          ename = "scala-ts-mode";
+          version = inputs.scala-ts-mode.lastModifiedDate;
+          commit = rev;
+          packageRequires = [ ];
+
+          src = fetchFromGitHub {
+            inherit rev;
+            owner = "KaranAhlawat";
+            repo = "scala-ts-mode";
+            sha256 = inputs.scala-ts-mode.narHash;
+          };
+
+          recipe = writeText "recipe" ''
+            (scala-ts-mode
+              :repo "KaranAhlawat/scala-ts-mode"
+              :fetcher github
+              :files ("*.el" "dist"))
+          '';
+          meta.description = "Emacs plugin for Scala tree-sitter support";
+        };
+
+    };
 
     extraPackages = epkgs:
       with epkgs; [
@@ -64,7 +109,7 @@ in
 
         # Theme
         doom-modeline # A fancy and fast mode-line
-
+        doom-themes # An opinionated pack of modern color-themes
         # Language Server
         dap-mode # Debug Adapter Protocol mode
 
@@ -78,10 +123,15 @@ in
         clojure-mode # Major mode for editing clojure files
         cider # Extends clojure-mode with superpowers
         web-mode # Major mode for editing web templates
+        scala-ts-mode # Major mode for editing Scala files
+        eglot-java# Majos mode for editing Java files
+        copilot # Copilot support
 
         # User interface packages.
         counsel # Various completion functions using Ivy
+        treesit-grammars.with-all-grammars
       ];
+
     extraConfig = ''
       (setq inhibit-startup-message t) ; Disable startup message
       (menu-bar-mode -1) ; Disable the menu bar
@@ -159,22 +209,6 @@ in
       (defvar projectile-project-root nil)
       (projectile-mode +1)
 
-      ;; Enable Scala
-      ;; scala-ts-mode configuration
-      (let ((scala-ts-mode-dir "~/.scalaTsMode")
-            (scala-ts-mode-file "~/.scalaTsMode/scala-ts-mode.el"))
-        ;; Check if the scala-ts-mode.el file exists
-        (when (file-exists-p scala-ts-mode-file)
-          ;; Add the directory to the load-path
-          (add-to-list 'load-path scala-ts-mode-dir)
-          ;; Try to load the scala-ts-mode module and catch any errors
-          (condition-case err
-              (progn
-                (require 'scala-ts-mode))
-            ;; If there's an error, print a message (you can also log or take other actions)
-            (error (message "Failed to load scala-ts-mode: %s" err)))))
-
-
       ;; Enable SQL
       (require 'sql)
 
@@ -219,23 +253,13 @@ in
       (setq web-mode-style-padding 2)
       (setq web-mode-code-indent-offset 2)
 
-      ;; Copilot Configuration
-      (let ((copilot-dir "~/.emacsCopilot")
-            (copilot-file "~/.emacsCopilot/copilot.el"))
-        ;; Check if the copilot.el file exists
-        (when (file-exists-p copilot-file)
-          ;; Add the directory to the load-path
-          (add-to-list 'load-path copilot-dir)
-          ;; Try to load the copilot module and catch any errors
-          (condition-case err
-              (progn
-                (require 'copilot)
-                (add-hook 'prog-mode-hook 'copilot-mode)
-                (define-key copilot-completion-map (kbd "C-p") 'copilot-accept-completion)
-                (define-key copilot-mode-map (kbd "C-j") #'copilot-next-completion)
-                (define-key copilot-mode-map (kbd "C-k") #'copilot-previous-completion))
-            ;; If there's an error, print a message (you can also log or take other actions)
-            (error (message "Failed to load copilot: %s" err)))))
+      ;; Copilot
+      (require 'copilot)
+      (add-hook 'prog-mode-hook 'copilot-mode)
+      (define-key copilot-completion-map (kbd "C-p") 'copilot-accept-completion)
+      (define-key copilot-mode-map (kbd "C-j") #'copilot-next-completion)
+      (define-key copilot-mode-map (kbd "C-k") #'copilot-previous-completion)
+      (add-to-list 'copilot-major-mode-alist '("scala-ts" . "scala"))
 
       ;; Xml Pretty Print
       (defun xml-pretty-print (beg end &optional arg)
@@ -244,13 +268,19 @@ in
         (interactive "*r\nP")
         (shell-command-on-region beg end "xmllint --format -" t t))
 
-      ;; Enable Tree-sitter langs
-      (setq treesit-language-source-alist
-      '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-       (scala "https://github.com/tree-sitter/tree-sitter-scala")
-      ))
+      (setq major-mode-remap-alist
+        '((yaml-mode . yaml-ts-mode)
+          (bash-mode . bash-ts-mode)
+          (js2-mode . js-ts-mode)
+          (typescript-mode . typescript-ts-mode)
+          (json-mode . json-ts-mode)
+          (css-mode . css-ts-mode)
+          (python-mode . python-ts-mode)))
 
-      
+      ;; Tree-sitter-config
+      (setq treesit-font-lock-level 4)
+
+      ;; Eglot
       (dolist (mode
            '(
              clojure-mode-hook
@@ -259,6 +289,7 @@ in
              scala-ts-mode-hook
              ))
       (add-hook mode 'eglot-ensure))
+      (add-hook 'java-mode-hook 'eglot-java-mode)
 
       (with-eval-after-load 'eglot
       (add-to-list 'eglot-server-programs '((scala-mode scala-ts-mode) . ("metals"))))
@@ -277,33 +308,31 @@ in
       ;; Vterm Configuration
       (require 'vterm)
 
-      ;; Kanagawa theme
-      (let ((kanagawa-theme-dir "~/.emacsKanagawaTheme")
-            (kanagawa-theme-file "~/.emacsKanagawaTheme/kanagawa-theme.el"))
-        ;; Check if the kanagawa-theme.el file exists
-        (when (file-exists-p kanagawa-theme-file)
-          ;; Add the directory to the load-path
-          (add-to-list 'load-path kanagawa-theme-dir)
-          ;; Try to load the kanagawa-theme module and catch any errors
-          (condition-case err
-              (progn
-                (require 'kanagawa-theme))
-            ;; If there's an error, print a message (you can also log or take other actions)
-            (error (message "Failed to load kanagawa-theme: %s" err)))))
+      ;; Font
+      (set-frame-font "Iosevka Nerd Font 12" nil t)
 
-      (load-theme 'kanagawa t)
+      ;; Themes
+      (require 'doom-themes)
+      (load-theme 'doom-one t)
+      (require 'doom-modeline)
+      (doom-modeline-mode 1)
+      (setq doom-modeline-icon t)
+      (setq doom-modeline-major-mode-icon t)
+      (setq doom-modeline-height 35)
+      (setq doom-modeline-minor-modes t)
+      (setq doom-modeline-enable-word-count t)
+      (setq doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode text-mode))
+      (setq doom-modeline-buffer-encoding t)
+      (setq doom-modeline-indent-info t)
+      (setq doom-modeline-total-line-number t)
+      (setq doom-modeline-github t)
+      (setq doom-modeline-github-interval (* 10 60))
 
     '';
   };
 
   home.packages = with pkgs; [
     rnix-lsp
-    metals
-    clojure-lsp
-    jdt-language-server
   ];
 
-  home.file.".emacsCopilot".source = emacsCopilotSrc;
-  home.file.".scalaTsMode".source = scalaTsModeSrc;
-  home.file.".emacsKanagawaTheme".source = kanagawaThemeSrc;
 }
