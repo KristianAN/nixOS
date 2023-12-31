@@ -156,8 +156,10 @@
               (delete-other-windows))))
 
       ;; Evil Mode
+      (setq evil-want-keybinding nil)
       (require 'evil)
       (evil-mode 1)
+      (evil-collection-init '(calendar dired magit org org-roam))
 
       ;; Set the leader key to space
       (global-evil-leader-mode)
