@@ -35,9 +35,14 @@
       fsType = "vfat";
     };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/a88dc7b5-2ca8-4c73-96aa-e271cdc1b091"; }
-    ];
+  swapDevices = [ { device = "/dev/disk/by-uuid/a88dc7b5-2ca8-4c73-96aa-e271cdc1b091"; } ];
+
+  services.udev.extraRules = ''
+    # Conbee II 1cf1:0030 
+    SUBSYSTEM=="tty", ATTRS{idVendor}=="1cf1", ATTRS{idProduct}=="0030", SYMLINK+="zigbee"
+    # Z-stick gen5 0658:0200
+    SUBSYSTEM=="tty", ATTRS{idVendor}=="0658", ATTRS{idProduct}=="0200", SYMLINK+="zwave"
+  '';
   
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -45,5 +50,4 @@
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp1s0.useDHCP = lib.mkDefault true;
-
 }

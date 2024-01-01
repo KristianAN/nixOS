@@ -6,13 +6,14 @@
 
   imports = [
      ./services
-     ./emacs.nix
+     ./programs
   ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-    home = {
+
+  home = {
     username = "kristian";
     homeDirectory = "/home/kristian";
   };
@@ -24,9 +25,14 @@
     wev
     swaylock-effects
     dunst
+
   ];
 
+
   programs.home-manager.enable = true;
+  programs.emacs.enable = true;
+
+  home.sessionVariables.EDITOR = "${pkgs.emacs}/bin/emacsclient -c";
 
   programs.waybar = {
     enable = true;
@@ -262,7 +268,7 @@
       bars = [];
 
       startup = [
-        {command = "waybar";}
+        { command = "waybar"; }
       ];
       keybindings = lib.mkOptionDefault (import ./keybindings.nix { inherit pkgs; });
     };

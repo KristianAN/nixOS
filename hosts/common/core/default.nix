@@ -40,16 +40,19 @@ with lib; {
     git
     zsh
     chromium
-    microsoft-edge
 
     # Keyring
     gnome.gnome-keyring
+
+    # Copilot requires this
+    nodejs-18_x
 
   ];
 
   users.users.kristian.shell = pkgs.zsh;
 
   security.pam.services.swaylock = {};
+
 
   services.greetd = {
     enable = true;

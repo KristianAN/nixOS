@@ -3,9 +3,7 @@
 with pkgs;
 let
   modifier = "Mod4";
-  workspaceScript = pkgs.writeShellScript "wrk.sh" ''
-  "kitty tmux new-session -A";
-    '';
+
   swaylockScript = pkgs.writeShellScript "swaylock.sh" ''
       swaylock \
 	--screenshots \
@@ -25,6 +23,6 @@ let
   '';
 in
 {
-  "${modifier}+shift+t" = "exec ${workspaceScript}";
+  "${modifier}+ctrl+e" = "exec emacsclient -c";
   "${modifier}+alt+l" = "exec ${swaylockScript}";
 }
