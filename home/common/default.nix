@@ -137,8 +137,6 @@
     ] ++ builtins.attrValues servers;
   };
 
-    
-
   programs.kitty = {
     enable = true;
     font = {
