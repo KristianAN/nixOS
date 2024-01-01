@@ -26,6 +26,14 @@
   boot.kernelModules = [ "i915" "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  services.udev.extraRules = ''
+    # Conbee II 1cf1:0030 
+    SUBSYSTEM=="tty", ATTRS{idVendor}=="1cf1", ATTRS{idProduct}=="0030", SYMLINK+="zigbee"
+    # Z-stick gen5 0658:0200
+    SUBSYSTEM=="tty", ATTRS{idVendor}=="0658", ATTRS{idProduct}=="0200", SYMLINK+="zwave"
+  '';
+
+
   swapDevices = [ ];
   
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

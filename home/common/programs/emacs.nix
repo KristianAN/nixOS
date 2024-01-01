@@ -125,7 +125,7 @@
         web-mode # Major mode for editing web templates
         scala-ts-mode # Major mode for editing Scala files
         eglot-java# Majos mode for editing Java files
-        copilot # Copilot support
+        # copilot # Copilot support
 
         # User interface packages.
         counsel # Various completion functions using Ivy
@@ -207,7 +207,7 @@
       (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 
       ;; Projectile
-      (setq projectile-project-search-path '("~/src/" ))
+      (setq projectile-project-search-path '("~/src/" "~/nix/"))
       (defvar projectile-project-root nil)
       (projectile-mode +1)
 
@@ -256,12 +256,12 @@
       (setq web-mode-code-indent-offset 2)
 
       ;; Copilot
-      (require 'copilot)
-      (add-hook 'prog-mode-hook 'copilot-mode)
-      (define-key copilot-completion-map (kbd "C-p") 'copilot-accept-completion)
-      (define-key copilot-mode-map (kbd "C-j") #'copilot-next-completion)
-      (define-key copilot-mode-map (kbd "C-k") #'copilot-previous-completion)
-      (add-to-list 'copilot-major-mode-alist '("scala-ts" . "scala"))
+      ;;(require 'copilot)
+      ;;(add-hook 'prog-mode-hook 'copilot-mode)
+      ;;(define-key copilot-completion-map (kbd "C-p") 'copilot-accept-completion)
+      ;;(define-key copilot-mode-map (kbd "C-j") #'copilot-next-completion)
+      ;;(define-key copilot-mode-map (kbd "C-k") #'copilot-previous-completion)
+      ;;(add-to-list 'copilot-major-mode-alist '("scala-ts" . "scala"))
 
       ;; Xml Pretty Print
       (defun xml-pretty-print (beg end &optional arg)
