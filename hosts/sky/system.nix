@@ -35,7 +35,4 @@
 
   services.blueman.enable = true;
 
-
-  
-
 }

@@ -21,6 +21,10 @@
     };
   };
 
+
+  environment.systemPackages = with pkgs; [
+    shotwell
+  ];
   xdg = {
     portal = {
       enable = true;
