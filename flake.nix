@@ -100,6 +100,17 @@
 
     # Home Manager configuration, callable for each system
     homeConfigurations = {
+      # Sky
+      "kristian@sky" = home-manager.lib.homeManagerConfiguration {
+        pkgs = legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs;};
+        modules = [
+          ./home/sky
+          homeManagerModules
+        ];
+      };
+
+
       # Rubble
       "kristian@rubble" = home-manager.lib.homeManagerConfiguration {
         pkgs = legacyPackages.x86_64-linux;
