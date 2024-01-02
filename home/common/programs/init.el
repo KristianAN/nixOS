@@ -72,7 +72,7 @@
   "/" 'magit-status
   "<SPC>" 'project-find-file
   "ps" 'project-shell
-  "pb" 'project-buffers
+  "pb" 'project-switch-to-buffer
   
   ;; Org Keybindings
   "oa" 'org-agenda
@@ -197,6 +197,7 @@ With optional ARG, also auto-fill."
         ))
 (add-hook mode 'eglot-ensure))
 (add-hook 'java-mode-hook 'eglot-java-mode)
+(add-hook 'after-save-hook 'eglot-format)
 
 (with-eval-after-load 'eglot
 (add-to-list 'eglot-server-programs '((scala-mode scala-ts-mode) . ("metals"))))
