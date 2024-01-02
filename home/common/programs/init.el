@@ -34,21 +34,29 @@
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
-"b" 'ivy-switch-buffer
-"f" 'counsel-find-file
-"k" 'kill-buffer
-"q" 'kill-all-buffers-except-current
-"w" 'save-buffer
-"x" 'counsel-M-x
-"F" 'counsel-git-grep
-"d" 'dired
-"t" 'vterm
-"p" 'projectile-command-map
-"/" 'magit-status
+  "b" 'ivy-switch-buffer
+  "f" 'counsel-find-file
+  "k" 'kill-buffer
+  "q" 'kill-all-buffers-except-current
+  "w" 'save-buffer
+  "x" 'counsel-M-x
+  "F" 'counsel-git-grep
+  "d" 'dired
+  "t" 'vterm
+  "p" 'projectile-command-map
+  "/" 'magit-status
+  
+  ;; Org Keybindings
+  "oa" 'org-agenda
+  "oc" 'org-capture
 
-;; Org Keybindings
-"oa" 'org-agenda
-"oc" 'org-capture
+  ;; Lsp keybinds
+  "lgd" 'xref-find-definitions
+  "lgr" 'xref-find-references
+  "lgf" 'eglot-format
+  "lga" 'eglot-code-actions
+  "lgt" 'eglot-find-typeDefinition
+  "lgh" 'eglot-inlay-hints-mode
 )
 
 ;; Flycheck
@@ -183,6 +191,7 @@ With optional ARG, also auto-fill."
 ;;
 
 (add-hook 'after-make-frame-functions (lambda (f) (set-frame-font "Iosevka Nerd Font 12" nil t)))
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 ;; Themes
 (require 'doom-themes)
@@ -200,5 +209,4 @@ With optional ARG, also auto-fill."
 (setq doom-modeline-total-line-number t)
 (setq doom-modeline-github t)
 (setq doom-modeline-github-interval (* 10 60))
-
 (server-start)

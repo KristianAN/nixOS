@@ -102,6 +102,7 @@
         org-roam-ui # A graphical user interface for org-roam
         pretty-mode # Redisplay parts of the buffer as pretty symbols
         projectile # Project Interaction Library for Emacs
+        rainbow-delimiters
 
         # Terminal
         vterm # Fully-featured terminal emulator
