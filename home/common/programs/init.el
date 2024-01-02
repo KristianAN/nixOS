@@ -13,6 +13,32 @@
 
 ;; Package Specific Settings
 
+;; Tabspaces
+(require 'tabspaces)
+(setq tabspaces-use-filtered-buffers-as-default t)
+(setq tabspaces-default-tab "Default")
+(setq tabspaces-remove-to-default t)
+(setq tabspaces-include-buffers '("*scratch*"))
+(setq tabspaces-initialize-project-with-todo t)
+(setq tabspaces-todo-file-name "project-todo.org")
+;;Tabspaces sessions
+(setq tabspaces-session t)
+(setq tabspaces-session-auto-restore t)
+
+(defun tabspaces-ivy-switch-buffer ()
+  "Switch to another buffer in the current tabspace."
+  (interactive)
+  (ivy-read "Switch to buffer: " #'internal-complete-buffer
+            :predicate (when (tabspaces--current-tab-name)
+                         (let ((local-buffers (tabspaces--buffer-list)))
+                           (lambda (name-and-buffer)
+                             (member (cdr name-and-buffer) local-buffers))))
+            :keymap ivy-switch-buffer-map
+            :preselect (buffer-name (other-buffer (current-buffer)))
+            :action #'ivy--switch-buffer-action
+            :matcher #'ivy--switch-buffer-matcher
+            :caller 'ivy-switch-buffer))
+
 (yas-global-mode 1) ; Enable YASnippet
 
 ;; Function to kill all buffers except the current one
@@ -36,7 +62,7 @@
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
-  "b" 'ivy-switch-buffer
+  "b" 'counsel-switch-buffer
   "f" 'counsel-find-file
   "k" 'kill-buffer
   "q" 'kill-all-buffers-except-current
@@ -44,9 +70,9 @@
   "x" 'counsel-M-x
   "F" 'counsel-rg
   "d" 'dired
-  "t" 'vterm
-  "p" 'projectile-command-map
+  "t" 'tabspaces-command-map
   "/" 'magit-status
+  "<SPC>" 'project-find-file
   
   ;; Org Keybindings
   "oa" 'org-agenda
@@ -64,6 +90,7 @@
   "sp" 'rg-project
   "sdp" 'rg-dwim-project-dir
   "sd" 'rg-dwim
+
 )
 
 ;; Flycheck
@@ -89,11 +116,6 @@
 (global-set-key (kbd "<f6>") 'ivy-resume)
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-
-;; Projectile
-(setq projectile-project-search-path '("~/src/" "~/nix/"))
-(defvar projectile-project-root nil)
-(projectile-mode +1)
 
 ;; Enable SQL
 (require 'sql)
@@ -192,21 +214,24 @@ With optional ARG, also auto-fill."
 (require 'editorconfig)
 (editorconfig-mode 1)
 
-;; Vterm Configuration
-(require 'vterm)
-
 ;; Font
-;;
+(require 'kanagawa-theme)
+(add-hook 'after-make-frame-functions
+            (lambda (frame)
+              (with-selected-frame frame
+		 (load-theme 'doom-one t)
+                 (set-frame-font "Iosevka Nerd Font 12" nil t)
+                 (company-quickhelp-mode)
+		 )))
 
-(add-hook 'after-make-frame-functions (lambda (f) (set-frame-font "Iosevka Nerd Font 12" nil t)))
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook #'tabspaces-mode)
 
 ;; Turn off bell
 (setq ring-bell-function 'ignore)
 
 ;; Themes
 (require 'doom-themes)
-(load-theme 'doom-one t)
 (require 'doom-modeline)
 (doom-modeline-mode 1)
 (setq doom-modeline-icon t)

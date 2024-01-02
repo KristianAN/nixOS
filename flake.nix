@@ -17,6 +17,10 @@
       url = "github:KaranAhlawat/scala-ts-mode";
       flake = false;
     };
+    kanagawa-emacs-theme = {
+      url = "github:meritamen/emacs-kanagawa-theme";
+      flake = false;
+    };
   };
 
   outputs = {

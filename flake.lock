@@ -54,6 +54,22 @@
         "type": "github"
       }
     },
+    "kanagawa-emacs-theme": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1702886891,
+        "narHash": "sha256-195X4t7FOwlHzBd3RkOfUCF5R1CjkkkzX07RS4RhGxo=",
+        "owner": "meritamen",
+        "repo": "emacs-kanagawa-theme",
+        "rev": "cd4869986e0a3f688131007f1366f6041ef8d818",
+        "type": "github"
+      },
+      "original": {
+        "owner": "meritamen",
+        "repo": "emacs-kanagawa-theme",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1703961334,
@@ -75,6 +91,7 @@
         "copilot-el": "copilot-el",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
+        "kanagawa-emacs-theme": "kanagawa-emacs-theme",
         "nixpkgs": "nixpkgs",
         "scala-ts-mode": "scala-ts-mode"
       }

@@ -1,10 +1,39 @@
 { inputs, pkgs, ... }:
+
 {
   programs.emacs = {
     enable = true;
     overrides = self: super: {
       # I install the packages below by hand because they're not in MELPA, and I
       # don't want to incur the startup cost of using straight.el.
+      kanagawa-theme =
+        let
+          rev = inputs.kanagawa-emacs-theme.shortRev;
+        in
+        with pkgs;
+        with pkgs.emacsPackages;
+        melpaBuild {
+          pname = "kanagawa-theme";
+          ename = "kanagawa-theme";
+          version = inputs.kanagawa-emacs-theme.lastModifiedDate;
+          commit = rev;
+          packageRequires = [ ];
+
+          src = fetchFromGitHub {
+            inherit rev;
+            owner = "meritamen";
+            repo = "emacs-kanagawa-theme";
+            sha256 = inputs.kanagawa-emacs-theme.narHash;
+          };
+
+          recipe = writeText "recipe" ''
+            (kanagawa-theme
+              :repo "meritamen/emacs-kanagawa-theme"
+              :fetcher github
+              :files ("*.el"))
+          '';
+          meta.description = "Kanagawa theme for emacs";
+        };
       copilot =
         let
           rev = inputs.copilot-el.shortRev;
@@ -102,21 +131,20 @@
         org-roam # A note-taking tool based on the principles of networked thought
         org-roam-ui # A graphical user interface for org-roam
         pretty-mode # Redisplay parts of the buffer as pretty symbols
-        projectile # Project Interaction Library for Emacs
         rainbow-delimiters
-
-        # Terminal
-        vterm # Fully-featured terminal emulator
-        multi-vterm # Manage multiple vterm buffers
+        tabspaces
 
         # Theme
         doom-modeline # A fancy and fast mode-line
         doom-themes # An opinionated pack of modern color-themes
+        kanagawa-theme
+
         # Language Server
         dap-mode # Debug Adapter Protocol mode
 
         # Programming language packages.
         company # Modular text completion framework
+        company-quickhelp # Modular text completion framework
         helm-xref # Helm UI for xref
         json-mode # Major mode for editing JSON files
         vue-mode # Major mode for editing Vue.js files
