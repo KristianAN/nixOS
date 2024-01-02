@@ -155,11 +155,13 @@
         web-mode # Major mode for editing web templates
         scala-ts-mode # Major mode for editing Scala files
         eglot-java # Better java support in eglot
+        treesit-grammars.with-all-grammars
         # copilot # Copilot support
 
         # User interface packages.
         counsel # Various completion functions using Ivy
-        treesit-grammars.with-all-grammars
+        git-gutter
+        git-gutter-fringe
       ];
 
     extraConfig = builtins.readFile ./init.el;

@@ -13,6 +13,18 @@
 
 ;; Package Specific Settings
 
+;; Git gutter
+;; git-gutter
+(require 'git-gutter)
+(add-hook 'prog-mode-hook 'git-gutter-mode)
+(setq git-gutter:update-interval 0.05)
+
+;; git-gutter-fringe
+(require 'git-gutter-fringe)
+(define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
+(define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+(define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom)
+
 ;; Tabspaces
 (require 'tabspaces)
 (setq tabspaces-use-filtered-buffers-as-default t)
@@ -24,20 +36,6 @@
 ;;Tabspaces sessions
 (setq tabspaces-session t)
 (setq tabspaces-session-auto-restore t)
-
-(defun tabspaces-ivy-switch-buffer ()
-  "Switch to another buffer in the current tabspace."
-  (interactive)
-  (ivy-read "Switch to buffer: " #'internal-complete-buffer
-            :predicate (when (tabspaces--current-tab-name)
-                         (let ((local-buffers (tabspaces--buffer-list)))
-                           (lambda (name-and-buffer)
-                             (member (cdr name-and-buffer) local-buffers))))
-            :keymap ivy-switch-buffer-map
-            :preselect (buffer-name (other-buffer (current-buffer)))
-            :action #'ivy--switch-buffer-action
-            :matcher #'ivy--switch-buffer-matcher
-            :caller 'ivy-switch-buffer))
 
 (yas-global-mode 1) ; Enable YASnippet
 
@@ -73,6 +71,8 @@
   "t" 'tabspaces-command-map
   "/" 'magit-status
   "<SPC>" 'project-find-file
+  "ps" 'project-shell
+  "pb" 'project-buffers
   
   ;; Org Keybindings
   "oa" 'org-agenda
@@ -90,7 +90,6 @@
   "sp" 'rg-project
   "sdp" 'rg-dwim-project-dir
   "sd" 'rg-dwim
-
 )
 
 ;; Flycheck

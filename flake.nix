@@ -63,7 +63,7 @@
           nixosModules
           {
             programs.slack.enable = false;
-            # programs.citrix.enable = false;
+            programs.citrix.enable = false;
             programs.discord.enable = false;
             programs.intellij.enable = false;
           }
@@ -79,7 +79,7 @@
           nixosModules
           {
             programs.slack.enable = true;
-            # programs.citrix.enable = false;
+            programs.citrix.enable = true;
             programs.discord.enable = true;
             programs.intellij.enable = true;
           }
@@ -94,7 +94,7 @@
           nixosModules
           {
             programs.slack.enable = true;
-            # programs.citrix.enable = true;
+            programs.citrix.enable = false;
             programs.discord.enable = true;
             programs.intellij.enable = true;
           }
