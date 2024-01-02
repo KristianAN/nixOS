@@ -25,12 +25,9 @@
     wev
     swaylock-effects
     dunst
-
   ];
 
-
   programs.home-manager.enable = true;
-  programs.emacs.enable = true;
 
   home.sessionVariables.EDITOR = "${pkgs.emacs}/bin/emacsclient -c";
 
@@ -283,6 +280,7 @@
 
       startup = [
         { command = "waybar"; }
+        { command = "flameshot"; }
       ];
       keybindings = lib.mkOptionDefault (import ./keybindings.nix { inherit pkgs; });
     };

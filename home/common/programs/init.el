@@ -23,6 +23,8 @@
     (let ((current-buffer (current-buffer)))
         (mapc 'kill-buffer (delq current-buffer (buffer-list)))
         (delete-other-windows))))
+;; Rg
+(require 'rg)
 
 ;; Evil Mode
 (setq evil-want-keybinding nil)
@@ -40,7 +42,7 @@
   "q" 'kill-all-buffers-except-current
   "w" 'save-buffer
   "x" 'counsel-M-x
-  "F" 'counsel-git-grep
+  "F" 'counsel-rg
   "d" 'dired
   "t" 'vterm
   "p" 'projectile-command-map
@@ -51,12 +53,17 @@
   "oc" 'org-capture
 
   ;; Lsp keybinds
-  "lgd" 'xref-find-definitions
-  "lgr" 'xref-find-references
-  "lgf" 'eglot-format
-  "lga" 'eglot-code-actions
-  "lgt" 'eglot-find-typeDefinition
-  "lgh" 'eglot-inlay-hints-mode
+  "gd" 'xref-find-definitions
+  "gr" 'xref-find-references
+  "gf" 'eglot-format
+  "ga" 'eglot-code-actions
+  "gt" 'eglot-find-typeDefinition
+  "gh" 'eglot-inlay-hints-mode
+
+  ;; rg.el
+  "sp" 'rg-project
+  "sdp" 'rg-dwim-project-dir
+  "sd" 'rg-dwim
 )
 
 ;; Flycheck
@@ -173,6 +180,7 @@ With optional ARG, also auto-fill."
 (with-eval-after-load 'eglot
 (add-to-list 'eglot-server-programs '((scala-mode scala-ts-mode) . ("metals"))))
 
+;; Company
 (require 'company)
 (setq company-backends '(company-capf))
 (add-hook 'after-init-hook 'global-company-mode)
@@ -193,6 +201,9 @@ With optional ARG, also auto-fill."
 (add-hook 'after-make-frame-functions (lambda (f) (set-frame-font "Iosevka Nerd Font 12" nil t)))
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
+;; Turn off bell
+(setq ring-bell-function 'ignore)
+
 ;; Themes
 (require 'doom-themes)
 (load-theme 'doom-one t)
@@ -209,4 +220,5 @@ With optional ARG, also auto-fill."
 (setq doom-modeline-total-line-number t)
 (setq doom-modeline-github t)
 (setq doom-modeline-github-interval (* 10 60))
+
 (server-start)

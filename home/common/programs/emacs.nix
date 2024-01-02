@@ -1,4 +1,4 @@
-{inputs, pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   programs.emacs = {
     enable = true;
@@ -76,6 +76,7 @@
         which-key # Displays available keybindings in popup
 
         # Optional packages.
+        rg
         all-the-icons # A package for inserting developer icons
         all-the-icons-dired # Shows icons for each file in dired mode
         all-the-icons-ivy-rich # More friendly display transformer for ivy
@@ -125,7 +126,7 @@
         cider # Extends clojure-mode with superpowers
         web-mode # Major mode for editing web templates
         scala-ts-mode # Major mode for editing Scala files
-        eglot-java# Majos mode for editing Java files
+        eglot-java # Better java support in eglot
         # copilot # Copilot support
 
         # User interface packages.
