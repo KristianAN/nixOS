@@ -24,17 +24,33 @@
         (pop-to-buffer vterm-buffer)
       (vterm))))
 
-;; Git gutter
 ;; git-gutter
 (require 'git-gutter)
 (add-hook 'prog-mode-hook 'git-gutter-mode)
 (setq git-gutter:update-interval 0.05)
 
 ;; git-gutter-fringe
-(require 'git-gutter-fringe)
-(define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
-(define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
-(define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom)
+(defconst fringe-size '8 "Default fringe width.")
+
+;;; Setting up the fringe
+;; switches order of fringe and margin
+;;(setq-default fringes-outside-margins t)
+
+;; standardize fringe width
+(fringe-mode fringe-size)
+(push `(left-fringe  . ,fringe-size) default-frame-alist)
+(push `(right-fringe . ,fringe-size) default-frame-alist)
+
+;; colored fringe "bars"
+(define-fringe-bitmap 'git-gutter-fr:added
+	  [224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224]
+	  nil nil 'center)
+(define-fringe-bitmap 'git-gutter-fr:modified
+	  [224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224]
+	  nil nil 'center)
+(define-fringe-bitmap 'git-gutter-fr:deleted
+	  [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
+	  nil nil 'center)
 
 ;; Tabspaces
 (require 'tabspaces)
@@ -44,6 +60,7 @@
 (setq tabspaces-include-buffers '("*scratch*"))
 (setq tabspaces-initialize-project-with-todo t)
 (setq tabspaces-todo-file-name "project-todo.org")
+
 ;;Tabspaces sessions
 (setq tabspaces-session t)
 (setq tabspaces-session-auto-restore t)
@@ -239,47 +256,34 @@ With optional ARG, also auto-fill."
 (require 'editorconfig)
 (editorconfig-mode 1)
 
+;; Font and Theme
 (require-theme 'modus-themes)
-;; Font
-(require 'kanagawa-theme)
+
+(setq modus-themes-bold-constructs t
+      modus-themes-italic-constructs t)
+;; Maybe define some palette overrides, such as by using our presets
+(setq modus-themes-common-palette-overrides
+      modus-themes-preset-overrides-warmer)
+
+
 (add-hook 'after-make-frame-functions
-            (lambda (frame)
-              (with-selected-frame frame
+  (lambda (frame)
+    (with-selected-frame frame
+      ;; All customizations here
+      (load-theme 'modus-operandi)
+      (set-frame-font "Iosevka Nerd Font 12" nil t)
+      (company-quickhelp-mode))))
 
-                 ;; All customizations here
-                 (setq modus-themes-bold-constructs t
-                       modus-themes-italic-constructs t)
-                 
-                 ;; Maybe define some palette overrides, such as by using our presets
-                 (setq modus-themes-common-palette-overrides
-                       modus-themes-preset-overrides-intense)
-                 
-                 ;; Load the theme of choice (built-in themes are always "safe" so they
-                 ;; do not need the `no-require' argument of `load-theme').
-                 (load-theme 'modus-operandi)
-                 (set-frame-font "Iosevka Nerd Font 12" nil t)
-                 (company-quickhelp-mode)
-		 )))
+;; Mood-line for a better mode-line
+(require 'mood-line)
+(mood-line-mode 1)
+(setq mood-line-glyph-alist mood-line-glyphs-fira-code)
 
+;; Some hooks
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'prog-mode-hook #'tabspaces-mode)
 
 ;; Turn off bell
 (setq ring-bell-function 'ignore)
-
-;; Themes
-(require 'doom-modeline)
-(doom-modeline-mode 1)
-(setq doom-modeline-icon t)
-(setq doom-modeline-major-mode-icon t)
-(setq doom-modeline-height 35)
-(setq doom-modeline-minor-modes t)
-(setq doom-modeline-enable-word-count t)
-(setq doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode text-mode))
-(setq doom-modeline-buffer-encoding t)
-(setq doom-modeline-indent-info t)
-(setq doom-modeline-total-line-number t)
-(setq doom-modeline-github t)
-(setq doom-modeline-github-interval (* 10 60))
 
 (server-start)

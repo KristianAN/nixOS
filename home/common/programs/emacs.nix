@@ -6,34 +6,6 @@
     overrides = self: super: {
       # I install the packages below by hand because they're not in MELPA, and I
       # don't want to incur the startup cost of using straight.el.
-      kanagawa-theme =
-        let
-          rev = inputs.kanagawa-emacs-theme.shortRev;
-        in
-        with pkgs;
-        with pkgs.emacsPackages;
-        melpaBuild {
-          pname = "kanagawa-theme";
-          ename = "kanagawa-theme";
-          version = inputs.kanagawa-emacs-theme.lastModifiedDate;
-          commit = rev;
-          packageRequires = [ ];
-
-          src = fetchFromGitHub {
-            inherit rev;
-            owner = "meritamen";
-            repo = "emacs-kanagawa-theme";
-            sha256 = inputs.kanagawa-emacs-theme.narHash;
-          };
-
-          recipe = writeText "recipe" ''
-            (kanagawa-theme
-              :repo "meritamen/emacs-kanagawa-theme"
-              :fetcher github
-              :files ("*.el"))
-          '';
-          meta.description = "Kanagawa theme for emacs";
-        };
       copilot =
         let
           rev = inputs.copilot-el.shortRev;
@@ -62,6 +34,7 @@
           '';
           meta.description = "Emacs plugin for GitHub Copilot";
         };
+
         scala-ts-mode =
         let
           rev = inputs.scala-ts-mode.shortRev;
@@ -136,8 +109,6 @@
         vterm
 
         # Theme
-        doom-modeline # A fancy and fast mode-line
-        kanagawa-theme
         modus-themes
 
         # Language Server
@@ -163,6 +134,7 @@
         counsel # Various completion functions using Ivy
         git-gutter
         git-gutter-fringe
+        mood-line
       ];
 
     extraConfig = builtins.readFile ./init.el;
