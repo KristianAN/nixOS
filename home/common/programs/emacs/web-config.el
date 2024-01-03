@@ -8,9 +8,7 @@
 (require 'helm-xref)
 (require 'vue-mode)
 (require 'json-mode)
-;;(require 'dap-chrome)
 (add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-mode))
-(flycheck-add-mode 'javascript-eslint 'web-mode)
 
 ;; Web-mode configurations
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))

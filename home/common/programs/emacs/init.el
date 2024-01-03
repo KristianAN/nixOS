@@ -15,7 +15,7 @@
 (load-file "~/nix/nixOS/home/common/programs/emacs/tabspaces-config.el")
 (load-file "~/nix/nixOS/home/common/programs/emacs/eglot-config.el")
 (load-file "~/nix/nixOS/home/common/programs/emacs/indent-config.el")
-;;(load-file "~/nix/nixOS/home/common/programs/emacs/web-config.el")
+(load-file "~/nix/nixOS/home/common/programs/emacs/web-config.el")
 
 ; General Settings
 (setq display-line-numbers-type 'default)
