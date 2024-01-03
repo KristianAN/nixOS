@@ -54,6 +54,22 @@
         "type": "github"
       }
     },
+    "indent-bars": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1704228842,
+        "narHash": "sha256-8aZL2IkvlktpgTXFgyXcLlMVw2nm8ucYVpUceqo5Zj4=",
+        "owner": "jdtsmith",
+        "repo": "indent-bars",
+        "rev": "858de2c1244ad340ae3c1c65bb8215e21b95139d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jdtsmith",
+        "repo": "indent-bars",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1703961334,
@@ -75,6 +91,7 @@
         "copilot-el": "copilot-el",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
+        "indent-bars": "indent-bars",
         "nixpkgs": "nixpkgs",
         "scala-ts-mode": "scala-ts-mode"
       }

@@ -54,12 +54,14 @@
 
 ;; Tabspaces
 (require 'tabspaces)
-(setq tabspaces-use-filtered-buffers-as-default t)
-(setq tabspaces-default-tab "Default")
-(setq tabspaces-remove-to-default t)
-(setq tabspaces-include-buffers '("*scratch*"))
-(setq tabspaces-initialize-project-with-todo t)
-(setq tabspaces-todo-file-name "project-todo.org")
+(setq
+    tabspaces-use-filtered-buffers-as-default t
+    tabspaces-default-tab "Default"
+    tabspaces-remove-to-default t
+    tabspaces-include-buffers '("*scratch*")
+    tabspaces-initialize-project-with-todo t
+    tabspaces-todo-file-name "project-todo.org"
+)
 
 ;;Tabspaces sessions
 (setq tabspaces-session t)
@@ -120,6 +122,7 @@
   ;; Lsp keybinds
   "gd" 'xref-find-definitions
   "gr" 'xref-find-references
+  "gn" 'eglot-rename
   "gf" 'eglot-format
   "ga" 'eglot-code-actions
   "gt" 'eglot-find-typeDefinition
@@ -282,8 +285,24 @@ With optional ARG, also auto-fill."
 ;; Some hooks
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'prog-mode-hook #'tabspaces-mode)
+(dolist (indent-mode-langs
+         '(
+           scala-ts-mode-hook
+           java-mode-hook
+           clojure-mode-hook
+           ))
+(add-hook indent-mode-langs 'indent-bars-mode))
 
 ;; Turn off bell
 (setq ring-bell-function 'ignore)
+
+;;; Indent-guides
+(require 'indent-bars)
+(setq
+    indent-bars-color '(highlight :face-bg t :blend 0.3)
+    indent-bars-pattern " . . . . ." ; play with the number of dots for your usual font size
+    indent-bars-width-frac 0.35
+    indent-bars-pad-frac 0.2
+    indent-bars-highlight-current-depth nil)
 
 (server-start)

@@ -6,6 +6,35 @@
     overrides = self: super: {
       # I install the packages below by hand because they're not in MELPA, and I
       # don't want to incur the startup cost of using straight.el.
+
+      indent-bars =
+        let
+          rev = inputs.indent-bars.shortRev;
+        in
+          with pkgs;
+          with pkgs.emacsPackages;
+          melpaBuild {
+            pname = "indent-bars";
+            ename = "indent-bars";
+            version = inputs.indent-bars.lastModifiedDate;
+            commit = rev;
+            packageRequires = [];
+            src = fetchFromGitHub {
+              inherit rev;
+              owner = "jdtsmith";
+              repo = "indent-bars";
+              sha256 = inputs.indent-bars.narHash;
+            };
+
+            recipe = writeText "recipe" ''
+              (indent-bars
+                :repo "jdtsmith/indent-bars"
+                :fetcher github
+                :files ("*.el")) 
+            '';
+            meta.description = "Emacs plugin for indentation guides";
+          };
+          
       copilot =
         let
           rev = inputs.copilot-el.shortRev;
@@ -135,6 +164,7 @@
         git-gutter
         git-gutter-fringe
         mood-line
+        indent-bars
       ];
 
     extraConfig = builtins.readFile ./init.el;
