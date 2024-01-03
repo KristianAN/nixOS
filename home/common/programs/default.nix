@@ -1,6 +1,6 @@
 {
   imports = [
-    ./emacs.nix
+    ./emacs/emacs.nix
   ];
 }
 
