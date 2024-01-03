@@ -16,8 +16,15 @@
 (load-file "~/nix/nixOS/home/common/programs/emacs/eglot-config.el")
 (load-file "~/nix/nixOS/home/common/programs/emacs/indent-config.el")
 (load-file "~/nix/nixOS/home/common/programs/emacs/web-config.el")
+(load-file "~/nix/nixOS/home/common/programs/emacs/org-roam-config.el")
 
-; General Settings
+;; General Settings
+
+;; org-mode
+(require 'org-modern)
+(with-eval-after-load 'org (global-org-modern-mode))
+
+;; line-numbers
 (setq display-line-numbers-type 'default)
 ( global-display-line-numbers-mode t)
 
