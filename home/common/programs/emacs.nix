@@ -133,11 +133,12 @@
         pretty-mode # Redisplay parts of the buffer as pretty symbols
         rainbow-delimiters
         tabspaces
+        vterm
 
         # Theme
         doom-modeline # A fancy and fast mode-line
-        doom-themes # An opinionated pack of modern color-themes
         kanagawa-theme
+        modus-themes
 
         # Language Server
         dap-mode # Debug Adapter Protocol mode

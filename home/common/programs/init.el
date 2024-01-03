@@ -13,6 +13,17 @@
 
 ;; Package Specific Settings
 
+;; vterm
+(require 'vterm)
+(defun project-vterm ()
+  (interactive)
+  (let* ((default-directory (project-root (project-current t)))
+         (vterm-buffer-name "*vterm*")
+         (vterm-buffer (get-buffer vterm-buffer-name)))
+    (if (and vterm-buffer (not current-prefix-arg))
+        (pop-to-buffer vterm-buffer)
+      (vterm))))
+
 ;; Git gutter
 ;; git-gutter
 (require 'git-gutter)
@@ -47,6 +58,14 @@
     (let ((current-buffer (current-buffer)))
         (mapc 'kill-buffer (delq current-buffer (buffer-list)))
         (delete-other-windows))))
+
+;; Function to toggle theme
+(defun my-toggle-modus-theme ()
+  (interactive)
+  (if (display-graphic-p)
+      (modus-themes-toggle)
+    (message "Cannot toggle theme in non-graphical frame")))
+
 ;; Rg
 (require 'rg)
 
@@ -71,8 +90,11 @@
   "t" 'tabspaces-command-map
   "/" 'magit-status
   "<SPC>" 'project-find-file
-  "ps" 'project-shell
+  "ps" 'project-eshell
   "pb" 'project-switch-to-buffer
+  "pt" 'project-vterm
+  ;; Modus theme toggle
+  "mt" 'my-toggle-modus-theme
   
   ;; Org Keybindings
   "oa" 'org-agenda
@@ -197,7 +219,10 @@ With optional ARG, also auto-fill."
         ))
 (add-hook mode 'eglot-ensure))
 (add-hook 'java-mode-hook 'eglot-java-mode)
-(add-hook 'after-save-hook 'eglot-format)
+(add-hook 'after-save-hook
+          (lambda ()
+            (when (eglot-managed-p)
+              (eglot-format))))
 
 (with-eval-after-load 'eglot
 (add-to-list 'eglot-server-programs '((scala-mode scala-ts-mode) . ("metals"))))
@@ -214,12 +239,24 @@ With optional ARG, also auto-fill."
 (require 'editorconfig)
 (editorconfig-mode 1)
 
+(require-theme 'modus-themes)
 ;; Font
 (require 'kanagawa-theme)
 (add-hook 'after-make-frame-functions
             (lambda (frame)
               (with-selected-frame frame
-		 (load-theme 'doom-one t)
+
+                 ;; All customizations here
+                 (setq modus-themes-bold-constructs t
+                       modus-themes-italic-constructs t)
+                 
+                 ;; Maybe define some palette overrides, such as by using our presets
+                 (setq modus-themes-common-palette-overrides
+                       modus-themes-preset-overrides-intense)
+                 
+                 ;; Load the theme of choice (built-in themes are always "safe" so they
+                 ;; do not need the `no-require' argument of `load-theme').
+                 (load-theme 'modus-operandi)
                  (set-frame-font "Iosevka Nerd Font 12" nil t)
                  (company-quickhelp-mode)
 		 )))
@@ -231,7 +268,6 @@ With optional ARG, also auto-fill."
 (setq ring-bell-function 'ignore)
 
 ;; Themes
-(require 'doom-themes)
 (require 'doom-modeline)
 (doom-modeline-mode 1)
 (setq doom-modeline-icon t)
