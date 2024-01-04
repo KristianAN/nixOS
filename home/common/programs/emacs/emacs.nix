@@ -137,6 +137,7 @@
         rainbow-delimiters
         tabspaces
         vterm
+        multi-vterm
 
         # Theme
         modus-themes

@@ -10,7 +10,7 @@
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
-  "b" 'counsel-switch-buffer
+  "b" 'project-switch-to-buffer
   "f" 'counsel-find-file
   "k" 'kill-buffer
   "q" 'kill-all-buffers-except-current
@@ -21,9 +21,12 @@
   "t" 'tabspaces-command-map
   "/" 'magit-status
   "<SPC>" 'project-find-file
+
+  ;; Project
   "ps" 'project-eshell
   "pb" 'project-switch-to-buffer
   "pt" 'project-vterm
+
   ;; Modus theme toggle
   "mt" 'my-toggle-modus-theme
   
@@ -49,5 +52,13 @@
   "sp" 'rg-project
   "sdp" 'rg-dwim-project-dir
   "sd" 'rg-dwim
-)
+
+  ;; vterm
+  "vp" 'multi-vterm-project
+  "vn" 'multi-vterm-next
+  "vb" 'multi-vterm-previous
+  "vt" 'multi-vterm-dedicated-toggle
+  "vm" 'multi-vterm
+  )
+;;; evil-config.el ends here
 

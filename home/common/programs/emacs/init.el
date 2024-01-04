@@ -19,10 +19,15 @@
 (load-file "~/nix/nixOS/home/common/programs/emacs/org-roam-config.el")
 
 ;; General Settings
+(setq make-backup-files nil) ; Disable backup files
+(setq auto-save-default nil) ; Disable auto save
 
 ;; org-mode
 (require 'org-modern)
 (with-eval-after-load 'org (global-org-modern-mode))
+
+;; Turn off bell
+(setq ring-bell-function 'ignore)
 
 ;; line-numbers
 (setq display-line-numbers-type 'default)
@@ -136,10 +141,7 @@ With optional ARG, also auto-fill."
 ;; Mood-line for a better mode-line
 (require 'mood-line)
 (mood-line-mode 1)
-(setq mood-line-glyph-alist mood-line-glyphs-fira-code)
-
-;; Turn off bell
-(setq ring-bell-function 'ignore)
+(setq mood-line-glyph-alist mood-line-glyphs-unicode)
 
 ;; Some hooks
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
