@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "dape": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1704134088,
+        "narHash": "sha256-8Sf7XgqMN/qEBv0aMAuqwmQk8UFdAKE+EvC4BFh2jek=",
+        "owner": "svaante",
+        "repo": "dape",
+        "rev": "81b77eb7ab65d1500dd49798e6c05776536be7c5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "svaante",
+        "repo": "dape",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -89,11 +105,29 @@
     "root": {
       "inputs": {
         "copilot-el": "copilot-el",
+        "dape": "dape",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "indent-bars": "indent-bars",
         "nixpkgs": "nixpkgs",
+        "scala-cli-repl": "scala-cli-repl",
         "scala-ts-mode": "scala-ts-mode"
+      }
+    },
+    "scala-cli-repl": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1700430198,
+        "narHash": "sha256-4YpHiEbErgtmQXMp2NvswhVcOw9d6q3jgRVXTldzwXM=",
+        "owner": "ag91",
+        "repo": "scala-cli-repl",
+        "rev": "c4b2660ccdaf03e1fef9cc669a49f3fd96aa91d8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ag91",
+        "repo": "scala-cli-repl",
+        "type": "github"
       }
     },
     "scala-ts-mode": {

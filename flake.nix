@@ -25,6 +25,16 @@
       flake = false;
     };
 
+    dape = {
+      url = "github:svaante/dape";
+      flake = false;
+    };
+
+    scala-cli-repl = {
+      url = "github:ag91/scala-cli-repl";
+      flake = false;
+    };
+      
   };
 
   outputs = {

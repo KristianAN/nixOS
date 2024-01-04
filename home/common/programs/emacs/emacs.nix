@@ -7,6 +7,65 @@
       # I install the packages below by hand because they're not in MELPA, and I
       # don't want to incur the startup cost of using straight.el.
 
+      scala-cli-repl =
+        let
+          rev = inputs.scala-cli-repl.shortRev;
+        in
+          with pkgs;
+          with pkgs.emacsPackages;
+          melpaBuild {
+            pname = "scala-cli-repl";
+            ename = "scala-cli-repl";
+            version = inputs.scala-cli-repl.lastModifiedDate;
+            commit = rev;
+            packageRequires = [];
+
+            src = fetchFromGitHub {
+              inherit rev;
+              owner = "ag91";
+              repo = "scala-cli-repl";
+              sha256 = inputs.scala-cli-repl.narHash;
+            };
+
+            recipe = writeText "recipe" ''
+              (scala-cli-repl
+                :repo "ag91/scala-cli-repl"
+                :fetcher github
+                :files ("*.el")) 
+            '';
+            meta.description = "Emacs plugin for running scala-cli as a repl in emcacs";
+          };
+
+
+      dape =
+        let
+          rev = inputs.dape.shortRev;
+        in
+          with pkgs;
+          with pkgs.emacsPackages;
+          melpaBuild {
+            pname = "dape";
+            ename = "dape";
+            version = inputs.dape.lastModifiedDate;
+            commit = rev;
+            packageRequires = [];
+
+            src = fetchFromGitHub {
+              inherit rev;
+              owner = "svaante";
+              repo = "dape";
+              sha256 = inputs.dape.narHash;
+            };
+
+            recipe = writeText "recipe" ''
+              (dape
+                :repo "svaante/dape"
+                :fetcher github
+                :files ("*.el")) 
+            '';
+            meta.description = "Emacs plugin for debugging with eglot, expirmental";
+          };
+
       indent-bars =
         let
           rev = inputs.indent-bars.shortRev;
@@ -19,6 +78,7 @@
             version = inputs.indent-bars.lastModifiedDate;
             commit = rev;
             packageRequires = [];
+
             src = fetchFromGitHub {
               inherit rev;
               owner = "jdtsmith";
@@ -125,6 +185,7 @@
         ivy-rich # More friendly display transformer for ivy
         ligature # Ligature support for Emacs
         magit # A Git porcelain inside Emacs
+        forge # Extension for magit for handling forges
         nerd-icons # Nerd icons for Emacs
         nix-mode # Nix integration
         org # For keeping notes, maintaining TODO lists, and project planning
@@ -163,10 +224,12 @@
 
         # User interface packages.
         counsel # Various completion functions using Ivy
-        git-gutter
-        git-gutter-fringe
-        mood-line
-        indent-bars
+        git-gutter # A gutter for my git
+        git-gutter-fringe # Some more guttering
+        mood-line # A minimal modeline for emacs
+        indent-bars # Indentation guides that work!? In my editor?!
+        dape # Can you find the bugs? maybe with this?
+        scala-cli-repl # Now what does this function return? let's REPL
       ];
 
     extraConfig = builtins.readFile ./init.el;

@@ -18,9 +18,17 @@
 (load-file "~/nix/nixOS/home/common/programs/emacs/web-config.el")
 (load-file "~/nix/nixOS/home/common/programs/emacs/org-roam-config.el")
 
+;; Not working plugins that I want to make work
+;;(load-file "~/nix/nixOS/home/common/programs/emacs/scala-cli-repl-config.el")
+;;(load-file "~/nix/nixOS/home/common/programs/emacs/dape-config.el")
+
 ;; General Settings
 (setq make-backup-files nil) ; Disable backup files
 (setq auto-save-default nil) ; Disable auto save
+
+;; magit-forge
+(with-eval-after-load 'magit
+  (require 'forge))
 
 ;; org-mode
 (require 'org-modern)
@@ -43,13 +51,6 @@
     (let ((current-buffer (current-buffer)))
         (mapc 'kill-buffer (delq current-buffer (buffer-list)))
         (delete-other-windows))))
-
-;; Function to toggle theme
-(defun my-toggle-modus-theme ()
-  (interactive)
-  (if (display-graphic-p)
-      (modus-themes-toggle)
-    (message "Cannot toggle theme in non-graphical frame")))
 
 ;; Rg
 (require 'rg)
@@ -129,12 +130,25 @@ With optional ARG, also auto-fill."
 (setq modus-themes-common-palette-overrides
       modus-themes-preset-overrides-warmer)
 
+(defvar my-current-theme 'modus-operandi-tinted)
+
+(defun my-toggle-modus-theme ()
+  (interactive)
+  (if (display-graphic-p)
+      (if (eq my-current-theme 'modus-operandi-tinted)
+          (progn
+            (load-theme 'modus-vivendi-tinted t)
+            (setq my-current-theme 'modus-vivendi-tinted))
+        (progn
+          (load-theme 'modus-operandi-tinted t)
+          (setq my-current-theme 'modus-operandi-tinted)))
+    (message "Cannot toggle theme in non-graphical frame")))
 
 (add-hook 'after-make-frame-functions
   (lambda (frame)
     (with-selected-frame frame
       ;; All customizations here
-      (load-theme 'modus-operandi)
+      (load-theme 'modus-operandi-tinted)
       (set-frame-font "Iosevka Nerd Font 12" nil t)
       (company-quickhelp-mode))))
 

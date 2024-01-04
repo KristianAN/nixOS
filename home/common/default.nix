@@ -109,6 +109,7 @@
     userName = "Kristian Nedrevold-Hansen";
     extraConfig = {
       core.editor = "emacsclient -c";
+      github.user = "KristianAN";
     };
     ignores = [
         "*~"
@@ -157,15 +158,23 @@
       size = 13;
     };
     extraConfig = ''
+
+        # Kitty theme - Lisenced by author
+        ## name: Modus Operandi Tinted
+        ## author: Protesilaos Stavrou
+        ## license: GNU GPLv3
+        ## blurb: Highly accessible themes made for GNU Emacs, conforming with the highest
+        ## standard for colour contrast between background and foreground values (WCAG AAA)
+
         # The basic colors
         foreground              #000000
-        background              #ffffff
+        background              #fbf7f0
         selection_foreground    #000000
         selection_background    #bcbcbc
 
         # Cursor colors
         cursor                  #000000
-        cursor_text_color       #ffffff
+        cursor_text_color       #fbf7f0
 
         # kitty window border colors
         active_border_color     #193668
@@ -173,9 +182,9 @@
 
         # Tab bar colors
         active_tab_foreground   #000000
-        active_tab_background   #c4c4c4
+        active_tab_background   #c9b8b1
         inactive_tab_foreground #585858
-        inactive_tab_background #e3e3e3
+        inactive_tab_background #dfd6cd
 
         # The basic 16 colors
         # black
@@ -207,8 +216,8 @@
         color14 #005a5f
 
         # white
-        color7  #c4c4c4
-        color15 #595959
+        color7  #c9b8b1
+        color15 #585858
     '';
   };
 
@@ -221,6 +230,7 @@
       shellAliases = {
         please = "sudo";
         nd = "nix develop";
+        emc = "emacsclient -t";
       };
       oh-my-zsh = {
         enable = true;
