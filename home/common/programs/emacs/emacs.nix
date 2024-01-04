@@ -128,6 +128,7 @@
         nerd-icons # Nerd icons for Emacs
         nix-mode # Nix integration
         org # For keeping notes, maintaining TODO lists, and project planning
+        org-modern # A fresh look for org
         org-drill # A spaced repetition system for Emacs
         org-pomodoro # Pomodoro technique implementation
         org-roam # A note-taking tool based on the principles of networked thought

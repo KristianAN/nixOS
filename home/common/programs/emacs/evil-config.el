@@ -31,6 +31,11 @@
   "oa" 'org-agenda
   "oc" 'org-capture
 
+  ;; Org-roam keybindings
+  "orf" 'org-roam-node-find
+  "ori" 'org-roam-node-insert
+  "ogc" 'org-roam-capture
+
   ;; Lsp keybinds
   "gd" 'xref-find-definitions
   "gr" 'xref-find-references
