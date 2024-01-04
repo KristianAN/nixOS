@@ -1,4 +1,6 @@
-;; Tabspaces
+;;; tabspaces-config --- Configuration for tabspaces
+;;; Commentary:
+;;; Code:
 (require 'tabspaces)
 (setq
     tabspaces-use-filtered-buffers-as-default t
@@ -10,6 +12,7 @@
 )
 
 ;;Tabspaces sessions
-(setq tabspaces-session t)
-(setq tabspaces-session-auto-restore t)
+(setq tabspaces-session nil)
+(setq tabspaces-session-auto-restore nil)
+;;; tabspaces-config.el ends here
 

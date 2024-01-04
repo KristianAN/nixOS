@@ -3,8 +3,9 @@
 ;;; Code:
 (dolist (indent-mode-langs
          '(
+           haskell-ts
            scala-ts-mode-hook
-           java-mode-hook
+           eglot-java-mode-hook
            clojure-mode-hook
            ))
 (add-hook indent-mode-langs 'indent-bars-mode))
