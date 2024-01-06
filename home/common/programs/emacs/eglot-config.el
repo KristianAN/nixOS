@@ -29,6 +29,7 @@
               (eglot-format))))
 
 (with-eval-after-load 'eglot
-  (add-to-list 'eglot-server-programs '((scala-mode scala-ts-mode) . ("metals"))))
+  (add-to-list 'eglot-server-programs '((scala-mode scala-ts-mode) . ("metals")))
+  (add-to-list 'eglot-server-programs '((clojure-mode clojure-ts-mode) . ("clojure-lsp"))))
 ;;; eglot-config.el ends here
 
