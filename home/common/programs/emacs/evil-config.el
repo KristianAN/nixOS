@@ -1,22 +1,30 @@
 ;;; evil-config --- configuration for evil-mode
 ;;; Commentary:
 ;;; Code:
-(setq evil-want-keybinding nil)
-(require 'evil)
-(evil-mode 1)
-(evil-collection-init '(calendar dired magit org org-roam))
+
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init '(calendar dired magit org org-roam)))
 
 ;; Set the leader key to space
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
   "b" 'project-switch-to-buffer
-  "f" 'counsel-find-file
+  "f" 'consult-find
   "k" 'kill-buffer
   "q" 'kill-all-buffers-except-current
   "w" 'save-buffer
-  "x" 'counsel-M-x
-  "F" 'counsel-rg
+  "F" 'consult-ripgrep
   "d" 'dired
   "t" 'tabspaces-command-map
   "/" 'magit-status

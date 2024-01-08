@@ -2,10 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 ;; vterm
-(require 'vterm)
-(require 'multi-vterm)
+(use-package vterm
+  :ensure t)
 
-;; dedicated terminal height of 50 rows
-(setq multi-vterm-dedicated-window-height 50)
-
+(use-package multi-vterm
+  :ensure t
+  :after vterm
+  :config
+  (setq multi-vterm-dedicated-window-height 50))
 ;;; vterm-config.el ends here
