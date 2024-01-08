@@ -3,29 +3,30 @@
 ;;; Code:
 
 ;; Javascript Environment
-(helm-mode +1)
-(require 'web-mode)
-(require 'helm-xref)
-(require 'vue-mode)
-(require 'json-mode)
-(add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-mode))
+(use-package web-mode
+  :ensure t
+  :mode (("\\.phtml\\'" . web-mode)
+         ("\\.tpl\\.php\\'" . web-mode)
+         ("\\.[agj]sp\\'" . web-mode)
+         ("\\.as[cp]x\\'" . web-mode)
+         ("\\.erb\\'" . web-mode)
+         ("\\.mustache\\'" . web-mode)
+         ("\\.liquid\\'" . web-mode)
+         ("\\.djhtml\\'" . web-mode)
+         ("\\.html?\\'" . web-mode))
+  :config
+  (setq web-mode-enable-auto-closing t
+        web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-part-padding 2
+        web-mode-script-padding 2
+        web-mode-style-padding 2
+        web-mode-code-indent-offset 2))
 
-;; Web-mode configurations
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.liquid\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(use-package vue-mode
+  :ensure t
+  :mode ("\\.vue\\'" . vue-mode))
 
-(setq web-mode-enable-auto-closing t)
-(setq web-mode-markup-indent-offset 2)
-(setq web-mode-css-indent-offset 2)
-(setq web-mode-part-padding 2)
-(setq web-mode-script-padding 2)
-(setq web-mode-style-padding 2)
-(setq web-mode-code-indent-offset 2)
+(use-package json-mode
+  :ensure t)
 ;;; web-config.el ends here
