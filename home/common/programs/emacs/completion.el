@@ -52,8 +52,8 @@
 (use-package corfu
   ;; TAB-and-Go customizations
   :custom
-  (corfu-cycle t)           ;; Enable cycling for `corfu-next/previous'
-  (corfu-preselect 'prompt) ;; Always preselect the prompt
+    (corfu-cycle t)           ;; Enable cycling for `corfu-next/previous'
+    (corfu-preselect 'prompt) ;; Always preselect the prompt
 
   ;; Use TAB for cycling, default is `corfu-complete'.
   :bind
@@ -62,7 +62,6 @@
         ([tab] . corfu-next)
         ("S-TAB" . corfu-previous)
         ([backtab] . corfu-previous))
-
   :init
   (corfu-popupinfo-mode)
   (global-corfu-mode))
@@ -86,7 +85,6 @@
           (cdr args)))
   (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
   (setq tab-always-indent 'complete)
-  (setq completion-cycle-threshold 3)
   (setq minibuffer-prompt-properties
         '(read-only t cursor-intangible t face minibuffer-prompt))
   (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)

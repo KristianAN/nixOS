@@ -60,7 +60,6 @@
 
 (use-package sql
   :ensure t
-  :config
 )
 
 ;; Direnv Configuration

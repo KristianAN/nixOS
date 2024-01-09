@@ -109,7 +109,7 @@
           nixosModules
           {
             programs.slack.enable = true;
-            programs.citrix.enable = false;
+            programs.citrix.enable = true;
             programs.discord.enable = true;
             programs.intellij.enable = true;
           }
