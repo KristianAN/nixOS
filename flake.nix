@@ -34,12 +34,18 @@
       url = "github:ag91/scala-cli-repl";
       flake = false;
     };
+
+    myNeovimFlake = {
+      url = "github:KristianAN/neovim-flake";
+      flake = true;
+    };
       
   };
 
   outputs = {
     nixpkgs,
     flake-utils,
+    myNeovimFlake,
     home-manager,
     ...
   } @ inputs: let
@@ -55,7 +61,7 @@
    # NixOS modules
 
     nixosModules = import ./modules/nixos;
-    homeManagerModules = import ./modules/home-manager;
+    homeManagerModules =  import ./modules/home-manager;
 
 
     # Overlays
@@ -90,7 +96,7 @@
 
         specialArgs = {inherit inputs;};
         modules = [
-          ./hosts/rubble
+          ./hosts/rubble { inherit inputs; }
           nixosModules
           {
             programs.slack.enable = true;

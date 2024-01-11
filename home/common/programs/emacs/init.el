@@ -12,12 +12,13 @@
 (load-file "~/nix/nixOS/home/common/programs/emacs/evil-config.el")
 (load-file "~/nix/nixOS/home/common/programs/emacs/vterm-config.el")
 (load-file "~/nix/nixOS/home/common/programs/emacs/tabspaces-config.el")
-(load-file "~/nix/nixOS/home/common/programs/emacs/eglot-config.el")
+;;(load-file "~/nix/nixOS/home/common/programs/emacs/eglot-config.el")
 (load-file "~/nix/nixOS/home/common/programs/emacs/indent-config.el")
 (load-file "~/nix/nixOS/home/common/programs/emacs/web-config.el")
 (load-file "~/nix/nixOS/home/common/programs/emacs/org-roam-config.el")
 (load-file "~/nix/nixOS/home/common/programs/emacs/font-and-theme.el")
 (load-file "~/nix/nixOS/home/common/programs/emacs/completion.el")
+(load-file "~/nix/nixOS/home/common/programs/emacs/lsp-mode-config.el")
 
 ;; Not working plugins that I want to make work
 ;;(load-file "~/nix/nixOS/home/common/programs/emacs/scala-cli-repl-config.el")
@@ -26,6 +27,9 @@
 ;; General Settings
 (setq make-backup-files nil) ; Disable backup files
 (setq auto-save-default nil) ; Disable auto save
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+(setq lsp-idle-delay 0.500)
 
 ;; magit-forge
 (use-package forge

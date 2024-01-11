@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }: {
 
@@ -25,6 +26,8 @@
     wev
     swaylock-effects
     dunst
+    inputs.myNeovimFlake.packages.x86_64-linux.nvim
+
   ];
 
   programs.home-manager.enable = true;
@@ -141,7 +144,7 @@
       rust = rust-analyzer;
     };
   in {
-    enable = true;
+    enable = false;
     vimAlias = true;
     extraLuaConfig = lib.fileContents ./../config/neovim/init.lua;
     extraPackages = with pkgs; [
@@ -159,65 +162,52 @@
     };
     extraConfig = ''
 
-        # Kitty theme - Lisenced by author
-        ## name: Modus Operandi Tinted
-        ## author: Protesilaos Stavrou
-        ## license: GNU GPLv3
-        ## blurb: Highly accessible themes made for GNU Emacs, conforming with the highest
-        ## standard for colour contrast between background and foreground values (WCAG AAA)
+# vim:ft=kitty
 
-        # The basic colors
-        foreground              #000000
-        background              #fbf7f0
-        selection_foreground    #000000
-        selection_background    #bcbcbc
+## name: Kanagawa
+## license: MIT
+## author: Tommaso Laurenzi
+## upstream: https://github.com/rebelot/kanagawa.nvim/
 
-        # Cursor colors
-        cursor                  #000000
-        cursor_text_color       #fbf7f0
 
-        # kitty window border colors
-        active_border_color     #193668
-        inactive_border_color   #9f9f9f
+background #1F1F28
+foreground #DCD7BA
+selection_background #2D4F67
+selection_foreground #C8C093
+url_color #72A7BC
+cursor #C8C093
 
-        # Tab bar colors
-        active_tab_foreground   #000000
-        active_tab_background   #c9b8b1
-        inactive_tab_foreground #585858
-        inactive_tab_background #dfd6cd
+# Tabs
+active_tab_background #1F1F28
+active_tab_foreground #C8C093
+inactive_tab_background  #1F1F28
+inactive_tab_foreground #727169
+#tab_bar_background #15161E
 
-        # The basic 16 colors
-        # black
-        color0 #000000
-        color8 #585858
+# normal
+color0 #16161D
+color1 #C34043
+color2 #76946A
+color3 #C0A36E
+color4 #7E9CD8
+color5 #957FB8
+color6 #6A9589
+color7 #C8C093
 
-        # red
-        color1 #a60000
-        color9 #972500
+# bright
+color8  #727169
+color9  #E82424
+color10 #98BB6C
+color11 #E6C384
+color12 #7FB4CA
+color13 #938AA9
+color14 #7AA89F
+color15 #DCD7BA
 
-        # green
-        color2  #006800
-        color10 #316500
 
-        # yellow
-        color3  #6f5500
-        color11 #884900
-
-        # blue
-        color4  #0031a9
-        color12 #354fcf
-
-        # magenta
-        color5  #721045
-        color13 #531ab6
-
-        # cyan
-        color6  #00538b
-        color14 #005a5f
-
-        # white
-        color7  #c9b8b1
-        color15 #585858
+# extended colors
+color16 #FFA066
+color17 #FF5D62
     '';
   };
 

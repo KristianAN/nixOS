@@ -68,5 +68,27 @@
   "vt" 'multi-vterm-dedicated-toggle
   "vm" 'multi-vterm
   )
+
+;; For scala-ts-mode
+(with-eval-after-load 'scala-ts-mode
+  (evil-define-key 'normal scala-ts-mode-map
+    "gd" 'xref-find-definitions
+    "gr" 'xref-find-references
+    "gn" 'eglot-rename
+    "gf" 'eglot-format
+    "ga" 'eglot-code-actions
+    "gt" 'eglot-find-typeDefinition
+    "gh" 'eglot-inlay-hints-mode))
+
+;; For java-ts-mode
+(with-eval-after-load 'java-ts-mode
+  (evil-define-key 'normal java-ts-mode-map
+    "gd" 'xref-find-definitions
+    "gr" 'xref-find-references
+    "gn" 'eglot-rename
+    "gf" 'eglot-format
+    "ga" 'eglot-code-actions
+    "gt" 'eglot-find-typeDefinition
+    "gh" 'eglot-inlay-hints-mode)) 
 ;;; evil-config.el ends here
 

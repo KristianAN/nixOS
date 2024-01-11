@@ -1,6 +1,7 @@
 ;;; eglot-config --- Configuration for eglot
 ;;; Commentary:
 ;;; Code:
+
 (setq major-mode-remap-alist
 '((yaml-mode . yaml-ts-mode)
     (bash-mode . bash-ts-mode)

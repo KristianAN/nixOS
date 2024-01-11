@@ -175,10 +175,17 @@
         clojure-mode # Major mode for editing clojure files
         cider # Extends clojure-mode with superpowers
         web-mode # Major mode for editing web templates
-        scala-ts-mode # Major mode for editing Scala files
+        scala-ts-mode # Major mode for  Scala tree-sitter
+        kotlin-ts-mode # Major mode for  Kotlin tree-sitter
         eglot-java # Better java support in eglot
         treesit-grammars.with-all-grammars # Now I see whats wrong
-        dape # Can you find the bugs? maybe with this?
+        lsp-mode # lsp for emacs
+        yasnippet # snippets
+        lsp-metals # Scala lsp
+        lsp-java # So I can boilerplate faster
+        lsp-ui # Prettier lsp stuff
+        
+        # dape # Can you find the bugs? maybe with this?
         # copilot # Copilot support
 
         # User interface packages.
@@ -192,6 +199,7 @@
 
   home.packages = with pkgs; [
     rnix-lsp
+    metals
   ];
 
   services.emacs.enable = true;
