@@ -154,6 +154,10 @@
     ] ++ builtins.attrValues servers;
   };
 
+  programs.wezterm = {
+    enable = true;
+    enableZshIntegration = true;
+  };
   programs.kitty = {
     enable = true;
     font = {

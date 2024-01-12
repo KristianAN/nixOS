@@ -30,6 +30,14 @@
   "/" 'magit-status
   "<SPC>" 'project-find-file
 
+  ;; Lsp
+  "gd" 'lsp-find-definition
+  "gr" 'lsp-find-references
+  "gn" 'lsp-rename
+  "gf" 'lsp-format-buffer
+  "ga" 'lsp-execute-code-action
+  "gh" 'lsp-inlay-hints-mode
+
   ;; Project
   "ps" 'project-eshell
   "pb" 'project-switch-to-buffer
@@ -47,15 +55,6 @@
   "ori" 'org-roam-node-insert
   "ogc" 'org-roam-capture
 
-  ;; Lsp keybinds
-  "gd" 'xref-find-definitions
-  "gr" 'xref-find-references
-  "gn" 'eglot-rename
-  "gf" 'eglot-format
-  "ga" 'eglot-code-actions
-  "gt" 'eglot-find-typeDefinition
-  "gh" 'eglot-inlay-hints-mode
-
   ;; rg.el
   "sp" 'rg-project
   "sdp" 'rg-dwim-project-dir
@@ -72,23 +71,14 @@
 ;; For scala-ts-mode
 (with-eval-after-load 'scala-ts-mode
   (evil-define-key 'normal scala-ts-mode-map
-    "gd" 'xref-find-definitions
-    "gr" 'xref-find-references
-    "gn" 'eglot-rename
-    "gf" 'eglot-format
-    "ga" 'eglot-code-actions
-    "gt" 'eglot-find-typeDefinition
-    "gh" 'eglot-inlay-hints-mode))
+    "go" 'lsp-organize-imports
+    "gc" 'lsp-metals-new-scala-file
+    ))
 
 ;; For java-ts-mode
 (with-eval-after-load 'java-ts-mode
   (evil-define-key 'normal java-ts-mode-map
-    "gd" 'xref-find-definitions
-    "gr" 'xref-find-references
-    "gn" 'eglot-rename
-    "gf" 'eglot-format
-    "ga" 'eglot-code-actions
-    "gt" 'eglot-find-typeDefinition
-    "gh" 'eglot-inlay-hints-mode)) 
+    "go" 'lsp-java-organize-imports
+    )) 
 ;;; evil-config.el ends here
 

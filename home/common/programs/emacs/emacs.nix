@@ -199,7 +199,6 @@
 
   home.packages = with pkgs; [
     rnix-lsp
-    metals
   ];
 
   services.emacs.enable = true;

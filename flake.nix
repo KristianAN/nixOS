@@ -39,121 +39,124 @@
       url = "github:KristianAN/neovim-flake";
       flake = true;
     };
-      
+
   };
 
-  outputs = {
-    nixpkgs,
-    flake-utils,
-    myNeovimFlake,
-    home-manager,
-    ...
-  } @ inputs: let
-    forAllSystems = nixpkgs.lib.genAttrs systems;
-    systems = [
-      "x86_64-linux"
-    ];
-  in rec {
-    overlays = {
-      default = import ./overlay {inherit inputs;};
+  outputs =
+    { nixpkgs
+    , flake-utils
+    , myNeovimFlake
+    , home-manager
+    , ...
+    } @ inputs:
+    let
+      forAllSystems = nixpkgs.lib.genAttrs systems;
+      systems = [
+        "x86_64-linux"
+      ];
+    in
+    rec {
+      overlays = {
+        default = import ./overlay { inherit inputs; };
+      };
+
+      # NixOS modules
+
+      nixosModules = import ./modules/nixos;
+      homeManagerModules = import ./modules/home-manager;
+
+
+      # Overlays
+      legacyPackages = forAllSystems (system:
+        import inputs.nixpkgs {
+          inherit system;
+          overlays = builtins.attrValues overlays;
+          config.allowUnfree = true;
+        });
+
+      # NixOS configuration, callable for each system
+      nixosConfigurations = {
+
+        # Sky
+        sky = nixpkgs.lib.nixosSystem {
+
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/sky
+            nixosModules
+            {
+              programs.slack.enable = false;
+              programs.citrix.enable = false;
+              programs.discord.enable = false;
+              programs.intellij.enable = false;
+            }
+          ];
+        };
+
+        # Rubble
+        rubble = nixpkgs.lib.nixosSystem {
+
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/rubble
+            { inherit inputs; }
+            nixosModules
+            {
+              programs.slack.enable = true;
+              programs.citrix.enable = true;
+              programs.discord.enable = true;
+              programs.intellij.enable = true;
+            }
+          ];
+        };
+
+        # Chase 
+        chase = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/chase
+            nixosModules
+            {
+              programs.slack.enable = true;
+              programs.citrix.enable = true;
+              programs.discord.enable = true;
+              programs.intellij.enable = true;
+            }
+          ];
+        };
+      };
+
+      # Home Manager configuration, callable for each system
+      homeConfigurations = {
+        # Sky
+        "kristian@sky" = home-manager.lib.homeManagerConfiguration {
+          pkgs = legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [
+            ./home/sky
+            homeManagerModules
+          ];
+        };
+
+
+        # Rubble
+        "kristian@rubble" = home-manager.lib.homeManagerConfiguration {
+          pkgs = legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [
+            ./home/rubble
+            homeManagerModules
+          ];
+        };
+
+        "kristian@chase" = home-manager.lib.homeManagerConfiguration {
+          pkgs = legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [
+            ./home/chase
+            homeManagerModules
+          ];
+        };
+      };
     };
-
-   # NixOS modules
-
-    nixosModules = import ./modules/nixos;
-    homeManagerModules =  import ./modules/home-manager;
-
-
-    # Overlays
-    legacyPackages = forAllSystems (system:
-      import inputs.nixpkgs {
-        inherit system;
-        overlays = builtins.attrValues overlays;
-        config.allowUnfree = true;
-      });
-
-    # NixOS configuration, callable for each system
-    nixosConfigurations = {
-
-      # Sky
-      sky = nixpkgs.lib.nixosSystem {
-
-        specialArgs = {inherit inputs;};
-        modules = [
-          ./hosts/sky
-          nixosModules
-          {
-            programs.slack.enable = false;
-            programs.citrix.enable = false;
-            programs.discord.enable = false;
-            programs.intellij.enable = false;
-          }
-        ];
-      };
-
-      # Rubble
-      rubble = nixpkgs.lib.nixosSystem {
-
-        specialArgs = {inherit inputs;};
-        modules = [
-          ./hosts/rubble { inherit inputs; }
-          nixosModules
-          {
-            programs.slack.enable = true;
-            programs.citrix.enable = true;
-            programs.discord.enable = true;
-            programs.intellij.enable = true;
-          }
-        ];
-      };
-
-      # Chase 
-      chase = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs;};
-        modules = [
-          ./hosts/chase
-          nixosModules
-          {
-            programs.slack.enable = true;
-            programs.citrix.enable = true;
-            programs.discord.enable = true;
-            programs.intellij.enable = true;
-          }
-        ];
-      };
-    };
-
-    # Home Manager configuration, callable for each system
-    homeConfigurations = {
-      # Sky
-      "kristian@sky" = home-manager.lib.homeManagerConfiguration {
-        pkgs = legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs;};
-        modules = [
-          ./home/sky
-          homeManagerModules
-        ];
-      };
-
-
-      # Rubble
-      "kristian@rubble" = home-manager.lib.homeManagerConfiguration {
-        pkgs = legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs;};
-        modules = [
-          ./home/rubble
-          homeManagerModules
-        ];
-      };
-
-      "kristian@chase" = home-manager.lib.homeManagerConfiguration {
-        pkgs = legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs;};
-        modules = [
-          ./home/chase
-          homeManagerModules
-        ];
-      };
-    };
-  };
 }

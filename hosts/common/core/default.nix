@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  myNeovim
   ...
 }:
 with lib; {
