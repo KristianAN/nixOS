@@ -1,13 +1,12 @@
-{
-  pkgs,
-  lib,
-  inputs,
-  ...
+{ pkgs
+, lib
+, inputs
+, ...
 }: {
 
   imports = [
-     ./services
-     ./programs
+    ./services
+    ./programs
   ];
 
   # Allow unfree packages
@@ -40,7 +39,7 @@
 
   programs.tmux = {
     enable = true;
-    shell = "${pkgs.zsh}/bin/zsh";
+    shell = "${pkgs.nushell}/bin/nushell";
     escapeTime = 0;
     prefix = "C-a"; # set prefix to ctrl + a
     clock24 = true; # 24 hour clock
@@ -115,49 +114,46 @@
       github.user = "KristianAN";
     };
     ignores = [
-        "*~"
-        "\#*\#"
-        "/.emacs.desktop"
-        "/.emacs.desktop.lock"
-        "*.elc"
-        "auto-save-list"
-        "tramp"
-        ".\#*"
-        ".org-id-locations"
-        "*_archive"
-        "*_flymake.*"
-        "*.rel"
-        "flycheck_*.el"
-        ".projectile"
-        ".dir-locals.el"
+      "*~"
+      "\#*\#"
+      "/.emacs.desktop"
+      "/.emacs.desktop.lock"
+      "*.elc"
+      "auto-save-list"
+      "tramp"
+      ".\#*"
+      ".org-id-locations"
+      "*_archive"
+      "*_flymake.*"
+      "*.rel"
+      "flycheck_*.el"
+      ".projectile"
+      ".dir-locals.el"
     ];
   };
 
-  programs.neovim = 
-  let
-    servers = with pkgs; { 
-      jdtls = writeShellScriptBin "jdtls" "${jdt-language-server}/bin/jdt-language-server $*"; 
-      hls = haskell-language-server;
-      nixd = nixd;
-      tsserver = nodePackages.typescript-language-server;
-      volar = nodePackages.volar;
-      rust = rust-analyzer;
+  programs.neovim =
+    let
+      servers = with pkgs; {
+        jdtls = writeShellScriptBin "jdtls" "${jdt-language-server}/bin/jdt-language-server $*";
+        hls = haskell-language-server;
+        nixd = nixd;
+        tsserver = nodePackages.typescript-language-server;
+        volar = nodePackages.volar;
+        rust = rust-analyzer;
+      };
+    in
+    {
+      enable = false;
+      vimAlias = true;
+      extraLuaConfig = lib.fileContents ./../config/neovim/init.lua;
+      extraPackages = with pkgs; [
+        gcc
+        fzf
+        cmake
+      ] ++ builtins.attrValues servers;
     };
-  in {
-    enable = false;
-    vimAlias = true;
-    extraLuaConfig = lib.fileContents ./../config/neovim/init.lua;
-    extraPackages = with pkgs; [
-      gcc
-      fzf
-      cmake
-    ] ++ builtins.attrValues servers;
-  };
 
-  programs.wezterm = {
-    enable = true;
-    enableZshIntegration = true;
-  };
   programs.kitty = {
     enable = true;
     font = {
@@ -215,23 +211,27 @@ color17 #FF5D62
     '';
   };
 
+  programs.nushell = {
+    enable = true;
+  };
+
   programs.zsh = {
-      enable = true;
-      enableCompletion = false; # enabled in oh-my-zsh
-      initExtra = ''
-        test -f ~/.dir_colors && eval $(dircolors ~/.dir_colors)
-      '';
-      shellAliases = {
-        please = "sudo";
-        nd = "nix develop";
-        emc = "emacsclient -t";
-      };
-      oh-my-zsh = {
-        enable = true;
-        plugins = [ "git" "systemd" "rsync" "kubectl" ];
-        theme = "half-life";
-      };
+    enable = false;
+    enableCompletion = false; # enabled in oh-my-zsh
+    initExtra = ''
+      test -f ~/.dir_colors && eval $(dircolors ~/.dir_colors)
+    '';
+    shellAliases = {
+      please = "sudo";
+      nd = "nix develop";
+      emc = "emacsclient -t";
     };
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ "git" "systemd" "rsync" "kubectl" ];
+      theme = "half-life";
+    };
+  };
 
   programs.vscode = {
     enable = true;
@@ -269,8 +269,8 @@ color17 #FF5D62
       input = {
         "*" = {
           xkb_layout = "no,us";
-          xkb_variant= ",colemak_dh_iso";
-          xkb_options = "grp:rctrl_toggle"; 
+          xkb_variant = ",colemak_dh_iso";
+          xkb_options = "grp:rctrl_toggle";
           tap = "enabled";
         };
       };
@@ -293,7 +293,7 @@ color17 #FF5D62
         outer = 2;
       };
 
-      bars = [];
+      bars = [ ];
 
       startup = [
         { command = "waybar"; }
