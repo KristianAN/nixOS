@@ -1,7 +1,6 @@
-{
-  pkgs,
-  lib,
-  ...
+{ pkgs
+, lib
+, ...
 }:
 with lib; {
   # Core pakages for system
@@ -30,7 +29,7 @@ with lib; {
     # Sound stuff. TODO move to other file
     pulseaudio # Make sure this isn't enabled
     pavucontrol
-    
+
     # Archive tools
     xarchiver
     wget
@@ -39,7 +38,7 @@ with lib; {
     curl
     zip
     git
-    zsh
+    nushell
     chromium
 
     # Keyring
@@ -50,9 +49,9 @@ with lib; {
 
   ];
 
-  users.users.kristian.shell = pkgs.zsh;
+  users.users.kristian.shell = pkgs.nushell;
 
-  security.pam.services.swaylock = {};
+  security.pam.services.swaylock = { };
 
 
   services.greetd = {
@@ -96,7 +95,7 @@ with lib; {
     })
   ];
 
-  programs.zsh.enable = true;
+  programs.nushell.enable = true;
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
@@ -105,12 +104,12 @@ with lib; {
       wants = [ "graphical-session.target" ];
       after = [ "graphical-session.target" ];
       serviceConfig = {
-          Type = "simple";
-          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-          Restart = "on-failure";
-          RestartSec = 1;
-          TimeoutStopSec = 10;
-        };
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
     };
   };
 
@@ -124,7 +123,7 @@ with lib; {
       };
     };
   };
-      
+
   imports = [
     ./fonts.nix
   ];

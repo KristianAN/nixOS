@@ -12,7 +12,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-
   home = {
     username = "kristian";
     homeDirectory = "/home/kristian";
@@ -39,7 +38,7 @@
 
   programs.tmux = {
     enable = true;
-    shell = "${pkgs.zsh}/bin/zsh";
+    shell = "${pkgs.nushell}/bin/nushell";
     escapeTime = 0;
     prefix = "C-a"; # set prefix to ctrl + a
     clock24 = true; # 24 hour clock
@@ -154,10 +153,6 @@
       ] ++ builtins.attrValues servers;
     };
 
-  programs.wezterm = {
-    enable = true;
-    enableZshIntegration = true;
-  };
   programs.kitty = {
     enable = true;
     font = {
@@ -215,8 +210,12 @@ color17 #FF5D62
     '';
   };
 
-  programs.zsh = {
+  programs.nushell = {
     enable = true;
+  };
+
+  programs.zsh = {
+    enable = false;
     enableCompletion = false; # enabled in oh-my-zsh
     initExtra = ''
       test -f ~/.dir_colors && eval $(dircolors ~/.dir_colors)
