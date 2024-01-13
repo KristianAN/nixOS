@@ -1,13 +1,12 @@
-{
-  pkgs,
-  lib,
-  inputs,
-  ...
+{ pkgs
+, lib
+, inputs
+, ...
 }: {
 
   imports = [
-     ./services
-     ./programs
+    ./services
+    ./programs
   ];
 
   # Allow unfree packages
@@ -48,7 +47,7 @@
     baseIndex = 1; # start window/pane index at 1
     sensibleOnTop = true; # use tmux-sensible
     disableConfirmationPrompt = true; # i know what i'm doing, kill without prompt
-    terminal = "screen-256color";
+    terminal = "tmux-256color";
     tmuxinator.enable = true;
     # set-option -g terminal-overrides ",xterm-256color:Tc"
     plugins = with pkgs.tmuxPlugins; [
@@ -111,48 +110,49 @@
     userEmail = "kristian@krined.no";
     userName = "Kristian Nedrevold-Hansen";
     extraConfig = {
-      core.editor = "emacsclient -c";
+      core.editor = "nvim";
       github.user = "KristianAN";
     };
     ignores = [
-        "*~"
-        "\#*\#"
-        "/.emacs.desktop"
-        "/.emacs.desktop.lock"
-        "*.elc"
-        "auto-save-list"
-        "tramp"
-        ".\#*"
-        ".org-id-locations"
-        "*_archive"
-        "*_flymake.*"
-        "*.rel"
-        "flycheck_*.el"
-        ".projectile"
-        ".dir-locals.el"
+      "*~"
+      "\#*\#"
+      "/.emacs.desktop"
+      "/.emacs.desktop.lock"
+      "*.elc"
+      "auto-save-list"
+      "tramp"
+      ".\#*"
+      ".org-id-locations"
+      "*_archive"
+      "*_flymake.*"
+      "*.rel"
+      "flycheck_*.el"
+      ".projectile"
+      ".dir-locals.el"
     ];
   };
 
-  programs.neovim = 
-  let
-    servers = with pkgs; { 
-      jdtls = writeShellScriptBin "jdtls" "${jdt-language-server}/bin/jdt-language-server $*"; 
-      hls = haskell-language-server;
-      nixd = nixd;
-      tsserver = nodePackages.typescript-language-server;
-      volar = nodePackages.volar;
-      rust = rust-analyzer;
+  programs.neovim =
+    let
+      servers = with pkgs; {
+        jdtls = writeShellScriptBin "jdtls" "${jdt-language-server}/bin/jdt-language-server $*";
+        hls = haskell-language-server;
+        nixd = nixd;
+        tsserver = nodePackages.typescript-language-server;
+        volar = nodePackages.volar;
+        rust = rust-analyzer;
+      };
+    in
+    {
+      enable = false;
+      vimAlias = true;
+      extraLuaConfig = lib.fileContents ./../config/neovim/init.lua;
+      extraPackages = with pkgs; [
+        gcc
+        fzf
+        cmake
+      ] ++ builtins.attrValues servers;
     };
-  in {
-    enable = false;
-    vimAlias = true;
-    extraLuaConfig = lib.fileContents ./../config/neovim/init.lua;
-    extraPackages = with pkgs; [
-      gcc
-      fzf
-      cmake
-    ] ++ builtins.attrValues servers;
-  };
 
   programs.wezterm = {
     enable = true;
@@ -216,22 +216,22 @@ color17 #FF5D62
   };
 
   programs.zsh = {
-      enable = true;
-      enableCompletion = false; # enabled in oh-my-zsh
-      initExtra = ''
-        test -f ~/.dir_colors && eval $(dircolors ~/.dir_colors)
-      '';
-      shellAliases = {
-        please = "sudo";
-        nd = "nix develop";
-        emc = "emacsclient -t";
-      };
-      oh-my-zsh = {
-        enable = true;
-        plugins = [ "git" "systemd" "rsync" "kubectl" ];
-        theme = "half-life";
-      };
+    enable = true;
+    enableCompletion = false; # enabled in oh-my-zsh
+    initExtra = ''
+      test -f ~/.dir_colors && eval $(dircolors ~/.dir_colors)
+    '';
+    shellAliases = {
+      please = "sudo";
+      nd = "nix develop";
+      emc = "emacsclient -t";
     };
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ "git" "systemd" "rsync" "kubectl" ];
+      theme = "half-life";
+    };
+  };
 
   programs.vscode = {
     enable = true;
@@ -269,8 +269,8 @@ color17 #FF5D62
       input = {
         "*" = {
           xkb_layout = "no,us";
-          xkb_variant= ",colemak_dh_iso";
-          xkb_options = "grp:rctrl_toggle"; 
+          xkb_variant = ",colemak_dh_iso";
+          xkb_options = "grp:rctrl_toggle";
           tap = "enabled";
         };
       };
@@ -293,7 +293,7 @@ color17 #FF5D62
         outer = 2;
       };
 
-      bars = [];
+      bars = [ ];
 
       startup = [
         { command = "waybar"; }

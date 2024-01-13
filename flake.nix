@@ -99,7 +99,6 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./hosts/rubble
-            { inherit inputs; }
             nixosModules
             {
               programs.slack.enable = true;
