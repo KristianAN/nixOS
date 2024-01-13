@@ -30,7 +30,7 @@
 
   programs.home-manager.enable = true;
 
-  home.sessionVariables.EDITOR = "${pkgs.emacs}/bin/emacsclient -c";
+  home.sessionVariables.EDITOR = "nvim";
 
   programs.waybar = {
     enable = true;
@@ -38,7 +38,7 @@
 
   programs.tmux = {
     enable = true;
-    shell = "${pkgs.nushell}/bin/nushell";
+    shell = "${pkgs.nushell}/bin/nu";
     escapeTime = 0;
     prefix = "C-a"; # set prefix to ctrl + a
     clock24 = true; # 24 hour clock
@@ -212,6 +212,22 @@ color17 #FF5D62
 
   programs.nushell = {
     enable = true;
+    extraConfig = ''
+      $env.config = {
+        show_banner: false
+        edit_mode: vi
+
+        cursor_shape: {
+          vi_insert: line
+          vi_normal: block
+        }
+      }
+    '';
+  };
+
+  programs.starship = {
+    enable = true;
+    enableNushellIntegration = true;
   };
 
   programs.zsh = {
