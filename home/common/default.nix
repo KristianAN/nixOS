@@ -221,6 +221,15 @@ color17 #FF5D62
           vi_insert: line
           vi_normal: block
         }
+
+        hooks: {
+          pre_prompt: [{ ||
+            if (which direnv | is-empty) {
+              return
+            }
+            direnv export json | from json | default {} | load-env
+          }]
+        }
       }
     '';
   };
