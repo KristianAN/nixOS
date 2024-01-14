@@ -36,6 +36,10 @@
     enable = true;
   };
 
+  programs.gh = {
+    enable = true;
+  };
+
   programs.tmux = {
     enable = true;
     shell = "${pkgs.nushell}/bin/nu";
@@ -130,28 +134,6 @@
       ".dir-locals.el"
     ];
   };
-
-  programs.neovim =
-    let
-      servers = with pkgs; {
-        jdtls = writeShellScriptBin "jdtls" "${jdt-language-server}/bin/jdt-language-server $*";
-        hls = haskell-language-server;
-        nixd = nixd;
-        tsserver = nodePackages.typescript-language-server;
-        volar = nodePackages.volar;
-        rust = rust-analyzer;
-      };
-    in
-    {
-      enable = false;
-      vimAlias = true;
-      extraLuaConfig = lib.fileContents ./../config/neovim/init.lua;
-      extraPackages = with pkgs; [
-        gcc
-        fzf
-        cmake
-      ] ++ builtins.attrValues servers;
-    };
 
   programs.kitty = {
     enable = true;
