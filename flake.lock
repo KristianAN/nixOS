@@ -126,11 +126,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1705220063,
-        "narHash": "sha256-EJuaZW6PcZLiS4Y50kmSfII1eRZr1aEs/H62aSmKob4=",
+        "lastModified": 1705326202,
+        "narHash": "sha256-jMRSnKpVJy7XlcSco/rCcmhSpECLcbYDj6gzhtzOssM=",
         "owner": "KristianAN",
         "repo": "neovim-flake",
-        "rev": "5f6a5d393ee3d2735d8547b63e895a3d9a47f057",
+        "rev": "2b162fa61e38b786480c734b849583ed678b64fa",
         "type": "github"
       },
       "original": {
