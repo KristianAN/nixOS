@@ -231,6 +231,9 @@ color17 #FF5D62
           }]
         }
       }
+
+      def gtree [] { git ls-tree -r --name-only HEAD | tree --fromfile }
+
     '';
   };
 
