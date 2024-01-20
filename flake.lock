@@ -119,18 +119,35 @@
         "type": "github"
       }
     },
+    "midnight-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1702498367,
+        "narHash": "sha256-2OZMZ3uqlzvfMHBh9bwoeWPFNSJNhvApc8IGiUzcXjE=",
+        "owner": "dasupradyumna",
+        "repo": "midnight.nvim",
+        "rev": "a2512d71ca3e23c5cf7b9fd02a47b15e72ccf502",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dasupradyumna",
+        "repo": "midnight.nvim",
+        "type": "github"
+      }
+    },
     "myNeovimFlake": {
       "inputs": {
         "flake-utils": "flake-utils_2",
+        "midnight-nvim": "midnight-nvim",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1705326202,
-        "narHash": "sha256-jMRSnKpVJy7XlcSco/rCcmhSpECLcbYDj6gzhtzOssM=",
+        "lastModified": 1705708814,
+        "narHash": "sha256-1Ow42y2I7V5oy5sNtwX93YdJw1WEd4TdZ7zyCH8Xcew=",
         "owner": "KristianAN",
         "repo": "neovim-flake",
-        "rev": "2b162fa61e38b786480c734b849583ed678b64fa",
+        "rev": "ca19673a1ed3238157197a950f8ee85798fd2961",
         "type": "github"
       },
       "original": {
