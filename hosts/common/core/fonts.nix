@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   fonts.packages = with pkgs; [
     (nerdfonts.override {
       fonts = [
@@ -13,6 +13,7 @@
         "LiberationMono"
         "Noto"
         "RobotoMono"
+        "Monaspace"
       ];
     })
     noto-fonts

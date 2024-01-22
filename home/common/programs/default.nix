@@ -9,6 +9,7 @@
     ./tmux.nix
     ./waybar.nix
     ./wezterm.nix
+    ./vscode.nix
   ];
 }
 

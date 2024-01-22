@@ -9,6 +9,9 @@
     if wezterm.config_builder then
       config = wezterm.config_builder()
     end
+
+    config.font = wezterm.font 'Iosevka Nerd Font'
+    config.font_size = 13
     
     config.colors = {
       -- WezTerm uses these colors for text rendering
