@@ -1,6 +1,7 @@
 { ... }:
 {
   programs.wezterm.enable = true;
+  programs.wezterm.enableBashIntegration = true;
   programs.wezterm.extraConfig = ''
     local wezterm = require 'wezterm'
     

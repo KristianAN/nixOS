@@ -2,7 +2,7 @@
 {
   programs.tmux = {
     enable = true;
-    shell = "${pkgs.nushell}/bin/nu";
+    shell = "${pkgs.bash}/bin/bash";
     escapeTime = 0;
     prefix = "C-a"; # set prefix to ctrl + a
     clock24 = true; # 24 hour clock

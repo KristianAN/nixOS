@@ -38,7 +38,7 @@ with lib; {
     curl
     zip
     git
-    nushell
+    bash
     chromium
 
     # Keyring
@@ -49,7 +49,7 @@ with lib; {
 
   ];
 
-  users.users.kristian.shell = pkgs.nushell;
+  users.users.kristian.shell = pkgs.bash;
 
   security.pam.services.swaylock = { };
 
