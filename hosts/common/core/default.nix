@@ -38,7 +38,7 @@ with lib; {
     curl
     zip
     git
-    bash
+    zsh
     chromium
 
     # Keyring
@@ -49,10 +49,10 @@ with lib; {
 
   ];
 
-  users.users.kristian.shell = pkgs.bash;
+  programs.zsh.enable = true;
+  users.users.kristian.shell = pkgs.zsh;
 
   security.pam.services.swaylock = { };
-
 
   services.greetd = {
     enable = true;
