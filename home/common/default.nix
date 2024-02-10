@@ -19,7 +19,6 @@
 
   home.packages = with pkgs; [
     dconf
-    wofi
     wdisplays
     wev
     swaylock-effects

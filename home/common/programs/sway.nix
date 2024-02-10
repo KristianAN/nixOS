@@ -6,7 +6,7 @@
     # Sway config
     config = {
       terminal = "wezterm";
-      menu = "wofi --show run";
+      menu = "fuzzel";
       modifier = "Mod4";
 
       input = {

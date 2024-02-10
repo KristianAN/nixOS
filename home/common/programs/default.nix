@@ -1,6 +1,7 @@
 {
   imports = [
     #./nushell.nix
+    ./fuzzel.nix
     ./vscode.nix
     ./zsh.nix
     ./firefox.nix
