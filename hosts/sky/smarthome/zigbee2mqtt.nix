@@ -29,9 +29,11 @@ in
     enable = true;
     package = pkgs.zigbee2mqtt;
     settings = {
-
       permit_join = false;
-      serial.port = "/dev/ttyACM1";
+      serial = {
+        port = "/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2400945-if00";
+        adapter = "deconz";
+      };
       frontend = {
         port = 8081;
         host = "0.0.0.0";
@@ -47,7 +49,7 @@ in
       };
       mqtt = {
         version = 5;
-        server = "mqtt://localhost:1883";
+        server = "mqtt://192.168.4.198:1883";
         user = "zigbee2mqtt";
         password = config.mqtt_password;
       };
