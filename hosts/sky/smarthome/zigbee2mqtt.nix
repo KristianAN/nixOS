@@ -28,9 +28,11 @@ in
     settings = {
 
       permit_join = false;
-      serial.port = "/dev/zigbee";
-      frontend.port = 8081;
-
+      serial.port = "/dev/ttyACM1";
+      frontend = {
+        port = 8081;
+        host = "0.0.0.0";
+      };
       device_options = {
         retain = true;
       };
