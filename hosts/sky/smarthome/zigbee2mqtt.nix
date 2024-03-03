@@ -3,6 +3,7 @@ let
   # read from json
   config = lib.builtins.fromJSON (builtins.readFile /home/kristian/.configuration/mqtt.json);
 in 
+{
   networking.firewall.allowedTCPPorts = [ 8080 ];
 
   services.zigbee2mqtt = {
@@ -30,3 +31,4 @@ in
       };
     };
   };
+}
