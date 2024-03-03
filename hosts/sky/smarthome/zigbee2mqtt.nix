@@ -6,6 +6,19 @@ in
 {
   networking.firewall.allowedTCPPorts = [ 8080 ];
 
+  services.mosquitto = {
+    enable = true;
+    package = pkgs.mosquitto;
+    config = {
+      allow_anonymous = false;
+      password_file = "/home/kristian/.configuration/mqttpwd";
+      listener = {
+        port = 1883;
+        protocol = "mqtt";
+      };
+    };
+  };
+
   services.zigbee2mqtt = {
     enable = true;
     package = pkgs.zigbee2mqtt;
