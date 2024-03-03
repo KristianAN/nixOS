@@ -4,20 +4,23 @@ let
   config = builtins.fromJSON (builtins.readFile /home/kristian/.configuration/mqtt.json);
 in
 {
-  networking.firewall.allowedTCPPorts = [ 8081 1883 ];
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 8081 1883 ];
+  };
 
   services.mosquitto = {
     enable = true;
-    package = pkgs.mosquitto;
     listeners = [
       {
-        acl = [ "readwrite zigbee2mqtt/#" ];
+        address = "192.168.4.198";
+        port = 1883;
         users = {
           zigbee2mqtt = {
+            acl = [ "pattern readwrite #" ];
             password = config.mqtt_password;
           };
         };
-        port = 1883;
       }
     ];
   };
