@@ -23,6 +23,7 @@
     wev
     swaylock-effects
     dunst
+    digikam
     inputs.myNeovimFlake.packages.x86_64-linux.nvim
   ];
 

@@ -1,8 +1,7 @@
-{
- pkgs, 
- lib,
- config,
- ...
+{ pkgs
+, lib
+, config
+, ...
 }:
 {
   time.timeZone = "Europe/Oslo";
@@ -14,6 +13,7 @@
   # Feel free to remove if you don't need it.
 
   security.rtkit.enable = true;
+
 
   services.pipewire = {
     enable = true;

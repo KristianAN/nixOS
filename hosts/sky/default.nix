@@ -1,7 +1,6 @@
-{
-  pkgs,
-  modulesPath,
-  ...
+{ pkgs
+, modulesPath
+, ...
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -12,6 +11,7 @@
     ./nix.nix
     ./system.nix
     ./user.nix
+    ./smarthome
   ];
 
   hardware = {
