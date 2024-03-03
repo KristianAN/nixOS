@@ -1,22 +1,25 @@
 { config, pkgs, lib, ... }:
-let 
+let
   # read from json
   config = builtins.fromJSON (builtins.readFile /home/kristian/.configuration/mqtt.json);
-in 
+in
 {
-  networking.firewall.allowedTCPPorts = [ 8080 ];
+  networking.firewall.allowedTCPPorts = [ 8081 1883 ];
 
   services.mosquitto = {
     enable = true;
     package = pkgs.mosquitto;
-    config = {
-      allow_anonymous = false;
-      password_file = "/home/kristian/.configuration/mqttpwd";
-      listener = {
+    listeners = [
+      {
+        acl = [ "readwrite zigbee2mqtt/#" ];
+        users = {
+          zigbee2mqtt = {
+            password = config.mqtt_password;
+          };
+        };
         port = 1883;
-        protocol = "mqtt";
-      };
-    };
+      }
+    ];
   };
 
   services.zigbee2mqtt = {
@@ -25,14 +28,15 @@ in
     settings = {
 
       permit_join = false;
-      # serial.port = "/dev/ttyUSB0";
-      frontend = true;
+      serial.port = "/dev/zigbee";
+      frontend.port = 8081;
+
       device_options = {
         retain = true;
       };
       advanced = {
         channel = 25;
-        network_key = config.network_key;
+        network_key = "GENERATE";
         log_output = [ "console" ];
         log_level = "warn";
       };
@@ -40,8 +44,9 @@ in
         version = 5;
         server = "mqtt://localhost:1883";
         user = "zigbee2mqtt";
-        password =  config.mqtt_password;
+        password = config.mqtt_password;
       };
     };
   };
 }
+
