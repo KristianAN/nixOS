@@ -11,6 +11,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nix.package = pkgs.nixVersions.nix_2_20;
 
   home = {
     username = "kristian";
@@ -39,5 +40,5 @@
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.05";
+  home.stateVersion = "23.11";
 }
