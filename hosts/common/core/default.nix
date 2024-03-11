@@ -50,6 +50,9 @@ with lib; {
   ];
 
   programs.zsh.enable = true;
+
+  programs.virt-manager.enable = true;
+
   users.users.kristian.shell = pkgs.zsh;
 
   security.pam.services.swaylock = { };

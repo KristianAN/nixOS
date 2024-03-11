@@ -24,6 +24,7 @@
     swaylock-effects
     dunst
     digikam
+    gnome3.adwaita-icon-theme
     inputs.myNeovimFlake.packages.x86_64-linux.nvim
   ];
 
