@@ -25,11 +25,11 @@ let
   home-display-settings = pkgs.writeShellScript "home-displays-keybind.sh" ''
     swaymsg output "\"HP Inc. HP E27u G4 CN41320QQB\"" mode 2560x1440@59.951Hz pos 1440 570 transform normal scale 1.0 scale_filter nearest adaptive_sync off dpms on
     swaymsg output "\"HP Inc. HP E27u G4 CN41320QR1\"" mode 2560x1440@59.951Hz pos 0 0 transform 270 scale 1.0 scale_filter nearest adaptive_sync off dpms on
-    swaymsg output "\"AU Optronics 0xA68B Unknown\"" dpms off
+    swaymsg output "\"LG Display 0x06FA Unknown\"" dpms off
   '';
 
   laptop-display-settings = pkgs.writeShellScript "laptop-displays-keybind.sh" ''
-    swaymsg output "\"AU Optronics 0xA68B Unknown\"" mode 1920x1080@60.014Hz pos 0 0 transform normal scale 1.0 scale_filter nearest adaptive_sync off dpms on
+    swaymsg output "\"LG Display 0x06FA Unknown\"" mode 1920x1080@60.014Hz pos 0 0 transform normal scale 1.0 scale_filter nearest adaptive_sync off dpms on
   '';
 
 in

@@ -2,7 +2,6 @@
   imports = [
     #./nushell.nix
     ./fuzzel.nix
-    ./vscode.nix
     ./zsh.nix
     ./firefox.nix
     ./git.nix
@@ -12,6 +11,7 @@
     ./tmux.nix
     ./waybar.nix
     ./wezterm.nix
+    ./emacs/emacs.nix
   ];
 }
 

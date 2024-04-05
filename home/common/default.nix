@@ -19,6 +19,7 @@
   };
 
   home.packages = with pkgs; [
+    libreoffice
     dconf
     wdisplays
     wev

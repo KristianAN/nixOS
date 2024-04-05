@@ -10,10 +10,17 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # myNeovimFlake = {
-    #  url = "github:KristianAN/neovim-flake";
-    #  flake = true;
-    #};
+    myNeovimFlake = {
+      url = "github:KristianAN/neovim-flake";
+      flake = true;
+    };
+
+    indent-bars = {
+      url = "github:jdtsmith/indent-bars";
+      flake = false;
+    };
+
+
   };
 
   outputs =
@@ -85,7 +92,7 @@
             nixosModules
             {
               programs.slack.enable = true;
-              programs.citrix.enable = false;
+              programs.citrix.enable = true;
               programs.discord.enable = true;
               programs.intellij.enable = true;
             }
