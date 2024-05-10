@@ -49,7 +49,7 @@ in
       };
       mqtt = {
         version = 5;
-        server = "mqtt://192.168.4.198:1883";
+        server = "mqtt://192.168.4.100:1883";
         user = "zigbee2mqtt";
         password = config.mqtt_password;
       };
