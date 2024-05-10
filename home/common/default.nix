@@ -19,6 +19,7 @@
   };
 
   home.packages = with pkgs; [
+    vscode
     libreoffice
     dconf
     wdisplays
@@ -26,6 +27,9 @@
     swaylock-effects
     dunst
     digikam
+    wf-recorder
+    slurp
+    mpv
     inputs.myNeovimFlake.packages.x86_64-linux.nvim
   ];
 

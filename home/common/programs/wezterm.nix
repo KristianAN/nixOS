@@ -11,25 +11,43 @@
       config = wezterm.config_builder()
     end
     
+    force_reverse_video_cursor = true
+
     config.colors = {
-      -- WezTerm uses these colors for text rendering
-      foreground = "#b5bdc5",
-      background = "#080c10",
-      cursor_bg = "#b5bdc5", -- Set this to the color you want for the cursor
-      cursor_border = "#b5bdc5",
-      cursor_fg = "#080c10", -- And this to the color you want for the cursor text
-      selection_bg = "#012749",
-      selection_fg = "#b5bdc5",
+      foreground = "#c5c9c5",
+      background = "#181616",
 
-      -- The color of the scrollbar "thumb"; the portion that represents the current viewport
-      scrollbar_thumb = "#393939",
+      cursor_bg = "#C8C093",
+      cursor_fg = "#C8C093",
+      cursor_border = "#C8C093",
 
-      -- The color of the split lines between panes
-      split = "#393939",
+      selection_fg = "#C8C093",
+      selection_bg = "#2D4F67",
 
-      -- ansi and bright color definitions
-      ansi = {"#262626", "#fa4d56", "#42be65", "#d2a106", "#5080ff", "#a665d0", "#0ab6ba", "#e0e0e0"},
-      brights = {"#474747", "#ff8389", "#74e792", "#f8e6a0", "#78a9ff", "#be95ff", "#57e5e5", "#cac5c4"},
+      scrollbar_thumb = "#16161D",
+      split = "#16161D",
+
+      ansi = {
+        "#0D0C0C",
+        "#C4746E",
+        "#8A9A7B",
+        "#C4B28A",
+        "#8BA4B0",
+        "#A292A3",
+        "#8EA4A2",
+        "#C8C093",
+      },
+      brights = {
+        "#A6A69C",
+        "#E46876",
+        "#87A987",
+        "#E6C384",
+        "#7FB4CA",
+        "#938AA9",
+        "#7AA89F",
+        "#C5C9C5",
+      },
+      indexed = { [16] = "#B6927B", [17] = "#B98D7B" },
     }
 
     config.window_padding = {
