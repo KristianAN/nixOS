@@ -12,7 +12,7 @@
         TZ = "Europe/Oslo";
         PUID = "1000";
         PGID = "1000";
-        PEERS = "1";
+        PEERS = "2";
         PEERDNS = "auto";
         ALLOWEDIPS = "0.0.0.0/0";
         SERVERPORT = "51820";
