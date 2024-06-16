@@ -30,6 +30,7 @@
     wf-recorder
     slurp
     mpv
+    sway-contrib.grimshot
     inputs.myNeovimFlake.packages.x86_64-linux.nvim
   ];
 

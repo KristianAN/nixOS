@@ -24,7 +24,6 @@ with lib; {
     killall
     tree
     dbeaver
-    flameshot
 
     # Sound stuff. TODO move to other file
     pulseaudio # Make sure this isn't enabled
