@@ -20,6 +20,7 @@
 
   home.packages = with pkgs; [
     vscode
+    virt-manager
     libreoffice
     dconf
     wdisplays
@@ -30,6 +31,7 @@
     wf-recorder
     slurp
     mpv
+    distrobox
     sway-contrib.grimshot
     inputs.myNeovimFlake.packages.x86_64-linux.nvim
   ];

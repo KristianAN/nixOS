@@ -20,27 +20,30 @@
       flake = false;
     };
 
-
   };
 
   outputs =
-    { self
-    , nixpkgs
-    , flake-utils
-    , myNeovimFlake
-    , home-manager
-    , ...
-    } @ inputs:
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
     let
       inherit (self) outputs;
       lib = nixpkgs.lib // home-manager.lib;
-      systems = [ "x86_64-linux" "aarch64-linux" ];
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
       forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
-      pkgsFor = lib.genAttrs systems (system:
+      pkgsFor = lib.genAttrs systems (
+        system:
         import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-        });
+        }
+      );
       nixosModules = import ./modules/nixos;
       homeManagerModules = import ./modules/home-manager;
     in
@@ -51,16 +54,19 @@
       };
       templates = import ./templates;
       packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
-      devShells = forEachSystem (pkgs:
+      devShells = forEachSystem (
+        pkgs:
         import ./shell.nix {
           inherit pkgs;
-          buildInputs = with pkgs; [
-          ];
-        });
+          buildInputs = with pkgs; [ ];
+        }
+      );
 
       nixosConfigurations = {
         sky = lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = {
+            inherit inputs outputs;
+          };
           modules = [
             ./hosts/sky
             nixosModules
@@ -73,7 +79,9 @@
           ];
         };
         rubble = lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = {
+            inherit inputs outputs;
+          };
           modules = [
             ./hosts/rubble
             nixosModules
@@ -86,13 +94,15 @@
           ];
         };
         chase = lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = {
+            inherit inputs outputs;
+          };
           modules = [
             ./hosts/chase
             nixosModules
             {
               programs.slack.enable = true;
-              programs.citrix.enable = true;
+              programs.citrix.enable = false;
               programs.discord.enable = true;
               programs.intellij.enable = true;
             }
