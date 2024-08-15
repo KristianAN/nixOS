@@ -8,6 +8,7 @@
     shellAliases = {
       za = "zellij a";
       zn = "zellij -s";
+      zqa = "zellij kill-all-sessions -y && zellij delete-all-sessions -y";
     };
     syntaxHighlighting.enable = true;
   };
