@@ -1,31 +1,25 @@
 let
   defaultLayout = ''
     layout {
-      tab name="nvim" {
+      default_tab_template {
         pane size=1 borderless=true {
             plugin location="compact-bar"
         }
-        pane
+        children
       }
+      tab name="nvim"  
       tab name="build" {
-        pane size=1 borderless=true {
-            plugin location="compact-bar"
-        }
         pane split_direction="vertical" {
           pane
           pane
         }
       }
       tab name="shell" {
-        pane size=1 borderless=true {
-            plugin location="compact-bar"
-        }
         pane split_direction="vertical" {
           pane
           pane
         }
       }
-
     }
   '';
 
@@ -101,6 +95,7 @@ let
     default_layout "default_layout"
     default_mode "normal"
     default_shell "zsh"
+    simplified_ui true
     layout_dir "/home/kristian/.config/zellij/layouts"
   '';
 in
