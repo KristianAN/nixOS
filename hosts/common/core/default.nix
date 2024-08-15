@@ -1,8 +1,6 @@
-{ pkgs
-, lib
-, ...
-}:
-with lib; {
+{ pkgs, lib, ... }:
+with lib;
+{
   # Core pakages for system
   environment.systemPackages = with pkgs; [
     # Nix Core
@@ -23,8 +21,7 @@ with lib; {
     htop
     killall
     tree
-    dbeaver
-    flameshot
+    dbeaver-bin
 
     # Sound stuff. TODO move to other file
     pulseaudio # Make sure this isn't enabled
@@ -42,7 +39,7 @@ with lib; {
     chromium
 
     # Keyring
-    gnome.gnome-keyring
+    gnome-keyring
 
     # Copilot requires this
     nodejs-18_x
@@ -50,6 +47,7 @@ with lib; {
   ];
 
   programs.zsh.enable = true;
+  environment.pathsToLink = [ "/share/zsh" ];
   users.users.kristian.shell = pkgs.zsh;
 
   security.pam.services.swaylock = { };
@@ -122,7 +120,5 @@ with lib; {
     };
   };
 
-  imports = [
-    ./fonts.nix
-  ];
+  imports = [ ./fonts.nix ];
 }

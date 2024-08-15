@@ -5,7 +5,6 @@
   ...
 }: {
   hardware.opengl.enable = true;
-  hardware.opengl.driSupport = true;
   hardware.logitech.wireless.enable = true;
   hardware.opengl.extraPackages = with pkgs; [
     vaapiIntel

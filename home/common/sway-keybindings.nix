@@ -38,4 +38,5 @@ in
   "${modifier}+alt+l" = "exec ${swaylockScript}";
   "${modifier}+ctrl+h" = "exec ${home-display-settings}";
   "${modifier}+ctrl+l" = "exec ${laptop-display-settings}";
+  "${modifier}+ctrl+p" = "exec grimshot --notify save area";
 } 

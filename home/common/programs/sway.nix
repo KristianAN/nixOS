@@ -40,9 +40,8 @@
 
       startup = [
         { command = "waybar"; }
-        { command = "flameshot"; }
       ];
-      keybindings = pkgs.lib.mkOptionDefault (import ../keybindings.nix { inherit pkgs; });
+      keybindings = pkgs.lib.mkOptionDefault (import ../sway-keybindings.nix { inherit pkgs; });
     };
   };
 

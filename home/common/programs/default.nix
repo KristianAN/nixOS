@@ -1,6 +1,7 @@
 {
   imports = [
     #./nushell.nix
+    ./zellij.nix
     ./fuzzel.nix
     ./zsh.nix
     ./firefox.nix
@@ -14,4 +15,3 @@
     ./emacs/emacs.nix
   ];
 }
-

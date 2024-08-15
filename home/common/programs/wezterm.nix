@@ -4,13 +4,13 @@
   programs.wezterm.enableZshIntegration = true;
   programs.wezterm.extraConfig = ''
     local wezterm = require 'wezterm'
-    
+
     local config = {}
-    
+
     if wezterm.config_builder then
       config = wezterm.config_builder()
     end
-    
+
     force_reverse_video_cursor = true
 
     config.colors = {
