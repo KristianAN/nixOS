@@ -2,17 +2,17 @@
 {
   programs.jujutsu = {
     enable = true;
-  };
 
-  settings = {
-    user = {
-      name = "Kristian Nedrevold-Hansen";
-      email = "kristian@krined.no";
-    };
+    settings = {
+      user = {
+        name = "Kristian Nedrevold-Hansen";
+        email = "kristian@krined.no";
+      };
 
-    ui = {
-      color = "auto";
-      editor = "nvim";
+      ui = {
+        color = "auto";
+        editor = "nvim";
+      };
     };
   };
 }
