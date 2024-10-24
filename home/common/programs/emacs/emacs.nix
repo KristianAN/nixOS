@@ -1,5 +1,36 @@
 { inputs, pkgs, ... }:
+let
 
+  metals =
+    { version, outputHash }:
+    let
+      metalsDeps = pkgs.stdenv.mkDerivation {
+        name = "metals-deps-${version}";
+        buildCommand = ''
+          export COURSIER_CACHE=$(pwd)
+          ${pkgs.coursier}/bin/cs fetch org.scalameta:metals_2.13:${version} \
+            -r bintray:scalacenter/releases \
+            -r sonatype:snapshots > deps
+          mkdir -p $out/share/java
+          cp -n $(< deps) $out/share/java/
+        '';
+        outputHashMode = "recursive";
+        outputHashAlgo = "sha256";
+        inherit outputHash;
+      };
+    in
+    pkgs.metals.overrideAttrs (old: {
+      inherit version;
+      extraJavaOpts = old.extraJavaOpts + " -Dmetals.client=nvim-lsp";
+      buildInputs = [ metalsDeps ];
+      jre = pkgs.temurin-bin-21;
+    });
+
+  metals-pkg = metals {
+    version = "1.3.5";
+    outputHash = "sha256-86/zeoOO5kSAwh7uQTV7nGUGQoIux1rlH5eUgvn3kvY=";
+  };
+in
 {
   programs.emacs = {
     enable = true;
@@ -7,40 +38,38 @@
       # I install the packages below by hand because they're not in MELPA, and I
       # don't want to incur the startup cost of using straight.el.
 
-      
       indent-bars =
         let
           rev = inputs.indent-bars.shortRev;
         in
-          with pkgs;
-          with pkgs.emacsPackages;
-          melpaBuild {
-            pname = "indent-bars";
-            ename = "indent-bars";
-            version = inputs.indent-bars.lastModifiedDate;
-            commit = rev;
-            packageRequires = [];
+        with pkgs.emacsPackages;
+        melpaBuild {
+          pname = "indent-bars";
+          ename = "indent-bars";
+          version = inputs.indent-bars.lastModifiedDate;
+          commit = rev;
+          packageRequires = [ ];
 
-            src = fetchFromGitHub {
-              inherit rev;
-              owner = "jdtsmith";
-              repo = "indent-bars";
-              sha256 = inputs.indent-bars.narHash;
-            };
-
-            recipe = writeText "recipe" ''
-              (indent-bars
-                :repo "jdtsmith/indent-bars"
-                :fetcher github
-                :files ("*.el")) 
-            '';
-            meta.description = "Emacs plugin for indentation guides";
+          src = pkgs.fetchFromGitHub {
+            inherit rev;
+            owner = "jdtsmith";
+            repo = "indent-bars";
+            sha256 = inputs.indent-bars.narHash;
           };
+
+          recipe = pkgs.writeText "recipe" ''
+            (indent-bars
+              :repo "jdtsmith/indent-bars"
+              :fetcher github
+              :files ("*.el")) 
+          '';
+          meta.description = "Emacs plugin for indentation guides";
+        };
 
     };
 
-    extraPackages = epkgs:
-      with epkgs; [
+    extraPackages =
+      epkgs: with epkgs; [
         # Core packages
         evil # Extensible Vi Layer for Emacs
         evil-collection # A set of keybindings for evil mode
@@ -76,7 +105,7 @@
         consult # Consulting the minibuffer
         orderless # A completion style
         vertico # Vertically oriented completion
-        corfu # Completion overlay
+        company # Completion overlay
 
         # Theme
         modus-themes # Great themes
@@ -93,24 +122,24 @@
         web-mode # Major mode for editing web templates
         scala-ts-mode # Major mode for  Scala tree-sitter
         kotlin-ts-mode # Major mode for  Kotlin tree-sitter
-        eglot-java # Better java support in eglot
         treesit-grammars.with-all-grammars # Now I see whats wrong
         lsp-mode # lsp for emacs
         yasnippet # snippets
         lsp-metals # Scala lsp
         lsp-java # So I can boilerplate faster
         lsp-ui # Prettier lsp stuff
-        
+
         # User interface packages.
         # mood-line # A minimal modeline for emacs
       ];
 
     extraConfig = builtins.readFile ./init.el;
-      
+
   };
 
-  home.packages = with pkgs; [
-    metals
+  home.packages = [
+    metals-pkg
+    pkgs.java-language-server
   ];
 
   services.emacs.enable = true;

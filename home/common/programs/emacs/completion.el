@@ -9,6 +9,7 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
+
 ;; Marginalia
 (use-package marginalia
   :bind (:map minibuffer-local-map
@@ -30,43 +31,46 @@
 	 ("C-c s r" . consult-recent-file)
 	 ("C-c s G" . consult-git-grep))
   :config
-  (
-   consult-ripgrep
-   consult-git-grep consult-grep
-   consult-bookmark consult-recent-file consult-xref consult--source-recent-file consult--source-project-recent-file consult--source-bookmark)
-
-  (global-set-key [remap switch-to-buffer] 'consult-buffer)
-  (global-set-key [remap switch-to-buffer-other-window] 'consult-buffer-other-window)
-  (global-set-key [remap switch-to-buffer-other-frame] 'consult-buffer-other-frame)
-  (global-set-key [remap goto-line] 'consult-goto-line)
-
+  (consult-customize
+   consult-theme :preview-key '(:debounce 0.2 any)
+   consult-ripgrep consult-git-grep consult-grep
+   consult-bookmark consult-recent-file consult-xref
+   consult--source-bookmark consult--source-file-register
+   consult--source-recent-file consult--source-project-recent-file
+   ;; :preview-key "M-."
+   :preview-key '(:debounce 0.4 any))
   )
 
 ;; Enable vertico
 (use-package vertico
+  :bind(:map vertico-map 
+    ("C-n" . vertico-next)
+    ("C-p" . vertico-previous)
+    ("C-y" . vertico-insert))
   :init
   (vertico-mode)
   )
 
-;; Corfu
-(use-package corfu
-  ;; TAB-and-Go customizations
+;; company
+(use-package company
+  :defer t 
+  :ensure t
   :custom
-    (corfu-cycle t)           ;; Enable cycling for `corfu-next/previous'
-    (corfu-preselect 'prompt) ;; Always preselect the prompt
-      ;; Use TAB for cycling, default is `corfu-complete'.
-  :bind
-  (:map corfu-map
-        ("TAB" . corfu-next)
-        ([tab] . corfu-next)
-        ("S-TAB" . corfu-previous)
-        ([backtab] . corfu-previous))
+  (company-tooltip-align-annotations t)      ;; Align annotations with completions.
+  (company-minimum-prefix-length 1)          ;; Trigger completion after typing 1 character
+  (company-idle-delay 0.2)                   ;; Delay before showing completion (adjust as needed)
+  (company-tooltip-maximum-width 50) 
   :config
-  (setq corfu-auto t
-    corfu-quit-no-match 'separator) 
-  :init
-  (corfu-popupinfo-mode)
-  (global-corfu-mode))
+
+  ;; While using C-p C-n to select a completion candidate
+  ;; C-y quickly shows help docs for the current candidate
+  (define-key company-active-map (kbd "C-h")
+			  (lambda ()
+				(interactive)
+				(company-show-doc-buffer)))
+  (define-key company-active-map (kbd "C-y") 'company-complete-selection)
+  :hook
+  (after-init . global-company-mode)) ;; Enable Company Mode globally after initialization.
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
@@ -93,4 +97,10 @@
 
   (setq enable-recursive-minibuffers t))
 
+
+(defun kb/corfu-setup-lsp ()
+    "Use orderless completion style with lsp-capf instead of the
+default lsp-passthrough."
+    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+          '(orderless)))
 ;;; completion.el ends here

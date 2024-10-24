@@ -3,9 +3,10 @@
   wayland.windowManager.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
+    checkConfig = false;
     # Sway config
     config = {
-      terminal = "wezterm";
+      terminal = "footclient";
       menu = "fuzzel";
       modifier = "Mod4";
 
@@ -19,6 +20,9 @@
       };
 
       output = {
+        "*" = {
+          bg = "~/Pictures/kanagawa-wp.jpg fill";
+        };
         eDP-1 = {
           scale = "1";
           mode = "1920x1080";
@@ -38,12 +42,9 @@
 
       bars = [ ];
 
-      startup = [
-        { command = "waybar"; }
-      ];
+      startup = [ { command = "yambar"; } ];
       keybindings = pkgs.lib.mkOptionDefault (import ../sway-keybindings.nix { inherit pkgs; });
     };
   };
-
 
 }
