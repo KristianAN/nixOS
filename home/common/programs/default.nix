@@ -10,8 +10,11 @@
     ./starship.nix
     ./sway.nix
     ./tmux.nix
-    ./waybar.nix
-    ./wezterm.nix
+    # ./waybar.nix
+    ./yambar.nix
+    # ./wezterm.nix
+    ./foot.nix
     ./emacs/emacs.nix
+    ./jujutsu.nix
   ];
 }

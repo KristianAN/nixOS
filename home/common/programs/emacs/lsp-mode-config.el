@@ -17,6 +17,10 @@
   :config
   (setq lsp-metals-server-command "metals"))
 
+(use-package lsp-java
+  :ensure t
+  :config
+  (setq lsp-java-java-path "java-language-server"))
 
 (use-package yasnippet
   :ensure t
@@ -30,11 +34,9 @@
   :init
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
   (setq lsp-keymap-prefix "C-c l")
-  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-         (scala-ts-mode . lsp)
-         (java-ts-mode . lsp)
+  :hook (((scala-ts-mode) . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp
+  :commands (lsp lsp-deferred)
   :config
   (setq lsp-enable-suggest-server-download nil))
 

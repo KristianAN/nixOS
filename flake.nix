@@ -1,6 +1,7 @@
 {
   description = "Kristian start with NixOS flakes";
   inputs = {
+
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # flake-utils is a tool that helps you work with flakes
@@ -102,7 +103,7 @@
             nixosModules
             {
               programs.slack.enable = true;
-              programs.citrix.enable = false;
+              programs.citrix.enable = true;
               programs.discord.enable = true;
               programs.intellij.enable = true;
             }

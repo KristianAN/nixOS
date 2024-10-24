@@ -1,8 +1,5 @@
-{ pkgs
-, lib
-, inputs
-, ...
-}: {
+{ pkgs, inputs, ... }:
+{
 
   imports = [
     ./services
@@ -18,22 +15,25 @@
     homeDirectory = "/home/kristian";
   };
 
-  home.packages = with pkgs; [
-    vscode
-    virt-manager
-    libreoffice
-    dconf
-    wdisplays
-    wev
-    swaylock-effects
-    dunst
-    digikam
-    wf-recorder
-    slurp
-    mpv
-    distrobox
-    sway-contrib.grimshot
+  home.packages = [
+    pkgs.vscode
+    pkgs.virt-manager
+    pkgs.libreoffice
+    pkgs.dconf
+    pkgs.wdisplays
+    pkgs.wev
+    pkgs.swaylock-effects
+    pkgs.dunst
+    pkgs.digikam
+    pkgs.wf-recorder
+    pkgs.slurp
+    pkgs.mpv
+    pkgs.neovide
+    pkgs.distrobox
+    pkgs.sway-contrib.grimshot
+    pkgs.texliveFull
     inputs.myNeovimFlake.packages.x86_64-linux.nvim
+    pkgs.pandoc
   ];
 
   programs.home-manager.enable = true;
@@ -49,4 +49,5 @@
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.11";
+
 }
