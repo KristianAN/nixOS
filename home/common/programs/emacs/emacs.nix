@@ -34,40 +34,6 @@ in
 {
   programs.emacs = {
     enable = true;
-    overrides = self: super: {
-      # I install the packages below by hand because they're not in MELPA, and I
-      # don't want to incur the startup cost of using straight.el.
-
-      indent-bars =
-        let
-          rev = inputs.indent-bars.shortRev;
-        in
-        with pkgs.emacsPackages;
-        melpaBuild {
-          pname = "indent-bars";
-          ename = "indent-bars";
-          version = inputs.indent-bars.lastModifiedDate;
-          commit = rev;
-          packageRequires = [ ];
-
-          src = pkgs.fetchFromGitHub {
-            inherit rev;
-            owner = "jdtsmith";
-            repo = "indent-bars";
-            sha256 = inputs.indent-bars.narHash;
-          };
-
-          recipe = pkgs.writeText "recipe" ''
-            (indent-bars
-              :repo "jdtsmith/indent-bars"
-              :fetcher github
-              :files ("*.el")) 
-          '';
-          meta.description = "Emacs plugin for indentation guides";
-        };
-
-    };
-
     extraPackages =
       epkgs: with epkgs; [
         # Core packages
@@ -97,8 +63,6 @@ in
         vterm # It's no kitty
         multi-vterm # More of them...
         flycheck # See the errors
-
-        indent-bars
 
         # Completion
         marginalia # A minibuffer completion UI
