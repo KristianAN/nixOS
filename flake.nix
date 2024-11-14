@@ -94,6 +94,21 @@
             }
           ];
         };
+        everest = lib.nixosSystem {
+          specialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [
+            ./hosts/everest
+            nixosModules
+            {
+              programs.slack.enable = true;
+              programs.citrix.enable = false;
+              programs.discord.enable = true;
+              programs.intellij.enable = false;
+            }
+          ];
+        };
         chase = lib.nixosSystem {
           specialArgs = {
             inherit inputs outputs;
@@ -103,9 +118,9 @@
             nixosModules
             {
               programs.slack.enable = true;
-              programs.citrix.enable = true;
+              programs.citrix.enable = false;
               programs.discord.enable = true;
-              programs.intellij.enable = true;
+              programs.intellij.enable = false;
             }
           ];
         };
@@ -128,6 +143,16 @@
           };
           modules = [
             ./home/rubble
+            homeManagerModules
+          ];
+        };
+        "kristian@everest" = lib.homeManagerConfiguration {
+          pkgs = pkgsFor.x86_64-linux;
+          extraSpecialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [
+            ./home/everest
             homeManagerModules
           ];
         };

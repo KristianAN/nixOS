@@ -1,0 +1,6 @@
+{pkgs, myNeovimFlake, ...}: {
+  imports = [
+    ../common
+  ];
+  
+}
