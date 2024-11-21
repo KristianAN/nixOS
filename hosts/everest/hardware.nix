@@ -47,11 +47,6 @@
   };
 
   hardware.logitech.wireless.enable = true;
-  hardware.opengl.extraPackages = with pkgs; [
-    vaapiIntel
-    libvdpau-va-gl
-    intel-media-driver
-  ];
 
   hardware.bluetooth.enable = true;
   hardware.keyboard.zsa.enable = true;
@@ -62,34 +57,35 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "thunderbolt"
     "vmd"
+    "xhci_pci"
+    "ahci"
     "nvme"
-    "usbhid"
     "usb_storage"
+    "usbhid"
     "sd_mod"
+    "sr_mod"
   ];
   boot.initrd.kernelModules = [ ];
-
-  boot.kernelModules = [
-    "i915"
-    "kvm-intel"
-  ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/ec5e593e-551a-4aae-a25b-c59e111d92e8";
+    device = "/dev/disk/by-uuid/6d04566b-dbff-46d0-b0cb-aede1b693009";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/2234-821A";
+    device = "/dev/disk/by-uuid/6249-EB1D";
     fsType = "vfat";
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
   };
 
   swapDevices = [
-    { device = "/dev/disk/by-uuid/1e472841-888d-4ab3-b85f-80cddff26abe"; }
+    { device = "/dev/disk/by-uuid/4957b23b-e6d0-4cac-a1ce-8f9cff5aab91"; }
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
