@@ -1,7 +1,9 @@
-{ pkgs
-, modulesPath
-, ...
-}: {
+{
+  pkgs,
+  modulesPath,
+  ...
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     ../common
@@ -21,7 +23,6 @@
     };
   };
 
-
   environment.systemPackages = with pkgs; [
     shotwell
   ];
@@ -39,5 +40,5 @@
   nixpkgs.config.allowUnfree = true;
 
   # NixOS release to be compatible with for staeful data such as databases.
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }
