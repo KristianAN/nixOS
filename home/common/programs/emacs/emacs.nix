@@ -45,7 +45,7 @@ in
         general # Provides a more convenient way to define keybindings
         which-key # Displays available keybindings in popup
         rg # grep, but superfast
-        dired-single # Reuse the dired buffer
+        # dired-single # Reuse the dired buffer
         direnv # Environment switcher for Emacs
         editorconfig # EditorConfig Emacs Plugin
         eldoc # Show function arglist or variable docstring in echo area
