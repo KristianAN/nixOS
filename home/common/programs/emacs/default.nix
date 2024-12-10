@@ -57,6 +57,7 @@ in
         vim-tab-bar
         evil-visualstar
         evil-surround
+        evil-leader
 
         # Native compilation
         # compile-angel
@@ -90,11 +91,11 @@ in
         # Project management
         projectile
 
-        # Treesitter
+        # Programming
         treesit-grammars.with-all-grammars
         scala-ts-mode
-
-        # LSP
+        nix-ts-mode
+        haskell-mode
         eglot-booster
         eldoc-box
 

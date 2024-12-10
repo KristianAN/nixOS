@@ -16,30 +16,27 @@
   (evil-mode 1))
 
 ;;; Leader
-(define-prefix-command 'my-leader-map)
-
-(keymap-set evil-motion-state-map "SPC" 'my-leader-map)
-(keymap-set evil-normal-state-map "SPC" 'my-leader-map)
-
-(which-key-add-key-based-replacements
-  "my-leader-map f" "find"
-  "my-leader-map p" "project"
-  "my-leader-map l" "lsp"
-  "my-leader-map m" "file-stuf")
-
-(evil-define-key nil my-leader-map
-  "fb" 'consult-buffer
-  "fg" 'consult-ripgrep
-  "fl" 'consult-line
-  "fw" 'kristian/consult-ripgrep-from-visual-selection
+(use-package evil-leader)
+(global-evil-leader-mode)
+(evil-leader/set-leader "<SPC>")
+(evil-leader/set-key
+  "f" '("find" . (keymap))
+  "fb" '("buffer" . consult-buffer)
+  "fg" '("grep" . consult-ripgrep)
+  "fl" '("line" . consult-line)
+  "fw" '("grep-selection" . kristian/consult-ripgrep-from-visual-selection)
   "G" 'magit
-  "pp" 'project-switch-project
-  "pt" 'projectile-run-vterm
-  " " 'project-find-file
+  "p" '("project" . (keymap))
+  "pp" '("switch-project" . project-switch-project)
+  "pt" '("vterm" . projectile-run-vterm)
+  "<SPC>" '("find-file" . project-find-file)
+  "m" '("files" . (keymap))
   "mc" 'dired-jump
+  "l" '("lsp" . (keymap))
   "ld" 'flymake-show-project-diagnostics
   "la" 'eglot-code-actions
   "ln" 'flymake-goto-next-error
+  "le" 'eglot
   )
 
 (use-package evil-collection

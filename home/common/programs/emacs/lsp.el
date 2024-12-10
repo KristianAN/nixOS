@@ -20,14 +20,18 @@
   :init
   (setq scala-ts-indent-offset 2))
 
+(use-package haskell-mode)
+
+(use-package nix-ts-mode
+  :mode "\\.nix\\'")
+
 (use-package eglot-booster
-	:after eglot
-	:config	(eglot-booster-mode))
+  :after eglot
+  :config	(eglot-booster-mode))
 
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
                '(scala-ts-mode . ("metals"))))
 
 (use-package eldoc-box)
-
 (add-hook 'eglot-managed-mode-hook #'eldoc-box-hover-mode t)
