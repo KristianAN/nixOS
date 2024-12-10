@@ -36,6 +36,9 @@
 ;; the precise point where you previously left off.
 (add-hook 'after-init-hook #'save-place-mode)
 
+;; Turn on which-key-mode
+(add-hook 'after-init-hook 'which-key-mode)
+
 ;; Turn off autosave-mode
 ;; turn off backup-files
 (auto-save-mode -1)
@@ -75,10 +78,17 @@
          ("C-c C-e" . markdown-do)))
 
 (minimal-emacs-load-user-init "custom.el")
+
 (minimal-emacs-load-user-init "evil.el")
 
-;;; Completions
+;;; Formatter
+(use-package apheleia
+  :config
+  (push '(scalafmt . ("scalafmt" "--stdin" "--non-interactive" "--quiet" "--stdout")) apheleia-formatters)
+  (push '(scala-ts-mode . scalafmt) apheleia-mode-alist))
 
+(apheleia-global-mode +1)
+;;; Completions
 (minimal-emacs-load-user-init "completions.el")
 
 ;;; LSP
@@ -95,10 +105,14 @@
 (use-package magit)
 
 ;;; Projectile
-(use-package projectile
-  (setq projectile-project-search-path '("~/projects/" "~/src")))
+(use-package projectile)
+(setq projectile-project-search-path '("~/projects/" ("~/src" . 1)))
+(setq projectile-auto-discover 1)
 
 ;;; Indentation
 (use-package indent-bars
   :hook ((scala-mode scala-ts-mode yaml-mode) . indent-bars-mode))
 
+;;; Dirvish
+(use-package dirvish)
+(dirvish-override-dired-mode)

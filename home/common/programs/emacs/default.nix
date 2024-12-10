@@ -62,6 +62,7 @@ in
         # compile-angel
         # Terminal
         vterm
+
         # Completion et.al.
         orderless
         vertico
@@ -95,11 +96,14 @@ in
 
         # LSP
         eglot-booster
+        eldoc-box
 
         # Editing
         markdown-mode
-        #format-all
+        apheleia
 
+        # Other
+        dirvish
       ];
 
     extraConfig = builtins.readFile ./init.el;
@@ -109,6 +113,13 @@ in
     pkgs.emacs-lsp-booster
     metals
     pkgs.scalafmt
+    pkgs.astyle
+    pkgs.fd
+    pkgs.imagemagick
+    pkgs.poppler
+    pkgs.ffmpegthumbnailer
+    pkgs.mediainfo
+
   ];
 
   home.file = {

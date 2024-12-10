@@ -28,3 +28,4 @@
   (add-to-list 'eglot-server-programs
                '(scala-ts-mode . ("metals"))))
 
+(use-package eldoc-box)

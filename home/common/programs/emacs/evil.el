@@ -21,21 +21,26 @@
 (keymap-set evil-motion-state-map "SPC" 'my-leader-map)
 (keymap-set evil-normal-state-map "SPC" 'my-leader-map)
 
+(which-key-add-key-based-replacements
+  "my-leader-map f" "find"
+  "my-leader-map p" "project"
+  "my-leader-map l" "lsp"
+  "my-leader-map m" "file-stuf")
+
 (evil-define-key nil my-leader-map
-    ;; add your bindings here:
-    ;"b"  'switch-to-buffer
-    "fb" 'consult-buffer
-    "fg" 'consult-ripgrep
-    "fl" 'consult-line
-    "G" 'magit
-    "pp" 'project-switch-project
-    " " 'project-find-file
-    "mc" 'dired-jump
-    ;"B"  'project-switch-to-buffer
-    ;"pf" 'project-find-file
-    ;"ps" 'project-shell-command
-    ;; etc.
-    )
+  "fb" 'consult-buffer
+  "fg" 'consult-ripgrep
+  "fl" 'consult-line
+  "fw" 'kristian/consult-ripgrep-from-visual-selection
+  "G" 'magit
+  "pp" 'project-switch-project
+  "pt" 'projectile-run-vterm
+  " " 'project-find-file
+  "mc" 'dired-jump
+  "ld" 'flymake-show-project-diagnostics
+  "la" 'eglot-code-actions
+  "ln" 'flymake-goto-next-error
+  )
 
 (use-package evil-collection
   :after evil
@@ -97,8 +102,4 @@
     (comment-or-uncomment-region beg end))
   (evil-define-key 'normal 'global (kbd "gc") 'my-evil-comment-or-uncomment))
 
-(which-key-add-key-based-replacements
-  "my-leader-map f" "find"
-  "my-leader-map p" "project"
-  "my-leader-map m" "file-stuf")
 
