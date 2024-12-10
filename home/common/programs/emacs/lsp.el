@@ -29,3 +29,5 @@
                '(scala-ts-mode . ("metals"))))
 
 (use-package eldoc-box)
+
+(add-hook 'eglot-managed-mode-hook #'eldoc-box-hover-mode t)
