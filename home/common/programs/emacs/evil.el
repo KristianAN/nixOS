@@ -37,6 +37,7 @@
   "la" 'eglot-code-actions
   "ln" 'flymake-goto-next-error
   "le" 'eglot
+  "e"  'eldoc-box-help-at-point
   )
 
 (use-package evil-collection
