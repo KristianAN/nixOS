@@ -28,7 +28,8 @@
   "G" 'magit
   "p" '("project" . (keymap))
   "pp" '("switch-project" . project-switch-project)
-  "pt" '("vterm" . projectile-run-vterm)
+  "pt" '("term" . eat-project)
+  "po" '("term-other-window" . eat-project-other-window)
   "<SPC>" '("find-file" . project-find-file)
   "m" '("files" . (keymap))
   "mc" 'dired-jump
