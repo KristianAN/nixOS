@@ -6,14 +6,14 @@
 ;; Ensure JIT compilation is enabled for improved performance by
 ;; native-compiling loaded .elc files asynchronously
 (setq native-comp-jit-compilation t)
-;(setq native-comp-deferred-compilation t) ; Deprecated in Emacs > 29.1
+                                        ;(setq native-comp-deferred-compilation t) ; Deprecated in Emacs > 29.1
 
-;(use-package compile-angel
-;  :ensure t
-;  :demand t
-;  :config
-;  (compile-angel-on-load-mode)
-;  (add-hook 'emacs-lisp-mode-hook #'compile-angel-on-save-local-mode))
+                                        ;(use-package compile-angel
+                                        ;  :ensure t
+                                        ;  :demand t
+                                        ;  :config
+                                        ;  (compile-angel-on-load-mode)
+                                        ;  (add-hook 'emacs-lisp-mode-hook #'compile-angel-on-save-local-mode))
 
 ;; Auto-revert in Emacs is a feature that automatically updates the
 ;; contents of a buffer to reflect changes made to the underlying file
@@ -49,33 +49,24 @@
 (setq display-line-numbers-type 'relative) 
 (global-display-line-numbers-mode)
 ;;; Font
-;(set-frame-font "Iosevka Nerd Font" nil t)
+                                        ;(set-frame-font "Iosevka Nerd Font" nil t)
 
 (use-package nerd-icons)
 
 (add-hook 'after-make-frame-functions
-  (lambda (frame)
-    (with-selected-frame frame
-      ;; All customizations here
-      (load-theme 'ef-symbiosis t)
-      (set-frame-font "Iosevka Nerd Font 12" nil t)
-      )))
-
-;;; Terminal
-(use-package vterm
-  :ensure t
-  :defer t
-  :commands vterm
-  :config
-  ;; Speed up vterm
-  (setq vterm-timer-delay 0.01))
+          (lambda (frame)
+            (with-selected-frame frame
+              ;; All customizations here
+              (load-theme 'ef-symbiosis t)
+              (set-frame-font "Iosevka Nerd Font 12" nil t)
+              )))
 
 (use-package markdown-mode
   :ensure t
   :mode ("README\\.md\\'" . gfm-mode)
   :init (setq markdown-command "multimarkdown")
   :bind (:map markdown-mode-map
-         ("C-c C-e" . markdown-do)))
+              ("C-c C-e" . markdown-do)))
 
 (minimal-emacs-load-user-init "custom.el")
 
@@ -116,3 +107,9 @@
 ;;; Dirvish
 (use-package dirvish)
 (dirvish-override-dired-mode)
+
+;;; Terminal
+(use-package eat)
+(add-hook 'eshell-load-hook #'eat-eshell-mode)
+(add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)
+

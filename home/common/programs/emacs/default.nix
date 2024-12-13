@@ -61,8 +61,6 @@ in
 
         # Native compilation
         # compile-angel
-        # Terminal
-        vterm
 
         # Completion et.al.
         orderless
@@ -106,6 +104,7 @@ in
 
         # Other
         dirvish
+        eat
       ];
 
     extraConfig = builtins.readFile ./init.el;
