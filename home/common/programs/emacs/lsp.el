@@ -25,6 +25,11 @@
 (use-package nix-ts-mode
   :mode "\\.nix\\'")
 
+(use-package typescript-ts-mode
+  :mode (("\\.cts\\'" . typescript-ts-mode)
+         ("\\.tsx\\'" . typescript-ts-mode)
+         ("\\.ts\\'" . typescript-ts-mode)))
+
 (use-package eglot-booster
   :after eglot
   :config	(eglot-booster-mode))
@@ -34,3 +39,16 @@
                '(scala-ts-mode . ("metals"))))
 
 (use-package eldoc-box)
+
+(use-package web-mode
+  :ensure t
+  :mode
+  (("\\.phtml\\'" . web-mode)
+   ("\\.php\\'" . web-mode)
+   ("\\.vue\\'" . web-mode)
+   ("\\.tpl\\'" . web-mode)
+   ("\\.[agj]sp\\'" . web-mode)
+   ("\\.as[cp]x\\'" . web-mode)
+   ("\\.erb\\'" . web-mode)
+   ("\\.mustache\\'" . web-mode)
+   ("\\.djhtml\\'" . web-mode)))

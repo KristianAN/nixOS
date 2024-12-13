@@ -98,6 +98,7 @@ in
         haskell-mode
         eglot-booster
         eldoc-box
+        web-mode
 
         # Editing
         markdown-mode
