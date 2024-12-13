@@ -269,18 +269,8 @@ When set to non-nil, Emacs will automatically call `package-initialize' and
   (setq use-file-dialog nil)
   (setq use-dialog-box nil))
 
-;;; package.el
-(setq package-enable-at-startup nil)
-(setq package-quickstart nil)
-(setq use-package-always-ensure t)
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("melpa-stable" . "https://stable.melpa.org/packages/")
-                         ("gnu" . "https://elpa.gnu.org/packages/")
-                         ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
-(customize-set-variable 'package-archive-priorities '(("gnu"    . 99)
-                                                      ("nongnu" . 80)
-                                                      ("stable" . 70)
-                                                      ("melpa"  . 0)))
+;;; LSP
+(setenv "LSP_USE_PLISTS" "true")
 
 ;;; Load post-early-init.el
 (minimal-emacs-load-user-init "post-early-init.el")

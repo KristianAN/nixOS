@@ -14,7 +14,7 @@
     ./yambar.nix
     # ./wezterm.nix
     ./foot.nix
-    ./emacs/emacs.nix
+    ./emacs/default.nix
     ./jujutsu.nix
   ];
 }
