@@ -36,4 +36,5 @@
 
   # NixOS release to be compatible with for staeful data such as databases.
   system.stateVersion = "24.05";
+  services.flatpak.enable = true;
 }
