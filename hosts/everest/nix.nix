@@ -1,10 +1,12 @@
-{ pkgs
-, lib
-, config
-, inputs
-, ...
-}: {
-  nix.package = pkgs.nixVersions.nix_2_20;
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}:
+{
+  nix.package = pkgs.nixVersions.nix_2_25;
   nix = {
     # This will add each flake input as a registry
     # To make nix3 commands consistent with your flake
