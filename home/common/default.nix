@@ -8,7 +8,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nix.package = pkgs.nixVersions.nix_2_20;
+  nix.package = pkgs.nixVersions.nix_2_25;
 
   home = {
     username = "kristian";
