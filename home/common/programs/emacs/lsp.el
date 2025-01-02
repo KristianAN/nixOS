@@ -30,6 +30,9 @@
          ("\\.tsx\\'" . typescript-ts-mode)
          ("\\.ts\\'" . typescript-ts-mode)))
 
+(use-package python-ts-mode
+  :mode ("\\.py\\'" . python-ts-mode))
+
 (use-package eglot-booster
   :after eglot
   :config	(eglot-booster-mode))
