@@ -5,6 +5,8 @@
     ./fuzzel.nix
     #./zsh.nix
     ./firefox.nix
+    ./lazygit.nix
+    ./fish.nix
     ./git.nix
     ./gtk.nix
     ./starship.nix
