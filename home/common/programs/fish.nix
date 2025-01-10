@@ -14,6 +14,6 @@ in
 
   programs.zoxide = {
     enable = true;
-    enagleFishIntegration = true;
+    enableFishIntegration = true;
   };
 }
