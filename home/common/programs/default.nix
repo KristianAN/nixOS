@@ -3,7 +3,7 @@
     #./nushell.nix
     ./zellij.nix
     ./fuzzel.nix
-    ./zsh.nix
+    #./zsh.nix
     ./firefox.nix
     ./git.nix
     ./gtk.nix

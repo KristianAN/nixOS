@@ -46,9 +46,9 @@ with lib;
 
   ];
 
-  programs.zsh.enable = true;
-  environment.pathsToLink = [ "/share/zsh" ];
-  users.users.kristian.shell = pkgs.zsh;
+  programs.fish.enable = true;
+  environment.pathsToLink = [ "/share/fish" ];
+  users.users.kristian.shell = pkgs.fish;
 
   security.pam.services.swaylock = { };
 

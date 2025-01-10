@@ -34,7 +34,7 @@
     pkgs.texliveFull
     inputs.myNeovimFlake.packages.x86_64-linux.nvim
     pkgs.pandoc
-    pkgs.nyxt
+    pkgs.lazygit
   ];
 
   programs.home-manager.enable = true;

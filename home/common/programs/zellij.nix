@@ -94,7 +94,7 @@ let
     pane_frames false
     default_layout "default_layout"
     default_mode "normal"
-    default_shell "zsh"
+    default_shell "fish"
     simplified_ui true
     layout_dir "/home/kristian/.config/zellij/layouts"
   '';
