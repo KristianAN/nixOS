@@ -23,11 +23,8 @@ with lib;
     tree
     dbeaver-bin
 
-    # Sound stuff. TODO move to other file
     pulseaudio # Make sure this isn't enabled
     pavucontrol
-
-    # Archive tools
     xarchiver
     wget
     inetutils
@@ -35,7 +32,6 @@ with lib;
     curl
     zip
     git
-    zsh
     chromium
 
     # Keyring
@@ -46,9 +42,7 @@ with lib;
 
   ];
 
-  programs.fish.enable = true;
-  environment.pathsToLink = [ "/share/fish" ];
-  users.users.kristian.shell = pkgs.fish;
+  users.defaultUserShell = pkgs.fish;
 
   security.pam.services.swaylock = { };
 
@@ -120,7 +114,10 @@ with lib;
     };
   };
 
-  imports = [ ./fonts.nix ];
+  imports = [
+    ./fonts.nix
+    ./shell.nix
+  ];
 
   # Binary Cache for Haskell.nix
   nix.settings.trusted-public-keys = [

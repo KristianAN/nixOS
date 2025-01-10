@@ -34,7 +34,7 @@ let
 
         bind "Ctrl e" { WriteChars "nvim"; Write 13; SwitchToMode "Normal"; }
 
-        bind "Ctrl u" { CloseFocus; SwitchToMode "Normal"; }
+        bind "Ctrl x" { CloseFocus; SwitchToMode "Normal"; }
         bind "z" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
         bind "d" { Detach; }
         bind "s" { ToggleActiveSyncTab; SwitchToMode "Normal"; }

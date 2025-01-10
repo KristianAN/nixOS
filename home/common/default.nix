@@ -34,6 +34,7 @@
     pkgs.texliveFull
     inputs.myNeovimFlake.packages.x86_64-linux.nvim
     pkgs.pandoc
+    pkgs.any-nix-shell
   ];
 
   programs.home-manager.enable = true;
