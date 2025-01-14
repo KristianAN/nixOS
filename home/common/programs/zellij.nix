@@ -34,7 +34,7 @@ let
 
         bind "Ctrl e" { WriteChars "nvim"; Write 13; SwitchToMode "Normal"; }
 
-        bind "Ctrl x" { CloseFocus; SwitchToMode "Normal"; }
+        bind "Ctrl k" { CloseFocus; SwitchToMode "Normal"; }
         bind "z" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
         bind "d" { Detach; }
         bind "s" { ToggleActiveSyncTab; SwitchToMode "Normal"; }
@@ -73,20 +73,20 @@ let
       }
     }
 
-    theme "kanagawa"
+    theme "neovim"
     themes {
-      kanagawa{
-        bg "#DCD7BA"
-        fg "#1F1F28"
-        white "#090618"
-        black "#dcd6ba"
-        red "#e82424"
-        green "#98bb6c"
-        yellow "#e6c384"
-        blue "#7fb4ca"
-        magenta "#938aa9"
-        cyan "#7aa89f"
-        orange "#FFA066"
+      neovim {
+        bg "#4f5258"
+        fg "#eef1f8"
+        white "#eef1f8"
+        black "#07080d"
+        red "#ffc0b9"
+        green "#b3f6c0"
+        yellow "#fce094"
+        blue "#a6dbff"
+        magenta "#ffcaff"
+        cyan "#8cf8f7"
+        orange "#6b5300"
       }
     }
 

@@ -6,7 +6,7 @@
     checkConfig = false;
     # Sway config
     config = {
-      terminal = "footclient";
+      terminal = "foot";
       menu = "fuzzel";
       modifier = "Mod4";
 

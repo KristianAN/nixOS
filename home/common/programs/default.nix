@@ -14,7 +14,7 @@
     ./tmux.nix
     # ./waybar.nix
     ./yambar.nix
-    # ./wezterm.nix
+    ./wezterm.nix
     ./foot.nix
     ./emacs/default.nix
     ./jujutsu.nix
