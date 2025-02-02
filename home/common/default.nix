@@ -32,6 +32,7 @@
     pkgs.distrobox
     pkgs.sway-contrib.grimshot
     pkgs.texliveFull
+    pkgs.brightnessctl
     inputs.myNeovimFlake.packages.x86_64-linux.nvim
     pkgs.pandoc
     pkgs.any-nix-shell

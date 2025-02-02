@@ -6,7 +6,7 @@
     settings = {
       main = {
         term = "xterm-256color";
-        font = "Iosevka Nerd Font:size=13";
+        font = "Iosevka Nerd Font:size=14";
         dpi-aware = "no";
       };
 
