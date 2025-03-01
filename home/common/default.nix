@@ -36,6 +36,7 @@
     inputs.myNeovimFlake.packages.x86_64-linux.nvim
     pkgs.pandoc
     pkgs.any-nix-shell
+    pkgs.nyxt
   ];
 
   programs.home-manager.enable = true;
