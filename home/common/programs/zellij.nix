@@ -102,7 +102,7 @@ in
 {
   programs.zellij = {
     enable = true;
-    # enableZshIntegration = true;
+    enableFishIntegration = false;
   };
 
   home.file."./.config/zellij/layouts/default_layout.kdl".text = defaultLayout;

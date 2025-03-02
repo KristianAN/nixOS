@@ -37,6 +37,8 @@
     pkgs.pandoc
     pkgs.any-nix-shell
     pkgs.nyxt
+    pkgs.librewolf
+    pkgs.ladybird
   ];
 
   programs.home-manager.enable = true;
