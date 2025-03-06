@@ -14,9 +14,10 @@
     ./tmux.nix
     # ./waybar.nix
     ./yambar.nix
-    ./wezterm.nix
     ./foot.nix
     ./emacs/default.nix
+    ./wezterm/default.nix
     ./jujutsu.nix
+    ./yazi.nix
   ];
 }
