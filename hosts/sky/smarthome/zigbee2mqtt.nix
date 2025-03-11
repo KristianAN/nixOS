@@ -13,7 +13,7 @@ in
     enable = true;
     listeners = [
       {
-        address = "192.168.4.198";
+        address = "192.168.4.100";
         port = 1883;
         users = {
           zigbee2mqtt = {

@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
   imports = [
-    ./zigbee2mqtt.nix
+    #./zigbee2mqtt.nix
     ./wireguard.nix
   ];
 }

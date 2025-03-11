@@ -3,6 +3,11 @@
   systemd.tmpfiles.rules = [
     "d /configs/wireguard 0755 kristian kristian-" #The - disables automatic cleanup, so the file wont be removed after a period
   ];
+  networking.firewall = {
+    enable = true;
+    allowedUDPPorts = [ 51820 ];
+  };
+
 
   virtualisation.oci-containers.containers = {
     wireguard = {
