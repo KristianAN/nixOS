@@ -15,32 +15,6 @@
   (evil-select-search-module 'evil-search-module 'evil-search)
   (evil-mode 1))
 
-;;; Leader
-(use-package evil-leader)
-(global-evil-leader-mode)
-(evil-leader/set-leader "<SPC>")
-(evil-leader/set-key
-  "f" '("find" . (keymap))
-  "fb" '("buffer" . consult-buffer)
-  "fg" '("grep" . consult-ripgrep)
-  "fl" '("line" . consult-line)
-  "fw" '("grep-selection" . kristian/consult-ripgrep-from-visual-selection)
-  "G" 'magit
-  "p" '("project" . (keymap))
-  "pp" '("switch-project" . project-switch-project)
-  "pt" '("term" . eat-project)
-  "po" '("term-other-window" . eat-project-other-window)
-  "<SPC>" '("find-file" . project-find-file)
-  "m" '("files" . (keymap))
-  "mc" 'dired-jump
-  "l" '("lsp" . (keymap))
-  "ld" 'flymake-show-project-diagnostics
-  "la" 'eglot-code-actions
-  "ln" 'flymake-goto-next-error
-  "le" 'eglot
-  "e"  'eldoc-box-help-at-point
-  )
-
 (use-package evil-collection
   :after evil
   :ensure t
