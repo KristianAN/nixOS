@@ -90,7 +90,7 @@ in
         treesit-grammars.with-all-grammars
         scala-ts-mode
         nix-ts-mode
-        haskell-mode
+        haskell-ts-mode
         eglot-booster
         eldoc-box
         web-mode

@@ -11,6 +11,7 @@
             (javascript-mode . js-ts-mode)
             (typescript-mode . typescript-ts-mode)
             (java-mode . java-ts-mode)
+            (haskell-mode . haskell-ts-mode)
             (css-mode . css-ts-mode)
             (sh-mode . bash-ts-mode)
             (scala-mode . scala-ts-mode)
@@ -20,7 +21,9 @@
   :init
   (setq scala-ts-indent-offset 2))
 
-(use-package haskell-mode)
+(use-package haskell-ts-mode
+  :mode (("\\.hs\\'" . haskell-ts-mode)
+         ("\\.cabal\\'" . haskell-ts-mode)))
 
 (use-package nix-ts-mode
   :mode "\\.nix\\'")
@@ -33,13 +36,19 @@
 (use-package python-ts-mode
   :mode ("\\.py\\'" . python-ts-mode))
 
+;; Package that helps with eglot performance
 (use-package eglot-booster
   :after eglot
   :config	(eglot-booster-mode))
 
+;; Disable eglot inlay hints by default
+(add-hook 'eglot-managed-mode-hook (lambda () (eglot-inlay-hints-mode -1)))
+
+;; Setup lsp for eglot for modes not currently supported by default by eglot
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
-               '(scala-ts-mode . ("metals"))))
+               ('(scala-ts-mode . ("metals"))
+                '(haskell-ts-mode . ("haskell-language-server-wrapper" "--lsp")))))
 
 (define-prefix-command 'lsp-prefix-map)
 (global-set-key (kbd "C-l") 'lsp-prefix-map)
