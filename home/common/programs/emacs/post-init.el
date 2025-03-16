@@ -72,6 +72,10 @@
 
 (minimal-emacs-load-user-init "evil.el")
 
+(minimal-emacs-load-user-init "magit.el")
+
+(minimal-emacs-load-user-init "org.el")
+
 ;;; Formatter
 (use-package apheleia
   :config
@@ -92,9 +96,6 @@
 (use-package envrc
   :hook (after-init . envrc-global-mode))
 
-;;; Magit
-(use-package magit)
-
 ;;; Projectile
 (use-package projectile)
 (setq projectile-project-search-path '("~/projects/" ("~/src" . 1)))
@@ -105,7 +106,10 @@
   :hook ((scala-mode scala-ts-mode yaml-mode) . indent-bars-mode))
 
 ;;; Dirvish
-(use-package dirvish)
+(use-package dirvish
+  :bind
+  ("C-x f" . dired-create-empty-file))
+
 (dirvish-override-dired-mode)
 
 ;;; Terminal

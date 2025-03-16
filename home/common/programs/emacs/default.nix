@@ -57,7 +57,6 @@ in
         vim-tab-bar
         evil-visualstar
         evil-surround
-        evil-leader
 
         # Native compilation
         # compile-angel
@@ -75,7 +74,6 @@ in
 
         # Good looks
         nerd-icons
-        cyberpunk-theme
         ef-themes
         indent-bars
         doom-modeline
@@ -85,6 +83,8 @@ in
 
         # Git
         magit
+        git-gutter-fringe
+        git-gutter
 
         # Project management
         projectile
@@ -105,6 +105,7 @@ in
         # Other
         dirvish
         eat
+        org-roam
       ];
 
     extraConfig = builtins.readFile ./init.el;
