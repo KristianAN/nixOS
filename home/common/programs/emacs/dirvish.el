@@ -7,6 +7,7 @@
    '(("h" "~/"                          "Home")
      ("d" "~/Downloads/"                "Downloads")
      ("m" "/mnt/"                       "Drives")
+     ("p" "~/src/"                      "Projects")
      ("t" "~/.local/share/Trash/files/" "TrashCan")))
 
   :config
@@ -24,22 +25,28 @@
   :bind ; Bind `dirvish-fd|dirvish-side|dirvish-dwim' as you see fit
   (("C-c f" . dirvish)
    :map dirvish-mode-map          ; Dirvish inherits `dired-mode-map'
-   ("?"   . dirvish-dispatch)     ; contains most of sub-menus in dirvish extensions
-   ("a"   . dirvish-quick-access)
-   ("f"   . dirvish-file-info-menu)
-   ("y"   . dirvish-yank-menu)
-   ("N"   . dirvish-narrow)
-   ("^"   . dirvish-history-last)
-   ("h"   . dired-up-directory)
-   ("H"   . dirvish-history-jump) ; remapped `describe-mode'
-   ("s"   . dirvish-quicksort)    ; remapped `dired-sort-toggle-or-edit'
-   ("v"   . dirvish-vc-menu)      ; remapped `dired-view-file'
-   ("TAB" . dirvish-subtree-toggle)
-   ("M-f" . dirvish-history-go-forward)
-   ("M-b" . dirvish-history-go-backward)
+   ;; ("M-?"   . dirvish-dispatch)     ; contains most of sub-menus in dirvish extensions
+   ("M-a"   . dirvish-quick-access)
+   ("M-f"   . dirvish-file-info-menu)
+   ("M-y"   . dirvish-yank-menu)
+   ;; ("N"   . dirvish-narrow)
+   ;; ("^"   . dirvish-history-last)
+   ("M-h" . dired-up-directory)
+   ("M-n" . dired-create-empty-file)
+   ;; ("H"   . dirvish-history-jump) ; remapped `describe-mode'
+   ;; ("s"   . dirvish-quicksort)    ; remapped `dired-sort-toggle-or-edit'
+   ("M-v"   . dirvish-vc-menu)      ; remapped `dired-view-file'
+   ("M-o" . dirvish-subtree-toggle)
+   ;; ("M-f" . dirvish-history-go-forward)
+   ;; ("M-b" . dirvish-history-go-backward)
    ("M-l" . dirvish-ls-switches-menu)
    ("M-m" . dirvish-mark-menu)
    ("M-t" . dirvish-layout-toggle)
    ("M-s" . dirvish-setup-menu)
    ("M-e" . dirvish-emerge-menu)
+   ("M-q" . dirvish-quit)
    ("M-j" . dirvish-fd-jump)))
+
+(add-hook 'dirvish-setup-hook (lambda ()
+                                (visual-line-mode -1)
+                                (setq-local truncate-lines t)))

@@ -90,6 +90,9 @@
 ;;; LSP
 (minimal-emacs-load-user-init "lsp.el")
 
+;;; Dirvish
+(minimal-emacs-load-user-init "dirvish.el")
+
 ;;; Modeline
 (minimal-emacs-load-user-init "modeline.el")
 
