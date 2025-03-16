@@ -47,8 +47,9 @@
 ;; Setup lsp for eglot for modes not currently supported by default by eglot
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
-               ('(scala-ts-mode . ("metals"))
-                '(haskell-ts-mode . ("haskell-language-server-wrapper" "--lsp")))))
+               '(scala-ts-mode . ("metals")))
+  (add-to-list 'eglot-server-programs
+                '(haskell-ts-mode . ("haskell-language-server-wrapper" "--lsp"))))
 
 (define-prefix-command 'lsp-prefix-map)
 (global-set-key (kbd "C-l") 'lsp-prefix-map)
@@ -63,7 +64,7 @@
                    ("t" . eglot-find-typeDefinition)
                    ("e" . flymake-goto-next-error)
                    ("o" . eglot-organize-imports)
-                   ("h" . eldoc-box-eglot-help-at-point)))
+                   ("h" . eldoc-box-help-at-point)))
 
   (define-key lsp-prefix-map (kbd (car binding)) (cdr binding)))
 

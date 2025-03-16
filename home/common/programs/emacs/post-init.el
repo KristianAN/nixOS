@@ -102,7 +102,7 @@
 
 ;;; Indentation
 (use-package indent-bars
-  :hook ((scala-mode scala-ts-mode yaml-mode) . indent-bars-mode))
+  :hook ((haskell-ts-mode scala-mode scala-ts-mode yaml-mode) . indent-bars-mode))
 
 ;;; Dirvish
 (use-package dirvish
