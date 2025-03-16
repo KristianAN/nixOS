@@ -13,6 +13,7 @@
             (java-mode . java-ts-mode)
             (css-mode . css-ts-mode)
             (sh-mode . bash-ts-mode)
+            (haskell-mode . haskell-ts-mode)
             (scala-mode . scala-ts-mode)
             (shell-script-mode . bash-ts-mode))))
 
@@ -40,6 +41,22 @@
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
                '(scala-ts-mode . ("metals"))))
+
+(define-prefix-command 'lsp-prefix-map)
+(global-set-key (kbd "C-l") 'lsp-prefix-map)
+
+(dolist (binding '(("l" . eglot)
+                   ("a" . eglot-code-actions)
+                   ("f" . eglot-format-buffer)
+                   ("r" . eglot-rename)
+                   ("H" . eglot-inlay-hints-mode)
+                   ("d" . eglot-find-declaration)
+                   ("i" . eglot-find-implementation)
+                   ("t" . eglot-find-typeDefinition)
+                   ("o" . eglot-organize-imports)
+                   ("h" . eldoc-box-eglot-help-at-point)))
+
+  (define-key lsp-prefix-map (kbd (car binding)) (cdr binding)))
 
 (use-package eldoc-box)
 

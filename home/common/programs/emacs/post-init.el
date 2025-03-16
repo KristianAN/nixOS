@@ -58,7 +58,7 @@
             (with-selected-frame frame
               ;; All customizations here
               (load-theme 'ef-symbiosis t)
-              (set-frame-font "Iosevka Nerd Font 12" nil t)
+              (set-frame-font "ZedMono Nerd Font 13" nil t)
               )))
 
 (use-package markdown-mode
@@ -113,7 +113,9 @@
 (dirvish-override-dired-mode)
 
 ;;; Terminal
-(use-package eat)
+(use-package eat
+  :bind
+  ("C-x p e" . eat-project))
 (add-hook 'eshell-load-hook #'eat-eshell-mode)
 (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)
 

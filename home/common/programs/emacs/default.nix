@@ -113,6 +113,7 @@ in
 
   home.packages = [
     pkgs.emacs-lsp-booster
+    pkgs.jdt-language-server
     metals
     pkgs.scalafmt
     pkgs.astyle

@@ -126,21 +126,17 @@
          ("M-g i" . consult-imenu)
          ("M-g I" . consult-imenu-multi)
          ;; M-s bindings in `search-map'
-         ("M-s d" . consult-find)
-         ("M-s c" . consult-locate)
-         ("M-s g" . consult-ripgrep)
-         ("M-s G" . consult-git-grep)
-         ("M-s l" . consult-line)
-         ("M-s L" . consult-line-multi)
-         ("M-s k" . consult-keep-lines)
-         ("M-s u" . consult-focus-lines)
-         ("M-s v" . kristian/consult-ripgrep-from-visual-selection)
+         ("C-c d" . consult-find)
+         ("C-c c" . consult-locate)
+         ("C-c g" . consult-ripgrep)
+         ("C-c G" . consult-git-grep)
+         ("C-c l" . consult-line)
+         ("C-c L" . consult-line-multi)
+         ("C-c u" . consult-focus-lines)
+         ("C-c v" . kristian/consult-ripgrep-from-visual-selection)
          ;; Isearch integration
-         ("M-s e" . consult-isearch-history)
          :map isearch-mode-map
-         ("M-e" . consult-isearch-history)
-         ("M-s e" . consult-isearch-history)
-         ("M-s L" . consult-line-multi)
+         ("C-c L" . consult-line-multi)
          )
 
   ;; Enable automatic preview at point in the *Completions* buffer.
