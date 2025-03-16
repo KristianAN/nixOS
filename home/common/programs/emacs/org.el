@@ -6,7 +6,6 @@
 
 (define-key org-prefix-map (kbd "c") 'org-roam-capture)
 
-(make-directory "~/org-roam")
 (setq org-roam-directory (file-truename "~/org-roam"))
 
 (org-roam-db-autosync-mode)

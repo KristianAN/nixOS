@@ -86,9 +86,6 @@ in
         git-gutter-fringe
         git-gutter
 
-        # Project management
-        projectile
-
         # Programming
         treesit-grammars.with-all-grammars
         scala-ts-mode

@@ -48,8 +48,6 @@
 ;;; Line numbers
 (setq display-line-numbers-type 'relative) 
 (global-display-line-numbers-mode)
-;;; Font
-                                        ;(set-frame-font "Iosevka Nerd Font" nil t)
 
 (use-package nerd-icons)
 
@@ -57,9 +55,12 @@
           (lambda (frame)
             (with-selected-frame frame
               ;; All customizations here
-              (load-theme 'ef-symbiosis t)
-              (set-frame-font "ZedMono Nerd Font 13" nil t)
+              (load-theme 'ef-dream t)
+              (set-frame-font "Aporetic Sans Mono 12" nil t)
               )))
+
+;; Set global visual line mode for line-wrapping
+(global-visual-line-mode t)
 
 (use-package markdown-mode
   :ensure t
@@ -95,11 +96,6 @@
 ;;; Direnv integration
 (use-package envrc
   :hook (after-init . envrc-global-mode))
-
-;;; Projectile
-(use-package projectile)
-(setq projectile-project-search-path '("~/projects/" ("~/src" . 1)))
-(setq projectile-auto-discover 1)
 
 ;;; Indentation
 (use-package indent-bars

@@ -13,7 +13,6 @@
             (java-mode . java-ts-mode)
             (css-mode . css-ts-mode)
             (sh-mode . bash-ts-mode)
-            (haskell-mode . haskell-ts-mode)
             (scala-mode . scala-ts-mode)
             (shell-script-mode . bash-ts-mode))))
 
@@ -53,6 +52,7 @@
                    ("d" . eglot-find-declaration)
                    ("i" . eglot-find-implementation)
                    ("t" . eglot-find-typeDefinition)
+                   ("e" . flymake-goto-next-error)
                    ("o" . eglot-organize-imports)
                    ("h" . eldoc-box-eglot-help-at-point)))
 

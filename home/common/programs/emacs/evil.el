@@ -9,6 +9,7 @@
   (setq evil-undo-system 'undo-fu)
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
+  (evil-define-key '(normal insert visual motion) 'global (kbd "M-s") nil) 
   :custom
   (evil-want-Y-yank-to-eol t)
   :config
