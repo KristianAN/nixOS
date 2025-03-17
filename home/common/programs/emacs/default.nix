@@ -1,13 +1,13 @@
 { pkgs, ... }:
 let
+  metalsVersion = "1.5.1";
   metals = pkgs.metals.overrideAttrs (
     final: prev: {
-      version = "1.5.1";
       deps = pkgs.stdenv.mkDerivation {
-        name = "${prev.pname}-deps-1.4.1";
+        name = "${prev.pname}-deps-${metalsVersion}";
         buildCommand = ''
           export COURSIER_CACHE=$(pwd)
-          ${pkgs.pkgs.coursier}/bin/cs fetch org.scalameta:metals_2.13:1.4.1 \
+          ${pkgs.pkgs.coursier}/bin/cs fetch org.scalameta:metals_2.13:${metalsVersion} \
             -r bintray:scalacenter/releases \
             -r sonatype:snapshots > deps
           mkdir -p $out/share/java
@@ -15,7 +15,7 @@ let
         '';
         outputHashMode = "recursive";
         outputHashAlgo = "sha256";
-        outputHash = "sha256-86AqsfNQEuZrjrPVBFEwNjx2mCV689SwOAIkwxPSMKQ=";
+        outputHash = "sha256-2FA2B/WzNGU4B785pn5zZ9Xj64huzbSbr2Or+CxUMlI=";
       };
       buildInputs = [ final.deps ];
     }
