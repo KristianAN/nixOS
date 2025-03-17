@@ -49,7 +49,7 @@
   (add-to-list 'eglot-server-programs
                '(scala-ts-mode . ("metals")))
   (add-to-list 'eglot-server-programs
-                '(haskell-ts-mode . ("haskell-language-server-wrapper" "--lsp"))))
+               '(haskell-ts-mode . ("haskell-language-server-wrapper" "--lsp"))))
 
 (define-prefix-command 'lsp-prefix-map)
 (global-set-key (kbd "C-l") 'lsp-prefix-map)

@@ -2,7 +2,7 @@
 let
   metals = pkgs.metals.overrideAttrs (
     final: prev: {
-      version = "1.4.1";
+      version = "1.5.1";
       deps = pkgs.stdenv.mkDerivation {
         name = "${prev.pname}-deps-1.4.1";
         buildCommand = ''
@@ -15,7 +15,7 @@ let
         '';
         outputHashMode = "recursive";
         outputHashAlgo = "sha256";
-        outputHash = "sha256-CVAPjeTYuv0w57EK/IldJcGz8mTQnyCGAjaUf6La2rU";
+        outputHash = "sha256-86AqsfNQEuZrjrPVBFEwNjx2mCV689SwOAIkwxPSMKQ=";
       };
       buildInputs = [ final.deps ];
     }
@@ -103,6 +103,7 @@ in
         dirvish
         eat
         org-roam
+        org-modern
       ];
 
     extraConfig = builtins.readFile ./init.el;
