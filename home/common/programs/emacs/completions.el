@@ -7,6 +7,13 @@
   (yas-global-mode 1))
 
 (use-package corfu
+  :init
+  (global-corfu-mode 1)
+  (setq global-corfu-minibuffer
+        (lambda ()
+          (not (or (bound-and-true-p mct--active)
+                   (bound-and-true-p vertico--input)
+                   (eq (current-local-map) read-passwd-map)))))
   :bind (:map corfu-map
               ("C-n" . corfu-next)
               ("C-p" . corfu-previous)
@@ -22,7 +29,6 @@
   (corfu-quit-no-match t)
 
   :config
-  (global-corfu-mode 1)
 
   ;; Add Evil-specific binding for C-y in Corfu
   (with-eval-after-load 'evil
@@ -33,11 +39,6 @@
                       (corfu-insert)
                     (evil-paste-before 1)))))
 
-  (setq global-corfu-minibuffer
-        (lambda ()
-          (not (or (bound-and-true-p mct--active)
-                   (bound-and-true-p vertico--input)
-                   (eq (current-local-map) read-passwd-map)))))
 
   )
 
