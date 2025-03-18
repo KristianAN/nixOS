@@ -131,8 +131,14 @@ jobs:
       - name: Push to cachix in smaller batches
         run: |
           STORE_PATH=$(readlink -f result)
-          for path in $(nix path-info --json $STORE_PATH | jq -r '.[].path'); do
-            cachix push kristian $path || true
+          echo "Resolved 'result' to store path: $STORE_PATH"
+          
+          PATHS=$(nix path-info --json $STORE_PATH | jq -r '.[].path')
+          COUNT=$(echo "$PATHS" | wc -l)
+          echo "Found $COUNT store paths to process"
+          
+          for path in $PATHS; do
+            cachix push kristian $path || echo "Warning: Failed to push $path"
           done
 
   check_flake:
