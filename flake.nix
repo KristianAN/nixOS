@@ -114,6 +114,7 @@
             inherit inputs outputs;
           };
           modules = [
+            inputs.home-manager.nixosModules.home-manager
             ./hosts/chase
             nixosModules
             {
@@ -121,10 +122,22 @@
               programs.citrix.enable = false;
               programs.discord.enable = true;
               programs.intellij.enable = false;
+              home-manager = {
+                useUserPackages = false; # TODO on reinstall
+                extraSpecialArgs = { inherit inputs outputs; };
+                backupFileExtension = ".hm-backup";
+                users.kristian = { ... }: {
+                  nixpkgs.config.allowUnfree = true;
+                  imports = [
+                    ./home/chase
+                  ];
+                };
+              };
             }
           ];
         };
       };
+
       homeConfigurations = {
         "kristian@sky" = lib.homeManagerConfiguration {
           pkgs = pkgsFor.x86_64-linux;
@@ -153,16 +166,6 @@
           };
           modules = [
             ./home/everest
-            homeManagerModules
-          ];
-        };
-        "kristian@chase" = lib.homeManagerConfiguration {
-          pkgs = pkgsFor.x86_64-linux;
-          extraSpecialArgs = {
-            inherit inputs outputs;
-          };
-          modules = [
-            ./home/chase
             homeManagerModules
           ];
         };

@@ -8,7 +8,6 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nix.package = pkgs.nixVersions.nix_2_25;
 
   home = {
     username = "kristian";
@@ -39,6 +38,7 @@
     pkgs.nyxt
     pkgs.librewolf
     pkgs.ladybird
+    pkgs.cmatrix
   ];
 
   programs.home-manager.enable = true;
