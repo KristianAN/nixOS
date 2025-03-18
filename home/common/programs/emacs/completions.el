@@ -59,7 +59,6 @@
   :commands (marginalia-mode marginalia-cycle)
   :hook (after-init . marginalia-mode))
 
-(global-unset-key (kbd "C-e"))
 (use-package embark
   ;; Embark is an Emacs package that acts like a context menu, allowing
   ;; users to perform context-sensitive actions on selected items
@@ -72,12 +71,6 @@
              embark-collect
              embark-bindings
              embark-prefix-help-command)
-  :bind
-  (("C-." . embark-act)         ;; pick some comfortable binding
-   ("C-;" . embark-dwim) ;; good alternative: M-.
-   ("C-e e" . embark-export)
-   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
-
   :init
   (setq prefix-help-command #'embark-prefix-help-command)
 
@@ -89,9 +82,11 @@
                  (window-parameters (mode-line-format . none)))))
 
 (use-package embark-consult
-  :ensure t
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
+  :after embark consult
+  :bind (:map minibuffer-mode-map
+              ("C-e Ce" . embark-export))
+  :hook (embark-collect-mode . consult-preview-at-point-mode))
+
 (use-package consult
   :ensure t
   :bind (;; C-c bindings in `mode-specific-map'
