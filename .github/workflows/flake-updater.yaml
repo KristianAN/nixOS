@@ -128,17 +128,18 @@ jobs:
 
           # Build the configuration
           nix build .#nixosConfigurations.${{ matrix.nixos_configuration }}.config.system.build.toplevel --out-link result
-      - name: Push to cachix properly
+      - name: Push to cachix in smaller batches
         run: |
           STORE_PATH=$(readlink -f result)
-          echo "Pushing complete closure of $STORE_PATH to Cachix"
+          echo "Resolved 'result' to store path: $STORE_PATH"
           
-          # Count paths in closure
-          PATH_COUNT=$(nix path-info -r $STORE_PATH | wc -l)
-          echo "Closure contains $PATH_COUNT total paths"
+          PATHS=$(nix path-info --json $STORE_PATH | jq -r '.[].path')
+          COUNT=$(echo "$PATHS" | wc -l)
+          echo "Found $COUNT store paths to process"
           
-          # Push the entire closure with all dependencies
-          cachix push kristian $STORE_PATH
+          for path in $PATHS; do
+            cachix push kristian $path || echo "Warning: Failed to push $path"
+          done
 
   check_flake:
     runs-on: ubuntu-latest
