@@ -5,7 +5,6 @@
   ...
 }: {
   hardware.graphics.enable = true;
-  hardware.opengl.driSupport = true;
 
   hardware.graphics.extraPackages = with pkgs; [
     vaapiIntel
