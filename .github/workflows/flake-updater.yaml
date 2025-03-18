@@ -130,8 +130,8 @@ jobs:
           nix build .#nixosConfigurations.${{ matrix.nixos_configuration }}.config.system.build.toplevel --out-link result
       - name: Push to cachix in smaller batches
         run: |
-          # Use realpath to resolve the symlink first
-          for path in $(nix path-info --json $(realpath result) | jq -r '.[].path'); do
+          STORE_PATH=$(readlink -f result)
+          for path in $(nix path-info --json $STORE_PATH | jq -r '.[].path'); do
             cachix push kristian $path || true
           done
 
