@@ -180,15 +180,15 @@ jobs:
           name: flake_lock
       - name: Set up git
         run: |
-          git config user.email "gako358@outlook.com"
-          git config user.name "Gako358"
+          git config user.email "kristian@krined.no"
+          git config user.name "KristianAN"
       - name: Create and merge PR
         run: |
           git switch -c updates-${{ github.run_id }}
           git commit -am "flake.lock: Update"
           git push -u origin updates-${{ github.run_id }}
           PR=$(gh pr create \
-            --assignee Gako358 \
+            --assignee KristianAN \
             --base main \
             --body "Automatic flake update on $(date -I)" \
             --fill \
