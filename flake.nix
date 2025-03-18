@@ -69,13 +69,23 @@
             inherit inputs outputs;
           };
           modules = [
+            inputs.home-manager.nixosModules.home-manager
             ./hosts/sky
             nixosModules
             {
-              programs.slack.enable = false;
-              programs.citrix.enable = false;
-              programs.discord.enable = false;
-              programs.intellij.enable = false;
+              programs.slack.enable = true;
+              programs.discord.enable = true;
+              home-manager = {
+                useUserPackages = false; # TODO on reinstall
+                extraSpecialArgs = { inherit inputs outputs; };
+                backupFileExtension = ".hm-backup";
+                users.kristian = { ... }: {
+                  nixpkgs.config.allowUnfree = true;
+                  imports = [
+                    ./home/sky
+                  ];
+                };
+              };
             }
           ];
         };
@@ -84,13 +94,23 @@
             inherit inputs outputs;
           };
           modules = [
+            inputs.home-manager.nixosModules.home-manager
             ./hosts/rubble
             nixosModules
             {
               programs.slack.enable = true;
-              programs.citrix.enable = false;
               programs.discord.enable = true;
-              programs.intellij.enable = true;
+              home-manager = {
+                useUserPackages = false; # TODO on reinstall
+                extraSpecialArgs = { inherit inputs outputs; };
+                backupFileExtension = ".hm-backup";
+                users.kristian = { ... }: {
+                  nixpkgs.config.allowUnfree = true;
+                  imports = [
+                    ./home/rubble
+                  ];
+                };
+              };
             }
           ];
         };
@@ -99,13 +119,23 @@
             inherit inputs outputs;
           };
           modules = [
+            inputs.home-manager.nixosModules.home-manager
             ./hosts/everest
             nixosModules
             {
               programs.slack.enable = true;
-              programs.citrix.enable = false;
               programs.discord.enable = true;
-              programs.intellij.enable = false;
+              home-manager = {
+                useUserPackages = false; # TODO on reinstall
+                extraSpecialArgs = { inherit inputs outputs; };
+                backupFileExtension = ".hm-backup";
+                users.kristian = { ... }: {
+                  nixpkgs.config.allowUnfree = true;
+                  imports = [
+                    ./home/everest
+                  ];
+                };
+              };
             }
           ];
         };
@@ -119,9 +149,7 @@
             nixosModules
             {
               programs.slack.enable = true;
-              programs.citrix.enable = false;
               programs.discord.enable = true;
-              programs.intellij.enable = false;
               home-manager = {
                 useUserPackages = false; # TODO on reinstall
                 extraSpecialArgs = { inherit inputs outputs; };
@@ -134,39 +162,6 @@
                 };
               };
             }
-          ];
-        };
-      };
-
-      homeConfigurations = {
-        "kristian@sky" = lib.homeManagerConfiguration {
-          pkgs = pkgsFor.x86_64-linux;
-          extraSpecialArgs = {
-            inherit inputs outputs;
-          };
-          modules = [
-            ./home/sky
-            homeManagerModules
-          ];
-        };
-        "kristian@rubble" = lib.homeManagerConfiguration {
-          pkgs = pkgsFor.x86_64-linux;
-          extraSpecialArgs = {
-            inherit inputs outputs;
-          };
-          modules = [
-            ./home/rubble
-            homeManagerModules
-          ];
-        };
-        "kristian@everest" = lib.homeManagerConfiguration {
-          pkgs = pkgsFor.x86_64-linux;
-          extraSpecialArgs = {
-            inherit inputs outputs;
-          };
-          modules = [
-            ./home/everest
-            homeManagerModules
           ];
         };
       };

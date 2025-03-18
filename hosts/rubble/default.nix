@@ -21,6 +21,7 @@
     };
   };
 
+  xdg.portal.config.common.default = "*";
   xdg = {
     portal = {
       enable = true;

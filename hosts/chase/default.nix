@@ -12,11 +12,12 @@
   ];
 
   hardware = {
-    opengl = {
+    graphics = {
       enable = true;
     };
   };
 
+  xdg.portal.config.common.default = "*";
   xdg = {
     portal = {
       enable = true;

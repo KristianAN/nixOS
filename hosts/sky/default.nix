@@ -26,6 +26,9 @@
   environment.systemPackages = with pkgs; [
     shotwell
   ];
+
+  xdg.portal.config.common.default = "*";
+
   xdg = {
     portal = {
       enable = true;
