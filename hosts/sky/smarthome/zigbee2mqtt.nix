@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   # read from json
   config = builtins.fromJSON (builtins.readFile /home/kristian/.configuration/mqtt.json);
@@ -6,7 +11,10 @@ in
 {
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 8081 1883 ];
+    allowedTCPPorts = [
+      8081
+      1883
+    ];
   };
 
   services.mosquitto = {
@@ -56,4 +64,3 @@ in
     };
   };
 }
-
