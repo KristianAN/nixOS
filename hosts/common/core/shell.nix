@@ -21,7 +21,16 @@ let
       fish_vi_key_bindings
     ''
     + fzfConfig
-    + themeConfig;
+    + themeConfig
+    + ''
+      if test "$TERM" = "dumb"
+          set -e fish_key_bindings
+          set -g fish_prompt '> '
+          set -g HISTFILE ~/.tramp-histfile
+      else
+          starship init fish | source
+      end
+      '';
 
 in
 {
