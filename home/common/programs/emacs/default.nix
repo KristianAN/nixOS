@@ -68,7 +68,8 @@ in
         embark
         embark-consult
         consult
-        company
+        corfu
+        cape
         yasnippet
         wgrep
 

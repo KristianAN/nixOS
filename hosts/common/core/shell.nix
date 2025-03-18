@@ -21,16 +21,7 @@ let
       fish_vi_key_bindings
     ''
     + fzfConfig
-    + themeConfig
-    + ''
-      if test "$TERM" = "dumb"
-          set -e fish_key_bindings
-          set -g fish_prompt '> '
-          set -g HISTFILE ~/.tramp-histfile
-      else
-          starship init fish | source
-      end
-      '';
+    + themeConfig;
 
 in
 {
@@ -44,7 +35,14 @@ in
     interactiveShellInit = ''
       eval (direnv hook fish)
       any-nix-shell fish --info-right | source
-    '';
+      if test "$TERM" = "dumb"
+          set -e fish_key_bindings
+          set -g fish_prompt '> '
+          set -g HISTFILE ~/.tramp-histfile
+      else
+          starship init fish | source
+      end
+      '';
     shellAliases = {
     };
     shellInit = fishConfig;

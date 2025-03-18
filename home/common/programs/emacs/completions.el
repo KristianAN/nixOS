@@ -6,28 +6,51 @@
   :init
   (yas-global-mode 1))
 
-(use-package company
-  :defer t 
-  :ensure t
-  :custom
-  (company-tooltip-align-annotations t)      ;; Align annotations with completions.
-  (company-minimum-prefix-length 1)          ;; Trigger completion after typing 1 character
-  (company-idle-delay 0.2)                   ;; Delay before showing completion (adjust as needed)
-  (company-tooltip-maximum-width 50) 
-  :config
+(use-package corfu
+  :bind (:map corfu-map
+              ("C-n" . corfu-next)
+              ("C-p" . corfu-previous)
+              ("C-h" . corfu-info-documentation)
+              ;; Remove the C-y binding from here since Evil intercepts it
+              )
 
-  ;; While using C-p C-n to select a completion candidate C-y selects completion
-  ;; C-h quickly shows help docs for the current candidate
-  (define-key company-active-map (kbd "C-h")
-			  (lambda ()
-				(interactive)
-				(company-show-doc-buffer)))
-  (define-key company-active-map (kbd "C-y") 'company-complete-selection)
-  (setq lsp-completion-provider :capf)
-  :hook
-  (after-init . global-company-mode)
-  ((scala-ts-mode scala-mode) . company-mode)
-  (company-mode . yas-minor-mode)) ;; Enable Company Mode globally after initialization.
+  :custom
+  (corfu-cycle t)
+  (corfu-auto t)
+  (corfu-preview-current nil)
+  (corfu-quit-at-boundary t)
+  (corfu-quit-no-match t)
+
+  :config
+  (global-corfu-mode 1)
+
+  ;; Add Evil-specific binding for C-y in Corfu
+  (with-eval-after-load 'evil
+    (define-key evil-insert-state-map (kbd "C-y") 
+                (lambda () 
+                  (interactive)
+                  (if (and (boundp 'corfu-mode) corfu-mode)
+                      (corfu-insert)
+                    (evil-paste-before 1)))))
+
+  (setq global-corfu-minibuffer
+        (lambda ()
+          (not (or (bound-and-true-p mct--active)
+                   (bound-and-true-p vertico--input)
+                   (eq (current-local-map) read-passwd-map)))))
+
+  )
+
+(use-package cape
+  ;; Bind prefix keymap providing all Cape commands under a mnemonic key.
+  ;; Press C-c p ? to for help.
+  :bind ("C-c p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
+  :init
+  (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  (add-hook 'completion-at-point-functions #'cape-file)
+  (add-hook 'completion-at-point-functions #'cape-elisp-block)
+  ;; (add-hook 'completion-at-point-functions #'cape-history)
+  )
 
 ;;; Emacs Completions
 
