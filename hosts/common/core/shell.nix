@@ -15,13 +15,24 @@ let
     set -g theme_color_scheme solarized
   '';
 
+  useStarshipOrDumb = ''
+    if test "$TERM" = "dumb"
+        set -e fish_key_bindings
+        set -g fish_prompt '> '
+        set -g HISTFILE ~/.tramp-histfile
+    else
+        starship init fish | source
+    end
+  '';
+
   fishConfig =
     ''
       set fish_greeting
       fish_vi_key_bindings
     ''
     + fzfConfig
-    + themeConfig;
+    + themeConfig
+    + useStarshipOrDumb;
 
 in
 {
@@ -34,15 +45,8 @@ in
     };
     interactiveShellInit = ''
       eval (direnv hook fish)
-      any-nix-shell fish --info-right | source
-      if test "$TERM" = "dumb"
-          set -e fish_key_bindings
-          set -g fish_prompt '> '
-          set -g HISTFILE ~/.tramp-histfile
-      else
-          starship init fish | source
-      end
-      '';
+      any-nix-shell fish --info-right | source'';
+
     shellAliases = {
     };
     shellInit = fishConfig;
