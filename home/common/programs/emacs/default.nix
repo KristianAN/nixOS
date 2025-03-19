@@ -78,6 +78,8 @@ in
         ef-themes
         indent-bars
         doom-modeline
+        nerd-icons-completion
+        nerd-icons-corfu
 
         # Direnv
         envrc
@@ -95,6 +97,8 @@ in
         eglot-booster
         eldoc-box
         web-mode
+        fsharp-mode
+        eglot-fsharp
 
         # Editing
         markdown-mode
@@ -121,7 +125,7 @@ in
     pkgs.poppler
     pkgs.ffmpegthumbnailer
     pkgs.mediainfo
-
+    pkgs.fsautocomplete
   ];
 
   home.file = {

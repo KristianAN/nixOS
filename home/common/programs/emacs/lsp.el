@@ -36,6 +36,36 @@
 (use-package python-ts-mode
   :mode ("\\.py\\'" . python-ts-mode))
 
+(use-package fsharp-mode
+  :defer t
+  :ensure t)
+
+(use-package eglot-fsharp
+  :ensure t
+  :after fsharp-mode)
+
+(defvar my-nix-fsautocomplete-path
+  (with-temp-buffer
+    (when (= 0 (call-process "which" nil t nil "fsautocomplete"))
+      (goto-char (point-min))
+      (buffer-substring-no-properties (point-min) (1- (point-max)))))
+  "Path to fsautocomplete executable provided by Nix.")
+
+(when my-nix-fsautocomplete-path
+  (setq eglot-fsharp-server-install-dir nil)
+  
+  (defadvice eglot-fsharp--path-to-server (around use-nix-fsautocomplete activate)
+    "Use fsautocomplete from Nix."
+    (setq ad-return-value my-nix-fsautocomplete-path))
+  
+  (defadvice eglot-fsharp--maybe-install (around skip-installation activate)
+    "Skip fsautocomplete installation since we're using Nix version."
+    nil)
+  
+  (defadvice eglot-fsharp-current-version-p (around always-current-for-nix activate)
+    "Always consider the Nix-provided version as current."
+    (setq ad-return-value t)))
+
 ;; Package that helps with eglot performance
 (use-package eglot-booster
   :after eglot
@@ -48,6 +78,8 @@
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
                '(scala-ts-mode . ("metals")))
+  (add-to-list 'eglot-server-programs
+               '(fsharp-mode . ("fsautocomplete" "--adaptive-lsp-server")))
   (add-to-list 'eglot-server-programs
                '(haskell-ts-mode . ("haskell-language-server-wrapper" "--lsp"))))
 
@@ -82,3 +114,4 @@
    ("\\.erb\\'" . web-mode)
    ("\\.mustache\\'" . web-mode)
    ("\\.djhtml\\'" . web-mode)))
+
