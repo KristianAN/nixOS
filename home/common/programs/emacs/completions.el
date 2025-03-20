@@ -29,7 +29,6 @@
   (corfu-quit-no-match t)
 
   :config
-
   ;; Add Evil-specific binding for C-y in Corfu
   (with-eval-after-load 'evil
     (define-key evil-insert-state-map (kbd "C-y") 
@@ -42,12 +41,18 @@
 
   )
 
+(use-package dabbrev
+  :autoload (dabbrev-capf)
+  :custom
+  ;; Make dabbrev distinguish between different case patterns
+  (dabbrev-case-fold-search t)  ;; Makes search case-insensitive
+  (dabbrev-case-distinction nil) ;; Treat differently-cased versions as different
+  (dabbrev-case-replace nil)    ;; Don't change case of the replacement
+  )
+
 (use-package cape
-  ;; Bind prefix keymap providing all Cape commands under a mnemonic key.
-  ;; Press C-c p ? to for help.
-  :bind ("C-c p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
+  :ensure t
   :init
-  (add-hook 'completion-at-point-functions #'cape-dabbrev)
   (add-hook 'completion-at-point-functions #'cape-file)
   (add-hook 'completion-at-point-functions #'cape-elisp-block)
   ;; (add-hook 'completion-at-point-functions #'cape-history)
