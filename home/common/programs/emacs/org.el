@@ -1,3 +1,5 @@
+;;; org.el --- org-mode -*- no-byte-compile: t; lexical-binding: t; -*-
+
 (use-package org-roam)
 
 (define-prefix-command 'org-prefix-map)

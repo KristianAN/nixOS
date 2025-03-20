@@ -77,6 +77,10 @@
 
 (minimal-emacs-load-user-init "org.el")
 
+(minimal-emacs-load-user-init "org.el")
+
+(minimal-emacs-load-user-init "tabspaces.el")
+
 ;;; Formatter
 (use-package apheleia
   :config
@@ -102,7 +106,7 @@
 
 ;;; Indentation
 (use-package indent-bars
-  :hook ((haskell-ts-mode scala-mode scala-ts-mode yaml-mode) . indent-bars-mode))
+  :hook ((haskell-ts-mode scala-mode scala-ts-mode yaml-mode python-ts-mode) . indent-bars-mode))
 
 ;;; Dirvish
 (use-package dirvish

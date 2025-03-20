@@ -1,3 +1,4 @@
+;;; dirvish.el --- polished dired -*- no-byte-compile: t; lexical-binding: t; -*-
 (use-package dirvish
   :ensure t
   :init

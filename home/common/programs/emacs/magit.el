@@ -1,3 +1,5 @@
+;;; magit.el --- magit -*- no-byte-compile: t; lexical-binding: t; -*-
+
 (use-package magit
   :bind
   (("C-x m" . magit)))

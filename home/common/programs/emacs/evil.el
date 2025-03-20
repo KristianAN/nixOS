@@ -16,12 +16,6 @@
   (evil-select-search-module 'evil-search-module 'evil-search)
   (evil-mode 1))
 
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :config
-  (evil-collection-init))
-
 (use-package undo-fu
   :ensure t
   :commands (undo-fu-only-undo
