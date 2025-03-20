@@ -49,14 +49,9 @@ in
     package = pkgs.emacs30;
     extraPackages =
       epkgs: with epkgs; [
-        # Evil 
-        evil
-        evil-collection
-        undo-fu
-        undo-fu-session
+        # Meow!
         vim-tab-bar
-        evil-visualstar
-        evil-surround
+        meow
 
         # Native compilation
         # compile-angel

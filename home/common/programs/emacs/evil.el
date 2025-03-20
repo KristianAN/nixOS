@@ -1,73 +1,99 @@
-;;; evil.el --- EVIL configuration -*- no-byte-compile: t; lexical-binding: t; -*-
+(defun meow-setup ()
+  (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+  (meow-motion-define-key
+   '("j" . meow-next)
+   '("k" . meow-prev)
+   '("<escape>" . ignore))
+  (meow-leader-define-key
+   ;; Use SPC (0-9) for digit arguments.
+   '("1" . meow-digit-argument)
+   '("2" . meow-digit-argument)
+   '("3" . meow-digit-argument)
+   '("4" . meow-digit-argument)
+   '("5" . meow-digit-argument)
+   '("6" . meow-digit-argument)
+   '("7" . meow-digit-argument)
+   '("8" . meow-digit-argument)
+   '("9" . meow-digit-argument)
+   '("0" . meow-digit-argument)
+   '("/" . meow-keypad-describe-key)
+   '("?" . meow-cheatsheet))
+  (meow-normal-define-key
+   '("0" . meow-expand-0)
+   '("9" . meow-expand-9)
+   '("8" . meow-expand-8)
+   '("7" . meow-expand-7)
+   '("6" . meow-expand-6)
+   '("5" . meow-expand-5)
+   '("4" . meow-expand-4)
+   '("3" . meow-expand-3)
+   '("2" . meow-expand-2)
+   '("1" . meow-expand-1)
+   '("-" . negative-argument)
+   '(";" . meow-reverse)
+   '("," . meow-inner-of-thing)
+   '("." . meow-bounds-of-thing)
+   '("[" . meow-beginning-of-thing)
+   '("]" . meow-end-of-thing)
+   '("a" . meow-append)
+   '("A" . meow-open-below)
+   '("b" . meow-back-word)
+   '("B" . meow-back-symbol)
+   '("c" . meow-change)
+   '("d" . meow-delete)
+   '("D" . meow-backward-delete)
+   '("e" . meow-next-word)
+   '("E" . meow-next-symbol)
+   '("f" . meow-find)
+   '("g" . meow-cancel-selection)
+   '("G" . meow-grab)
+   '("h" . meow-left)
+   '("H" . meow-left-expand)
+   '("i" . meow-insert)
+   '("I" . meow-open-above)
+   '("j" . meow-next)
+   '("J" . meow-next-expand)
+   '("k" . meow-prev)
+   '("K" . meow-prev-expand)
+   '("l" . meow-right)
+   '("L" . meow-right-expand)
+   '("m" . meow-join)
+   '("n" . meow-search)
+   '("o" . meow-block)
+   '("O" . meow-to-block)
+   '("p" . meow-yank)
+   '("q" . meow-quit)
+   '("Q" . meow-goto-line)
+   '("r" . meow-replace)
+   '("R" . meow-swap-grab)
+   '("s" . meow-kill)
+   '("t" . meow-till)
+   '("u" . meow-undo)
+   '("U" . meow-undo-in-selection)
+   '("v" . meow-visit)
+   '("w" . meow-mark-word)
+   '("W" . meow-mark-symbol)
+   '("x" . meow-line)
+   '("X" . meow-goto-line)
+   '("y" . meow-save)
+   '("Y" . meow-sync-grab)
+   '("z" . meow-pop-selection)
+   '("'" . repeat)
+   '("<escape>" . ignore)))
 
-;; evil-want-keybinding must be declared before Evil and Evil Collection
-(setq evil-want-keybinding nil)
 
-(use-package evil
-  :ensure t
-  :init
-  (setq evil-undo-system 'undo-fu)
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  (evil-define-key '(normal insert visual motion) 'global (kbd "M-s") nil) 
+(use-package meow
   :custom
-  (evil-want-Y-yank-to-eol t)
+  ;(meow-use-cursor-position-hack t)
+  (meow-use-clipboard t)
+  (meow-goto-line-function 'consult-goto-line)
   :config
-  (evil-select-search-module 'evil-search-module 'evil-search)
-  (evil-mode 1))
-
-(use-package undo-fu
-  :ensure t
-  :commands (undo-fu-only-undo
-             undo-fu-only-redo
-             undo-fu-only-redo-all
-             undo-fu-disable-checkpoint)
-  :custom
-  ;; 3 times the default values
-  (undo-limit (* 3 160000))
-  (undo-strong-limit (* 3 240000)))
-
-(use-package undo-fu-session
-  :ensure t
-  :config
-  (undo-fu-session-global-mode))
-
-(use-package vim-tab-bar
-  :ensure t
-  :commands vim-tab-bar-mode
-  :hook (after-init . vim-tab-bar-mode))
-
-(use-package evil-visualstar
-  :after evil
-  :ensure t
-  :defer t
-  :commands global-evil-visualstar-mode
-  :hook (after-init . global-evil-visualstar-mode))
-
-(use-package evil-surround
-  :after evil
-  :ensure t
-  :defer t
-  :commands global-evil-surround-mode
-  :custom
-  (evil-surround-pairs-alist
-   '((?\( . ("(" . ")"))
-     (?\[ . ("[" . "]"))
-     (?\{ . ("{" . "}"))
-
-     (?\) . ("(" . ")"))
-     (?\] . ("[" . "]"))
-     (?\} . ("{" . "}"))
-
-     (?< . ("<" . ">"))
-     (?> . ("<" . ">"))))
-  :hook (after-init . global-evil-surround-mode))
-
-(with-eval-after-load "evil"
-  (evil-define-operator my-evil-comment-or-uncomment (beg end)
-    "Toggle comment for the region between BEG and END."
-    (interactive "<r>")
-    (comment-or-uncomment-region beg end))
-  (evil-define-key 'normal 'global (kbd "gc") 'my-evil-comment-or-uncomment))
-
-
+  ;; set colors in theme
+  (setq meow-use-dynamic-face-color nil)
+  ;; Make sure delete char means delete char
+  ;; see https://github.com/meow-edit/meow/issues/112
+  (setq meow--kbd-delete-char "<deletechar>")
+  ;; start helpful in normal
+  ;; (add-to-list 'meow-mode-state-list '(helpful-mode . normal))
+  (meow-global-mode 1)
+  (meow-setup))
