@@ -24,7 +24,7 @@
   (setq dired-listing-switches
         "-l --almost-all --human-readable --group-directories-first --no-group")
   :bind ; Bind `dirvish-fd|dirvish-side|dirvish-dwim' as you see fit
-  (("C-c f" . dirvish)
+  (
    :map dirvish-mode-map          ; Dirvish inherits `dired-mode-map'
    ;; ("M-?"   . dirvish-dispatch)     ; contains most of sub-menus in dirvish extensions
    ("M-a"   . dirvish-quick-access)

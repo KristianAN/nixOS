@@ -30,22 +30,12 @@
 
   :config
 
-  ;; Add Evil-specific binding for C-y in Corfu
-  (with-eval-after-load 'evil
-    (define-key evil-insert-state-map (kbd "C-y") 
-                (lambda () 
-                  (interactive)
-                  (if (and (boundp 'corfu-mode) corfu-mode)
-                      (corfu-insert)
-                    (evil-paste-before 1)))))
-
-
   )
 
 (use-package cape
   ;; Bind prefix keymap providing all Cape commands under a mnemonic key.
   ;; Press C-c p ? to for help.
-  :bind ("C-c p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
+  :bind ("M-p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
   :init
   (add-hook 'completion-at-point-functions #'cape-dabbrev)
   (add-hook 'completion-at-point-functions #'cape-file)
@@ -103,13 +93,17 @@
   (add-to-list 'display-buffer-alist
                '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
                  nil
-                 (window-parameters (mode-line-format . none)))))
+                 (window-parameters (mode-line-format . none))))
+  :bind (:map minibuffer-local-map
+              ("M-o"     . embark-act)
+              ("C-c C-c" . embark-export)
+              ("C-c C-o" . embark-collect))
+  )
 
 (use-package embark-consult
-  :after embark consult
-  :bind (:map minibuffer-mode-map
-              ("C-e Ce" . embark-export))
-  :hook (embark-collect-mode . consult-preview-at-point-mode))
+  :ensure t ; only need to install it, embark loads it after consult if found
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package consult
   :ensure t
