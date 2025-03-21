@@ -84,7 +84,7 @@
 
 (use-package meow
   :custom
-  ;(meow-use-cursor-position-hack t)
+                                        ;(meow-use-cursor-position-hack t)
   (meow-use-clipboard t)
   (meow-goto-line-function 'consult-goto-line)
   :config
@@ -93,6 +93,8 @@
   ;; Make sure delete char means delete char
   ;; see https://github.com/meow-edit/meow/issues/112
   (setq meow--kbd-delete-char "<deletechar>")
+  (add-to-list 'meow-mode-state-list '(eshell-mode . insert))
+  (add-to-list 'meow-mode-state-list '(eat-mode . insert))
   ;; start helpful in normal
   ;; (add-to-list 'meow-mode-state-list '(helpful-mode . normal))
   (meow-global-mode 1)
