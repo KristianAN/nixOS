@@ -104,6 +104,7 @@ in
         eat
         org-roam
         org-modern
+        tabspaces
       ];
 
     extraConfig = builtins.readFile ./init.el;
