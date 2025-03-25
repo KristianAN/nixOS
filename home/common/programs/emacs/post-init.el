@@ -45,20 +45,6 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
-;;; Line numbers
-(setq display-line-numbers-type 'relative) 
-(global-display-line-numbers-mode)
-
-(use-package nerd-icons)
-
-(add-hook 'after-make-frame-functions
-          (lambda (frame)
-            (with-selected-frame frame
-              ;; All customizations here
-              (load-theme 'doom-ayu-dark t)
-              (set-frame-font "Aporetic Sans Mono 12" nil t)
-              )))
-
 ;; Set global visual line mode for line-wrapping
 (global-visual-line-mode t)
 
@@ -74,6 +60,8 @@
 (minimal-emacs-load-user-init "evil.el")
 
 (minimal-emacs-load-user-init "magit.el")
+
+(minimal-emacs-load-user-init "looks.el")
 
 (minimal-emacs-load-user-init "org.el")
 
@@ -116,9 +104,7 @@
 (dirvish-override-dired-mode)
 
 ;;; Terminal
-(use-package eat
-  :hook (eat-exec . (lambda (&rest _) (eat-line-mode)))
-  )
+(use-package eat)
 
 (add-hook 'eshell-load-hook #'eat-eshell-mode)
 (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)

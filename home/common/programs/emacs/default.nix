@@ -69,10 +69,10 @@ in
 
         # Good looks
         nerd-icons
-        ef-themes
-        doom-themes
         indent-bars
-        doom-modeline
+        ef-themes
+        vim-tab-bar
+        mood-line
         nerd-icons-completion
         nerd-icons-corfu
 
@@ -82,6 +82,7 @@ in
         # Git
         magit
         git-gutter-fringe
+        fringe-helper
         git-gutter
 
         # Programming
