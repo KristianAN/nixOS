@@ -20,6 +20,10 @@ let
         set -e fish_key_bindings
         set -g fish_prompt '> '
         set -g HISTFILE ~/.tramp-histfile
+        functions -e fish_prompt
+        function fish_prompt
+            echo '> '
+        end
     else
         starship init fish | source
     end
@@ -43,15 +47,12 @@ in
       config.enable = true;
       functions.enable = true;
     };
+    # Remove the interactiveShellInit that overrides the settings in fishConfig
     interactiveShellInit = ''
       if test "$TERM" = "dumb"
-          set -e fish_key_bindings
-          set -g fish_prompt '> '
-          set -g HISTFILE ~/.tramp-histfile
       else
         eval (direnv hook fish)
         any-nix-shell fish --info-right | source
-          starship init fish | source
       end'';
 
     shellAliases = {
