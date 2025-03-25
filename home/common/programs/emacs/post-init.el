@@ -116,7 +116,10 @@
 (dirvish-override-dired-mode)
 
 ;;; Terminal
-(use-package eat)
+(use-package eat
+  :hook (eat-exec . (lambda (&rest _) (eat-line-mode)))
+  )
+
 (add-hook 'eshell-load-hook #'eat-eshell-mode)
 (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)
 
