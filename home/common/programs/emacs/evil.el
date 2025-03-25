@@ -44,7 +44,8 @@
     (define-key meow-prefix-find (kbd (car binding)) (cdr binding)))
   (dolist (binding '(("p" . eat-project-other-window)
                      ("n" . eat)
-                     ("b" . kristian/consult-grep-project-buffer-term)))
+                     ("b" . kristian/consult-grep-project-buffer-term)
+                     ("c" . kristian/my-toggle-theme)))
     (define-key meow-prefix-t-map (kbd (car binding)) (cdr binding)))
   (meow-normal-define-key
    '("0" . meow-expand-0)

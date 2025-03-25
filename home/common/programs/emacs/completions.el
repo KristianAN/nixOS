@@ -25,6 +25,7 @@
   :custom
   (corfu-cycle t)
   (corfu-auto t)
+  (corfu-popupinfo-mode t)
   (corfu-preview-current nil)
   (corfu-quit-at-boundary t)
   (corfu-quit-no-match t)
