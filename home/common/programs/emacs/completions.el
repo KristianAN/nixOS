@@ -140,14 +140,6 @@
          ("M-g i" . consult-imenu)
          ("M-g I" . consult-imenu-multi)
          ;; M-s bindings in `search-map'
-         ("M-s d" . consult-find)
-         ("M-s c" . consult-locate)
-         ("M-s g" . consult-ripgrep)
-         ("M-s G" . consult-git-grep)
-         ("M-s l" . consult-line)
-         ("M-s L" . consult-line-multi)
-         ("M-s u" . consult-focus-lines)
-         ("M-s v" . kristian/consult-ripgrep-from-visual-selection)
          ;; Isearch integration
          :map isearch-mode-map
          ("M-s L" . consult-line-multi)

@@ -76,6 +76,7 @@
   (push '(scala-ts-mode . scalafmt) apheleia-mode-alist))
 
 (apheleia-global-mode +1)
+
 ;;; Completions
 (minimal-emacs-load-user-init "completions.el")
 
@@ -87,6 +88,9 @@
 
 ;;; Modeline
 (minimal-emacs-load-user-init "modeline.el")
+
+;;; Tramp
+(minimal-emacs-load-user-init "tramp.el")
 
 ;;; Direnv integration
 (use-package envrc
