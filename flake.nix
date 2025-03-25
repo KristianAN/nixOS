@@ -114,31 +114,6 @@
             }
           ];
         };
-        everest = lib.nixosSystem {
-          specialArgs = {
-            inherit inputs outputs;
-          };
-          modules = [
-            inputs.home-manager.nixosModules.home-manager
-            ./hosts/everest
-            nixosModules
-            {
-              programs.slack.enable = true;
-              programs.discord.enable = true;
-              home-manager = {
-                useUserPackages = false; # TODO on reinstall
-                extraSpecialArgs = { inherit inputs outputs; };
-                backupFileExtension = ".hm-backup";
-                users.kristian = { ... }: {
-                  nixpkgs.config.allowUnfree = true;
-                  imports = [
-                    ./home/everest
-                  ];
-                };
-              };
-            }
-          ];
-        };
         chase = lib.nixosSystem {
           specialArgs = {
             inherit inputs outputs;
