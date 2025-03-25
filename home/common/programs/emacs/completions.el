@@ -18,6 +18,7 @@
               ("C-n" . corfu-next)
               ("C-p" . corfu-previous)
               ("C-h" . corfu-info-documentation)
+              ("C-y" . corfu-complete)
               ;; Remove the C-y binding from here since Evil intercepts it
               )
 
