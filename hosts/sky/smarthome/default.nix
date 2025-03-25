@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    #./zigbee2mqtt.nix
+    ./zigbee2mqtt.nix
     ./openhab.nix
   ];
 }

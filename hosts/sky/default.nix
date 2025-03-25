@@ -17,7 +17,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    shotwell
+    deconz
   ];
 
   xdg = {

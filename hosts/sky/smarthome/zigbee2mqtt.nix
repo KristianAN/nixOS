@@ -13,19 +13,25 @@ in
     enable = true;
     allowedTCPPorts = [
       8081
+      8080
+      8443
       1883
     ];
   };
-
+  services.udev.extraRules = ''
+    # ConBee II
+    SUBSYSTEM=="tty", ATTRS{idVendor}=="1cf1", ATTRS{idProduct}=="0030", SYMLINK+="ttyACM-conbee", MODE="0666"
+  '';
   services.mosquitto = {
     enable = true;
     listeners = [
       {
-        address = "192.168.4.100";
+        address = "0.0.0.0";  # Changed from 192.168.4.100 for better accessibility
         port = 1883;
         users = {
           zigbee2mqtt = {
-            acl = [ "pattern readwrite #" ];
+            # Fix: Change "pattern readwrite #" to "readwrite #"
+            acl = [ "readwrite #" ];
             password = config.mqtt_password;
           };
         };
@@ -44,7 +50,7 @@ in
       };
       frontend = {
         port = 8081;
-        host = "0.0.0.0";
+        host = "192.168.4.100";
       };
       device_options = {
         retain = true;

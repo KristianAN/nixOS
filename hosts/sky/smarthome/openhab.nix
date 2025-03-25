@@ -14,15 +14,6 @@
       extraGroups."openhab".gid = 1200;
     };
 
-    networking.firewall.allowedTCPPorts = [
-      8080
-      8443
-    ];
-    networking.firewall.allowedUDPPorts = [
-      8080
-      8443
-    ];
-
     virtualisation.oci-containers.containers = {
       openhab = {
         image = "openhab/openhab:latest";
