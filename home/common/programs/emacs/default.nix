@@ -70,6 +70,7 @@ in
         # Good looks
         nerd-icons
         ef-themes
+        doom-themes
         indent-bars
         doom-modeline
         nerd-icons-completion

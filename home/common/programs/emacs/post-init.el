@@ -55,7 +55,7 @@
           (lambda (frame)
             (with-selected-frame frame
               ;; All customizations here
-              (load-theme 'ef-dream t)
+              (load-theme 'doom-ayu-dark t)
               (set-frame-font "Aporetic Sans Mono 12" nil t)
               )))
 
