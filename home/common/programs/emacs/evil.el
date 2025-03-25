@@ -4,8 +4,11 @@
    '("j" . meow-next)
    '("k" . meow-prev)
    '("<escape>" . ignore))
+  ;; Keybind-Prefixes
+  (define-prefix-command 'meow-prefix-p-map)
+  (define-prefix-command 'meow-prefix-t-map)
   (meow-leader-define-key
-   ;; Use SPC (0-9) for digit arguments.
+   ;; Use SPC (0-9) for digit arguments
    '("1" . meow-digit-argument)
    '("2" . meow-digit-argument)
    '("3" . meow-digit-argument)
@@ -17,7 +20,18 @@
    '("9" . meow-digit-argument)
    '("0" . meow-digit-argument)
    '("/" . meow-keypad-describe-key)
-   '("?" . meow-cheatsheet))
+   '("?" . meow-cheatsheet)
+   '("b" . consult-project-buffer)
+   '("p" . meow-prefix-p-map)
+   '("t" . meow-prefix-t-map)
+   '("f" . dirvish-dwim)
+   )
+  (define-key meow-prefix-p-map (kbd "s") 'tabspaces-switch-or-create-workspace)
+  (define-key meow-prefix-p-map (kbd "d") 'tabspaces-close-workspace)
+  (define-key meow-prefix-p-map (kbd "o") 'tabspaces-open-or-create-project-and-workspace)
+  (define-key meow-prefix-t-map (kbd "p") 'eat-project-other-window)
+  (define-key meow-prefix-t-map (kbd "n") 'eat)
+  (define-key meow-prefix-t-map (kbd "b") 'kristian/consult-grep-project-buffer-term)
   (meow-normal-define-key
    '("0" . meow-expand-0)
    '("9" . meow-expand-9)

@@ -8,3 +8,9 @@
     (deactivate-mark)
     (consult-ripgrep nil selection)))
 
+(defun kristian/consult-grep-project-buffer-term ()
+  (interactive)
+  (minibuffer-with-setup-hook
+      (lambda ()
+        (insert "term"))
+    (call-interactively #'consult-project-buffer)))

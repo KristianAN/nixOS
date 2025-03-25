@@ -50,7 +50,6 @@ in
     extraPackages =
       epkgs: with epkgs; [
         # Meow!
-        vim-tab-bar
         meow
 
         # Native compilation

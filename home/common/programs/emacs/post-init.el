@@ -116,9 +116,7 @@
 (dirvish-override-dired-mode)
 
 ;;; Terminal
-(use-package eat
-  :bind
-  ("C-x p e" . eat-project))
+(use-package eat)
 (add-hook 'eshell-load-hook #'eat-eshell-mode)
 (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)
 

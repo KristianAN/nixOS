@@ -193,3 +193,10 @@
   :after corfu
   :config
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+
+(setopt text-mode-ispell-word-completion nil)
+
+(defun my-dabbrev-in-text()
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev))
+
+(add-hook 'text-mode-hook #'my-dabbrev-in-text)
