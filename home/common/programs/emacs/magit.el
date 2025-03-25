@@ -1,8 +1,10 @@
 ;;; magit.el --- magit -*- no-byte-compile: t; lexical-binding: t; -*-
 
 (use-package magit
-  :bind
-  (("C-x m" . magit)))
+  :bind (:map magit-mode-map
+              (";" . magit-discard))
+  )
+
 
 (use-package git-gutter
   :hook (prog-mode . git-gutter-mode)
