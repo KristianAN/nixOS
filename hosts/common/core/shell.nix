@@ -44,8 +44,15 @@ in
       functions.enable = true;
     };
     interactiveShellInit = ''
-      eval (direnv hook fish)
-      any-nix-shell fish --info-right | source'';
+      if test "$TERM" = "dumb"
+          set -e fish_key_bindings
+          set -g fish_prompt '> '
+          set -g HISTFILE ~/.tramp-histfile
+      else
+        eval (direnv hook fish)
+        any-nix-shell fish --info-right | source
+          starship init fish | source
+      end'';
 
     shellAliases = {
     };
