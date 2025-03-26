@@ -1,6 +1,5 @@
 ;;; custom.el --- Custom functions -*- no-byte-compile: t; lexical-binding: t; -*-
 
-
 (defun kristian/consult-ripgrep-from-visual-selection ()
   "Send selected region to consult-ripgrep."
   (interactive)
@@ -14,6 +13,7 @@
       (lambda ()
         (insert "term"))
     (call-interactively #'consult-project-buffer)))
+
 ;; (custom-enabled-themes)
 (defun kristian/my-toggle-theme ()
   (interactive)

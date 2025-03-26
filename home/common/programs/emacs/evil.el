@@ -1,3 +1,4 @@
+
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
   (meow-motion-define-key
@@ -8,6 +9,7 @@
   (define-prefix-command 'meow-prefix-p-map)
   (define-prefix-command 'meow-prefix-t-map)
   (define-prefix-command 'meow-prefix-find)
+  (define-prefix-command 'meow-prefix-git)
   (meow-leader-define-key
    ;; Use SPC (0-9) for digit arguments
    '("1" . meow-digit-argument)
@@ -27,6 +29,7 @@
    '("p" . meow-prefix-p-map)
    '("t" . meow-prefix-t-map)
    '("f" . meow-prefix-find)
+   '("d" . meow-prefix-git)
    '("o" . dirvish-dwim)
    '("w" . save-buffer)
    '("r" . query-replace)
@@ -36,6 +39,11 @@
                      ("o" . tabspaces-open-or-create-project-and-workspace)
                      ("f" . project-find-file)))
     (define-key meow-prefix-p-map (kbd (car binding)) (cdr binding)))
+  (dolist (binding '(
+                     ("r" . git-gutter:revert-hunk)
+                     ("b" . magit-blame)
+                     ))
+    (define-key meow-prefix-git (kbd (car binding)) (cdr binding)))
   (dolist (binding '(("g" . consult-ripgrep)
                      ("f" . consult-find)
                      ("l" . consult-line)
