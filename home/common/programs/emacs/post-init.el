@@ -69,14 +69,6 @@
 
 (minimal-emacs-load-user-init "tabspaces.el")
 
-;;; Formatter
-(use-package apheleia
-  :config
-  (push '(scalafmt . ("scalafmt" "--stdin" "--non-interactive" "--quiet" "--stdout")) apheleia-formatters)
-  (push '(scala-ts-mode . scalafmt) apheleia-mode-alist))
-
-(apheleia-global-mode +1)
-
 ;;; Completions
 (minimal-emacs-load-user-init "completions.el")
 
@@ -84,7 +76,7 @@
 (minimal-emacs-load-user-init "lsp.el")
 
 ;;; Dirvish
-(minimal-emacs-load-user-init "dirvish.el")
+;; (minimal-emacs-load-user-init "dirvish.el") Use plain dired for now
 
 ;;; Modeline
 (minimal-emacs-load-user-init "modeline.el")
@@ -99,13 +91,6 @@
 ;;; Indentation
 (use-package indent-bars
   :hook ((haskell-ts-mode scala-mode scala-ts-mode yaml-mode python-ts-mode) . indent-bars-mode))
-
-;;; Dirvish
-(use-package dirvish
-  :bind
-  ("C-x f" . dired-create-empty-file))
-
-(dirvish-override-dired-mode)
 
 ;;; Terminal
 (use-package eat)

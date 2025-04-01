@@ -71,11 +71,27 @@
   :after eglot
   :config	(eglot-booster-mode))
 
-;; Disable eglot inlay hints by default
-(add-hook 'eglot-managed-mode-hook (lambda () (eglot-inlay-hints-mode -1)))
+(use-package eglot
+  :custom
+  (eglot-send-changes-idle-time 0.1)
+  (eglot-extend-to-xref t)
+  :config
+  (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
+  ;; Disable eglot inlay hints by default
+  (add-hook 'eglot-managed-mode-hook (lambda () (eglot-inlay-hints-mode -1)))
+  
+  ;; Add formatter to eglot-managed-mode-hook instead
+  (add-hook 'eglot-managed-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook #'eglot-format-buffer nil t)))
+  
+  (setq eglot-autoshutdown t))
+
 
 ;; Setup lsp for eglot for modes not currently supported by default by eglot
 (with-eval-after-load 'eglot
+  (add-to-list 'eglot-workspace-configuration
+               '(:haskell . (:formattingProvider "fourmolu")))
   (add-to-list 'eglot-server-programs
                '(scala-ts-mode . ("metals")))
   (add-to-list 'eglot-server-programs

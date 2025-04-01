@@ -98,10 +98,10 @@ in
 
         # Editing
         markdown-mode
-        apheleia
+        # apheleia # Formatting
 
         # Other
-        dirvish
+        # dirvish
         eat
         org-roam
         org-modern
@@ -118,10 +118,6 @@ in
     pkgs.scalafmt
     pkgs.astyle
     pkgs.fd
-    pkgs.imagemagick
-    pkgs.poppler
-    pkgs.ffmpegthumbnailer
-    pkgs.mediainfo
     pkgs.fsautocomplete
   ];
 
