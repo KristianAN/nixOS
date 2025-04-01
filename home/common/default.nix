@@ -35,12 +35,6 @@
     inputs.myNeovimFlake.packages.x86_64-linux.nvim
     pkgs.pandoc
     pkgs.any-nix-shell
-    pkgs.nyxt
-    gst_all_1.gst-libav
-    gst_all_1.gst-plugins-bad
-    gst_all_1.gst-plugins-base
-    gst_all_1.gst-plugins-good
-    gst_all_1.gst-plugins-ugly
     pkgs.librewolf
     pkgs.ladybird
     pkgs.cmatrix

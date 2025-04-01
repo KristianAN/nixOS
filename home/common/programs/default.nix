@@ -16,6 +16,7 @@
     ./yambar.nix
     ./foot.nix
     ./emacs/default.nix
+    ./nyxt/default.nix
     ./wezterm/default.nix
     ./jujutsu.nix
     ./yazi.nix
