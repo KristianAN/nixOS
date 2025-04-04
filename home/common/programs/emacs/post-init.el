@@ -84,6 +84,9 @@
 ;;; Tramp
 (minimal-emacs-load-user-init "tramp.el")
 
+;;; Custom nix stuff
+(minimal-emacs-load-user-init "nix-config.el")
+
 ;;; Direnv integration
 (use-package envrc
   :hook (after-init . envrc-global-mode))

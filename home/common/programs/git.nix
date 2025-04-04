@@ -6,7 +6,7 @@
     userEmail = "kristian@krined.no";
     userName = "Kristian Nedrevold-Hansen";
     extraConfig = {
-      core.editor = "nvim";
+      core.editor = "emacsclient";
       github.user = "KristianAN";
     };
 

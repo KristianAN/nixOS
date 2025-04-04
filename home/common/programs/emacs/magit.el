@@ -5,6 +5,11 @@
               (";" . magit-discard))
   )
 
+(use-package forge
+  :after magit
+  :config
+  (setq auth-sources '("~/.authinfo"))
+)
 
 (use-package git-gutter
   :hook (prog-mode . git-gutter-mode)
