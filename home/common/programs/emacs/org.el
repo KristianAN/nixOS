@@ -12,8 +12,8 @@
 (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
 
 ;; active Babel languages
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((mermaid . t)
-   (emacs-lisp . t)))
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '((mermaid . t)
+;;    (emacs-lisp . t)))
 
