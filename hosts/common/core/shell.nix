@@ -49,11 +49,9 @@ in
     };
     # Remove the interactiveShellInit that overrides the settings in fishConfig
     interactiveShellInit = ''
-      if test "$TERM" = "dumb"
-      else
-        eval (direnv hook fish)
-        any-nix-shell fish --info-right | source
-      end'';
+      eval (direnv hook fish)
+      any-nix-shell fish --info-right | source
+    '';
 
     shellAliases = {
     };
