@@ -22,7 +22,8 @@
 
 (use-package haskell-mode
   :mode (("\\.hs\\'" . haskell-mode)
-         ("\\.cabal\\'" . haskell-mode)))
+         ("\\.cabal\\'" . haskell-cabal-mode)
+         ))
 
 (use-package nix-ts-mode
   :mode "\\.nix\\'")
