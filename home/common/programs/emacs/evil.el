@@ -1,12 +1,27 @@
 ;; evil.el --- Not really evil, meow -*- no-byte-compile: t; lexical-binding: t; -*-
 
 ;; Prefix maps for meow leader
+(define-prefix-command 'detached-prefix-map)
+(dolist (binding '(("v" . detached-view-session)
+                   ("a" . detached-attach-session)
+                   ("=" . detached-diff-session)
+                   ("c" . detached-compile-session)
+                   ("r" . detached-rerun-session)
+                   ("i" . detached-insert-session-command)
+                   ("w" . detached-copy-session-command)
+                   ("W" . detached-copy-session-output)
+                   ("k" . detached-kill-session)
+                   ("d" . detached-delete-session)
+                   ))
+  (define-key detached-prefix-map (kbd (car binding)) (cdr binding)))
+
 (define-prefix-command 'meow-prefix-p-map)
 (dolist (binding '(("s" . tabspaces-switch-or-create-workspace)
                    ("d" . tabspaces-close-workspace)
                    ("o" . tabspaces-open-or-create-project-and-workspace)
                    ("f" . project-find-file)))
   (define-key meow-prefix-p-map (kbd (car binding)) (cdr binding)))
+
 (define-prefix-command 'meow-prefix-git)
 (dolist (binding '(
                    ("r" . git-gutter:revert-hunk)
@@ -16,6 +31,7 @@
                    ("b" . magit-blame)
                    ))
   (define-key meow-prefix-git (kbd (car binding)) (cdr binding)))
+
 (define-prefix-command 'meow-prefix-find)
 (dolist (binding '(("g" . consult-ripgrep)
                    ("f" . consult-find)
@@ -23,6 +39,7 @@
                    ("L" . consult-line-multi)
                    ("v" . kristian/consult-ripgrep-from-visual-selection)))
   (define-key meow-prefix-find (kbd (car binding)) (cdr binding)))
+
 (define-prefix-command 'meow-prefix-t-map)
 (dolist (binding '(("p" . eat-project-other-window)
                    ("n" . eat)
@@ -58,8 +75,8 @@
    '("d" . meow-prefix-git)
    '("o" . dirvish-dwim)
    '("w" . save-buffer)
-   '("r" . query-replace)
-   '("s" . detached-action-map)
+   '("r" . query-replace-regexp)
+   '("s" . detached-prefix-map)
    )
   (meow-normal-define-key
    '("0" . meow-expand-0)
