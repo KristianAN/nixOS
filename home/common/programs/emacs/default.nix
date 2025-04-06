@@ -90,12 +90,12 @@ in
         treesit-grammars.with-all-grammars
         scala-ts-mode
         nix-ts-mode
-        haskell-ts-mode
         eglot-booster
         eldoc-box
         web-mode
         fsharp-mode
         eglot-fsharp
+        haskell-mode
 
         # Editing
         markdown-mode
@@ -107,6 +107,7 @@ in
         org-roam
         org-modern
         tabspaces
+        detached
       ];
 
     extraConfig = builtins.readFile ./init.el;
@@ -120,6 +121,7 @@ in
     pkgs.astyle
     pkgs.fd
     pkgs.fsautocomplete
+    pkgs.dtach
   ];
 
   home.file = {

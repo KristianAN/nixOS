@@ -59,6 +59,7 @@
    '("o" . dirvish-dwim)
    '("w" . save-buffer)
    '("r" . query-replace)
+   '("s" . detached-action-map)
    )
   (meow-normal-define-key
    '("0" . meow-expand-0)

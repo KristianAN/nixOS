@@ -11,7 +11,6 @@
             (javascript-mode . js-ts-mode)
             (typescript-mode . typescript-ts-mode)
             (java-mode . java-ts-mode)
-            (haskell-mode . haskell-ts-mode)
             (css-mode . css-ts-mode)
             (sh-mode . bash-ts-mode)
             (scala-mode . scala-ts-mode)
@@ -21,9 +20,9 @@
   :init
   (setq scala-ts-indent-offset 2))
 
-(use-package haskell-ts-mode
-  :mode (("\\.hs\\'" . haskell-ts-mode)
-         ("\\.cabal\\'" . haskell-ts-mode)))
+(use-package haskell-mode
+  :mode (("\\.hs\\'" . haskell-mode)
+         ("\\.cabal\\'" . haskell-mode)))
 
 (use-package nix-ts-mode
   :mode "\\.nix\\'")
@@ -97,7 +96,7 @@
   (add-to-list 'eglot-server-programs
                '(fsharp-mode . ("fsautocomplete" "--adaptive-lsp-server")))
   (add-to-list 'eglot-server-programs
-               '(haskell-ts-mode . ("haskell-language-server-wrapper" "--lsp"))))
+               '(haskell-mode . ("haskell-language-server-wrapper" "--lsp"))))
 
 (define-prefix-command 'lsp-prefix-map)
 (global-set-key (kbd "C-l") 'lsp-prefix-map)
