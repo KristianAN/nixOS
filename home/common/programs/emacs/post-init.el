@@ -87,6 +87,12 @@
 ;;; Custom nix stuff
 (minimal-emacs-load-user-init "nix-config.el")
 
+;;; Formatting
+(minimal-emacs-load-user-init "apheleia.el")
+
+;;; Iedit
+(minimal-emacs-load-user-init "iedit.el")
+
 ;;; Direnv integration
 (use-package envrc
   :hook (after-init . envrc-global-mode))

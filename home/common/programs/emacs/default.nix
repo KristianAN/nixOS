@@ -99,7 +99,8 @@ in
 
         # Editing
         markdown-mode
-        # apheleia # Formatting
+        iedit
+        apheleia # Formatting
 
         # Other
         # dirvish
