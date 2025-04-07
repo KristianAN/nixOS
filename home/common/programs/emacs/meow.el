@@ -137,6 +137,8 @@
    '("x" . meow-delete)
    '("X" . meow-backward-delete)
    '("y" . meow-save)
+   '("d" . meow-pop-to-mark)
+   '("D" . meow-unpop-to-mark)
    '("z" . meow-pop-selection)
    '("'" . repeat)
    '("<escape>" . ignore)))

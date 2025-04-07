@@ -42,7 +42,6 @@
 
 (use-package cape
   ;; Bind prefix keymap providing all Cape commands under a mnemonic key.
-  ;; Press C-c p ? to for help.
   :bind ("M-p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
   :init
   (add-hook 'completion-at-point-functions #'cape-dabbrev)
