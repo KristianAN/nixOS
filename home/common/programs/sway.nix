@@ -28,7 +28,18 @@
           mode = "1920x1080";
         };
       };
-
+      
+      modes = {
+        resize = {
+          "m" = "resize shrink width 10px";
+          "n" = "resize grow height 10px";
+          "e" = "resize shrink height 10px";
+          "i" = "resize grow width 10px";
+          "Return" = "mode default";
+          "Escape" = "mode default";
+        };
+      };
+      
       window = {
         titlebar = false;
       };

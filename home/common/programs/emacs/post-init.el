@@ -110,7 +110,7 @@
 (add-hook 'eshell-load-hook #'eat-eshell-mode)
 (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)
 
-(global-set-key (kbd "M-o h")  'windmove-left)
-(global-set-key (kbd "M-o l") 'windmove-right)
-(global-set-key (kbd "M-o k")    'windmove-up)
-(global-set-key (kbd "M-o j")  'windmove-down)
+(global-set-key (kbd "M-o m")  'windmove-left)
+(global-set-key (kbd "M-o i") 'windmove-right)
+(global-set-key (kbd "M-o e")    'windmove-up)
+(global-set-key (kbd "M-o n")  'windmove-down)

@@ -39,4 +39,34 @@ in
   "${modifier}+ctrl+h" = "exec ${home-display-settings}";
   "${modifier}+ctrl+l" = "exec ${laptop-display-settings}";
   "${modifier}+ctrl+p" = "exec grimshot --notify save area";
+
+  # Directional keybindings - focus
+  "${modifier}+m" = "focus left";
+  "${modifier}+n" = "focus down";
+  "${modifier}+e" = "focus up";
+  "${modifier}+i" = "focus right";
+  
+  # Directional keybindings - move windows
+  "${modifier}+Shift+m" = "move left";
+  "${modifier}+Shift+n" = "move down";
+  "${modifier}+Shift+e" = "move up";
+  "${modifier}+Shift+i" = "move right";
+  
+  # Workspace movement
+  "${modifier}+Ctrl+m" = "workspace prev";
+  "${modifier}+Ctrl+i" = "workspace next";
+
+  # Resize
+  "${modifier}+r" = "mode resize";
+  
+  # Volume control keybindings
+  "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
+  "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
+  "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
+  "XF86AudioMicMute" = "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+
+  # Brightness control using brightnessctl
+  "XF86MonBrightnessUp" = "exec brightnessctl set +5%";
+  "XF86MonBrightnessDown" = "exec brightnessctl set 5%-";
+  
 } 
