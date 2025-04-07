@@ -57,8 +57,6 @@
 
 (minimal-emacs-load-user-init "custom.el")
 
-(minimal-emacs-load-user-init "evil.el")
-
 (minimal-emacs-load-user-init "magit.el")
 
 (minimal-emacs-load-user-init "looks.el")
@@ -92,6 +90,12 @@
 
 ;;; Iedit
 (minimal-emacs-load-user-init "iedit.el")
+
+;;; Meow
+(minimal-emacs-load-user-init "dired.el")
+
+;;; Meow
+(minimal-emacs-load-user-init "meow.el")
 
 ;;; Direnv integration
 (use-package envrc

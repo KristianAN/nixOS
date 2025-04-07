@@ -2,14 +2,14 @@
 
 (use-package magit
   :bind (:map magit-mode-map
-              (";" . magit-discard))
-  )
+              (";" . magit-discard)
+              ("e" . previous-line)))
 
 (use-package forge
   :after magit
   :config
   (setq auth-sources '("~/.authinfo"))
-)
+  )
 
 (use-package git-gutter
   :hook (prog-mode . git-gutter-mode)
