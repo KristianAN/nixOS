@@ -7,6 +7,13 @@
     (deactivate-mark)
     (consult-ripgrep nil selection)))
 
+(defun kristian/consult-grep-line-from-visual-selection ()
+  "Send selected region to consult-ripgrep."
+  (interactive)
+  (let ((selection (buffer-substring-no-properties (region-beginning) (region-end))))
+    (deactivate-mark)
+    (consult-line selection)))
+
 (defun kristian/consult-grep-project-buffer-term ()
   (interactive)
   (minibuffer-with-setup-hook

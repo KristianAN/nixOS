@@ -45,6 +45,9 @@ in
   "${modifier}+n" = "focus down";
   "${modifier}+e" = "focus up";
   "${modifier}+i" = "focus right";
+
+  # Layout
+  "${modifier}+h" = "layout toggle split";
   
   # Directional keybindings - move windows
   "${modifier}+Shift+m" = "move left";

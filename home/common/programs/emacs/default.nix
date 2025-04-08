@@ -103,12 +103,13 @@ in
         apheleia # Formatting
 
         # Other
-        # dirvish
         eat
         org-roam
+        org-roam-ui
         org-modern
         tabspaces
         detached
+        dashboard
       ];
 
     extraConfig = builtins.readFile ./init.el;

@@ -99,6 +99,9 @@
 ;;; Meow
 (minimal-emacs-load-user-init "meow.el")
 
+;;; Dashboard
+(minimal-emacs-load-user-init "dashboard.el")
+
 ;;; Direnv integration
 (use-package envrc
   :hook (after-init . envrc-global-mode))
