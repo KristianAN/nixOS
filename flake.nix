@@ -77,7 +77,7 @@
               programs.discord.enable = true;
               home-manager = {
                 useUserPackages = false; # TODO on reinstall
-                extraSpecialArgs = { inherit inputs outputs; };
+                extraSpecialArgs = { inherit inputs outputs; inherit (inputs.self.nixosConfigurations.sky.config.networking) hostName; };
                 backupFileExtension = ".hm-backup";
                 users.kristian = { ... }: {
                   nixpkgs.config.allowUnfree = true;
@@ -102,7 +102,7 @@
               programs.discord.enable = true;
               home-manager = {
                 useUserPackages = false; # TODO on reinstall
-                extraSpecialArgs = { inherit inputs outputs; };
+                extraSpecialArgs = { inherit inputs outputs; inherit (inputs.self.nixosConfigurations.rubble.config.networking) hostName; };
                 backupFileExtension = ".hm-backup";
                 users.kristian = { ... }: {
                   nixpkgs.config.allowUnfree = true;
@@ -127,7 +127,7 @@
               programs.discord.enable = true;
               home-manager = {
                 useUserPackages = false; # TODO on reinstall
-                extraSpecialArgs = { inherit inputs outputs; };
+                extraSpecialArgs = { inherit inputs outputs; inherit (inputs.self.nixosConfigurations.rubble.config.networking) hostName; };
                 backupFileExtension = ".hm-backup";
                 users.kristian = { ... }: {
                   nixpkgs.config.allowUnfree = true;

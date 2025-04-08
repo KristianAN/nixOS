@@ -1,4 +1,9 @@
-{ ... }:
+{ hostName, ... }:
+let
+  batteryDevice = 
+    if hostName == "rubble" then "BAT1"
+    else "BAT0";  # Default to BAT0 for other machines
+in
 {
   programs.yambar = {
     enable = true;
@@ -107,7 +112,7 @@
           }
           {
             battery = {
-              name = "BAT0";
+              name = batteryDevice;
               poll-interval = 30000;
 
               content = {
