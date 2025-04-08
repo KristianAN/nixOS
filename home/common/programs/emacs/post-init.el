@@ -69,6 +69,9 @@
 ;;; Completions
 (minimal-emacs-load-user-init "completions.el")
 
+;;; Detached
+(minimal-emacs-load-user-init "detached.el")
+
 ;;; LSP
 (minimal-emacs-load-user-init "lsp.el")
 
