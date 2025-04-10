@@ -127,7 +127,7 @@
               programs.discord.enable = true;
               home-manager = {
                 useUserPackages = false; # TODO on reinstall
-                extraSpecialArgs = { inherit inputs outputs; inherit (inputs.self.nixosConfigurations.rubble.config.networking) hostName; };
+                extraSpecialArgs = { inherit inputs outputs; inherit (inputs.self.nixosConfigurations.chase.config.networking) hostName; };
                 backupFileExtension = ".hm-backup";
                 users.kristian = { ... }: {
                   nixpkgs.config.allowUnfree = true;

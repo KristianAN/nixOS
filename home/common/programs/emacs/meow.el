@@ -39,7 +39,7 @@
 (dolist (binding '(("g" . consult-ripgrep)
                    ("f" . consult-find)
                    ("l" . consult-line)
-                   ("L" . consult-line-multi)
+                   ("L" . kristian/consult-grep-line-from-visual-selection)
                    ("v" . kristian/consult-ripgrep-from-visual-selection)))
   (define-key meow-prefix-find (kbd (car binding)) (cdr binding)))
 

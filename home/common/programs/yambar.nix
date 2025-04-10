@@ -2,6 +2,7 @@
 let
   batteryDevice = 
     if hostName == "rubble" then "BAT1"
+    else if hostName == "chase" then "BAT0"
     else "BAT0";  # Default to BAT0 for other machines
 in
 {
