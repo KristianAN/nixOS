@@ -12,7 +12,7 @@
           (lambda (frame)
             (with-selected-frame frame
               ;; All customizations here
-              (load-theme 'ef-night t)
+              (load-theme 'ef-owl t)
               (set-frame-font "Aporetic Sans Mono 12" nil t)
               )))
 
