@@ -1,5 +1,22 @@
 ;;; lsp.el --- LSP configuration -*- no-byte-compile: t; lexical-binding: t; -*-
 
+(defun list-active-faces ()
+  "List all faces used in the current buffer."
+  (interactive)
+  (let ((faces '()))
+    (save-excursion
+      (goto-char (point-min))
+      (while (not (eobp))
+        (let ((face (get-text-property (point) 'face)))
+          (when face
+            (unless (listp face) (setq face (list face)))
+            (dolist (f face)
+              (unless (memq f faces)
+                (push f faces)))))
+        (forward-char 1)))
+    (message "Faces in use: %s" faces)
+    faces))
+
 (use-package treesit
   :ensure nil
   :custom
@@ -14,7 +31,22 @@
             (css-mode . css-ts-mode)
             (sh-mode . bash-ts-mode)
             (scala-mode . scala-ts-mode)
-            (shell-script-mode . bash-ts-mode))))
+            (shell-script-mode . bash-ts-mode)))
+  
+  (defun my-scala-ts-mode-setup ()
+    "Set up JavaScript Tree-sitter mode with custom face settings."
+    (setq-local face-remapping-alist
+                (append face-remapping-alist
+                        `((font-lock-string-face . (:foreground ,(car (ef-themes-with-colors (list yellow)))))
+                          (font-lock-number-face . (:foreground ,(car (ef-themes-with-colors (list yellow)))))
+                          (font-lock-comment-face . (:foreground ,(car (ef-themes-with-colors (list red)))))
+                          (font-lock-function-name-face . default)
+                          (font-lock-variable-name-face . default)
+                          ))))
+
+  ;; Add hooks
+  (add-hook 'scala-ts-mode-hook 'my-scala-ts-mode-setup)
+  )
 
 (use-package scala-ts-mode
   :init
