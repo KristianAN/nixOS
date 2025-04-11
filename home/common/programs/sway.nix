@@ -60,8 +60,9 @@
 
     # to find the app_id we can run: swaymsg -t get_tree
     extraConfig = ''
-    for_window [app_id="emacs"] opacity 0.8
+    for_window [app_id="emacs"] opacity 0.9
     for_window [app_id="firefox"] opacity 0.8
+    for_window [app_id="fuzzel"] opacity 0.8
     for_window [app_id="org.wezfurlong.wezterm"] opacity 0.8
     for_window [class="Slack"] opacity 0.8
     blur enable
