@@ -22,7 +22,7 @@
 
       output = {
         "*" = {
-          bg = "~/Pictures/kanagawa-wp.jpg fill";
+          bg = "${./wallpaper.png} fill";
         };
         eDP-1 = {
           scale = "1";
