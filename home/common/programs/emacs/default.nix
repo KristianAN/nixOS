@@ -46,7 +46,7 @@ in
 {
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs30;
+    package = pkgs.emacs-pgtk;
     extraPackages =
       epkgs: with epkgs; [
         # Meow!

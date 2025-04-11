@@ -4,16 +4,24 @@ let
     if hostName == "rubble" then "BAT1"
     else if hostName == "chase" then "BAT0"
     else "BAT0";  # Default to BAT0 for other machines
+  borderMargin = 5;
 in
 {
   programs.yambar = {
     enable = true;
     settings = {
       bar = {
+
+        border = {
+          top-margin = borderMargin;
+          right-margin = borderMargin;
+          left-margin = borderMargin;
+        };
+        
         location = "top";
         height = 26;
-        background = "16161DFF";
-        foreground = "C8C093FF";
+        background = "292c2fFF";
+        foreground = "d0d0d0FF";
 
         font = "monospace:pixelsize=16";
         spacing = 6;

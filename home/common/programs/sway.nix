@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   wayland.windowManager.sway = {
+    package = pkgs.swayfx;
     enable = true;
     wrapperFeatures.gtk = true;
     checkConfig = false;
@@ -46,8 +47,8 @@
 
       gaps = {
         smartBorders = "on";
-        smartGaps = true;
-        inner = 5;
+        smartGaps = false;
+        inner = 3;
         outer = 2;
       };
 
@@ -56,6 +57,27 @@
       startup = [ { command = "yambar"; } ];
       keybindings = pkgs.lib.mkOptionDefault (import ../sway-keybindings.nix { inherit pkgs; });
     };
+
+    # to find the app_id we can run: swaymsg -t get_tree
+    extraConfig = ''
+    for_window [app_id="emacs"] opacity 0.8
+    for_window [app_id="firefox"] opacity 0.8
+    for_window [app_id="org.wezfurlong.wezterm"] opacity 0.8
+    for_window [class="Slack"] opacity 0.8
+    blur enable
+    blur_passes 3
+    blur_radius 8
+    shadows enable
+    corner_radius 10
+    
+    layer_effects "panel" {
+        blur enable;
+        blur_xray enable;
+        blur_ignore_transparent enable;
+        shadows enable;
+        corner_radius 20;
+    }
+    '';
   };
 
 }

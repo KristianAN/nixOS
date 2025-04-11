@@ -33,7 +33,7 @@
             (scala-mode . scala-ts-mode)
             (shell-script-mode . bash-ts-mode)))
   
-  (defun my-scala-ts-mode-setup ()
+  (defun my-custom-font-lock-settings ()
     "Set up JavaScript Tree-sitter mode with custom face settings."
     (setq-local face-remapping-alist
                 (append face-remapping-alist
@@ -45,7 +45,8 @@
                           ))))
 
   ;; Add hooks
-  (add-hook 'scala-ts-mode-hook 'my-scala-ts-mode-setup)
+  (add-hook 'scala-ts-mode-hook 'my-custom-font-lock-settings)
+  (add-hook 'java-ts-mode-hook 'my-custom-font-lock-settings)
   )
 
 (use-package scala-ts-mode
