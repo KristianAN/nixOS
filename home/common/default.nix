@@ -38,6 +38,7 @@
     pkgs.librewolf
     pkgs.ladybird
     pkgs.cmatrix
+    pkgs.proton-pass
   ];
 
   programs.home-manager.enable = true;
