@@ -20,5 +20,6 @@
     ./wezterm/default.nix
     ./jujutsu.nix
     ./yazi.nix
+    ./zen.nix
   ];
 }
