@@ -20,7 +20,6 @@
               ("C-h" . corfu-info-documentation)
               ("C-y" . corfu-complete)
               ("C-e" . my/corfu-quit-or-abort)
-              ;; Remove the C-y binding from here since Evil intercepts it
               )
 
   :custom
