@@ -95,7 +95,7 @@ in
         web-mode
         fsharp-mode
         eglot-fsharp
-        haskell-mode
+        haskell-ts-mode
 
         # Editing
         markdown-mode

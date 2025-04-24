@@ -50,13 +50,16 @@
   )
 
 (use-package scala-ts-mode
-  :init
-  (setq scala-ts-indent-offset 2))
+  :ensure t
+  :custom
+  (scala-ts-indent-offset 2))
 
-(use-package haskell-mode
-  :mode (("\\.hs\\'" . haskell-mode)
-         ("\\.cabal\\'" . haskell-cabal-mode)
-         ))
+(use-package haskell-ts-mode
+  :ensure t
+  :custom
+  (haskell-ts-use-indent t)
+  (haskell-ts-ghci "ghci")
+  :mode (("\\.hs\\'" . haskell-ts-mode)))
 
 (use-package nix-ts-mode
   :mode "\\.nix\\'")
@@ -128,7 +131,7 @@
   (add-to-list 'eglot-server-programs
                '(fsharp-mode . ("fsautocomplete" "--adaptive-lsp-server")))
   (add-to-list 'eglot-server-programs
-               '(haskell-mode . ("haskell-language-server-wrapper" "--lsp"))))
+               '(haskell-ts-mode . ("haskell-language-server-wrapper" "--lsp"))))
 
 (define-prefix-command 'lsp-prefix-map)
 (global-set-key (kbd "C-l") 'lsp-prefix-map)
