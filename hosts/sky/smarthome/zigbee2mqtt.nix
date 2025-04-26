@@ -6,7 +6,7 @@
 }:
 let
   # read from json
-  config = builtins.fromJSON (builtins.readFile /home/kristian/.configuration/mqtt.json);
+  config = ''''; # builtins.fromJSON (builtins.readFile /home/kristian/.configuration/mqtt.json);
 in
 {
   networking.firewall = {
