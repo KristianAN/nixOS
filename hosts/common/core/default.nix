@@ -37,9 +37,6 @@ with lib;
     # Keyring
     gnome-keyring
 
-    # Copilot requires this
-    nodejs-18_x
-
   ];
 
   users.defaultUserShell = pkgs.fish;
