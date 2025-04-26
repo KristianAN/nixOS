@@ -270,7 +270,7 @@ When set to non-nil, Emacs will automatically call `package-initialize' and
   (setq use-dialog-box nil))
 
 ;;; LSP
-(setenv "LSP_USE_PLISTS" "true")
+(setenv "LSP_USE_PLISTS" "TRUE")
 
 ;;; Load post-early-init.el
 (minimal-emacs-load-user-init "post-early-init.el")

@@ -20,28 +20,6 @@ let
       buildInputs = [ final.deps ];
     }
   );
-
-  eglot-booster = pkgs.emacsPackages.melpaBuild {
-    pname = "eglot-booster";
-    version = "20241029";
-
-    commit = "e6daa6bcaf4aceee29c8a5a949b43eb1b89900ed";
-
-    src = pkgs.fetchFromGitHub {
-      owner = "jdtsmith";
-      repo = "eglot-booster";
-      rev = "e6daa6bcaf4aceee29c8a5a949b43eb1b89900ed";
-      hash = "sha256-PLfaXELkdX5NZcSmR1s/kgmU16ODF8bn56nfTh9g6bs=";
-    };
-
-    recipe = pkgs.writeText "recipe" ''
-      (eglot-booster
-      :repo "jdtsmith/eglot-booster"
-      :fetcher github
-      :files ("*.el"))
-    '';
-  };
-
 in
 {
   programs.emacs = {
@@ -90,11 +68,8 @@ in
         treesit-grammars.with-all-grammars
         scala-ts-mode
         nix-ts-mode
-        eglot-booster
-        eldoc-box
         web-mode
         fsharp-mode
-        eglot-fsharp
         haskell-ts-mode
 
         # Editing
@@ -110,6 +85,14 @@ in
         tabspaces
         detached
         dashboard
+
+        (lsp-mode.overrideAttrs (p: {
+          buildPhase = ''
+              export LSP_USE_PLISTS=true;
+            '' + p.buildPhase;
+        }))
+        lsp-haskell
+        lsp-ui
       ];
 
     extraConfig = builtins.readFile ./init.el;
