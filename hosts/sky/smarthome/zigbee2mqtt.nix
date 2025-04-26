@@ -6,7 +6,7 @@
 }:
 let
   # read from json
-  config = ''''; # builtins.fromJSON (builtins.readFile /home/kristian/.configuration/mqtt.json);
+  mqttConfig = ''''; # builtins.fromJSON (builtins.readFile /home/kristian/.configuration/mqtt.json);
 in
 {
   networking.firewall = {
@@ -32,7 +32,7 @@ in
           zigbee2mqtt = {
             # Fix: Change "pattern readwrite #" to "readwrite #"
             acl = [ "readwrite #" ];
-            password = config.mqtt_password;
+            password = ''''; # config.mqtt_password;
           };
         };
       }
@@ -65,7 +65,7 @@ in
         version = 5;
         server = "mqtt://192.168.4.100:1883";
         user = "zigbee2mqtt";
-        password = config.mqtt_password;
+        password = ''''; # config.mqtt_password;
       };
     };
   };
