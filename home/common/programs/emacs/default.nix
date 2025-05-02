@@ -20,6 +20,44 @@ let
       buildInputs = [ final.deps ];
     }
   );
+
+
+  haskell-ts-mode-custom = pkgs.emacsPackages.melpaBuild {
+    pname = "haskell-ts-mode";
+    version = "1";
+    commit = "625b8c5d4c907f822c74c951bfe1bbdd8b187d4e";
+
+    src = pkgs.fetchgit {
+      url = "https://codeberg.org/pranshu/haskell-ts-mode.git";
+      rev = "625b8c5d4c907f822c74c951bfe1bbdd8b187d4e";
+      sha256 = "sha256-G3vKgJAE0kRtwWxsqJGdDOeYpYxUszv0e1fZEiUZuUI="; # You'll need to add the correct hash here
+    };
+
+    recipe = pkgs.writeText "recipe" ''
+      (haskell-ts-mode :fetcher git :url "https://codeberg.org/pranshu/haskell-ts-mode.git")
+    '';
+    };
+
+    eglot-booster = pkgs.emacsPackages.melpaBuild {
+      pname = "eglot-booster";
+      version = "20241029";
+
+      commit = "e6daa6bcaf4aceee29c8a5a949b43eb1b89900ed";
+
+      src = pkgs.fetchFromGitHub {
+        owner = "jdtsmith";
+        repo = "eglot-booster";
+        rev = "e6daa6bcaf4aceee29c8a5a949b43eb1b89900ed";
+        hash = "sha256-PLfaXELkdX5NZcSmR1s/kgmU16ODF8bn56nfTh9g6bs=";
+      };
+
+      recipe = pkgs.writeText "recipe" ''
+        (eglot-booster
+      :repo "jdtsmith/eglot-booster"
+      :fetcher github
+      :files ("*.el"))
+      ''; 
+  };
 in
 {
   programs.emacs = {
@@ -70,7 +108,8 @@ in
         nix-ts-mode
         web-mode
         fsharp-mode
-        haskell-ts-mode
+        eglot-fsharp
+        haskell-ts-mode-custom
 
         # Editing
         markdown-mode
@@ -86,13 +125,9 @@ in
         detached
         dashboard
 
-        (lsp-mode.overrideAttrs (p: {
-          buildPhase = ''
-              export LSP_USE_PLISTS=true;
-            '' + p.buildPhase;
-        }))
-        lsp-haskell
-        lsp-ui
+        # lsp
+        eglot-booster
+        eldoc-box
       ];
 
     extraConfig = builtins.readFile ./init.el;

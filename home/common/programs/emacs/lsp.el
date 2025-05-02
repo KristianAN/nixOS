@@ -32,7 +32,7 @@
             (sh-mode . bash-ts-mode)
             (scala-mode . scala-ts-mode)
             (shell-script-mode . bash-ts-mode)))
-  
+
   (defun my-custom-font-lock-settings ()
     "Set up JavaScript Tree-sitter mode with custom face settings."
     (setq-local face-remapping-alist
@@ -76,6 +76,82 @@
   :defer t
   :ensure t)
 
+(use-package eglot-fsharp
+  :ensure t
+  :after fsharp-mode)
+
+(defvar my-nix-fsautocomplete-path
+  (with-temp-buffer
+    (when (= 0 (call-process "which" nil t nil "fsautocomplete"))
+      (goto-char (point-min))
+      (buffer-substring-no-properties (point-min) (1- (point-max)))))
+  "Path to fsautocomplete executable provided by Nix.")
+
+(when my-nix-fsautocomplete-path
+  (setq eglot-fsharp-server-install-dir nil)
+
+  (defadvice eglot-fsharp--path-to-server (around use-nix-fsautocomplete activate)
+    "Use fsautocomplete from Nix."
+    (setq ad-return-value my-nix-fsautocomplete-path))
+
+  (defadvice eglot-fsharp--maybe-install (around skip-installation activate)
+    "Skip fsautocomplete installation since we're using Nix version."
+    nil)
+
+  (defadvice eglot-fsharp-current-version-p (around always-current-for-nix activate)
+    "Always consider the Nix-provided version as current."
+    (setq ad-return-value t)))
+
+;; Package that helps with eglot performance
+(use-package eglot-booster
+  :after eglot
+  :config	(eglot-booster-mode))
+
+(use-package eglot
+  :custom
+  (eglot-send-changes-idle-time 0.1)
+  (eglot-extend-to-xref t)
+  :config
+  (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
+  ;; Disable eglot inlay hints by default
+  (add-hook 'eglot-managed-mode-hook (lambda () (eglot-inlay-hints-mode -1)))
+
+  ;; Add formatter to eglot-managed-mode-hook instead
+  ;; (add-hook 'eglot-managed-mode-hook
+  ;;           (lambda ()
+  ;;             (add-hook 'before-save-hook #'eglot-format-buffer nil t)))
+  ;;
+  (setq eglot-autoshutdown t))
+
+
+;; Setup lsp for eglot for modes not currently supported by default by eglot
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '(scala-ts-mode . ("metals")))
+  (add-to-list 'eglot-server-programs
+               '(fsharp-mode . ("fsautocomplete" "--adaptive-lsp-server")))
+  (add-to-list 'eglot-server-programs
+               '(haskell-ts-mode . ("haskell-language-server-wrapper" "--lsp"))))
+
+(define-prefix-command 'lsp-prefix-map)
+(global-set-key (kbd "C-l") 'lsp-prefix-map)
+
+(dolist (binding '(("l" . eglot)
+                   ("a" . eglot-code-actions)
+                   ("f" . eglot-format-buffer)
+                   ("r" . eglot-rename)
+                   ("H" . eglot-inlay-hints-mode)
+                   ("d" . eglot-find-declaration)
+                   ("i" . eglot-find-implementation)
+                   ("t" . eglot-find-typeDefinition)
+                   ("e" . flymake-goto-next-error)
+                   ("o" . eglot-organize-imports)
+                   ("h" . eldoc-box-help-at-point)))
+
+  (define-key lsp-prefix-map (kbd (car binding)) (cdr binding)))
+
+(use-package eldoc-box)
+
 (use-package web-mode
   :ensure t
   :mode
@@ -88,51 +164,3 @@
    ("\\.erb\\'" . web-mode)
    ("\\.mustache\\'" . web-mode)
    ("\\.djhtml\\'" . web-mode)))
-
-(use-package lsp-mode
-  :init
-  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-  :custom
-  (lsp-keymap-prefix "C-c l")
-  ;; (lsp-completion-provider :none)       ; Use corfu instead for lsp completions
-  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-         ;; if you want which-key integration
-         (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp)
-
-;; optionally
-(use-package lsp-ui :commands lsp-ui-mode)
-
-(use-package lsp-haskell
-  :ensure t)
-
-(defun lsp-booster--advice-json-parse (old-fn &rest args)
-  "Try to parse bytecode instead of json."
-  (or
-   (when (equal (following-char) ?#)
-     (let ((bytecode (read (current-buffer))))
-       (when (byte-code-function-p bytecode)
-         (funcall bytecode))))
-   (apply old-fn args)))
-(advice-add (if (progn (require 'json)
-                       (fboundp 'json-parse-buffer))
-                'json-parse-buffer
-              'json-read)
-            :around
-            #'lsp-booster--advice-json-parse)
-
-(defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
-  "Prepend emacs-lsp-booster command to lsp CMD."
-  (let ((orig-result (funcall old-fn cmd test?)))
-    (if (and (not test?)                             ;; for check lsp-server-present?
-             (not (file-remote-p default-directory)) ;; see lsp-resolve-final-command, it would add extra shell wrapper
-             lsp-use-plists
-             (not (functionp 'json-rpc-connection))  ;; native json-rpc
-             (executable-find "emacs-lsp-booster"))
-        (progn
-          (when-let ((command-from-exec-path (executable-find (car orig-result))))  ;; resolve command from exec-path (in case not found in $PATH)
-            (setcar orig-result command-from-exec-path))
-          (message "Using emacs-lsp-booster for %s!" orig-result)
-          (cons "emacs-lsp-booster" orig-result))
-      orig-result)))
-(advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
