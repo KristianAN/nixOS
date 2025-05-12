@@ -41,23 +41,23 @@ in
   "${modifier}+ctrl+p" = "exec grimshot --notify save area";
 
   # Directional keybindings - focus
-  "${modifier}+m" = "focus left";
-  "${modifier}+n" = "focus down";
-  "${modifier}+e" = "focus up";
-  "${modifier}+i" = "focus right";
+  "${modifier}+n" = "focus left";
+  "${modifier}+e" = "focus down";
+  "${modifier}+i" = "focus up";
+  "${modifier}+o" = "focus right";
 
   # Layout
   "${modifier}+h" = "layout toggle split";
   
   # Directional keybindings - move windows
-  "${modifier}+Shift+m" = "move left";
-  "${modifier}+Shift+n" = "move down";
-  "${modifier}+Shift+e" = "move up";
-  "${modifier}+Shift+i" = "move right";
+  "${modifier}+Shift+n" = "move left";
+  "${modifier}+Shift+e" = "move down";
+  "${modifier}+Shift+i" = "move up";
+  "${modifier}+Shift+o" = "move right";
   
   # Workspace movement
-  "${modifier}+Ctrl+m" = "workspace prev";
-  "${modifier}+Ctrl+i" = "workspace next";
+  "${modifier}+Ctrl+n" = "workspace prev";
+  "${modifier}+Ctrl+o" = "workspace next";
 
   # Resize
   "${modifier}+r" = "mode resize";

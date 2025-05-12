@@ -36,6 +36,33 @@ let
     recipe = pkgs.writeText "recipe" ''
       (haskell-ts-mode :fetcher git :url "https://codeberg.org/pranshu/haskell-ts-mode.git")
     '';
+  };
+
+  tree-sitter-unison = pkgs.tree-sitter.buildGrammar {
+    language = "tree-sitter-unison";
+    version = "2.0.1";
+    src = pkgs.fetchFromGitHub {
+      owner = "kylegoetz";
+      repo = "tree-sitter-unison";
+      rev = "169e7f748a540ec360c0cb086b448faad012caa4";
+      hash = "sha256-0HOLtLh1zRdaGQqchT5zFegWKJHkQe9r7DGKL6sSkPo=";
+    };
+  };
+  
+  unison-ts-mode = pkgs.emacsPackages.melpaBuild {
+    pname = "unison-ts-mode";
+    version = "1";
+    commit = "04cbd1f73f94346e68f9b42f8ab9d7ab8ab43ad3";
+
+    src = pkgs.fetchgit {
+      url = "https://github.com/fmguerreiro/unison-ts-mode";
+      rev = "04cbd1f73f94346e68f9b42f8ab9d7ab8ab43ad3";
+      sha256 = "sha256-GwF5//vnrdANGWz8gDv7Oi79UDGej88VXtnalV85f6o="; 
+    };
+
+      recipe = pkgs.writeText "recipe" ''
+      (unison-ts-mode :fetcher git :url "https://github.com/fmguerreiro/unison-ts-mode")
+      '';
     };
 
     eglot-booster = pkgs.emacsPackages.melpaBuild {
@@ -53,11 +80,11 @@ let
 
       recipe = pkgs.writeText "recipe" ''
         (eglot-booster
-      :repo "jdtsmith/eglot-booster"
-      :fetcher github
-      :files ("*.el"))
-      ''; 
-  };
+        :repo "jdtsmith/eglot-booster"
+        :fetcher github
+        :files ("*.el"))
+        ''; 
+      };
 in
 {
   programs.emacs = {
@@ -103,13 +130,21 @@ in
         git-gutter
 
         # Programming
-        treesit-grammars.with-all-grammars
+        (treesit-grammars.with-grammars (grammars: with grammars; [
+            tree-sitter-nix
+            tree-sitter-unison
+            tree-sitter-haskell
+            tree-sitter-scala
+            tree-sitter-java
+            tree-sitter-yaml
+          ]))
         scala-ts-mode
         nix-ts-mode
         web-mode
         fsharp-mode
         eglot-fsharp
         haskell-ts-mode-custom
+        unison-ts-mode
 
         # Editing
         markdown-mode

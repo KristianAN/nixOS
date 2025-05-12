@@ -3,7 +3,7 @@
 (use-package magit
   :bind (:map magit-mode-map
               (";" . magit-discard)
-              ("e" . previous-line)))
+              ))
 
 (use-package forge
   :after magit

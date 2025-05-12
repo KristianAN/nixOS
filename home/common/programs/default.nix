@@ -14,6 +14,7 @@
     ./tmux.nix
     # ./waybar.nix
     ./yambar.nix
+    ./helix
     ./foot.nix
     ./emacs/default.nix
     ./nyxt/default.nix

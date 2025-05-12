@@ -61,6 +61,9 @@
   (haskell-ts-ghci "ghci")
   :mode (("\\.hs\\'" . haskell-ts-mode)))
 
+(use-package unison-ts-mode
+  :ensure t)
+
 (use-package nix-ts-mode
   :mode "\\.nix\\'")
 
@@ -130,6 +133,8 @@
                '(scala-ts-mode . ("metals")))
   (add-to-list 'eglot-server-programs
                '(fsharp-mode . ("fsautocomplete" "--adaptive-lsp-server")))
+  (add-to-list 'eglot-server-programs
+               '(unison-ts-mode . ("127.0.0.1" 5757)))
   (add-to-list 'eglot-server-programs
                '(haskell-ts-mode . ("haskell-language-server-wrapper" "--lsp"))))
 
