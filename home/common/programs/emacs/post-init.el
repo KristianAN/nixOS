@@ -94,9 +94,6 @@
 (minimal-emacs-load-user-init "iedit.el")
 
 ;;; Meow
-(minimal-emacs-load-user-init "dired.el")
-
-;;; Meow
 (minimal-emacs-load-user-init "meow.el")
 
 ;;; Dashboard
