@@ -39,6 +39,8 @@
 (dolist (binding '(("g" . consult-ripgrep)
                    ("f" . consult-find)
                    ("l" . consult-line)
+                   ("d" . consult-flymake)
+                   ("y" . consult-yank-from-kill-ring)
                    ("L" . kristian/consult-grep-line-from-visual-selection)
                    ("v" . kristian/consult-ripgrep-from-visual-selection)))
   (define-key meow-prefix-find (kbd (car binding)) (cdr binding)))
@@ -49,6 +51,14 @@
                    ("b" . kristian/consult-grep-project-buffer-term)
                    ("c" . kristian/my-toggle-theme)))
   (define-key meow-prefix-t-map (kbd (car binding)) (cdr binding)))
+
+;; Buffer management
+(define-prefix-command 'meow-prefix-buffer-map)
+(dolist (binding '(("b" . consult-buffer)
+                   ("p" . consult-project-buffer)
+                   ("w" . consult-buffer-other-window)
+                   ("t" . consult-buffer-other-tab)))
+  (define-key meow-prefix-buffer-map (kbd (car binding)) (cdr binding)))
 
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-colemak-dh)
@@ -71,7 +81,7 @@
    '(";" . meow-comment)
    '("/" . meow-keypad-describe-key)
    '("?" . meow-cheatsheet)
-   '("b" . consult-project-buffer)
+   '("b" . meow-prefix-buffer-map)
    '("p" . meow-prefix-p-map)
    '("t" . meow-prefix-t-map)
    '("f" . meow-prefix-find)
