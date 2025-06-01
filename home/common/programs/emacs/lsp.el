@@ -136,7 +136,7 @@
   (add-to-list 'eglot-server-programs
                '(unison-ts-mode . ("127.0.0.1" 5757)))
   (add-to-list 'eglot-server-programs
-               '(haskell-ts-mode . ("haskell-language-server-wrapper" "--lsp"))))
+               '(haskell-ts-mode . ("cabal" "run" "lspipe" "--" "--server" "haskell-language-server --lsp"))))
 
 (define-prefix-command 'lsp-prefix-map)
 (global-set-key (kbd "C-l") 'lsp-prefix-map)
@@ -169,3 +169,40 @@
    ("\\.erb\\'" . web-mode)
    ("\\.mustache\\'" . web-mode)
    ("\\.djhtml\\'" . web-mode)))
+
+(use-package dape
+  :ensure t
+  )
+
+(with-eval-after-load 'dape
+  (add-to-list 'dape-configs
+               `(jdtls-attach
+                 modes (java-mode java-ts-mode)
+                 ensure (lambda (config)
+                          (let ((file (or (dape-config-get config :filePath)
+                                          (buffer-file-name))))
+                            (unless (and (stringp file) (file-exists-p file))
+                              (user-error "Unable to locate Java file"))
+                            (with-current-buffer (find-file-noselect file)
+                              (unless (and (featurep 'eglot) (eglot-current-server))
+                                (user-error "No eglot instance active in buffer %s" (current-buffer)))
+                              (unless (seq-contains-p (eglot--server-capable :executeCommandProvider :commands)
+                                                      "vscode.java.resolveClasspath")
+                                (user-error "Jdtls instance does not bundle java-debug-server, please install")))))
+                 fn (lambda (config)
+                      (let ((file (or (dape-config-get config :filePath)
+                                      (buffer-file-name))))
+                        (with-current-buffer (find-file-noselect file)
+                          (if-let* ((server (eglot-current-server)))
+                              (let ((port (eglot-execute-command server
+                                                                 "vscode.java.startDebugSession" nil)))
+                                (thread-first config
+                                              (plist-put 'port port)))
+                            server))))
+                 :filePath ,(lambda () (buffer-file-name))
+                 :request "attach"
+                 :type "java"
+                 :hostName "localhost"
+                 :port ,(lambda () (read-number "JPDA Port: " 8000))
+                 :timeout 5000)))
+
