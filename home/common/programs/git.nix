@@ -3,7 +3,7 @@
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.gitFull;
-    userEmail = "kristian@krined.no";
+    userEmail = "kristiananh@proton.me";
     userName = "Kristian Nedrevold-Hansen";
     extraConfig = {
       core.editor = "emacsclient";
