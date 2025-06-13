@@ -11,6 +11,7 @@
              (cabal-gild . ("cabal-gild"))
              (fourmolu . ("fourmolu" "--stdin-input-file" filepath))
              (scalafmt . ("scalafmt" filepath "--stdin" "--non-interactive" "--quiet" "--stdout"))
+             (prettier . ("npx"  "prettier" "--stdin-filepath" filepath))
              )
            apheleia-formatters))
 
@@ -20,7 +21,11 @@
            '((haskell-mode . fourmolu)
              (haskell-cabal-mode . cabal-gild)
              (scala-ts-mode . scalafmt)
+             (web-mode . prettier)
+             (typescript-ts-mode . prettier)
              )
-           apheleia-mode-alist))))
+           apheleia-mode-alist))
+    )
+  )
 
 (apheleia-global-mode +1)

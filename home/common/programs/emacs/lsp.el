@@ -105,10 +105,6 @@
     "Always consider the Nix-provided version as current."
     (setq ad-return-value t)))
 
-;; Package that helps with eglot performance
-(use-package eglot-booster
-  :after eglot
-  :config	(eglot-booster-mode))
 
 (use-package eglot
   :custom
@@ -136,7 +132,7 @@
   (add-to-list 'eglot-server-programs
                '(unison-ts-mode . ("127.0.0.1" 5757)))
   (add-to-list 'eglot-server-programs
-               '(haskell-ts-mode . ("cabal" "run" "lspipe" "--" "--server" "haskell-language-server --lsp"))))
+               '(haskell-ts-mode . ("cabal" "run" "lspipe" "--" "--server" "haskell-language-server --lsp" "--server" "typos-lsp" "--debug"))))
 
 (define-prefix-command 'lsp-prefix-map)
 (global-set-key (kbd "C-l") 'lsp-prefix-map)
@@ -169,6 +165,10 @@
    ("\\.erb\\'" . web-mode)
    ("\\.mustache\\'" . web-mode)
    ("\\.djhtml\\'" . web-mode)))
+
+(use-package eglot-java
+  :ensure t
+  :hook ('java-ts-mode 'eglot-java-mode))
 
 (use-package dape
   :ensure t
