@@ -1,12 +1,14 @@
 {
-  config,
   pkgs,
   lib,
   ...
 }:
 let
   # read from json
-  mqttConfig = ''''; # builtins.fromJSON (builtins.readFile /home/kristian/.configuration/mqtt.json);
+  mqttConfig = {
+    network_key = "temp";
+    mqtt_password =  "superduperpass";
+  };
 in
 {
   networking.firewall = {
@@ -26,13 +28,12 @@ in
     enable = true;
     listeners = [
       {
-        address = "0.0.0.0";  # Changed from 192.168.4.100 for better accessibility
+        address = "0.0.0.0";  
         port = 1883;
         users = {
           zigbee2mqtt = {
-            # Fix: Change "pattern readwrite #" to "readwrite #"
             acl = [ "readwrite #" ];
-            password = ''''; # config.mqtt_password;
+            password = mqttConfig.mqtt_password;
           };
         };
       }
@@ -65,7 +66,7 @@ in
         version = 5;
         server = "mqtt://192.168.4.100:1883";
         user = "zigbee2mqtt";
-        password = ''''; # config.mqtt_password;
+        password = mqttConfig.mqtt_password;
       };
     };
   };
