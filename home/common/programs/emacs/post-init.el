@@ -107,6 +107,15 @@
 (use-package indent-bars
   :hook ((haskell-ts-mode scala-mode scala-ts-mode yaml-mode python-ts-mode) . indent-bars-mode))
 
+;;; Lisp
+;; (use-package sly
+;;   :ensure t
+;;   :config
+;;   (setq sly-lisp-implementations
+;;         '((sbcl ("sbcl") :coding-system utf-8-unix)))
+;;   ;; Optional: Set the default implementation
+;;   (setq sly-default-lisp 'sbcl))
+
 ;;; Terminal
 (use-package eat)
 
