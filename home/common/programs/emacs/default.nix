@@ -158,6 +158,7 @@ in
         apheleia # Formatting
 
         # Other
+        pdf-tools
         eat
         org-roam
         org-roam-ui

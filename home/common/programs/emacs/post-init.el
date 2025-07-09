@@ -116,6 +116,15 @@
 ;;   ;; Optional: Set the default implementation
 ;;   (setq sly-default-lisp 'sbcl))
 
+;;; PDFs
+(use-package pdf-tools
+  :ensure t
+  :hook (pdf-view-mode . (lambda ()
+			               (display-line-numbers-mode -1)))
+  :config
+  (pdf-loader-install)
+  (setq-default pdf-view-display-size 'fit-page))
+
 ;;; Terminal
 (use-package eat)
 
