@@ -28,6 +28,7 @@
             (javascript-mode . js-ts-mode)
             (typescript-mode . typescript-ts-mode)
             (java-mode . java-ts-mode)
+            (haskell-mode . haskell-ts-mode)
             (css-mode . css-ts-mode)
             (sh-mode . bash-ts-mode)
             (scala-mode . scala-ts-mode)

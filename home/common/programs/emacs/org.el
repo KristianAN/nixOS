@@ -14,6 +14,6 @@
 ;; active Babel languages
 ;; (org-babel-do-load-languages
 ;;  'org-babel-load-languages
-;;  '((mermaid . t)
+;;  '((haskell . t)
 ;;    (emacs-lisp . t)))
 
