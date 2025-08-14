@@ -7,15 +7,19 @@
 ;;; Icons
 (use-package nerd-icons)
 
-;;; Set font
-(add-hook 'after-make-frame-functions
-          (lambda (frame)
-            (with-selected-frame frame
-              ;; All customizations here
-              (load-theme 'ef-owl t)
-              (set-frame-font "Aporetic Sans Mono 12" nil t)
-              )))
+(use-package doric-themes
+  :ensure t
+  :demand t
+  :config
+  ;; These are the default values.
+  (setq doric-themes-to-toggle '(doric-dark doric-light))
+  (setq doric-themes-to-rotate doric-themes-collection)
 
+  (doric-themes-select 'doric-dark)
+
+  (set-face-attribute 'default nil :family "Aporetic Sans Mono" :height 130)
+  (set-face-attribute 'variable-pitch nil :family "Aporetic Sans" :height 1.0)
+  (set-face-attribute 'fixed-pitch nil :family "Aporetic Sans Mono" :height 1.0))
 
 (use-package vim-tab-bar
   :ensure t

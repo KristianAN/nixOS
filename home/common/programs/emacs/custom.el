@@ -21,10 +21,11 @@
         (insert "term"))
     (call-interactively #'consult-project-buffer)))
 
+;; Don't currently use this as doric-themes can toggle themselves
 ;; (custom-enabled-themes)
-(defun kristian/my-toggle-theme ()
-  (interactive)
-  (let ((current (car custom-enabled-themes)))
-    (if (string-match-p (regexp-quote "light") (symbol-name current))
-        (load-theme 'ef-night t)
-      (load-theme 'ef-light t))))
+;; (defun kristian/my-toggle-theme ()
+;;   (interactive)
+;;   (let ((current (car custom-enabled-themes)))
+;;     (if (string-match-p (regexp-quote "vivendi") (symbol-name current))
+;;         (load-theme 'modus-operandi t)
+;;       (load-theme 'modus-vivendi t))))

@@ -33,21 +33,6 @@
             (sh-mode . bash-ts-mode)
             (scala-mode . scala-ts-mode)
             (shell-script-mode . bash-ts-mode)))
-
-  (defun my-custom-font-lock-settings ()
-    "Set up JavaScript Tree-sitter mode with custom face settings."
-    (setq-local face-remapping-alist
-                (append face-remapping-alist
-                        `((font-lock-string-face . (:foreground ,(car (ef-themes-with-colors (list yellow)))))
-                          (font-lock-number-face . (:foreground ,(car (ef-themes-with-colors (list yellow)))))
-                          (font-lock-comment-face . (:foreground ,(car (ef-themes-with-colors (list red)))))
-                          (font-lock-function-name-face . default)
-                          (font-lock-variable-name-face . default)
-                          ))))
-
-  ;; Add hooks
-  (add-hook 'scala-ts-mode-hook 'my-custom-font-lock-settings)
-  (add-hook 'java-ts-mode-hook 'my-custom-font-lock-settings)
   )
 
 (use-package scala-ts-mode
@@ -62,8 +47,6 @@
   (haskell-ts-ghci "ghci")
   :mode (("\\.hs\\'" . haskell-ts-mode)))
 
-(use-package unison-ts-mode
-  :ensure t)
 
 (use-package nix-ts-mode
   :mode "\\.nix\\'")
@@ -76,36 +59,6 @@
 (use-package python-ts-mode
   :mode ("\\.py\\'" . python-ts-mode))
 
-(use-package fsharp-mode
-  :defer t
-  :ensure t)
-
-(use-package eglot-fsharp
-  :ensure t
-  :after fsharp-mode)
-
-(defvar my-nix-fsautocomplete-path
-  (with-temp-buffer
-    (when (= 0 (call-process "which" nil t nil "fsautocomplete"))
-      (goto-char (point-min))
-      (buffer-substring-no-properties (point-min) (1- (point-max)))))
-  "Path to fsautocomplete executable provided by Nix.")
-
-(when my-nix-fsautocomplete-path
-  (setq eglot-fsharp-server-install-dir nil)
-
-  (defadvice eglot-fsharp--path-to-server (around use-nix-fsautocomplete activate)
-    "Use fsautocomplete from Nix."
-    (setq ad-return-value my-nix-fsautocomplete-path))
-
-  (defadvice eglot-fsharp--maybe-install (around skip-installation activate)
-    "Skip fsautocomplete installation since we're using Nix version."
-    nil)
-
-  (defadvice eglot-fsharp-current-version-p (around always-current-for-nix activate)
-    "Always consider the Nix-provided version as current."
-    (setq ad-return-value t)))
-
 
 (use-package eglot
   :custom
@@ -117,10 +70,11 @@
   (add-hook 'eglot-managed-mode-hook (lambda () (eglot-inlay-hints-mode -1)))
 
   ;; Add formatter to eglot-managed-mode-hook instead
-  ;; (add-hook 'eglot-managed-mode-hook
-  ;;           (lambda ()
-  ;;             (add-hook 'before-save-hook #'eglot-format-buffer nil t)))
-  ;;
+  (add-hook 'eglot-managed-mode-hook
+            (lambda ()
+              (when (eq major-mode 'scala-ts-mode)
+                (add-hook 'before-save-hook #'eglot-format-buffer nil t))))
+  
   (setq eglot-autoshutdown t))
 
 
@@ -128,10 +82,6 @@
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
                '(scala-ts-mode . ("metals")))
-  (add-to-list 'eglot-server-programs
-               '(fsharp-mode . ("fsautocomplete" "--adaptive-lsp-server")))
-  (add-to-list 'eglot-server-programs
-               '(unison-ts-mode . ("127.0.0.1" 5757)))
   (add-to-list 'eglot-server-programs
                '(haskell-ts-mode . ("cabal" "run" "lspipe" "--" "--server" "haskell-language-server --lsp" "--server" "typos-lsp" "--debug"))))
 

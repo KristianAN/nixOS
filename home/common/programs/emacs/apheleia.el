@@ -10,7 +10,6 @@
            '(
              (cabal-gild . ("cabal-gild"))
              (fourmolu . ("fourmolu" "--stdin-input-file" filepath))
-             (scalafmt . ("scalafmt" filepath "--stdin" "--non-interactive" "--quiet" "--stdout"))
              (prettier . ("npx"  "prettier" "--stdin-filepath" filepath))
              )
            apheleia-formatters))
@@ -20,11 +19,14 @@
            'list
            '((haskell-mode . fourmolu)
              (haskell-cabal-mode . cabal-gild)
-             (scala-ts-mode . scalafmt)
              (web-mode . prettier)
              (typescript-ts-mode . prettier)
              )
            apheleia-mode-alist))
+
+    ;; Disable apheleia for scala-ts-mode to let eglot handle formatting
+    (add-hook 'scala-ts-mode-hook
+              (lambda () (apheleia-mode -1)))
     )
   )
 
