@@ -78,13 +78,6 @@ in
         # Direnv
         envrc
 
-        # Git
-        magit
-        forge
-        git-gutter-fringe
-        fringe-helper
-        git-gutter
-
         # Programming
         (treesit-grammars.with-grammars (grammars: with grammars; [
           tree-sitter-nix

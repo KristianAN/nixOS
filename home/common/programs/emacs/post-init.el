@@ -56,8 +56,6 @@
 
 (minimal-emacs-load-user-init "custom.el")
 
-(minimal-emacs-load-user-init "magit.el")
-
 (minimal-emacs-load-user-init "looks.el")
 
 (minimal-emacs-load-user-init "org.el")
@@ -71,6 +69,9 @@
 
 ;;; Detached
 (minimal-emacs-load-user-init "detached.el")
+
+;;; Denote
+(minimal-emacs-load-user-init "denote.el")
 
 ;;; LSP
 (minimal-emacs-load-user-init "lsp.el")
