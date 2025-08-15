@@ -97,7 +97,7 @@
    '("p" . meow-prefix-p-map)
    '("t" . meow-prefix-t-map)
    '("f" . meow-prefix-find)
-   '("f" . denote-prefix-map)
+   '("n" . denote-prefix-map)
    '("d" . meow-prefix-git)
    '("o" . dirvish-dwim)
    '("w" . save-buffer)
