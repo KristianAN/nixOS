@@ -3,14 +3,14 @@
 ;; Prefix maps for meow leader
 
 (define-prefix-command 'denote-prefix-map)
-(dolist (binding (('"o" . denote-open-or-create)
-                  ("g" . consult-denote-grep)
-                  ("f" . consult-denote-find)
-                  ("n" . denote)
-                  ("r" . denote-region)
-                  ("l" . denote-link)
-                  ("b" . denote-backlinks)
-                  ))
+(dolist (binding '(("o" . denote-open-or-create)
+                   ("g" . consult-denote-grep)
+                   ("f" . consult-denote-find)
+                   ("n" . denote)
+                   ("r" . denote-region)
+                   ("l" . denote-link)
+                   ("b" . denote-backlinks)
+                   ))
   (define-key denote-prefix-map (kbd (car binding)) (cdr binding)))
 
 (define-prefix-command 'detached-prefix-map)
