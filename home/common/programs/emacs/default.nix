@@ -70,10 +70,10 @@ in
         nerd-icons
         indent-bars
         doric-themes
-        vim-tab-bar
         mood-line
         nerd-icons-completion
         nerd-icons-corfu
+        spacious-padding
 
         # Direnv
         envrc
@@ -112,6 +112,8 @@ in
         pdf-tools
         eat
         denote
+        denote-org
+        consult-denote
         tabspaces
         detached
         dashboard

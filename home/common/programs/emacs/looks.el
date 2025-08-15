@@ -21,23 +21,18 @@
   (set-face-attribute 'variable-pitch nil :family "Aporetic Sans" :height 1.0)
   (set-face-attribute 'fixed-pitch nil :family "Aporetic Sans Mono" :height 1.0))
 
-(use-package vim-tab-bar
-  :ensure t
-  :commands vim-tab-bar-mode
-  :config
-  (defun my/hide-tab-bar-when-single (&rest _)
-    "Hide the tab bar if only one tab is open; show it otherwise."
-    (if (<= (length (tab-bar-tabs)) 1)
-        (tab-bar-mode -1)  ;; Turn off the tab-bar itself, not vim-tab-bar-mode
-      (unless tab-bar-mode
-        (tab-bar-mode 1))))
-  
-  (advice-add 'tab-bar-new-tab :after #'my/hide-tab-bar-when-single)
-  (advice-add 'tab-bar-close-tab :after #'my/hide-tab-bar-when-single)
-  (advice-add 'tab-bar-select-tab :after #'my/hide-tab-bar-when-single)
-  
-  :hook
-  (after-init . (lambda ()
-                  (vim-tab-bar-mode 1)
-                  (my/hide-tab-bar-when-single))))
 
+(use-package spacious-padding
+  :config
+  (setq spacious-padding-widths
+        '( :internal-border-width 15
+           :header-line-width 4
+           :mode-line-width 6
+           :tab-bar-width 4
+           :tab-width 4
+           :right-divider-width 30
+           :scroll-bar-width 0
+           :fringe-width 8)
+        )
+  :custom
+  (spacious-padding-mode 1))
