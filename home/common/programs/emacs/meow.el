@@ -1,6 +1,18 @@
 ;; evil.el --- Not really evil, meow -*- no-byte-compile: t; lexical-binding: t; -*-
 
 ;; Prefix maps for meow leader
+
+(define-prefix-command 'denote-prefix-map)
+(dolist (binding (('"o" . denote-open-or-create)
+                  ("g" . consult-denote-grep)
+                  ("f" . consult-denote-find)
+                  ("n" . denote)
+                  ("r" . denote-region)
+                  ("l" . denote-link)
+                  ("b" . denote-backlinks)
+                  ))
+  (define-key denote-prefix-map (kbd (car binding)) (cdr binding)))
+
 (define-prefix-command 'detached-prefix-map)
 (dolist (binding '(("v" . detached-view-session)
                    ("a" . detached-attach-session)
@@ -85,6 +97,7 @@
    '("p" . meow-prefix-p-map)
    '("t" . meow-prefix-t-map)
    '("f" . meow-prefix-find)
+   '("f" . denote-prefix-map)
    '("d" . meow-prefix-git)
    '("o" . dirvish-dwim)
    '("w" . save-buffer)
