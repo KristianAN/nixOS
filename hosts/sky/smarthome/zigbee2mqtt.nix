@@ -18,6 +18,7 @@ in
       8080
       8443
       1883
+      8581
     ];
   };
   services.udev.extraRules = ''
@@ -38,6 +39,11 @@ in
         };
       }
     ];
+  };
+
+  services.homebridge = {
+    enable = true;
+    openFirewall = true;
   };
 
   services.zigbee2mqtt = {
