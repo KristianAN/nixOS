@@ -54,7 +54,9 @@ in
     '';
 
     shellAliases = {
+      eat = "emacsclient -c -e \"(eat)\""
     };
+    
     shellInit = fishConfig;
   };
 }
