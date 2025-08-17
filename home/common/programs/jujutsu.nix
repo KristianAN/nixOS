@@ -6,12 +6,13 @@
     settings = {
       user = {
         name = "Kristian Nedrevold-Hansen";
-        email = "kristian@krined.no";
+        email = "kristiananh@proton.me";
       };
 
       ui = {
         color = "auto";
-        editor = "nvim";
+        editor = "emacsclient";
+        paginate = "never";
       };
     };
   };

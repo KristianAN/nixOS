@@ -15,9 +15,7 @@
   };
 
   home.packages = [
-    pkgs.vscode
     pkgs.virt-manager
-    pkgs.libreoffice
     pkgs.dconf
     pkgs.wdisplays
     pkgs.wev
@@ -27,23 +25,19 @@
     pkgs.wf-recorder
     pkgs.slurp
     pkgs.mpv
-    pkgs.neovide
-    pkgs.distrobox
     pkgs.sway-contrib.grimshot
     pkgs.texliveFull
     pkgs.brightnessctl
     inputs.myNeovimFlake.packages.x86_64-linux.nvim
     pkgs.pandoc
     pkgs.any-nix-shell
-    pkgs.librewolf
-    pkgs.ladybird
     pkgs.cmatrix
     pkgs.proton-pass
   ];
 
   programs.home-manager.enable = true;
 
-  home.sessionVariables.EDITOR = "nvim";
+  home.sessionVariables.EDITOR = "emacsclient";
 
   programs.gh = {
     enable = true;
