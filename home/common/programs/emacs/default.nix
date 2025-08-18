@@ -70,7 +70,7 @@ in
         nerd-icons
         indent-bars
         doric-themes
-        mood-line
+        delight
         nerd-icons-completion
         nerd-icons-corfu
         spacious-padding
@@ -101,7 +101,6 @@ in
         apheleia # Formatting
 
         # Other
-        pdf-tools
         eat
         denote
         denote-org

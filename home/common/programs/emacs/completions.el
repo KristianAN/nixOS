@@ -71,13 +71,19 @@
   (completion-category-overrides '((file (styles partial-completion)))))
 
 (use-package marginalia
-  ;; Marginalia allows Embark to offer you preconfigured actions in more contexts.
-  ;; In addition to that, Marginalia also enhances Vertico by adding rich
-  ;; annotations to the completion candidates displayed in Vertico's interface.
-  :ensure t
-  :defer t
-  :commands (marginalia-mode marginalia-cycle)
-  :hook (after-init . marginalia-mode))
+  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
+  ;; available in the *Completions* buffer, add it to the
+  ;; `completion-list-mode-map'.
+  :bind (:map minibuffer-local-map
+              ("M-A" . marginalia-cycle))
+
+  ;; The :init section is always executed.
+  :init
+
+  ;; Marginalia must be activated in the :init section of use-package such that
+  ;; the mode gets enabled right away. Note that this forces loading the
+  ;; package.
+  (marginalia-mode))
 
 (use-package embark
   ;; Embark is an Emacs package that acts like a context menu, allowing
@@ -142,19 +148,6 @@
 
 (use-package wgrep)
 
-;; Pretty icons for completion
-(use-package nerd-icons-completion
-  :ensure t
-  :after marginalia
-  :config
-  (nerd-icons-completion-marginalia-setup)
-  (nerd-icons-completion-mode 1))
-
-(use-package nerd-icons-corfu
-  :ensure t
-  :after corfu
-  :config
-  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
 (setopt text-mode-ispell-word-completion nil)
 

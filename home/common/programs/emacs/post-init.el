@@ -50,6 +50,8 @@
 
 (minimal-emacs-load-user-init "custom.el")
 
+(minimal-emacs-load-user-init "completions.el")
+
 (minimal-emacs-load-user-init "looks.el")
 
 (minimal-emacs-load-user-init "org.el")
@@ -57,9 +59,6 @@
 (minimal-emacs-load-user-init "org.el")
 
 (minimal-emacs-load-user-init "tabspaces.el")
-
-;;; Completions
-(minimal-emacs-load-user-init "completions.el")
 
 ;;; Detached
 (minimal-emacs-load-user-init "detached.el")
@@ -73,14 +72,8 @@
 ;;; Dirvish
 ;; (minimal-emacs-load-user-init "dirvish.el") Use plain dired for now
 
-;;; Modeline
-(minimal-emacs-load-user-init "modeline.el")
-
 ;;; Tramp
 (minimal-emacs-load-user-init "tramp.el")
-
-;;; Custom nix stuff
-(minimal-emacs-load-user-init "nix-config.el")
 
 ;;; Formatting
 (minimal-emacs-load-user-init "apheleia.el")
@@ -108,17 +101,28 @@
 ;;   ;; Optional: Set the default implementation
 ;;   (setq sly-default-lisp 'sbcl))
 
-;;; PDFs
-(use-package pdf-tools
-  :ensure t
-  :hook (pdf-view-mode . (lambda ()
-			               (display-line-numbers-mode -1)))
-  :config
-  (pdf-loader-install)
-  (setq-default pdf-view-display-size 'fit-page))
-
 ;;; Terminal
 (use-package eat)
+
+;;; delight
+(use-package delight
+  :ensure t
+  :config
+  (delight '((envrc-mode nil "envrc")               ; Hide envrc-mode
+             (which-key-mode nil "which-key")       ; Hide which-key
+             (apheleia-mode nil "apheleia")         ; Hide apheleia
+             (visual-line-mode nil "simple")        ; Hide wrap mode
+             
+             ;; Other unwanted minor modes
+             (auto-revert-mode nil "autorevert")
+             (eldoc-mode nil "eldoc")
+             (company-mode nil "company")
+             (yas-minor-mode nil "yasnippet")))
+  
+  ;; Force hide vc-mode specifically
+  (with-eval-after-load 'vc-hooks
+    (setq-default mode-line-format
+                  (delete '(vc-mode vc-mode) mode-line-format))))
 
 (add-hook 'eshell-load-hook #'eat-eshell-mode)
 (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)
