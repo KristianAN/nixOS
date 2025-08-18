@@ -235,10 +235,6 @@
 
 (setq resize-mini-windows 'grow-only)
 
-;; Automatically balance windows after splitting
-(advice-add 'split-window-right :after 'balance-windows)
-(advice-add 'split-window-below :after 'balance-windows)
-
 ;;; Scrolling
 ;; Enables faster scrolling through unfontified regions. This may result in
 ;; brief periods of inaccurate syntax highlighting immediately after scrolling,
