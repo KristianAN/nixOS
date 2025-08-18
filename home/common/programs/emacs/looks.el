@@ -7,21 +7,6 @@
 ;;; Icons
 (use-package nerd-icons)
 
-(use-package doric-themes
-  :ensure t
-  :demand t
-  :config
-  ;; These are the default values.
-  (setq doric-themes-to-toggle '(doric-dark doric-light))
-  (setq doric-themes-to-rotate doric-themes-collection)
-
-  (doric-themes-select 'doric-dark)
-
-  (set-face-attribute 'default nil :family "Aporetic Sans Mono" :height 130)
-  (set-face-attribute 'variable-pitch nil :family "Aporetic Sans" :height 1.0)
-  (set-face-attribute 'fixed-pitch nil :family "Aporetic Sans Mono" :height 1.0))
-
-
 (use-package spacious-padding
   :config
   (setq spacious-padding-widths
@@ -50,3 +35,14 @@
   :after corfu
   :config
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+
+
+(require-theme 'modus-themes) 
+
+(setq modus-themes-to-toggle '(modus-vivendi-tinted modus-operandi-tinted))
+
+(set-face-attribute 'default nil :family "Aporetic Sans Mono" :height 130)
+(set-face-attribute 'variable-pitch nil :family "Aporetic Sans" :height 1.0)
+(set-face-attribute 'fixed-pitch nil :family "Aporetic Sans Mono" :height 1.0)
+
+(load-theme 'modus-vivendi-tinted)

@@ -69,7 +69,6 @@ in
         # Good looks
         nerd-icons
         indent-bars
-        doric-themes
         delight
         nerd-icons-completion
         nerd-icons-corfu

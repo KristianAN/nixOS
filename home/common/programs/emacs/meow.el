@@ -61,7 +61,7 @@
 (dolist (binding '(("p" . eat-project-other-window)
                    ("n" . eat)
                    ("b" . kristian/consult-grep-project-buffer-term)
-                   ("c" . doric-themes-toggle)))
+                   ("c" . modus-themes-toggle)))
   (define-key meow-prefix-t-map (kbd (car binding)) (cdr binding)))
 
 ;; Buffer management
