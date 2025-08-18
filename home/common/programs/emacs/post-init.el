@@ -48,12 +48,6 @@
 ;; Set global visual line mode for line-wrapping
 (global-visual-line-mode t)
 
-(use-package markdown-mode
-  :ensure t
-  :mode ("README\\.md\\'" . gfm-mode)
-  :init (setq markdown-command "multimarkdown")
-  )
-
 (minimal-emacs-load-user-init "custom.el")
 
 (minimal-emacs-load-user-init "looks.el")
@@ -96,9 +90,6 @@
 
 ;;; Meow
 (minimal-emacs-load-user-init "meow.el")
-
-;;; Dashboard
-(minimal-emacs-load-user-init "dashboard.el")
 
 ;;; Direnv integration
 (use-package envrc

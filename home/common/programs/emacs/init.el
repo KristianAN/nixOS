@@ -39,6 +39,9 @@
 
 ;; Ensure the 'use-package' package is installed and loaded
 
+;; Enable use-package statistic
+(setq use-package-compute-statistics t)
+
 ;;; Features, warnings, and errors
 
 ;; Disable warnings from the legacy advice API. They aren't useful.

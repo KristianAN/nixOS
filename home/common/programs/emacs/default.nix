@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  metalsVersion = "1.5.1";
+  metalsVersion = "1.6.2";
   metals = pkgs.metals.overrideAttrs (
     final: prev: {
       deps = pkgs.stdenv.mkDerivation {
@@ -15,7 +15,7 @@ let
         '';
         outputHashMode = "recursive";
         outputHashAlgo = "sha256";
-        outputHash = "sha256-2FA2B/WzNGU4B785pn5zZ9Xj64huzbSbr2Or+CxUMlI=";
+        outputHash = "sha256-WcPgX0GZSqpVVAzQ1zCxuRCkwcuR/8bwGjSCpHneeio=";
       };
       buildInputs = [ final.deps ];
     }
@@ -97,7 +97,6 @@ in
         haskell-ts-mode
 
         # Editing
-        markdown-mode
         iedit
         apheleia # Formatting
 
@@ -109,7 +108,6 @@ in
         consult-denote
         tabspaces
         detached
-        dashboard
 
         # lsp
         # eglot-booster
