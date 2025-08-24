@@ -82,7 +82,7 @@
 (minimal-emacs-load-user-init "iedit.el")
 
 ;;; Meow
-(minimal-emacs-load-user-init "meow.el")
+;;; (minimal-emacs-load-user-init "meow.el")
 
 ;;; Direnv integration
 (use-package envrc
