@@ -21,7 +21,6 @@
         (insert "term"))
     (call-interactively #'consult-project-buffer)))
 
-test ("foo")
 (defconst custom/wrap-symbol-pairs
   '((?\( . ("(" . ")"))
     (?\{ . ("{" . "}"))

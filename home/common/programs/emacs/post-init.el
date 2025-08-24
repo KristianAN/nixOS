@@ -82,7 +82,7 @@
 (minimal-emacs-load-user-init "iedit.el")
 
 ;;; Meow
-;;; (minimal-emacs-load-user-init "meow.el")
+(minimal-emacs-load-user-init "meow.el")
 
 ;;; Direnv integration
 (use-package envrc
@@ -102,7 +102,20 @@
 ;;   (setq sly-default-lisp 'sbcl))
 
 ;;; Terminal
-(use-package eat)
+(use-package eat
+  :bind
+  (("C-c e p" . eat-project-other-window)
+   ("C-c e n" . eat)
+   ("C-x p s" . eat-project)
+   ("C-c e g" . kristian/consult-grep-project-buffer-term)
+   ("C-c e e" . eat-emacs-mode)
+   ("C-c e c" . eat-char-mode)
+   ("C-c e l" . eat-line-mode)
+   ("C-c e s" . eat-eshell-mode)
+   ("C-c e t" . eat-trace-mode)
+   ("C-c e k" . eat-kill-process)
+   ("C-c e b" . eat-blink-mode)))
+
 
 ;;; delight
 (use-package delight

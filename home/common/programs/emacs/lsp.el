@@ -86,7 +86,7 @@
                '(haskell-ts-mode . ("cabal" "run" "lspipe" "--" "--server" "haskell-language-server --lsp" "--server" "typos-lsp" "--debug"))))
 
 (define-prefix-command 'lsp-prefix-map)
-(global-set-key (kbd "C-l") 'lsp-prefix-map)
+(global-set-key (kbd "C-c l") 'lsp-prefix-map)
 
 (dolist (binding '(("l" . eglot)
                    ("a" . eglot-code-actions)

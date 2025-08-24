@@ -48,7 +48,6 @@ in
     package = pkgs.emacs-pgtk;
     extraPackages =
       epkgs: with epkgs; [
-        # Meow!
         meow
 
         # Native compilation

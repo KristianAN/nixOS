@@ -15,11 +15,11 @@
         "*" = {
           xkb_layout = "no,us";
           xkb_variant = ",colemak_dh_iso";
-          xkb_options = "grp:rctrl_toggle";
+          xkb_options = "grp:rctrl_toggle,ctrl:swapcaps_group2";
           tap = "enabled";
         };
       };
-
+      
       output = {
         "*" = {
           bg = "${./wallpaper.png} fill";

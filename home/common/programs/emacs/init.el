@@ -408,6 +408,9 @@
 (setq ediff-window-setup-function #'ediff-setup-windows-plain
       ediff-split-window-function #'split-window-horizontally)
 
+;;; Enable default disabled commands
+(put 'downcase-region 'disabled nil)
+
 ;;; Load post-init.el
 (minimal-emacs-load-user-init "post-init.el")
 
