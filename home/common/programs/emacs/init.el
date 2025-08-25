@@ -301,6 +301,12 @@
 
 ;;; Annoyances
 
+;; Unbind F4 from kmacro-end-or-call-macro
+(global-unset-key [f4])
+
+;; Bind C-) to kmacro-end-or-call-macro
+(global-set-key (kbd "C-x )") 'kmacro-end-or-call-macro)
+
 ;; No beeping or blinking
 (setq visible-bell nil)
 (setq ring-bell-function #'ignore)
