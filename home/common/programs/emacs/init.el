@@ -318,6 +318,9 @@
 (setq-default left-fringe-width  8)
 (setq-default right-fringe-width 8)
 
+;; Enable electric pair mode
+(electric-pair-mode t)
+
 ;; Do not show an arrow at the top/bottomin the fringe and empty lines
 (setq-default indicate-buffer-boundaries nil)
 (setq-default indicate-empty-lines nil)
