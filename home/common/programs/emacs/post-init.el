@@ -58,8 +58,6 @@
 
 (minimal-emacs-load-user-init "org.el")
 
-(minimal-emacs-load-user-init "tabspaces.el")
-
 ;;; Detached
 (minimal-emacs-load-user-init "detached.el")
 

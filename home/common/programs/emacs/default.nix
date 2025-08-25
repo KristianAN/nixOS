@@ -39,7 +39,7 @@ let
         :repo "jdtsmith/eglot-booster"
         :fetcher github
         :files ("*.el"))
-        ''; 
+        '';
       };
 in
 {
@@ -48,7 +48,6 @@ in
     package = pkgs.emacs-pgtk;
     extraPackages =
       epkgs: with epkgs; [
-        meow
 
         # Native compilation
         # compile-angel
@@ -103,7 +102,6 @@ in
         denote
         denote-org
         consult-denote
-        tabspaces
         detached
 
         # lsp
