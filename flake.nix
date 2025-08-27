@@ -1,144 +1,90 @@
 {
   description = "Kristian start with NixOS flakes";
+
   inputs = {
-
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    # flake-utils is a tool that helps you work with flakes
-    flake-utils.url = "github:numtide/flake-utils";
-
-    # Home Manager is a tool that helps you manage your dotfiles
+    flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    myNeovimFlake = {
-      url = "github:KristianAN/neovim-flake";
-      flake = true;
-    };
-
-    indent-bars = {
-      url = "github:jdtsmith/indent-bars";
-      flake = false;
-    };
-
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      ...
-    }@inputs:
-    let
-      inherit (self) outputs;
-      lib = nixpkgs.lib // home-manager.lib;
+  outputs = inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
         "aarch64-linux"
       ];
-      forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
-      pkgsFor = lib.genAttrs systems (
-        system:
-        import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        }
-      );
-      nixosModules = import ./modules/nixos;
-      homeManagerModules = import ./modules/home-manager;
-    in
-    {
-      inherit lib;
-      overlays = {
-        default = import ./overlay { inherit inputs outputs; };
-      };
-      templates = import ./templates;
-      packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
-      devShells = forEachSystem (
-        pkgs:
-        import ./shell.nix {
-          inherit pkgs;
-          buildInputs = with pkgs; [ ];
-        }
-      );
 
-      nixosConfigurations = {
-        sky = lib.nixosSystem {
-          specialArgs = {
-            inherit inputs outputs;
-          };
-          modules = [
-            inputs.home-manager.nixosModules.home-manager
-            ./hosts/sky
-            nixosModules
-            {
-              programs.slack.enable = true;
-              programs.discord.enable = true;
-              home-manager = {
-                useUserPackages = false; # TODO on reinstall
-                extraSpecialArgs = { inherit inputs outputs; inherit (inputs.self.nixosConfigurations.sky.config.networking) hostName; };
-                backupFileExtension = ".hm-backup";
-                users.kristian = { ... }: {
-                  nixpkgs.config.allowUnfree = true;
-                  imports = [
-                    ./home/sky
-                  ];
-                };
+      flake =
+        let
+          hostConfigs = {
+            sky = {
+              hostname = "sky";
+              programs = {
+                slack = false;
+                discord = false;
               };
-            }
-          ];
-        };
-        rubble = lib.nixosSystem {
-          specialArgs = {
-            inherit inputs outputs;
-          };
-          modules = [
-            inputs.home-manager.nixosModules.home-manager
-            ./hosts/rubble
-            nixosModules
-            {
-              programs.slack.enable = true;
-              programs.discord.enable = true;
-              home-manager = {
-                useUserPackages = false; # TODO on reinstall
-                extraSpecialArgs = { inherit inputs outputs; inherit (inputs.self.nixosConfigurations.rubble.config.networking) hostName; };
-                backupFileExtension = ".hm-backup";
-                users.kristian = { ... }: {
-                  nixpkgs.config.allowUnfree = true;
-                  imports = [
-                    ./home/rubble
-                  ];
-                };
+              #  add more host-specific options here
+              # extraModules = [ ./some-sky-module ];
+              # system = "x86_64-linux";
+            };
+            rubble = {
+              hostname = "rubble";
+              programs = {
+                slack = false;
+                discord = true;
               };
-            }
-          ];
-        };
-        chase = lib.nixosSystem {
-          specialArgs = {
-            inherit inputs outputs;
-          };
-          modules = [
-            inputs.home-manager.nixosModules.home-manager
-            ./hosts/chase
-            nixosModules
-            {
-              programs.slack.enable = true;
-              programs.discord.enable = true;
-              home-manager = {
-                useUserPackages = false; # TODO on reinstall
-                extraSpecialArgs = { inherit inputs outputs; inherit (inputs.self.nixosConfigurations.chase.config.networking) hostName; };
-                backupFileExtension = ".hm-backup";
-                users.kristian = { ... }: {
-                  nixpkgs.config.allowUnfree = true;
-                  imports = [
-                    ./home/chase
-                  ];
-                };
+            };
+            chase = {
+              hostname = "chase";
+              programs = {
+                slack = true;
+                discord = true;
               };
-            }
-          ];
+            };
+          };
+
+          mkNixosSystem = name: config: inputs.nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              inherit inputs;
+              inherit (inputs.self) outputs;
+            };
+            modules = [
+              inputs.home-manager.nixosModules.home-manager
+              ./hosts/${config.hostname}
+              (import ./modules/nixos)
+              {
+                programs.slack.enable = config.programs.slack;
+                programs.discord.enable = config.programs.discord;
+                home-manager = {
+                  useUserPackages = false; # TODO on reinstall
+                  extraSpecialArgs = {
+                    inherit inputs;
+                    inherit (inputs.self) outputs;
+                    inherit (inputs.self.nixosConfigurations.${name}.config.networking) hostName;
+                  };
+                  backupFileExtension = ".hm-backup";
+                  users.kristian = { ... }: {
+                    nixpkgs.config.allowUnfree = true;
+                    imports = [
+                      ./home/${config.hostname}
+                    ];
+                  };
+                };
+              }
+            ] ++ (config.extraModules or []);
+          };
+        in
+        {
+          lib = inputs.nixpkgs.lib // inputs.home-manager.lib;
+
+          overlays = {
+            default = import ./overlay { inherit inputs; inherit (inputs.self) outputs; };
+          };
+
+          templates = import ./templates;
+
+          nixosConfigurations = inputs.nixpkgs.lib.mapAttrs mkNixosSystem hostConfigs;
         };
-      };
     };
 }

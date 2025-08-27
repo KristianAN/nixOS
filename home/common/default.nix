@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
 
   imports = [
@@ -28,7 +28,7 @@
     pkgs.sway-contrib.grimshot
     pkgs.texliveFull
     pkgs.brightnessctl
-    inputs.myNeovimFlake.packages.x86_64-linux.nvim
+    pkgs.neovim
     pkgs.pandoc
     pkgs.any-nix-shell
     pkgs.cmatrix
