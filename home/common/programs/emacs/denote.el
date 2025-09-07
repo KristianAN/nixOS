@@ -9,7 +9,7 @@
    ("M-n l" . denote-link)
    ("M-n b" . denote-backlinks)
    ("M-n d" . denote-dired)
-   ("M-n g" . denote-config))
+   ("M-n c" . denote-config))
 
   :config
   (setq denote-directory (expand-file-name "~/Documents/notes/"))
@@ -31,7 +31,7 @@
 (use-package consult-denote
   :ensure t
   :bind
-  (("C-c n f" . consult-denote-find)
-   ("C-c n g" . consult-denote-grep))
+  (("M-n f" . consult-denote-find)
+   ("M-n g" . consult-denote-grep))
   :config
   (consult-denote-mode 1))

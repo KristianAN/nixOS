@@ -36,13 +36,28 @@
   :config
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
+(use-package ef-themes
+  :ensure t
+  :demand t
+  :config
+  ;; These are the default values.
+  (setq ef-themes-to-toggle '(ef-day ef-owl))
 
-(require-theme 'modus-themes) 
+  (ef-themes-select 'ef-owl)
 
-(setq modus-themes-to-toggle '(modus-vivendi-tinted modus-operandi-tinted))
+  (set-face-attribute 'default nil :family "Aporetic Sans Mono" :height 130)
+  (set-face-attribute 'variable-pitch nil :family "Aporetic Sans" :height 1.0)
+  (set-face-attribute 'fixed-pitch nil :family "Aporetic Sans Mono" :height 1.0)
+  )
 
-(set-face-attribute 'default nil :family "Aporetic Sans Mono" :height 130)
-(set-face-attribute 'variable-pitch nil :family "Aporetic Sans" :height 1.0)
-(set-face-attribute 'fixed-pitch nil :family "Aporetic Sans Mono" :height 1.0)
+;;; Setup modus-themes if we don't want to use any package for themes
 
-(load-theme 'modus-vivendi-tinted)
+;; (require-theme 'modus-themes) 
+;; 
+;; (setq modus-themes-to-toggle '(modus-vivendi-tinted modus-operandi-tinted))
+;; 
+;; (set-face-attribute 'default nil :family "Aporetic Sans Mono" :height 130)
+;; (set-face-attribute 'variable-pitch nil :family "Aporetic Sans" :height 1.0)
+;; (set-face-attribute 'fixed-pitch nil :family "Aporetic Sans Mono" :height 1.0)
+;; 
+;; (load-theme 'modus-vivendi-tinted)

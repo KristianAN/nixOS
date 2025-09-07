@@ -71,7 +71,8 @@ in
         nerd-icons-completion
         nerd-icons-corfu
         spacious-padding
-
+        ef-themes
+        
         # Direnv
         envrc
 

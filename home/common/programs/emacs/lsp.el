@@ -24,7 +24,7 @@
   :config
   (seq-do (lambda (it)
             (push it major-mode-remap-alist))
-          '((python-mode . python-ts-mode)
+          '(
             (javascript-mode . js-ts-mode)
             (typescript-mode . typescript-ts-mode)
             (java-mode . java-ts-mode)
@@ -55,10 +55,6 @@
   :mode (("\\.cts\\'" . typescript-ts-mode)
          ("\\.tsx\\'" . typescript-ts-mode)
          ("\\.ts\\'" . typescript-ts-mode)))
-
-(use-package python-ts-mode
-  :mode ("\\.py\\'" . python-ts-mode))
-
 
 (use-package eglot
   :custom
