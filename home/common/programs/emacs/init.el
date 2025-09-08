@@ -157,8 +157,7 @@
 
 ;; Avoid generating backups or lockfiles to prevent creating world-readable
 ;; copies of files.
-(setq create-lockfiles nil)
-(setq make-backup-files nil)
+(setq create-lockfiles nil) 
 
 (setq backup-directory-alist
       `(("." . ,(expand-file-name "backup" user-emacs-directory))))

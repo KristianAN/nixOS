@@ -33,6 +33,10 @@
     pkgs.any-nix-shell
     pkgs.cmatrix
     pkgs.proton-pass
+    pkgs.hunspell
+    pkgs.hunspellDicts.en_GB-ise
+    pkgs.hunspellDicts.nb_NO
+    pkgs.hunspellDicts.nn_NO
   ];
 
   programs.home-manager.enable = true;

@@ -79,6 +79,8 @@
 ;;; Iedit
 (minimal-emacs-load-user-init "iedit.el")
 
+;;; Flyspell
+(minimal-emacs-load-user-init "flyspell.el")
 ;;; Meow
 ;;; (minimal-emacs-load-user-init "meow.el") 
 

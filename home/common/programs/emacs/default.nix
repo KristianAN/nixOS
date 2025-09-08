@@ -97,6 +97,7 @@ in
         # Editing
         iedit
         apheleia # Formatting
+        citeproc
 
         # Other
         eat
