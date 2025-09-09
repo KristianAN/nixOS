@@ -79,6 +79,7 @@ in
         # Programming
         (treesit-grammars.with-grammars (grammars: with grammars; [
           tree-sitter-nix
+          tree-sitter-bash
           tree-sitter-haskell
           tree-sitter-scala
           tree-sitter-java
@@ -98,12 +99,14 @@ in
         iedit
         apheleia # Formatting
         citeproc
-
+        
         # Other
         eat
         denote
         denote-org
         consult-denote
+        org-present
+        visual-fill-column
         detached
 
         # lsp

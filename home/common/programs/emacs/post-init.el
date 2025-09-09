@@ -81,8 +81,12 @@
 
 ;;; Flyspell
 (minimal-emacs-load-user-init "flyspell.el")
-;;; Meow
-;;; (minimal-emacs-load-user-init "meow.el") 
+
+;;; Presentation
+(minimal-emacs-load-user-init "present.el")
+
+;;; Eat 
+(minimal-emacs-load-user-init "eat.el")
 
 ;;; Direnv integration
 (use-package envrc
@@ -92,23 +96,6 @@
 (use-package indent-bars
   :hook ((haskell-ts-mode scala-mode scala-ts-mode yaml-mode python-ts-mode) . indent-bars-mode))
 
-;;; Lisp
-;; (use-package sly
-;;   :ensure t
-;;   :config
-;;   (setq sly-lisp-implementations
-;;         '((sbcl ("sbcl") :coding-system utf-8-unix)))
-;;   ;; Optional: Set the default implementation
-;;   (setq sly-default-lisp 'sbcl))
-
-;;; Terminal
-(use-package eat
-  :bind
-  (("C-c e p" . eat-project-other-window)
-   ("C-c e n" . eat)
-   ("C-c e s" . eat-project)
-   ("C-c e g" . kristian/consult-grep-project-buffer-term)
-   ))
 
 ;;; delight
 (use-package delight
