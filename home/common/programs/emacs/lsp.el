@@ -47,6 +47,9 @@
   (haskell-ts-ghci "ghci")
   :mode (("\\.hs\\'" . haskell-ts-mode)))
 
+(use-package java-ts-mode
+  :ensure t
+  :mode (("\\.java\\") . java-ts-mode))
 
 (use-package nix-ts-mode
   :mode "\\.nix\\'")
@@ -112,7 +115,3 @@
    ("\\.erb\\'" . web-mode)
    ("\\.mustache\\'" . web-mode)
    ("\\.djhtml\\'" . web-mode)))
-
-(use-package eglot-java
-  :ensure t
-  :hook ('java-ts-mode 'eglot-java-mode))

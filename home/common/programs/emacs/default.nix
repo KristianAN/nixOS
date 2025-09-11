@@ -92,7 +92,6 @@ in
         scala-ts-mode
         nix-ts-mode
         web-mode
-        eglot-java
         haskell-ts-mode
 
         # Editing
@@ -110,7 +109,6 @@ in
         detached
 
         # lsp
-        # eglot-booster
         eldoc-box
       ];
 
