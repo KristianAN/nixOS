@@ -48,8 +48,7 @@
   :mode (("\\.hs\\'" . haskell-ts-mode)))
 
 (use-package java-ts-mode
-  :ensure t
-  :mode (("\\.java\\") . java-ts-mode))
+  :mode "\\.java\\'")
 
 (use-package nix-ts-mode
   :mode "\\.nix\\'")
@@ -82,7 +81,7 @@
   (add-to-list 'eglot-server-programs
                '(scala-ts-mode . ("metals")))
   (add-to-list 'eglot-server-programs
-               '(haskell-ts-mode . ("cabal" "run" "lspipe" "--" "--server" "haskell-language-server --lsp" "--server" "typos-lsp" "--debug"))))
+               '(haskell-ts-mode . ("haskell-language-server" "--lsp"))))
 
 (define-prefix-command 'lsp-prefix-map)
 (global-set-key (kbd "C-c l") 'lsp-prefix-map)

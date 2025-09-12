@@ -10,9 +10,10 @@
     ./git.nix
     ./gtk.nix
     ./starship.nix
-    ./sway.nix
+    #./sway.nix
     ./tmux.nix
-    # ./waybar.nix
+    ./niri
+    ./waybar
     ./yambar.nix
     ./helix
     ./foot.nix

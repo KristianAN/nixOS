@@ -9,5 +9,5 @@
     pkgs.gst_all_1.gst-plugins-ugly
   ];
 
-  xdg.configFile."nyxt/default.lisp".source = ./default.lisp;
+  xdg.configFile."nyxt/config.lisp".source = ./config.lisp;
 }

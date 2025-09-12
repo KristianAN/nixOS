@@ -117,10 +117,13 @@
     (setq-default mode-line-format
                   (delete '(vc-mode vc-mode) mode-line-format))))
 
+(use-package ansi-color
+  :hook (compilation-filter . ansi-color-compilation-filter)) 
+
 (add-hook 'eshell-load-hook #'eat-eshell-mode)
 (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)
 
-(global-set-key (kbd "M-o n")  'windmove-left)
-(global-set-key (kbd "M-o o") 'windmove-right)
-(global-set-key (kbd "M-o i")    'windmove-up)
-(global-set-key (kbd "M-o e")  'windmove-down)
+;; (global-set-key (kbd "M-o n")  'windmove-left)
+;; (global-set-key (kbd "M-o o") 'windmove-right)
+;; (global-set-key (kbd "M-o i")    'windmove-up)
+;; (global-set-key (kbd "M-o e")  'windmove-down)

@@ -88,6 +88,7 @@ in
           tree-sitter-javascript
           tree-sitter-vue
           tree-sitter-tsx
+          tree-sitter-css
         ]))
         scala-ts-mode
         nix-ts-mode
