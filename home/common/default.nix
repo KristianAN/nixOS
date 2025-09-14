@@ -15,6 +15,7 @@
   };
 
   home.packages = [
+    pkgs.ladybird
     pkgs.virt-manager
     pkgs.dconf
     pkgs.wdisplays
@@ -37,6 +38,7 @@
     pkgs.hunspellDicts.en_GB-ise
     pkgs.hunspellDicts.nb_NO
     pkgs.hunspellDicts.nn_NO
+    pkgs.xwayland-satellite
   ];
 
   programs.home-manager.enable = true;

@@ -3,7 +3,7 @@
   "position": "top",
   "modules-left": ["niri/workspaces"],
   "modules-center": ["clock"],
-  "modules-right": ["network", "cpu", "memory", "battery"],
+  "modules-right": ["network", "cpu", "memory", "wireplumber", "battery"],
 
   "clock": {
     "format": "{:%a %d %b  %H:%M}"
