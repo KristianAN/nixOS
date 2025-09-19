@@ -19,11 +19,10 @@
 
   xdg = {
     portal = {
-      config.common.default = "*";
+      config.common.default = "gnome";
       enable = true;
       extraPortals = with pkgs; [
-        xdg-desktop-portal-wlr
-        xdg-desktop-portal-gtk
+        xdg-desktop-portal-gnome
       ];
     };
   };
@@ -35,9 +34,11 @@
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
+  services.dbus.packages = [ pkgs.nautilus ];
+
   # Remove if you wish to disable unfree packages for your system
   nixpkgs.config.allowUnfree = true;
 
   # NixOS release to be compatible with for staeful data such as databases.
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.05";
 }

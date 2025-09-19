@@ -21,7 +21,6 @@
     pkgs.wdisplays
     pkgs.wev
     pkgs.swaylock-effects
-    pkgs.dunst
     pkgs.digikam
     pkgs.wf-recorder
     pkgs.slurp

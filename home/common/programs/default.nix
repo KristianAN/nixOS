@@ -6,6 +6,7 @@
     #./zsh.nix
     ./firefox.nix
     ./lazygit.nix
+    ./mako.nix
     ./fish.nix
     ./git.nix
     ./gtk.nix

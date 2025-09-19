@@ -1,10 +1,63 @@
-{ ... }:
-{
-  programs.waybar = {
-    enable = true;
-  };
+{ lib, ... }:
 
+let
+  kanagawa = import ./../kanagawa-theme.nix;
+in
+{
+  programs.waybar.enable = true;
+
+  # Keep your JSON config file as-is (./config)
   xdg.configFile."waybar/config".source = ./config;
-  xdg.configFile."waybar/style.css".source = ./style.css;
-  
+
+  # Generate style.css from the shared kanagawa attrset so Waybar always matches Mako.
+  xdg.configFile."waybar/style.css".text = lib.concatStringsSep "\n" [
+    "/* Generated from kanagawa.nix */"
+    ""
+    "window#waybar {"
+    "  margin: 16px 32px 0 32px;"
+    "  background: rgba(42, 42, 55, 0.99);"
+    "  border-radius: 12px;"
+    "  border: none;"
+    "  box-shadow: 0 2px 7px 0 rgba(0,0,0,0.07);"
+    "}"
+    ""
+    "* {"
+    "  border-radius: 0px;"
+    "  background: rgba(42, 42, 55, 0.8);"
+    "  color: ${kanagawa.foreground};"
+    "  font-family: \"${kanagawa.font}\", \"Font Awesome 6 Free\", sans-serif;"
+    "  font-size: ${builtins.toString kanagawa.fontSize}px;"
+    "  opacity: 0.99;"
+    "}"
+    ""
+    "#workspaces, #clock, #network, #cpu, #memory, #battery {"
+    "  padding: 0 12px;"
+    "  border-radius: 12px;"
+    "  margin: 2px 4px;"
+    "  background: transparent;"
+    "}"
+    ""
+    "#workspaces button {"
+    "  border-radius: 9px;"
+    "  margin: 0 2px;"
+    "  padding: 0 8px;"
+    "  background: transparent;"
+    "  color: ${kanagawa.foreground};"
+    "  opacity: 0.87;"
+    "}"
+    ""
+    "#workspaces button.active {"
+    "  background: rgba(57, 57, 57, 0.82);"
+    "  color: ${kanagawa.accentYellow};"
+    "}"
+    ""
+    "#battery.charging {"
+    "  color: ${kanagawa.accentGreen};"
+    "}"
+    ""
+    "/* helper classes for module states */"
+    ".module.good { background: ${kanagawa.accentGreen}; color: ${kanagawa.background}; }"
+    ".module.warning { background: ${kanagawa.accentYellow}; color: ${kanagawa.background}; }"
+    ".module.urgent { background: ${kanagawa.accentRed}; color: ${kanagawa.background}; }"
+  ];
 }
