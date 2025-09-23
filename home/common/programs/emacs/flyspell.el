@@ -74,3 +74,11 @@
 (unless (assoc 'flyspell-mode minor-mode-alist)
   (add-to-list 'minor-mode-alist 
                '(flyspell-mode (:eval (my/ispell-dictionary-modeline)))))
+
+;; Ensure flyspell does not shadow C-; so the global iedit binding can win
+(with-eval-after-load 'flyspell
+  (when (boundp 'flyspell-mode-map)
+    (define-key flyspell-mode-map (kbd "C-;") nil))
+  ;; defensive: remove from any prog-mode variant if present
+  (when (boundp 'flyspell-prog-mode-map)
+    (define-key flyspell-prog-mode-map (kbd "C-;") nil)))
