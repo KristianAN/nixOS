@@ -1,4 +1,8 @@
-{ pkgs, ... }:
+{ pkgs,lib,... }:
+
+let
+  kanagawa = import ./kanagawa-theme.nix;
+in
 {
   wayland.windowManager.sway = {
     package = pkgs.swayfx;
@@ -43,6 +47,7 @@
       
       window = {
         titlebar = false;
+        border = 2;
       };
 
       gaps = {
@@ -54,19 +59,80 @@
 
       bars = [ ];
 
-      startup = [ { command = "yambar"; } ];
+      startup = [ { command = "waybar"; } ];
       keybindings = pkgs.lib.mkOptionDefault (import ../sway-keybindings.nix { inherit pkgs; });
+      
+      # Kanagawa colors
+      colors = {
+        focused = {
+          border = kanagawa.accentYellow;
+          background = kanagawa.background;
+          text = kanagawa.foreground;
+          indicator = kanagawa.accentGreen;
+          childBorder = kanagawa.accentYellow;
+        };
+        focusedInactive = {
+          border = kanagawa.border;
+          background = kanagawa.background;
+          text = kanagawa.muted;
+          indicator = kanagawa.border;
+          childBorder = kanagawa.border;
+        };
+        unfocused = {
+          border = kanagawa.border;
+          background = kanagawa.background;
+          text = kanagawa.muted;
+          indicator = kanagawa.border;
+          childBorder = kanagawa.border;
+        };
+        urgent = {
+          border = kanagawa.accentRed;
+          background = kanagawa.background;
+          text = kanagawa.accentRed;
+          indicator = kanagawa.accentRed;
+          childBorder = kanagawa.accentRed;
+        };
+        placeholder = {
+          border = kanagawa.border;
+          background = kanagawa.background;
+          text = kanagawa.muted;
+          indicator = kanagawa.border;
+          childBorder = kanagawa.border;
+        };
+        background = kanagawa.background;
+      };
+      
+      fonts = {
+        names = [ kanagawa.font ];
+        size = (lib.toInt (builtins.toString kanagawa.fontSize) - 2) * 1.0;
+      };
     };
 
     extraConfig = ''
     shadows enable
     corner_radius 10
     
+    # SwayFX specific effects with Kanagawa colors
     layer_effects "panel" {
         shadows enable;
         corner_radius 20;
     }
+    
+    # Window shadows for SwayFX
+    shadows_on_csd enable
+    shadow_blur_radius 20
+    shadow_color ${kanagawa.background}ee
+    
+    # Blur effects (optional, you can remove if you don't want blur)
+    blur enable
+    blur_xray disable
+    blur_passes 2
+    blur_radius 5
+    
+    # Dim inactive windows slightly
+    default_dim_inactive 0.1
+    dim_inactive_colors.unfocused ${kanagawa.background}ee
+    dim_inactive_colors.urgent ${kanagawa.accentRed}ee
     '';
   };
-
 }

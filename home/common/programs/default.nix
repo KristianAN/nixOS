@@ -11,11 +11,10 @@
     ./git.nix
     ./gtk.nix
     ./starship.nix
-    #./sway.nix
+    ./sway.nix
     ./tmux.nix
-    ./niri
+    #./niri
     ./waybar
-    ./yambar.nix
     ./helix
     ./foot.nix
     ./emacs/default.nix

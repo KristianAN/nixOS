@@ -1,10 +1,18 @@
 {
   "layer": "top",
   "position": "top",
-  "modules-left": ["niri/workspaces"],
+  "modules-left": ["sway/workspaces", "sway/window", "sway/mode"],
   "modules-center": ["clock"],
   "modules-right": ["network", "cpu", "memory", "wireplumber", "battery"],
-
+  "sway/workspaces": {
+    "disable-scroll": true,
+    "disable-markup": false,
+    "format": "{index}"
+  },
+  "sway/window": {
+    "format": "{}",
+    "max-length": 150
+  },
   "clock": {
     "format": "{:%a %d %b  %H:%M}"
   },
