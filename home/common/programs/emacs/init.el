@@ -15,7 +15,7 @@
 ;;; Code:
 
 ;;; Load pre-init.el
-(minimal-emacs-load-user-init "pre-init.el")
+(emacs-load-user-configuration "pre-init.el")
 
 ;;; Networking
 
@@ -434,7 +434,7 @@
 (global-set-key (kbd "M-c") 'capitalize-dwim)
 
 ;;; Load post-init.el
-(minimal-emacs-load-user-init "post-init.el")
+(emacs-load-user-configuration "post-init.el")
 
 (provide 'init)
 

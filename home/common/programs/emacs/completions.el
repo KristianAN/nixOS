@@ -64,7 +64,8 @@
   :after vertico
   :bind (:map vertico-map
               ("M-i" . vertico-quick-insert)
-              ("'" . vertico-quick-exit)
+              ("'" .
+               vertico-quick-exit)
               )
   :config
   (defun vertico-quick-embark (&optional arg)
@@ -120,11 +121,13 @@
                '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
                  nil
                  (window-parameters (mode-line-format . none))))
-  :bind (:map minibuffer-local-map
-              ("C-."     . embark-act)
-              ("C-;"     . embark-dwim)
-              ("C-c C-c" . embark-export)
-              ("C-c C-o" . embark-collect))
+  :bind
+  (("C-c ." . embark-act)
+   (:map minibuffer-local-map
+         ("C-."     . embark-act)
+         ("C-;"     . embark-dwim)
+         ("C-c C-c" . embark-export)
+         ("C-c C-o" . embark-collect)))
   ) 
 
 (use-package embark-consult
@@ -134,6 +137,13 @@
 
 (use-package consult
   :ensure t
+  :custom
+  (defun custom/consult-ripgrep-from-visual-selection ()
+    "Send selected region to consult-ripgrep."
+    (interactive)
+    (let ((selection (buffer-substring-no-properties (region-beginning) (region-end))))
+      (deactivate-mark)
+      (consult-ripgrep nil selection)))
 
   :bind (;; C-c bindings in `mode-specific-map'
          ("C-c M-x" . consult-mode-command)
@@ -172,6 +182,7 @@
          ("M-s g" . consult-grep)
          ("M-s G" . consult-git-grep)
          ("M-s r" . consult-ripgrep)
+         ("M-s v" . custom/consult-ripgrep-from-visual-selection)
          ("M-s l" . consult-line)
          ("M-s L" . consult-line-multi)
          ("M-s k" . consult-keep-lines)

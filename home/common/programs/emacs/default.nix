@@ -48,6 +48,7 @@ in
     package = pkgs.emacs-pgtk;
     extraPackages =
       epkgs: with epkgs; [
+        meow
 
         # Native compilation
         # compile-angel
@@ -60,10 +61,12 @@ in
         embark-consult
         consult
         consult-project-extra
+        consult-gh
         corfu
         cape
         yasnippet
         wgrep
+        avy
 
         # Good looks
         nerd-icons

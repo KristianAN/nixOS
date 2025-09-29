@@ -48,7 +48,7 @@ When set to non-nil, Emacs will automatically call `package-initialize' and
 
 ;;; Load pre-early-init.el
 
-(defun minimal-emacs-load-user-init (filename)
+(defun emacs-load-user-configuration (filename)
   "Execute a file of Lisp code named FILENAME."
   (let ((user-init-file
          (expand-file-name filename
@@ -56,7 +56,7 @@ When set to non-nil, Emacs will automatically call `package-initialize' and
     (when (file-exists-p user-init-file)
       (load user-init-file nil t))))
 
-(minimal-emacs-load-user-init "pre-early-init.el")
+(emacs-load-user-configuration "pre-early-init.el")
 
 (setq custom-theme-directory
       (expand-file-name "themes/" minimal-emacs-user-directory))
@@ -285,7 +285,7 @@ When set to non-nil, Emacs will automatically call `package-initialize' and
 (setenv "LSP_USE_PLISTS" "TRUE")
 
 ;;; Load post-early-init.el
-(minimal-emacs-load-user-init "post-early-init.el")
+(emacs-load-user-configuration "post-early-init.el")
 
 (provide 'early-init)
 

@@ -45,45 +45,51 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
-(minimal-emacs-load-user-init "custom.el")
+(emacs-load-user-configuration "custom.el")
 
-(minimal-emacs-load-user-init "completions.el")
+(emacs-load-user-configuration "completions.el")
 
-(minimal-emacs-load-user-init "looks.el")
+(emacs-load-user-configuration "looks.el")
 
-(minimal-emacs-load-user-init "org.el")
+(emacs-load-user-configuration "org.el")
 
-(minimal-emacs-load-user-init "org.el")
+(emacs-load-user-configuration "org.el")
 
 ;;; Detached
-(minimal-emacs-load-user-init "detached.el")
+(emacs-load-user-configuration "detached.el")
 
 ;;; Denote
-(minimal-emacs-load-user-init "denote.el")
+(emacs-load-user-configuration "denote.el")
 
 ;;; LSP
-(minimal-emacs-load-user-init "lsp.el")
+(emacs-load-user-configuration "lsp.el")
 
 ;;; Dirvish
-;; (minimal-emacs-load-user-init "dirvish.el") Use plain dired for now
+;; (emacs-load-user-configuration "dirvish.el") Use plain dired for now
 
 ;;; Tramp
-(minimal-emacs-load-user-init "tramp.el")
+(emacs-load-user-configuration "tramp.el")
 
 ;;; Formatting
-(minimal-emacs-load-user-init "apheleia.el")
+(emacs-load-user-configuration "apheleia.el")
 
 ;;; Iedit
-(minimal-emacs-load-user-init "iedit.el")
+(emacs-load-user-configuration "iedit.el")
 
 ;;; Flyspell
-(minimal-emacs-load-user-init "flyspell.el")
+(emacs-load-user-configuration "flyspell.el")
 
 ;;; Presentation
-(minimal-emacs-load-user-init "present.el")
+(emacs-load-user-configuration "present.el")
 
 ;;; Eat 
-(minimal-emacs-load-user-init "eat.el")
+(emacs-load-user-configuration "eat.el")
+
+;;; Avy
+(emacs-load-user-configuration "avy.el")
+
+;;; Avy
+(emacs-load-user-configuration "meow.el")
 
 ;;; Direnv integration
 (use-package envrc
