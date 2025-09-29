@@ -60,6 +60,20 @@
   :commands vertico-mode
   :hook (after-init . vertico-mode))
 
+(use-package vertico-quick
+  :after vertico
+  :bind (:map vertico-map
+              ("M-i" . vertico-quick-insert)
+              ("'" . vertico-quick-exit)
+              )
+  :config
+  (defun vertico-quick-embark (&optional arg)
+    "Embark on candidate using quick keys."
+    (interactive)
+    (when (vertico-quick-jump)
+      (embark-act arg))))
+
+
 (use-package orderless
   ;; Vertico leverages Orderless' flexible matching capabilities, allowing users
   ;; to input multiple patterns separated by spaces, which Orderless then
@@ -107,10 +121,11 @@
                  nil
                  (window-parameters (mode-line-format . none))))
   :bind (:map minibuffer-local-map
-              ("M-o"     . embark-act)
+              ("C-."     . embark-act)
+              ("C-;"     . embark-dwim)
               ("C-c C-c" . embark-export)
               ("C-c C-o" . embark-collect))
-  )
+  ) 
 
 (use-package embark-consult
   :ensure t ; only need to install it, embark loads it after consult if found
@@ -171,7 +186,9 @@
          ;; Minibuffer history
          :map minibuffer-local-map
          ("M-s" . consult-history)                 ;; orig. next-matching-history-element
-         ("M-r" . consult-history)) 
+         ("M-r" . consult-history))
+
+  
   
 
   ;; ENABLE automatic preview at point in the *Completions* buffer.
@@ -200,8 +217,13 @@
    :preview-key '(:debounce 0.4 any))
   (setq consult-narrow-key "<"))
 
-(use-package wgrep)
+(use-package consult-project-extra
+  :ensure t
+  :bind
+  (("C-c p f" . consult-project-extra-find)
+   ("C-c p o" . consult-project-extra-find-other-window)))
 
+(use-package wgrep)
 
 (setopt text-mode-ispell-word-completion nil)
 

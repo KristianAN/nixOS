@@ -70,3 +70,17 @@
         (insert open)
         (goto-char (+ beg (length open) (- (- end beg) 2)))
         (insert close)))))
+
+(defun custom/duckduckgo-search-eww (query)
+  "Search DuckDuckGo for QUERY and display results in EWW in another window.
+If another window exists, reuse it. Otherwise, create a right split and use that."
+  (interactive "sDuckDuckGo search: ")
+  (let ((url (concat "https://duckduckgo.com/?q=" (url-hexify-string query))))
+    (let ((target-window
+           (if (one-window-p)
+               (split-window-right)
+             (next-window))))
+      (select-window target-window)
+      (eww url))))
+
+(global-set-key (kbd "C-c s d") #'custom/duckduckgo-search-eww)

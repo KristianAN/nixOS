@@ -35,7 +35,6 @@
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
-  services.dbus.packages = [ pkgs.nautilus ];
 
   # Remove if you wish to disable unfree packages for your system
   nixpkgs.config.allowUnfree = true;

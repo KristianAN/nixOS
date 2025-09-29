@@ -4,12 +4,12 @@
   :ensure t
   :hook (dired-mode . denote-dired-mode)
   :bind
-  (("M-n n" . denote)
-   ("M-n r" . denote-rename-file)
-   ("M-n l" . denote-link)
-   ("M-n b" . denote-backlinks)
-   ("M-n d" . denote-dired)
-   ("M-n c" . denote-config))
+  (("C-c n n" . denote)
+   ("C-c n r" . denote-rename-file)
+   ("C-c n l" . denote-link)
+   ("C-c n b" . denote-backlinks)
+   ("C-c n d" . denote-dired)
+   ("C-c n c" . denote-config))
 
   :config
   (setq denote-directory (expand-file-name "~/Documents/notes/"))
@@ -31,7 +31,7 @@
 (use-package consult-denote
   :ensure t
   :bind
-  (("M-n f" . consult-denote-find)
-   ("M-n g" . consult-denote-grep))
+  (("C-c n f" . consult-denote-find)
+   ("C-c n g" . consult-denote-grep))
   :config
   (consult-denote-mode 1))

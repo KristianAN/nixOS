@@ -59,6 +59,7 @@ in
         embark
         embark-consult
         consult
+        consult-project-extra
         corfu
         cape
         yasnippet

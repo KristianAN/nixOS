@@ -45,9 +45,6 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
-;; Set global visual line mode for line-wrapping
-(global-visual-line-mode t)
-
 (minimal-emacs-load-user-init "custom.el")
 
 (minimal-emacs-load-user-init "completions.el")
@@ -123,7 +120,3 @@
 (add-hook 'eshell-load-hook #'eat-eshell-mode)
 (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)
 
-;; (global-set-key (kbd "M-o n")  'windmove-left)
-;; (global-set-key (kbd "M-o o") 'windmove-right)
-;; (global-set-key (kbd "M-o i")    'windmove-up)
-;; (global-set-key (kbd "M-o e")  'windmove-down)

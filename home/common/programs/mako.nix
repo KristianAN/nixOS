@@ -10,7 +10,7 @@ in
   };
 
     xdg.configFile."mako/config".text = lib.concatStringsSep "\n" [
-      "font=${kanagawa.font} ${(builtins.toString kanagawa.fontSize - 4)}"
+      "font=${kanagawa.font} ${(builtins.toString (kanagawa.fontSize - 4))}"
       "default-timeout=5000"
       "margin=12"
       "width=360"

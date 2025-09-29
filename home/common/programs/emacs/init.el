@@ -388,6 +388,12 @@
 (setq line-number-mode t)
 (setq column-number-mode t)
 
+;; Set global visual line mode for line-wrapping
+(global-visual-line-mode t)
+
+;; make C-n move to next line, ignoring visual line
+(setq line-move-visual nil)
+
 ;;; Filetype
 
 ;; Do not notify the user each time Python tries to guess the indentation offset
@@ -400,6 +406,7 @@
 (setq dired-free-space nil
       dired-deletion-confirmer 'y-or-n-p
       dired-filter-verbose nil
+      dired-dwim-target t
       dired-clean-confirm-killing-deleted-buffers nil
       dired-recursive-deletes 'top
       dired-recursive-copies  'always
@@ -418,6 +425,13 @@
 
 ;;; Enable default disabled commands
 (put 'downcase-region 'disabled nil)
+
+;;; Global keybindings
+
+;;; Modern saner up/downcasing
+(global-set-key (kbd "M-u") 'upcase-dwim)
+(global-set-key (kbd "M-l") 'downcase-dwim)
+(global-set-key (kbd "M-c") 'capitalize-dwim)
 
 ;;; Load post-init.el
 (minimal-emacs-load-user-init "post-init.el")

@@ -41,9 +41,9 @@
   :demand t
   :config
   ;; These are the default values.
-  (setq ef-themes-to-toggle '(ef-day ef-owl))
+  (setq ef-themes-to-toggle '(ef-day ef-symbiosis))
 
-  (ef-themes-select 'ef-owl)
+  (ef-themes-select 'ef-symbiosis)
 
   (set-face-attribute 'default nil :family "Aporetic Sans Mono" :height 130)
   (set-face-attribute 'variable-pitch nil :family "Aporetic Sans" :height 1.0)
