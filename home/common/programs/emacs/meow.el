@@ -85,9 +85,8 @@
    '("<escape>" . ignore)))
 
 (use-package meow
-  :bind
-  (("C-c w" . save-buffer))
   :custom
+                                        ;(meow-use-cursor-position-hack t)
   (meow-use-clipboard t)
   (meow-goto-line-function 'consult-goto-line)
   :config

@@ -88,8 +88,8 @@
 ;;; Avy
 (emacs-load-user-configuration "avy.el")
 
-;;; Avy
-(emacs-load-user-configuration "meow.el")
+;;; Meow
+;;; (emacs-load-user-configuration "meow.el")
 
 ;;; Direnv integration
 (use-package envrc
