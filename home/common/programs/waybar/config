@@ -1,38 +1,120 @@
 {
   "layer": "top",
   "position": "top",
-  "modules-left": ["sway/workspaces", "sway/window", "sway/mode"],
+  "gtk-layer-shell": true,
+  "spacing": 8,
+
+  "modules-left": [
+    "group/desk",
+    "sway/window",
+    "sway/mode"
+  ],
   "modules-center": ["clock"],
-  "modules-right": ["network", "cpu", "memory", "wireplumber", "battery"],
+  "modules-right": [
+    "mpris",
+    "group/system"
+  ],
+
+  "group/desk": {
+    "orientation": "horizontal",
+    "modules": [
+      "custom/nixos",
+      "sway/workspaces"
+    ]
+  },
+
+  "custom/nixos": {
+    "format": "",
+    "tooltip-format": "NixOS {output}",
+    "exec": "nixos-version | cut -d. -f1-2",
+    "interval": 3600
+  },
+
   "sway/workspaces": {
     "disable-scroll": true,
     "disable-markup": false,
     "format": "{index}"
   },
+
   "sway/window": {
     "format": "{}",
-    "max-length": 150
+    "max-length": 120,
+    "tooltip": false
   },
+
   "clock": {
-    "format": "{:%a %d %b  %H:%M}"
+    "format": "{:%a %d %b  %H:%M}",
+    "format-alt": "{:%Y-%m-%d  %H:%M:%S}",
+    "tooltip-format": "<b>{:%A}</b>\\n{:%d %B %Y}\\nWeek %V",
+    "on-click-middle": "waybar-msg module clock toggle"
   },
+
+  "mpris": {
+    "format": "{player_icon} {dynamic}",
+    "format-paused": "{status_icon} <i>{dynamic}</i>",
+    "player-icons": {
+      "default": "🎵",
+      "mpv": "🎬",
+      "spotify": ""
+    },
+    "status-icons": {
+      "paused": "⏸",
+      "stopped": "⏹"
+    },
+    "dynamic-order": ["title", "artist"],
+    "dynamic-separator": " • ",
+    "max-length": 48,
+    "ellipsis": true,
+    "interval": 2,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "on-click-middle": "playerctl previous",
+    "on-scroll-up": "playerctl position 5+",
+    "on-scroll-down": "playerctl position 5-",
+    "tooltip-format": "<b>{title}</b>\\n{artist}\\n{album}"
+  },
+
+  "group/system": {
+    "orientation": "horizontal",
+    "modules": [
+      "network",
+      "cpu",
+      "memory",
+      "wireplumber",
+      "battery"
+    ]
+  },
+
   "network": {
-    "format-wifi": " {essid}",
-    "format-ethernet": " {ifname}",
-    "format-disconnected": ""
+    "format-wifi": "",
+    "format-ethernet": "",
+    "format-disconnected": "",
+    "tooltip-format": "{essid} {ifname} {ipaddr}\\n{signalStrength}%",
+    "max-length": 22
   },
+
   "cpu": {
-    "format": " {usage}%"
+    "format": " {usage}%",
+    "states": { "warning": 55, "critical": 80 },
+    "tooltip": true
   },
+
   "memory": {
-    "format": " {used}GiB"
+    "format": " {used}G",
+    "tooltip-format": "{used} / {total} GiB",
+    "interval": 5
   },
+
   "wireplumber": {
-    "format": "{volume}% {icon}",
-    "format-muted": "",
-    "format-icons": ["", "", ""]
+    "format": "{icon} {volume}%",
+    "format-muted": " 0%",
+    "format-icons": ["", "", ""],
+    "scroll-step": 3,
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
   },
+
   "battery": {
+    "bat": "BAT0",
     "format": "{capacity}% {icon}",
     "format-icons": ["", "", "", "", ""]
   }

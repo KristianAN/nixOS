@@ -113,9 +113,15 @@ in
     corner_radius 10
     
     # SwayFX specific effects with Kanagawa colors
-    layer_effects "panel" {
-        shadows enable;
-        corner_radius 20;
+    layer_effects "waybar" {
+      corner_radius 18;
+      shadows enable;
+      shadow_blur_radius 22;
+      shadow_color ${kanagawa.background}dd;
+      blur enable;
+      blur_radius 6;
+      blur_passes 3;
+      dim_inactive 0;
     }
     
     # Window shadows for SwayFX

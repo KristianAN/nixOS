@@ -37,6 +37,7 @@
     pkgs.hunspellDicts.en_GB-ise
     pkgs.hunspellDicts.nb_NO
     pkgs.hunspellDicts.nn_NO
+    pkgs.playerctl
   ];
 
   programs.home-manager.enable = true;
