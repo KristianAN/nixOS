@@ -21,26 +21,6 @@ let
     }
   );
 
-  eglot-booster = pkgs.emacsPackages.melpaBuild {
-      pname = "eglot-booster";
-      version = "20241029";
-
-      commit = "e6daa6bcaf4aceee29c8a5a949b43eb1b89900ed";
-
-      src = pkgs.fetchFromGitHub {
-        owner = "jdtsmith";
-        repo = "eglot-booster";
-        rev = "e6daa6bcaf4aceee29c8a5a949b43eb1b89900ed";
-        hash = "sha256-PLfaXELkdX5NZcSmR1s/kgmU16ODF8bn56nfTh9g6bs=";
-      };
-
-      recipe = pkgs.writeText "recipe" ''
-        (eglot-booster
-        :repo "jdtsmith/eglot-booster"
-        :fetcher github
-        :files ("*.el"))
-        '';
-      };
 in
 {
   programs.emacs = {
@@ -48,12 +28,6 @@ in
     package = pkgs.emacs-pgtk;
     extraPackages =
       epkgs: with epkgs; [
-        meow
-
-        # Native compilation
-        # compile-angel
-
-        # Completion et.al.
         orderless
         vertico
         marginalia
@@ -61,24 +35,18 @@ in
         embark-consult
         consult
         consult-project-extra
-        consult-gh
         corfu
         cape
         yasnippet
         wgrep
         avy
-
-        # Good looks
         nerd-icons
         indent-bars
         delight
         nerd-icons-completion
         nerd-icons-corfu
         spacious-padding
-        
-        # Direnv
         envrc
-
         # Programming
         (treesit-grammars.with-grammars (grammars: with grammars; [
           tree-sitter-nix
@@ -97,35 +65,25 @@ in
         nix-ts-mode
         web-mode
         haskell-ts-mode
-
-        # Editing
         iedit
         apheleia # Formatting
         citeproc
-        
-        # Other
-        eat
         denote
         denote-org
         consult-denote
-        org-present
         visual-fill-column
-        detached
-
-        # lsp
         eldoc-box
+        vc-jj
       ];
 
     extraConfig = builtins.readFile ./init.el;
   };
 
   home.packages = [
-    pkgs.emacs-lsp-booster
     pkgs.jdt-language-server
     metals
     pkgs.astyle
     pkgs.fd
-    pkgs.dtach
   ];
 
   home.file = {
