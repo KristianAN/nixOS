@@ -84,3 +84,58 @@ If another window exists, reuse it. Otherwise, create a right split and use that
       (eww url))))
 
 (global-set-key (kbd "C-c s d") #'custom/duckduckgo-search-eww)
+
+(defun custom/consult-ripgrep-from-visual-selection ()
+  "Send selected region to consult-ripgrep."
+  (interactive)
+  (let ((selection (buffer-substring-no-properties (region-beginning) (region-end))))
+    (deactivate-mark)
+    (consult-ripgrep nil selection)))
+
+;; Define the keymap explicitly
+(defvar my-keys-minor-mode-map
+  (let ((map (make-sparse-keymap)))
+    ;; Built-ins
+    (define-key map (kbd "C-c e m") #'mark-sexp)
+    ;; Custom functions
+    (define-key map (kbd "C-c e r") #'custom/wrap-region-replace-symbols)
+    (define-key map (kbd "C-c e w") #'custom/wrap-region-with-symbols)
+    map)
+  "Keymap for `my-keys-minor-mode'.")
+
+(define-minor-mode my-keys-minor-mode
+  "Minor mode to host personal keybindings that should override major modes."
+  :init-value t
+  :lighter " my-keys"
+  :keymap my-keys-minor-mode-map)
+
+;; Optionally give it very high precedence (helps with Evil or other emulation layers)
+;; (add-to-list 'emulation-mode-map-alists
+;;              `((my-keys-minor-mode . ,my-keys-minor-mode-map)))
+
+;; Enable globally
+(my-keys-minor-mode 1)
+
+(defun my-minibuffer-setup-hook ()
+  (my-keys-minor-mode 0))
+
+(add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
+
+
+;;; Nixos wrappers
+
+(defvar nixos-system-root "~/nix/nixOS/"
+  "The root directory of your NixOS configuration flake.")
+
+(defun update-nixos ()
+  "Run 'sudo nixos-rebuild switch --flake .' in the directory specified by `nixos-system-root`."
+  (interactive)
+  (let ((default-directory nixos-system-root))
+    (async-shell-command "sudo nixos-rebuild switch --flake .")))
+
+
+(defun update-nixos-restart-emacs ()
+  "Run 'sudo nixos-rebuild switch --flake .' in the directory specified by `nixos-system-root`."
+  (interactive)
+  (let ((default-directory nixos-system-root))
+    (async-shell-command "sudo nixos-rebuild switch --flake . && systemctl --user restart emacs.service")))

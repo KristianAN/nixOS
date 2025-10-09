@@ -94,10 +94,12 @@ in
     "  background: transparent;"
     "  margin: 0 3px;"
     "  padding: 2px 8px;"
+    "  min-height: 24px;"
     "  border-radius: 6px;"
-    "  border: 0;"
+    "  border: 1px solid transparent;"
     "  transition: background 100ms;"
     "}"
+    
     "#desk #workspaces button:hover {"
     "  background: rgba(255,255,255,0.07);"
     "}"

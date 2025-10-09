@@ -38,11 +38,6 @@ turned on.")
 (defvar minimal-emacs-gc-cons-threshold (* 16 1024 1024)
   "The value of `gc-cons-threshold' after Emacs startup.")
 
-(defvar minimal-emacs-package-initialize-and-refresh t
-  "Whether to automatically initialize and refresh packages.
-When set to non-nil, Emacs will automatically call `package-initialize' and
-`package-refresh-contents' to set up and update the package system.")
-
 (defvar minimal-emacs-user-directory user-emacs-directory
   "The default value of the `user-emacs-directory' variable.")
 
@@ -258,15 +253,15 @@ When set to non-nil, Emacs will automatically call `package-initialize' and
 
 (setq scroll-bar-mode nil)
 
-(tab-bar-mode 1)
-(setq tab-bar-show nil)
-(add-to-list 'default-frame-alist '(tab-bar-lines . 0))
-
-;; Keep it hidden if something tries to show it after opening/closing tabs
-(add-hook 'tab-bar-tab-post-open-functions
-          (lambda (&rest _) (set-frame-parameter nil 'tab-bar-lines 0)))
-(add-hook 'tab-bar-tab-post-close-functions
-          (lambda (&rest _) (set-frame-parameter nil 'tab-bar-lines 0)))
+(tab-bar-mode -1)
+;; (setq tab-bar-show nil)
+;; (add-to-list 'default-frame-alist '(tab-bar-lines . 0))
+;; 
+;; ;; Keep it hidden if something tries to show it after opening/closing tabs
+;; (add-hook 'tab-bar-tab-post-open-functions
+;;           (lambda (&rest _) (set-frame-parameter nil 'tab-bar-lines 0)))
+;; (add-hook 'tab-bar-tab-post-close-functions
+;;           (lambda (&rest _) (set-frame-parameter nil 'tab-bar-lines 0)))
 
 (when (fboundp 'horizontal-scroll-bar-mode)
   (horizontal-scroll-bar-mode -1))

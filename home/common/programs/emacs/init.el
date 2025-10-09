@@ -17,25 +17,13 @@
 ;;; Load pre-init.el
 (emacs-load-user-configuration "pre-init.el")
 
+
 ;;; Networking
 
 ;; Don't ping things that look like domain names.
 (setq ffap-machine-p-known 'reject)
 
-;;; package.el
-(when (bound-and-true-p minimal-emacs-package-initialize-and-refresh)
-  ;; Initialize and refresh package contents again if needed
-  (package-initialize)
-  (unless package-archive-contents
-    (package-refresh-contents))
-
-  ;; Install use-package if necessary
-  (unless (package-installed-p 'use-package)
-    (package-install 'use-package))
-
-  ;; Ensure use-package is available at compile time
-  (eval-when-compile
-    (require 'use-package)))
+(require 'use-package)
 
 ;; Ensure the 'use-package' package is installed and loaded
 

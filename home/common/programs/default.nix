@@ -10,7 +10,6 @@
     ./fish.nix
     ./git.nix
     ./gtk.nix
-    ./starship.nix
     ./sway.nix
     ./tmux.nix
     #./niri

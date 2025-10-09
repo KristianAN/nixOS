@@ -15,28 +15,13 @@ let
     set -g theme_color_scheme solarized
   '';
 
-  useStarshipOrDumb = ''
-    if test "$TERM" = "dumb"
-        set -e fish_key_bindings
-        set -g fish_prompt '> '
-        set -g HISTFILE ~/.tramp-histfile
-        functions -e fish_prompt
-        function fish_prompt
-            echo '> '
-        end
-    else
-        starship init fish | source
-    end
-  '';
-
   fishConfig =
     ''
       set fish_greeting
       fish_default_key_bindings
     ''
     + fzfConfig
-    + themeConfig
-    + useStarshipOrDumb;
+    + themeConfig;
 
 in
 {
@@ -47,14 +32,14 @@ in
       config.enable = true;
       functions.enable = true;
     };
-    # Remove the interactiveShellInit that overrides the settings in fishConfig
+
     interactiveShellInit = ''
       eval (direnv hook fish)
       any-nix-shell fish --info-right | source
     '';
 
     shellAliases = {
-      eat = "emacsclient -c -e \"(eat)\"";
+
     };
     
     shellInit = fishConfig;

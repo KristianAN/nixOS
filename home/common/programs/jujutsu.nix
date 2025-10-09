@@ -13,6 +13,8 @@
         color = "auto";
         editor = "emacsclient";
         paginate = "never";
+        diff-formatter = ":git";
+        conflict-marker-style = "git";
       };
     };
   };

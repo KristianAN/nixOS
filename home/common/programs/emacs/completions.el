@@ -1,6 +1,5 @@
 ;;; completions.el --- Consult configuration -*- no-byte-compile: t; lexical-binding: t; -*-
 
-;;; Code completions
 (use-package yasnippet
   :ensure t
   :init

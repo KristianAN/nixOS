@@ -35,7 +35,7 @@ let
 in
 {
   "${modifier}+ctrl+e" = "exec emacsclient -c";
-  "${modifier}+ctrl+t" = "exec emacsclient -c -e \"(eat)\"";
+  "${modifier}+ctrl+t" = "exec emacsclient -c -e \"(eshell)\"";
   "${modifier}+alt+l" = "exec ${swaylockScript}";
   "${modifier}+ctrl+h" = "exec ${home-display-settings}";
   "${modifier}+ctrl+l" = "exec ${laptop-display-settings}";
