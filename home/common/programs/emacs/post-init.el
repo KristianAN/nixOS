@@ -131,13 +131,6 @@
 ;;; Eshell configuration
 (emacs-load-user-configuration "eshell.el")
 
-;;; Jujutsu mode
-(use-package jj-mode
-  :ensure t
-  :bind
-  (("C-c j l" . jj-log))
-  :defer t)
-
 ;;; Direnv integration
 (use-package envrc
   :defer t
@@ -150,7 +143,6 @@
 
 (use-package vc-jj
   :ensure t)
-
 
 ;;; delight
 (use-package delight
