@@ -20,7 +20,29 @@ let
       buildInputs = [ final.deps ];
     }
   );
+  
+  jjModeCommit = "bc8f74306c5a21cbfb4d5dc1b1263108b2a54f15";
+  jjModeSrcHash = "sha256-fBZLDdlPTFE68rUNsQUvUC1VqjiyGctQCFg0c8h6e34=";
 
+  jj-mode = pkgs.emacsPackages.melpaBuild {
+    pname = "jj-mode";
+    version = "0.0.0";
+    commit = jjModeCommit;
+    src = pkgs.fetchFromGitHub {
+      owner = "bolivier";
+      repo  = "jj-mode.el";
+      rev   = jjModeCommit;
+      hash  = jjModeSrcHash;
+    };
+    recipe = pkgs.writeText "recipe" ''
+      (jj-mode
+       :repo "bolivier/jj-mode.el"
+       :fetcher github
+       :files ("*.el"))
+      '';
+    packageRequires = [ pkgs.emacsPackages.magit ];
+  };
+  
 in
 {
   programs.emacs = {
@@ -28,6 +50,7 @@ in
     package = pkgs.emacs-pgtk;
     extraPackages =
       epkgs: with epkgs; [
+        jj-mode
         orderless
         vertico
         marginalia
