@@ -28,7 +28,7 @@ config.window_padding = {
 
 config.window_background_opacity = 1
 
-config.leader = { key = 'u', mods = 'CTRL', timeout_milliseconds = 1000 }
+config.leader = { key = 'u', mods = 'SUPER', timeout_milliseconds = 1000 }
 config.keys = {
   -- splitting
   { mods = "LEADER", key = "-",  action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' } },

@@ -39,7 +39,7 @@ in
     '';
 
     shellAliases = {
-
+      "vim" = "emacsclient -nw";
     };
     
     shellInit = fishConfig;
