@@ -17,7 +17,6 @@
 ;;; Load pre-init.el
 (emacs-load-user-configuration "pre-init.el")
 
-
 ;;; Networking
 
 ;; Don't ping things that look like domain names.

@@ -1,22 +1,5 @@
 ;;; lsp.el --- LSP configuration -*- no-byte-compile: t; lexical-binding: t; -*-
 
-(defun list-active-faces ()
-  "List all faces used in the current buffer."
-  (interactive)
-  (let ((faces '()))
-    (save-excursion
-      (goto-char (point-min))
-      (while (not (eobp))
-        (let ((face (get-text-property (point) 'face)))
-          (when face
-            (unless (listp face) (setq face (list face)))
-            (dolist (f face)
-              (unless (memq f faces)
-                (push f faces)))))
-        (forward-char 1)))
-    (message "Faces in use: %s" faces)
-    faces))
-
 (use-package treesit
   :ensure nil
   :custom
@@ -37,28 +20,35 @@
 
 (use-package scala-ts-mode
   :ensure t
+  :defer t
   :custom
   (scala-ts-indent-offset 2))
 
 (use-package haskell-ts-mode
   :ensure t
+  :defer t
   :custom
   (haskell-ts-use-indent t)
   (haskell-ts-ghci "ghci")
   :mode (("\\.hs\\'" . haskell-ts-mode)))
 
 (use-package java-ts-mode
+  :defer t
   :mode "\\.java\\'")
 
 (use-package nix-ts-mode
+  :defer t
   :mode "\\.nix\\'")
 
 (use-package typescript-ts-mode
+  :defer t
   :mode (("\\.cts\\'" . typescript-ts-mode)
          ("\\.tsx\\'" . typescript-ts-mode)
          ("\\.ts\\'" . typescript-ts-mode)))
 
 (use-package eglot
+  :ensure nil
+  :defer t
   :custom
   (eglot-send-changes-idle-time 0.1)
   (eglot-extend-to-xref t)
@@ -104,6 +94,7 @@
 
 (use-package web-mode
   :ensure t
+  :defer t
   :mode
   (("\\.phtml\\'" . web-mode)
    ("\\.php\\'" . web-mode)

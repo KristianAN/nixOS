@@ -87,14 +87,6 @@
   (which-key-add-column-padding 1)
   (which-key-max-description-length 40))
 
-
-;; Turn off autosave-mode
-;; turn off backup-files
-(auto-save-mode -1)
-(setq make-backup-files nil)
-(setq auto-save-default nil)
-
-
 (emacs-load-user-configuration "completions.el")
 
 (emacs-load-user-configuration "looks.el")
@@ -144,7 +136,9 @@
 (use-package magit
   :ensure t
   :defer t
-  :bind (("C-c g" . magit)))
+  :bind
+  (("C-c g g" . magit)
+   ("C-c g b" . magit-blame)))
 
 ;;; delight
 (use-package delight
@@ -160,11 +154,8 @@
              (eldoc-mode nil "eldoc")
              (company-mode nil "company")
              (yas-minor-mode nil "yasnippet")))
-  
-  ;; Force hide vc-mode specifically
-  (with-eval-after-load 'vc-hooks
-    (setq-default mode-line-format
-                  (delete '(vc-mode vc-mode) mode-line-format))))
+
+  )
 
 (use-package ansi-color
   :hook (
