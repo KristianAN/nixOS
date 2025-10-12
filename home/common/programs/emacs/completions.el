@@ -13,14 +13,13 @@
           (not (or (bound-and-true-p mct--active)
                    (bound-and-true-p vertico--input)
                    (eq (current-local-map) read-passwd-map)))))
+  
   :bind (:map corfu-map
               ("C-n" . corfu-next)
               ("C-p" . corfu-previous)
               ("C-h" . corfu-info-documentation)
               ("C-y" . corfu-complete)
-              ("C-e" . my/corfu-quit-or-abort)
               )
-
   :custom
   (corfu-cycle t)
   (corfu-auto t)
@@ -28,14 +27,6 @@
   (corfu-preview-current nil)
   (corfu-quit-at-boundary t)
   (corfu-quit-no-match t)
-
-  :config
-  (defun my/corfu-quit-or-abort ()
-    "Abort Corfu if active, otherwise fall back to default behavior."
-    (interactive)
-    (if corfu--frame
-        (corfu-quit)
-      (keyboard-escape-quit)))
   )
 
 (use-package cape

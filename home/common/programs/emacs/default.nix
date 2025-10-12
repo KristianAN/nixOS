@@ -28,6 +28,7 @@ in
     package = pkgs.emacs-pgtk;
     extraPackages =
       epkgs: with epkgs; [
+        magit
         orderless
         vertico
         marginalia
@@ -73,7 +74,6 @@ in
         consult-denote
         visual-fill-column
         eldoc-box
-        vc-jj
       ];
 
     extraConfig = builtins.readFile ./init.el;

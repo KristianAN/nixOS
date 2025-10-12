@@ -141,8 +141,10 @@
   :defer t
   :hook ((haskell-ts-mode scala-mode scala-ts-mode yaml-mode python-ts-mode) . indent-bars-mode))
 
-(use-package vc-jj
-  :ensure t)
+(use-package magit
+  :ensure t
+  :defer t
+  :bind (("C-c g" . magit)))
 
 ;;; delight
 (use-package delight
