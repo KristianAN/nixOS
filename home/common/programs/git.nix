@@ -8,6 +8,9 @@
     extraConfig = {
       core.editor = "emacsclient";
       github.user = "KristianAN";
+      rebase = {
+        updateRefs = true;
+      };
     };
 
     ignores = [
