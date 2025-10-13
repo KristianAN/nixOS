@@ -101,7 +101,7 @@
 (setq delete-by-moving-to-trash (not noninteractive))
 
 ;; Increase how much is read from processes in a single chunk
-(setq read-process-output-max (* 512 1024))  ; 512kb
+(setq read-process-output-max (* 1024 1024))  ; 1 MB
 
 ;; Collects and displays all available documentation immediately, even if
 ;; multiple sources provide it. It concatenates the results.
