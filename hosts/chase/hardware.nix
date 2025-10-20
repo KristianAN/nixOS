@@ -19,7 +19,7 @@
   # hardware.video.hidpi.enable = lib.mkDefault true;
   # Set your system kind (needed for flakes)
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-
+  hardware.uinput.enable = true;
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "i915" "kvm-intel" ];

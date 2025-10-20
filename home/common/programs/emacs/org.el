@@ -6,6 +6,12 @@
 ;;  '((haskell . t)
 ;;    (emacs-lisp . t)))
 
+(use-package org
+  :ensure nil
+  :custom
+  ((org-export-backends (quote (ascii html icalendar latex md odt))))
+  )
+
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "firefox")
 

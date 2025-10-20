@@ -16,12 +16,21 @@ in
       modifier = "Mod4";
 
       input = {
-        "*" = {
-          xkb_layout = "no,us";
-          xkb_variant = ",colemak_dh_iso";
-          xkb_options = "grp:rctrl_toggle,ctrl:swapcaps_group2";
-          tap = "enabled";
+        "1:1:AT_Translated_Set_2_keyboard" = {
+          xkb_layout = "us";
         };
+        "12951:8224:ZSA_Technology_Labs_Ergodox_EZ_Consumer_Control" = {
+          xkb_layout = "no";
+        };
+        "12951:8224:ZSA_Technology_Labs_Ergodox_EZ_Keyboard" = {
+          xkb_layout = "no";
+        };
+        "12951:8224:ZSA_Technology_Labs_Ergodox_EZ" = {
+          xkb_layout = "no";
+        };
+        "12951:8224:ZSA_Technology_Labs_Ergodox_EZ_System_Control" = {
+          xkb_layout = "no";
+        };              
       };
       
       output = {
