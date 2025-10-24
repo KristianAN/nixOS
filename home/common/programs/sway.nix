@@ -16,6 +16,9 @@ in
       modifier = "Mod4";
 
       input = {
+        "1267:12780:ELAN07AC:00_04F3:31EC_Touchpad" = {
+          "tap" = "enabled";
+        };
         "1:1:AT_Translated_Set_2_keyboard" = {
           xkb_layout = "us";
         };

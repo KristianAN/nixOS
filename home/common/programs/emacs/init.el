@@ -393,6 +393,7 @@
 (setq dired-free-space nil
       dired-deletion-confirmer 'y-or-n-p
       dired-filter-verbose nil
+      dired-vc-rename-file t
       dired-dwim-target t
       dired-clean-confirm-killing-deleted-buffers nil
       dired-recursive-deletes 'top

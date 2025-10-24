@@ -218,12 +218,6 @@
    :preview-key '(:debounce 0.4 any))
   (setq consult-narrow-key "<"))
 
-(use-package consult-project-extra
-  :ensure t
-  :bind
-  (("C-c p f" . consult-project-extra-find)
-   ("C-c p o" . consult-project-extra-find-other-window)))
-
 (use-package wgrep)
 
 (setopt text-mode-ispell-word-completion nil)

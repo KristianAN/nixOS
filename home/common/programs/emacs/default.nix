@@ -35,7 +35,7 @@ in
         embark
         embark-consult
         consult
-        consult-project-extra
+        consult-hoogle
         corfu
         cape
         yasnippet
@@ -84,6 +84,8 @@ in
     metals
     pkgs.astyle
     pkgs.fd
+    pkgs.haskellPackages.hoogle
+    pkgs.haskellPackages.hell
   ];
 
   home.file = {
