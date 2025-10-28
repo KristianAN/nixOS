@@ -6,6 +6,8 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    hell.url = "github:chrisdone/hell";
+    hell.inputs.nixpkgs.follows = "nixpkgs";  
   };
 
   outputs = inputs@{ flake-parts, ... }:
@@ -24,9 +26,6 @@
                 slack = false;
                 discord = false;
               };
-              #  add more host-specific options here
-              # extraModules = [ ./some-sky-module ];
-              # system = "x86_64-linux";
             };
             rubble = {
               hostname = "rubble";

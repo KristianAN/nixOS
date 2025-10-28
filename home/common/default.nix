@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
 
   imports = [
@@ -38,6 +38,7 @@
     pkgs.hunspellDicts.nb_NO
     pkgs.hunspellDicts.nn_NO
     pkgs.playerctl
+    inputs.hell.packages.${pkgs.system}.default
   ];
 
   programs.home-manager.enable = true;

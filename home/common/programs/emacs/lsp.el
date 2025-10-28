@@ -30,7 +30,10 @@
   :custom
   (haskell-ts-use-indent t)
   (haskell-ts-ghci "ghci")
-  :mode (("\\.hs\\'" . haskell-ts-mode)))
+  :mode (
+         ("\\.hs\\'" . haskell-ts-mode)
+         ("\\.hell\\'" . haskell-ts-mode)         
+         ))
 
 (use-package java-ts-mode
   :defer t

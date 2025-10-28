@@ -85,7 +85,6 @@ in
     pkgs.astyle
     pkgs.fd
     pkgs.haskellPackages.hoogle
-    pkgs.haskellPackages.hell
   ];
 
   home.file = {
