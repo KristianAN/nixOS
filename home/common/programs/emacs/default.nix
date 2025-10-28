@@ -74,6 +74,7 @@ in
         consult-denote
         visual-fill-column
         eldoc-box
+        meow
       ];
 
     extraConfig = builtins.readFile ./init.el;

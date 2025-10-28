@@ -123,6 +123,9 @@
 ;;; Eshell configuration
 (emacs-load-user-configuration "eshell.el")
 
+;;; Meow configuration
+(emacs-load-user-configuration "meow.el")
+
 ;;; Direnv integration
 (use-package envrc
   :defer t
