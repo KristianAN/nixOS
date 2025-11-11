@@ -8,6 +8,15 @@
 
 (use-package org
   :ensure nil
+  :config
+  (setq org-M-RET-may-split-line '((default . nil)))
+  (setq org-insert-heading-respect-content t)
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
+  (setq org-directory "~/org/")
+  (setq org-agenda-files (list org-directory))
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "WAIT(w!)" "|" "CANCEL(c!)" "DONE(d!)")))
   :custom
   ((org-export-backends (quote (ascii html icalendar latex md odt))))
   )

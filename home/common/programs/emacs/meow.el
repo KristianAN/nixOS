@@ -78,6 +78,8 @@
    '("d" . meow-pop-to-mark)
    '("D" . meow-unpop-to-mark)
    '("z" . meow-pop-selection)
+   '("{" . backward-paragraph)
+   '("}" . forward-paragraph)
    '("'" . repeat)
    '("<escape>" . ignore)))
 

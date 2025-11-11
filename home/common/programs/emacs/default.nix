@@ -43,7 +43,6 @@ in
         avy
         nerd-icons
         indent-bars
-        delight
         nerd-icons-completion
         nerd-icons-corfu
         spacious-padding
@@ -75,6 +74,7 @@ in
         visual-fill-column
         eldoc-box
         meow
+        doom-modeline
       ];
 
     extraConfig = builtins.readFile ./init.el;

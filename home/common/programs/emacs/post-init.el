@@ -126,6 +126,11 @@
 ;;; Meow configuration
 (emacs-load-user-configuration "meow.el")
 
+;;; modeline
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+
 ;;; Direnv integration
 (use-package envrc
   :defer t
@@ -149,25 +154,15 @@
   (("C-c g g" . magit)
    ("C-c g b" . magit-blame)))
 
-;;; delight
-(use-package delight
-  :ensure t
-  :config
-  (delight '((envrc-mode nil "envrc")               ; Hide envrc-mode
-             (which-key-mode nil "which-key")       ; Hide which-key
-             (apheleia-mode nil "apheleia")         ; Hide apheleia
-             (visual-line-mode nil "simple")        ; Hide wrap mode
-             
-             ;; Other unwanted minor modes
-             (auto-revert-mode nil "autorevert")
-             (eldoc-mode nil "eldoc")
-             (company-mode nil "company")
-             (yas-minor-mode nil "yasnippet")))
-
-  )
 
 (use-package ansi-color
   :hook (
          (compilation-filter . ansi-color-compilation-filter)))
 
-
+(setq erc-server "irc.libera.chat"
+      erc-nick "deployonfriday"
+      ;; erc-user-full-name "Emacs User"  ; And this!
+      erc-track-shorten-start 8
+      erc-autojoin-channels-alist '(("irc.libera.chat" "#systemcrafters" "#emacs" "##programming" "#haskell" "#scala" "nixos"))
+      erc-kill-buffer-on-part t
+      erc-auto-query 'bury)
