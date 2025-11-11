@@ -33,9 +33,21 @@ in
         };
         "12951:8224:ZSA_Technology_Labs_Ergodox_EZ_System_Control" = {
           xkb_layout = "no";
-        };              
+        };
+        "12951:6519:ZSA_Technology_Labs_Voyager_Keyboard" = {
+          xkb_layout = "no";
+        };
+        "12951:6519:ZSA_Technology_Labs_Voyager_Consumer_Control" = {
+          xkb_layout = "no";
+        };
+        "12951:6519:ZSA_Technology_Labs_Voyager_System_Control" = {
+          xkb_layout = "no";
+        };
+        "12951:6519:ZSA_Technology_Labs_Voyager" = {
+          xkb_layout = "no";
+        };
       };
-      
+
       output = {
         "*" = {
           bg = "${./wallpaper.png} fill";
@@ -45,7 +57,7 @@ in
           mode = "1920x1080";
         };
       };
-      
+
       modes = {
         resize = {
           "m" = "resize shrink width 10px";
@@ -56,7 +68,7 @@ in
           "Escape" = "mode default";
         };
       };
-      
+
       window = {
         titlebar = false;
         border = 2;
@@ -73,7 +85,7 @@ in
 
       startup = [ { command = "waybar"; } ];
       keybindings = pkgs.lib.mkOptionDefault (import ../sway-keybindings.nix { inherit pkgs; });
-      
+
       # Kanagawa colors
       colors = {
         focused = {
@@ -113,7 +125,7 @@ in
         };
         background = kanagawa.background;
       };
-      
+
       fonts = {
         names = [ kanagawa.font ];
         size = (lib.toInt (builtins.toString kanagawa.fontSize) - 2) * 1.0;
@@ -123,7 +135,7 @@ in
     extraConfig = ''
     shadows enable
     corner_radius 10
-    
+
     # SwayFX specific effects with Kanagawa colors
     layer_effects "waybar" {
       corner_radius 18;
@@ -135,18 +147,18 @@ in
       blur_passes 3;
       dim_inactive 0;
     }
-    
+
     # Window shadows for SwayFX
     shadows_on_csd enable
     shadow_blur_radius 20
     shadow_color ${kanagawa.background}ee
-    
+
     # Blur effects (optional, you can remove if you don't want blur)
     blur enable
     blur_xray disable
     blur_passes 2
     blur_radius 5
-    
+
     # Dim inactive windows slightly
     default_dim_inactive 0.1
     dim_inactive_colors.unfocused ${kanagawa.background}ee
