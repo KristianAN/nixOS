@@ -25,8 +25,8 @@
 
   "custom/nixos": {
     "format": "",
-    "tooltip-format": "NixOS {output}",
-    "exec": "nixos-version | cut -d. -f1-2",
+    "tooltip": true,
+    "exec": "echo \"NixOS $(nixos-version | cut -d. -f1-2)\"",
     "interval": 3600
   },
 
@@ -45,7 +45,7 @@
   "clock": {
     "format": "{:%a %d %b  %H:%M}",
     "format-alt": "{:%Y-%m-%d  %H:%M:%S}",
-    "tooltip-format": "<b>{:%A}</b>\\n{:%d %B %Y}\\nWeek %V",
+    "tooltip-format": "<b>{:%A}</b>\n{:%d %B %Y}\nWeek %V",
     "on-click-middle": "waybar-msg module clock toggle"
   },
 
@@ -71,12 +71,13 @@
     "on-click-middle": "playerctl previous",
     "on-scroll-up": "playerctl position 5+",
     "on-scroll-down": "playerctl position 5-",
-    "tooltip-format": "<b>{title}</b>\\n{artist}\\n{album}"
+    "tooltip-format": "<b>{title}</b>\n{artist}\n{album}"
   },
 
   "group/system": {
     "orientation": "horizontal",
     "modules": [
+      "custom/kmonad",
       "network",
       "cpu",
       "memory",
@@ -85,11 +86,20 @@
     ]
   },
 
+  "custom/kmonad": {
+    "format": " ",
+    "exec": "systemctl --user is-active kmonad-laptop.service",
+    "exec-if": "true",
+    "interval": 5,
+    "tooltip": true,
+    "tooltip-format": "KMonad is running"
+  },
+
   "network": {
-    "format-wifi": "",
+    "format-wifi": "  ",
     "format-ethernet": "",
     "format-disconnected": "",
-    "tooltip-format": "{essid} {ifname} {ipaddr}\\n{signalStrength}%",
+    "tooltip-format": "{essid} {ifname} {ipaddr}\n{signalStrength}%",
     "max-length": 22
   },
 

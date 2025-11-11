@@ -7,8 +7,9 @@ let
   sideMarginPixels = 12;   # distance from screen edge to bar background
   topMarginPixels  = 12;   # vertical offset from top
   innerPadX        = 24;   # horizontal padding inside the bar background
-in
-{
+
+in {
+
   programs.waybar.enable = true;
   xdg.configFile."waybar/config".source = ./config;
 
@@ -125,7 +126,7 @@ in
     "#cpu.warning  { color: @accent_orange; }"
     "#cpu.critical { color: @accent_red; font-weight: 600; }"
     "#battery.warning  { color: @accent_orange; }"
-    "#battery.critical { color: @accent_red; font-weight: 600; }"
+    "/* battery.critical is intentionally omitted to avoid confusion with charging state */"
     "#battery.charging { color: @accent_green; font-weight: 500; }"
     "#wireplumber.muted { color: @accent_magenta; }"
 
@@ -142,6 +143,7 @@ in
     "  padding: 6px 16px;"
     "}"
 
+    "system #custom-kmonad, #system #custom-kmonad,"
     "system #network, #system #network,"
     "system #cpu, #system #cpu,"
     "system #memory, #system #memory,"
@@ -154,9 +156,11 @@ in
     "  color: inherit;"
     "}"
 
+    "system #custom-kmonad, #system #custom-kmonad { padding-left: 4px; color: @accent_green; }"
     "system #network, #system #network { padding-left: 4px; }"
     "system #battery, #system #battery { padding-right: 12px; }"
 
+    "system #network, #system #network,"
     "system #cpu, #system #cpu,"
     "system #memory, #system #memory,"
     "system #wireplumber, #system #wireplumber,"

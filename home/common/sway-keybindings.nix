@@ -32,12 +32,22 @@ let
     swaymsg output "\"LG Display 0x06FA Unknown\"" mode 1920x1080@60.014Hz pos 0 0 transform normal scale 1.0 scale_filter nearest adaptive_sync off dpms on
   '';
 
+  toggle-kmonad = pkgs.writeShellScriptBin"toggle-kmonad" ''
+    if systemctl --user is-active --quiet kmonad-laptop.service; 
+    then
+      systemctl --user stop kmonad-laptop.service
+    else 
+      systemctl --user start kmonad-laptop.service
+    fi
+  '';
+
 in
 {
   "${modifier}+ctrl+e" = "exec emacsclient -c";
   "${modifier}+ctrl+t" = "exec emacsclient -c -e \"(eshell)\"";
   "${modifier}+alt+l" = "exec ${swaylockScript}";
   "${modifier}+ctrl+h" = "exec ${home-display-settings}";
+  "${modifier}+ctrl+k" = "exec ${toggle-kmonad}/bin/toggle-kmonad";
   "${modifier}+ctrl+l" = "exec ${laptop-display-settings}";
   "${modifier}+ctrl+p" = "exec grimshot --notify save area";
 
