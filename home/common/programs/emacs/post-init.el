@@ -159,6 +159,31 @@
   :hook (
          (compilation-filter . ansi-color-compilation-filter)))
 
+(use-package compile
+  :ensure nil  ;; built-in package
+  :config
+  ;; Add sbt error regexp patterns
+  (add-to-list 'compilation-error-regexp-alist 'sbt-error)
+  (add-to-list 'compilation-error-regexp-alist-alist
+               '(sbt-error
+                 "^\\[error\\] -- .*?: \\([^:]+\\):\\([0-9]+\\):\\([0-9]+\\)" 1 2 3 2 1))
+
+  (add-to-list 'compilation-error-regexp-alist 'sbt-warning)
+  (add-to-list 'compilation-error-regexp-alist-alist
+               '(sbt-warning
+                 "^\\[warn\\] -- .*?: \\([^:]+\\):\\([0-9]+\\):\\([0-9]+\\)" 1 2 3 1 1))
+
+  ;; Pattern for line-only errors (no column number)
+  (add-to-list 'compilation-error-regexp-alist 'sbt-error-simple)
+  (add-to-list 'compilation-error-regexp-alist-alist
+               '(sbt-error-simple
+                 "^\\[error\\] -- .*?: \\([^:]+\\):\\([0-9]+\\)" 1 2 nil 2 1))
+
+  (add-to-list 'compilation-error-regexp-alist 'sbt-warning-simple)
+  (add-to-list 'compilation-error-regexp-alist-alist
+               '(sbt-warning-simple
+                 "^\\[warn\\] -- .*?: \\([^:]+\\):\\([0-9]+\\)" 1 2 nil 1 1)))
+
 (setq erc-server "irc.libera.chat"
       erc-nick "deployonfriday"
       ;; erc-user-full-name "Emacs User"  ; And this!
@@ -166,3 +191,38 @@
       erc-autojoin-channels-alist '(("irc.libera.chat" "#systemcrafters" "#emacs" "##programming" "#haskell" "#scala" "nixos"))
       erc-kill-buffer-on-part t
       erc-auto-query 'bury)
+
+(use-package dape
+  :ensure t
+  ;; You can add keybindings here if you like, for example:
+  ;; :bind ("<f5>" . dape)
+  :config
+  (add-to-list 'dape-configs
+               '(metals
+                 modes (scala-ts-mode)
+                 ensure (lambda (config)
+                          (with-current-buffer (find-file-noselect (dape-config-get config :filePath))
+                            (unless (and (featurep 'eglot) (eglot-current-server))
+                              (user-error "No eglot instance active in buffer %s" (current-buffer)))
+                            ))
+                 fn (lambda (config)
+                      (with-current-buffer (find-file-noselect (dape-config-get config :filePath))
+                        (if-let* ((server (eglot-current-server))
+                                  ;; Remove dape-specific keywords before sending to metals
+                                  (params (let ((plist (copy-list config)))
+                                            (dolist (key '(:request :type :name :modes :ensure :fn :command :command-args :command-cwd :command-insert-stderr :host :port))
+                                              (remf plist key))
+                                            plist))
+                                  (response (eglot-execute-command server "metals.debug-adapter-start" (vector params))))
+                            (pcase-let ((`(,uri) response))
+                              (plist-put config 'port (string-to-number (cadr (split-string uri ":")))))
+                          (user-error "Could not start metals debug adapter"))))
+                 :filePath (dape-buffer-default)
+                 :mainClass (read-from-minibuffer "Main class: ")
+                 :runType "run"
+                 :request "launch"
+                 :type "scala"
+                 :args []
+                 :jvmOptions []
+                 :env nil
+                 :envFile nil)))

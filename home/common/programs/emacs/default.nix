@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  metalsVersion = "1.6.2";
+  metalsVersion = "1.6.3";
   metals = pkgs.metals.overrideAttrs (
     final: prev: {
       deps = pkgs.stdenv.mkDerivation {
@@ -15,7 +15,7 @@ let
         '';
         outputHashMode = "recursive";
         outputHashAlgo = "sha256";
-        outputHash = "sha256-WcPgX0GZSqpVVAzQ1zCxuRCkwcuR/8bwGjSCpHneeio=";
+        outputHash = "sha256-H5rIpz547pXID86OUPMtKGNcC5d5kxMMEUvaqDck2yo=";
       };
       buildInputs = [ final.deps ];
     }
@@ -41,6 +41,7 @@ in
         yasnippet
         wgrep
         avy
+        dape
         nerd-icons
         indent-bars
         nerd-icons-completion
