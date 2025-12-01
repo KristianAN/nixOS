@@ -39,6 +39,7 @@
     pkgs.hunspellDicts.nn_NO
     pkgs.playerctl
     inputs.hell.packages.${pkgs.system}.default
+    pkgs.jq
   ];
 
   programs.home-manager.enable = true;
