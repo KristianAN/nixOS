@@ -15,6 +15,7 @@
   };
 
   home.packages = [
+    pkgs.nixfmt-tree
     pkgs.ladybird
     pkgs.virt-manager
     pkgs.dconf
