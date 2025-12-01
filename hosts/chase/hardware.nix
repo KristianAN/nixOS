@@ -7,7 +7,7 @@
   hardware.graphics.enable = true;
   hardware.logitech.wireless.enable = true;
   hardware.graphics.extraPackages = with pkgs; [
-    vaapiIntel
+    intel-vaapi-driver
     libvdpau-va-gl
     intel-media-driver
   ];

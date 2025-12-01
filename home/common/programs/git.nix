@@ -2,10 +2,9 @@
 {
   programs.git = {
     enable = true;
-    package = pkgs.gitAndTools.gitFull;
-    userEmail = "kristiananh@proton.me";
-    userName = "Kristian Nedrevold-Hansen";
-    extraConfig = {
+    settings = {
+      user.email = "kristiananh@proton.me";
+      user.name = "Kristian Nedrevold-Hansen";
       core.editor = "emacsclient";
       github.user = "KristianAN";
       rebase = {
