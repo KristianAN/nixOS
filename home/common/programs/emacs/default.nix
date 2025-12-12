@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  metalsVersion = "1.6.3";
+  metalsVersion = "1.6.4";
   metals = pkgs.metals.overrideAttrs (
     final: prev: {
       deps = pkgs.stdenv.mkDerivation {
@@ -15,12 +15,12 @@ let
         '';
         outputHashMode = "recursive";
         outputHashAlgo = "sha256";
-        outputHash = "sha256-H5rIpz547pXID86OUPMtKGNcC5d5kxMMEUvaqDck2yo=";
+        outputHash = "sha256-MuzyVyTOVWZjs+GPqrztmEilirRjxF9SJIKyxgicbXM=";
       };
       buildInputs = [ final.deps ];
     }
   );
-  
+
 in
 {
   programs.emacs = {
@@ -86,7 +86,7 @@ in
     metals
     pkgs.astyle
     pkgs.fd
-    pkgs.haskellPackages.hoogle
+    # pkgs.haskellPackages.hoogle
   ];
 
   home.file = {

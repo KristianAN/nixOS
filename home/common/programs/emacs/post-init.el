@@ -144,7 +144,7 @@
 
 (use-package consult-hoogle
   :ensure t 
-  ;;  :load-path "~/projects/consult-hoogle"
+  :load-path "~/projects/consult-hoogle"
   )
 
 (use-package magit
