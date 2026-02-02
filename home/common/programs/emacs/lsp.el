@@ -72,7 +72,7 @@
 ;; Setup lsp for eglot for modes not currently supported by default by eglot
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
-               '(scala-ts-mode . ("metals")))
+               '(scala-ts-mode . ("metals" :initializationOptions (:defaultBspToBuildTool t))))
   (add-to-list 'eglot-server-programs
                '(haskell-ts-mode . ("haskell-language-server" "--lsp"))))
 

@@ -42,7 +42,7 @@
 
 (setq modus-themes-to-toggle '(modus-vivendi modus-operandi))
 
-(set-face-attribute 'default nil :family "Aporetic Sans Mono" :height 130)
+(set-face-attribute 'default nil :family "Aporetic Sans Mono" :height 135)  
 (set-face-attribute 'variable-pitch nil :family "Aporetic Sans" :height 1.0)
 (set-face-attribute 'fixed-pitch nil :family "Aporetic Sans Mono" :height 1.0)
 
