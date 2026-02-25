@@ -41,6 +41,7 @@
     pkgs.playerctl
     inputs.hell.packages.${pkgs.system}.default
     pkgs.jq
+    pkgs.teams-for-linux
   ];
 
   programs.home-manager.enable = true;
