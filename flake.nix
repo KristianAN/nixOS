@@ -7,7 +7,9 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     hell.url = "github:chrisdone/hell";
-    hell.inputs.nixpkgs.follows = "nixpkgs";  
+    hell.inputs.nixpkgs.follows = "nixpkgs";
+    ewm.url = "git+https://codeberg.org/ezemtsov/ewm.git?ref=master";
+    ewm.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{ flake-parts, ... }:
@@ -25,6 +27,7 @@
               programs = {
                 slack = false;
                 discord = false;
+                ewm = false;
               };
             };
             rubble = {
@@ -32,6 +35,7 @@
               programs = {
                 slack = false;
                 discord = true;
+                ewm = false;
               };
             };
             chase = {
@@ -39,6 +43,7 @@
               programs = {
                 slack = true;
                 discord = true;
+                ewm = false;
               };
             };
           };
@@ -50,11 +55,13 @@
             };
             modules = [
               inputs.home-manager.nixosModules.home-manager
+              inputs.ewm.nixosModules.default
               ./hosts/${config.hostname}
               (import ./modules/nixos)
               {
                 programs.slack.enable = config.programs.slack;
                 programs.discord.enable = config.programs.discord;
+                programs.ewm.enable = config.programs.ewm;
                 home-manager = {
                   useUserPackages = false; # TODO on reinstall
                   extraSpecialArgs = {
