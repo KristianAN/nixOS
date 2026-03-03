@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, osConfig, ... }:
 let
   metalsVersion = "1.6.4";
   metals = pkgs.metals.overrideAttrs (
@@ -26,59 +26,9 @@ in
   programs.emacs = {
     enable = true;
     package = pkgs.emacs-pgtk;
-    extraPackages =
-      epkgs: with epkgs; [
-        magit
-        rust-mode
-        orderless
-        vertico
-        marginalia
-        embark
-        embark-consult
-        consult
-        consult-hoogle
-        corfu
-        cape
-        yasnippet
-        wgrep
-        avy
-        dape
-        nerd-icons
-        indent-bars
-        nerd-icons-completion
-        nerd-icons-corfu
-        spacious-padding
-        envrc
-        # Programming
-        (treesit-grammars.with-grammars (grammars: with grammars; [
-          tree-sitter-nix
-          tree-sitter-rust
-          tree-sitter-bash
-          tree-sitter-haskell
-          tree-sitter-scala
-          tree-sitter-java
-          tree-sitter-yaml
-          tree-sitter-typescript
-          tree-sitter-javascript
-          tree-sitter-vue
-          tree-sitter-tsx
-          tree-sitter-css
-        ]))
-        scala-ts-mode
-        nix-ts-mode
-        web-mode
-        haskell-ts-mode
-        iedit
-        apheleia # Formatting
-        citeproc
-        denote
-        denote-org
-        consult-denote
-        visual-fill-column
-        eldoc-box
-        meow
-        doom-modeline
-      ];
+    extraPackages = epkgs:
+      (import ./packages.nix epkgs)
+      ++ lib.optionals osConfig.programs.ewm.enable [ osConfig.programs.ewm.ewmPackage ];
 
     extraConfig = builtins.readFile ./init.el;
   };
