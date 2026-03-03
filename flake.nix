@@ -43,7 +43,7 @@
               programs = {
                 slack = true;
                 discord = true;
-                ewm = false;
+                ewm = true;
               };
             };
           };
