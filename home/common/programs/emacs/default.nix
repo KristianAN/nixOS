@@ -49,6 +49,6 @@ in
 
   };
 
-  services.emacs.enable = true;
+  services.emacs.enable = !osConfig.programs.ewm.enable;
 
 }
