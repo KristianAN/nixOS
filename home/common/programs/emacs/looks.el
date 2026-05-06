@@ -22,6 +22,12 @@
   :custom
   (spacious-padding-mode 1))
 
+(use-package breadcrumb
+  :ensure t
+  :init
+  (breadcrumb-mode)
+  )
+
 ;; Pretty icons for completion
 (use-package nerd-icons-completion
   :ensure t
@@ -36,14 +42,21 @@
   :config
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
-;; Setup modus-themes if we don't want to use any package for themes
+(use-package ef-themes
+  :ensure t
+  :init
+  (ef-themes-take-over-modus-themes-mode 1)
+  :bind
+  (("<f5>" . modus-themes-rotate)
+   ("C-<f5>" . modus-themes-select)
+   ("M-<f5>" . modus-themes-load-random))
+  :config
+  (setq modus-themes-mixed-fonts t)
+  (setq modus-themes-italic-constructs t)
+  (setq modus-themes-to-toggle '(ef-night ef-day))
 
-(require-theme 'modus-themes) 
+  (set-face-attribute 'default nil :family "Aporetic Sans Mono" :height 135)
+  (set-face-attribute 'variable-pitch nil :family "Aporetic Sans" :height 1.0)
+  (set-face-attribute 'fixed-pitch nil :family "Aporetic Sans Mono" :height 1.0)
 
-(setq modus-themes-to-toggle '(modus-vivendi modus-operandi))
-
-(set-face-attribute 'default nil :family "Aporetic Sans Mono" :height 135)  
-(set-face-attribute 'variable-pitch nil :family "Aporetic Sans" :height 1.0)
-(set-face-attribute 'fixed-pitch nil :family "Aporetic Sans Mono" :height 1.0)
-
-(load-theme 'modus-vivendi)
+  (modus-themes-load-theme 'ef-night))

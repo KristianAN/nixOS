@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  metalsVersion = "1.6.4";
+  metalsVersion = "1.6.6";
   metals = pkgs.metals.overrideAttrs (
     final: prev: {
       deps = pkgs.stdenv.mkDerivation {
@@ -15,7 +15,7 @@ let
         '';
         outputHashMode = "recursive";
         outputHashAlgo = "sha256";
-        outputHash = "sha256-MuzyVyTOVWZjs+GPqrztmEilirRjxF9SJIKyxgicbXM=";
+        outputHash = "sha256-Snx4JvWOTkJcihVRwj25op4BJqmChz+1fZH/PrCCbt0=";
       };
       buildInputs = [ final.deps ];
     }
@@ -28,6 +28,10 @@ in
     package = pkgs.emacs-pgtk;
     extraPackages =
       epkgs: with epkgs; [
+        dumb-jump
+        breadcrumb
+        git-link
+        ef-themes
         magit
         rust-mode
         orderless
@@ -48,7 +52,8 @@ in
         nerd-icons-completion
         nerd-icons-corfu
         spacious-padding
-        envrc
+        ben
+        multiple-cursors
         # Programming
         (treesit-grammars.with-grammars (grammars: with grammars; [
           tree-sitter-nix
@@ -76,7 +81,7 @@ in
         consult-denote
         visual-fill-column
         eldoc-box
-        meow
+        eat
         doom-modeline
       ];
 

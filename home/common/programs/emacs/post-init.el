@@ -124,7 +124,10 @@
 (emacs-load-user-configuration "eshell.el")
 
 ;;; Meow configuration
-(emacs-load-user-configuration "meow.el")
+;;; (emacs-load-user-configuration "meow.el")
+
+(use-package eat
+  :hook ((eshell-load . eat-eshell-mode)))
 
 ;;; modeline
 (use-package doom-modeline
@@ -132,9 +135,9 @@
   :init (doom-modeline-mode 1))
 
 ;;; Direnv integration
-(use-package envrc
+(use-package ben
   :defer t
-  :hook (after-init . envrc-global-mode))
+  :hook (after-init . ben-global-mode))
 
 ;;; Indentation
 (use-package indent-bars
@@ -143,7 +146,7 @@
 
 
 (use-package consult-hoogle
-  :ensure t 
+  :ensure t
   :load-path "~/projects/consult-hoogle"
   )
 
@@ -196,37 +199,9 @@
       erc-kill-buffer-on-part t
       erc-auto-query 'bury)
 
-(use-package dape
+(use-package multiple-cursors
   :ensure t
-  ;; You can add keybindings here if you like, for example:
-  ;; :bind ("<f5>" . dape)
-  :config
-  (add-to-list 'dape-configs
-               '(metals
-                 modes (scala-ts-mode)
-                 ensure (lambda (config)
-                          (with-current-buffer (find-file-noselect (dape-config-get config :filePath))
-                            (unless (and (featurep 'eglot) (eglot-current-server))
-                              (user-error "No eglot instance active in buffer %s" (current-buffer)))
-                            ))
-                 fn (lambda (config)
-                      (with-current-buffer (find-file-noselect (dape-config-get config :filePath))
-                        (if-let* ((server (eglot-current-server))
-                                  ;; Remove dape-specific keywords before sending to metals
-                                  (params (let ((plist (copy-list config)))
-                                            (dolist (key '(:request :type :name :modes :ensure :fn :command :command-args :command-cwd :command-insert-stderr :host :port))
-                                              (remf plist key))
-                                            plist))
-                                  (response (eglot-execute-command server "metals.debug-adapter-start" (vector params))))
-                            (pcase-let ((`(,uri) response))
-                              (plist-put config 'port (string-to-number (cadr (split-string uri ":")))))
-                          (user-error "Could not start metals debug adapter"))))
-                 :filePath (dape-buffer-default)
-                 :mainClass (read-from-minibuffer "Main class: ")
-                 :runType "run"
-                 :request "launch"
-                 :type "scala"
-                 :args []
-                 :jvmOptions []
-                 :env nil
-                 :envFile nil)))
+  :bind (("C-S-c C-S-c" . mc/edit-lines)
+         ("C->" . mc/mark-next-like-this)
+         ("C-<" . mc/mark-previous-like-this)
+         ("C-c C-<" . mc/mark-all-like-this)))

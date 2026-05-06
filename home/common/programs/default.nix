@@ -6,14 +6,15 @@
     #./zsh.nix
     ./firefox.nix
     ./lazygit.nix
-    ./mako.nix
+    #./mako.nix
     ./fish.nix
     ./git.nix
     ./gtk.nix
     ./sway.nix
     ./tmux.nix
     #./niri
-    ./waybar
+    #./waybar
+    ./ironbar
     ./helix
     ./foot.nix
     ./emacs/default.nix
