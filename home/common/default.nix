@@ -13,8 +13,19 @@
     username = "kristian";
     homeDirectory = "/home/kristian";
   };
-
+services.udiskie = {
+    enable = true;
+    settings = {
+        # workaround for
+        # https://github.com/nix-community/home-manager/issues/632
+        program_options = {
+            # replace with your favorite file manager
+            file_manager = "${pkgs.nemo-with-extensions}/bin/nemo";
+        };
+    };
+};
   home.packages = [
+    pkgs.nemo-with-extensions
     pkgs.nixfmt-tree
     pkgs.ladybird
     pkgs.virt-manager
@@ -29,7 +40,6 @@
     pkgs.sway-contrib.grimshot
     pkgs.texliveFull
     pkgs.brightnessctl
-    pkgs.neovim
     pkgs.pandoc
     pkgs.any-nix-shell
     pkgs.cmatrix
@@ -52,10 +62,20 @@
     enable = true;
   };
 
+  programs.neovim = {
+    enable = true;
+    extraConfig = ''
+      set path+=**
+      set wildignorecase
+    '';
+  };
+  
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
+  services.swaync.enable = true;
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "25.05";
+  home.stateVersion = "26.05";
 
 }

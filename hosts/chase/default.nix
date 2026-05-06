@@ -35,10 +35,12 @@
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
+  networking.firewall.checkReversePath = false;
+  environment.systemPackages = with pkgs; [wireguard-tools protonvpn-gui];
 
   # Remove if you wish to disable unfree packages for your system
   nixpkgs.config.allowUnfree = true;
 
   # NixOS release to be compatible with for staeful data such as databases.
-  system.stateVersion = "25.05";
+  system.stateVersion = "26.05";
 }

@@ -83,7 +83,7 @@ in
 
       bars = [ ];
 
-      startup = [ { command = "waybar"; } ];
+      startup = [ { command = "ironbar"; } ];
       keybindings = pkgs.lib.mkOptionDefault (import ../sway-keybindings.nix { inherit pkgs; });
 
       # Kanagawa colors
@@ -137,7 +137,7 @@ in
     corner_radius 10
 
     # SwayFX specific effects with Kanagawa colors
-    layer_effects "waybar" {
+    layer_effects "ironbar" {
       corner_radius 18;
       shadows enable;
       shadow_blur_radius 22;

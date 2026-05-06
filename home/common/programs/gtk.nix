@@ -1,5 +1,10 @@
 { pkgs, ... }:
 {
+home.packages = [
+  pkgs.adwaita-icon-theme
+  pkgs.hicolor-icon-theme
+];
+  
   gtk = {
     enable = true;
     iconTheme = {

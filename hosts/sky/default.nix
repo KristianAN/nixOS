@@ -35,5 +35,5 @@
   nixpkgs.config.allowUnfree = true;
 
   # NixOS release to be compatible with for staeful data such as databases.
-  system.stateVersion = "24.05";
+  system.stateVersion = "26.05";
 }

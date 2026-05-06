@@ -1,8 +1,12 @@
 { pkgs, lib, ... }:
 with lib;
 {
+  
   # Core pakages for system
   environment.systemPackages = with pkgs; [
+    libimobiledevice
+    ifuse
+    
     # Nix Core
     nix-index
     wgetpaste
@@ -17,7 +21,6 @@ with lib;
     btop
     fd
     fzf
-    neofetch
     htop
     killall
     tree
@@ -43,6 +46,9 @@ with lib;
 
   security.pam.services.swaylock = { };
 
+  services.upower.enable = true;
+
+
   services.greetd = {
     enable = true;
     settings = {
@@ -51,6 +57,13 @@ with lib;
         user = "greeter";
       };
     };
+  };
+
+  services.udisks2.enable = true;
+
+  services.usbmuxd = {
+    enable = true;
+    package = pkgs.usbmuxd2;
   };
 
   services.udev.packages = [

@@ -266,6 +266,8 @@
   (when (and (display-graphic-p) (fboundp 'context-menu-mode))
     (add-hook 'after-init-hook #'context-menu-mode)))
 
+(pixel-scroll-precision-mode t)
+
 ;;; Cursor
 ;; The blinking cursor is distracting and interferes with cursor settings in
 ;; some minor modes that try to change it buffer-locally (e.g., Treemacs).
