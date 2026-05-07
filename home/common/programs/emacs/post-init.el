@@ -124,9 +124,6 @@
 ;;; Meow configuration
 ;;; (emacs-load-user-configuration "meow.el")
 
-(use-package eat
-  :hook ((eshell-load . eat-eshell-mode)))
-
 ;;; modeline
 (use-package doom-modeline
   :ensure t
@@ -135,6 +132,13 @@
 ;;; Direnv integration
 (use-package ben
   :defer t
+  ;; NOTE: Optionally un-comment the following config section to customize the
+  ;; mode-line status indicator with nerd-icons. 
+  :config
+  ;; There is a bug in doom-modeline where some squares appear if the icon is
+  ;; propertized.
+  (setq ben-indicator `(,(substring-no-properties (nerd-icons-faicon "nf-fa-cubes"))
+                        "[" (:eval (ben--status)) "]"))
   :hook (after-init . ben-global-mode))
 
 ;;; Indentation
