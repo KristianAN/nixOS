@@ -151,16 +151,21 @@
   :ensure t
   )
 
-(use-package rust-mode
-  :init
-  (setq rust-mode-treesitter-derive t))
-
 (use-package magit
   :ensure t
   :defer t
   :bind
   (("C-c g g" . magit)
+   ("C-c g f" . magit-file-dispatch)
    ("C-c g b" . magit-blame)))
+
+(use-package git-link
+  :ensure t
+  :bind
+  (("C-c g l" . git-link)
+   ("C-c g L" . git-link-commit))
+  :defer t
+  )
 
 
 (use-package ansi-color
@@ -207,7 +212,3 @@
          ("C-<" . mc/mark-previous-like-this)
          ("C-c C-<" . mc/mark-all-like-this)))
 
-(use-package git-link
-  :ensure t
-  :defer t
-  )

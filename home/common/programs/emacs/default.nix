@@ -33,7 +33,6 @@ in
         git-link
         ef-themes
         magit
-        rust-mode
         orderless
         vertico
         marginalia
@@ -57,7 +56,6 @@ in
         # Programming
         (treesit-grammars.with-grammars (grammars: with grammars; [
           tree-sitter-nix
-          tree-sitter-rust
           tree-sitter-bash
           tree-sitter-haskell
           tree-sitter-scala
