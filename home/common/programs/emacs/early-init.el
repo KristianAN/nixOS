@@ -199,7 +199,6 @@ turned on.")
          (native-comp-available-p))
     ;; Activate `native-compile'
     (setq native-comp-jit-compilation t
-          native-comp-deferred-compilation t  ; Obsolete since Emacs 29.1
           package-native-compile t)
   ;; Deactivate the `native-compile' feature if it is not available
   (setq features (delq 'native-compile features)))

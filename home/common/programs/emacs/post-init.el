@@ -1,12 +1,8 @@
 ;;; post-init.el --- Post Init -*- no-byte-compile: t; lexical-binding: t; -*-
 
-;; Ensure Emacs loads the most recent byte-compiled files.
-(setq load-prefer-newer t)
-
 ;; Ensure JIT compilation is enabled for improved performance by
 ;; native-compiling loaded .elc files asynchronously
 (setq native-comp-jit-compilation t)
-                                        ;(setq native-comp-deferred-compilation t) ;
 
 ;; Auto-revert in Emacs is a feature that automatically updates the
 ;; contents of a buffer to reflect changes made to the underlying file
@@ -20,6 +16,8 @@
   (auto-revert-interval 3)
   (auto-revert-remote-files nil)
   (auto-revert-use-notify t)
+  (revert-without-query (list "."))
+  (auto-revert-stop-on-user-input nil)  
   (auto-revert-avoid-polling nil)
   (auto-revert-verbose t))
 
@@ -147,7 +145,6 @@
 
 (use-package consult-hoogle
   :ensure t
-  :load-path "~/projects/consult-hoogle"
   )
 
 (use-package rust-mode
@@ -205,3 +202,8 @@
          ("C->" . mc/mark-next-like-this)
          ("C-<" . mc/mark-previous-like-this)
          ("C-c C-<" . mc/mark-all-like-this)))
+
+(use-package git-link
+  :ensure t
+  :defer t
+  )

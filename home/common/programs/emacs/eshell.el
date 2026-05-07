@@ -5,8 +5,8 @@
   :bind
   (
    ("C-c t e" . eshell)
-   ("C-c t p" . 'custom/open-eshell-project-root-same-window)
-   ("C-c t o" . 'custom/open-eshell-project-root-other-window)
+   ("C-c t p" . custom/open-eshell-project-root-same-window)
+   ("C-c t o" . custom/open-eshell-project-root-other-window)
    ))
 
 (defun custom/open-eshell-project-root-same-window ()

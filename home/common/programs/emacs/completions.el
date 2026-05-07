@@ -2,11 +2,11 @@
 
 (use-package yasnippet
   :ensure t
-  :init
-  (yas-global-mode 1))
+  :hook (after-init . yas-global-mode))
 
 (use-package corfu
   :init
+  (corfu-popupinfo-mode t)
   (global-corfu-mode 1)
   (setq global-corfu-minibuffer
         (lambda ()
@@ -23,7 +23,6 @@
   :custom
   (corfu-cycle t)
   (corfu-auto t)
-  (corfu-popupinfo-mode t)
   (corfu-preview-current nil)
   (corfu-quit-at-boundary t)
   (corfu-quit-no-match t)
@@ -127,14 +126,6 @@
 
 (use-package consult
   :ensure t
-  :custom
-  (defun custom/consult-ripgrep-from-visual-selection ()
-    "Send selected region to consult-ripgrep."
-    (interactive)
-    (let ((selection (buffer-substring-no-properties (region-beginning) (region-end))))
-      (deactivate-mark)
-      (consult-ripgrep nil selection)))
-
   :bind (;; C-c bindings in `mode-specific-map'
          ("C-c M-x" . consult-mode-command)
          ("C-c h" . consult-history)

@@ -19,7 +19,7 @@
            :scroll-bar-width 0
            :fringe-width 8)
         )
-  :custom
+  :init
   (spacious-padding-mode 1))
 
 (use-package breadcrumb

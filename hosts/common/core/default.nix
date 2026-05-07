@@ -47,7 +47,9 @@ with lib;
   security.pam.services.swaylock = { };
 
   services.upower.enable = true;
-
+  
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.greetd.enableGnomeKeyring = true;
 
   services.greetd = {
     enable = true;
